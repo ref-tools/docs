@@ -72,12 +72,12 @@
       "anchors": [
         {
           "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
+          "href": "https://ref.tools/docs",
           "icon": "book-open-cover"
         },
         {
           "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "href": "https://ref.tools/blog",
           "icon": "newspaper"
         }
       ]
@@ -97,7 +97,7 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://ref.tools/dashboard",
+      "href": "https://ref.tools/dashboard"
     }
   },
   "contextual": {
@@ -114,9 +114,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/ref-tools/ref-tools-mcp",
+      "linkedin": "https://www.linkedin.com/company/107120780"
     }
   }
 }
