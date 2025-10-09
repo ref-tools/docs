@@ -97,7 +97,7 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://ref.tools/dashboard"
+      "href": "https://ref.tools/dashboard",
     }
   },
   "contextual": {

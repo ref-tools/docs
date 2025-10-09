@@ -1,0 +1,16 @@
+.link, .navbar-link, #topbar-cta-button, .sidebar-group { 
+  font-family: 'Source Code Pro', monospace;
+}
+
+h1, h2, h3 {
+  font-family: 'Libre Baskerville', serif;
+}
+
+h4, h5 {
+  font-family: 'Source Code Pro', monospace;
+}
+
+div {
+  font-family: 'Source Code Pro', monospace;
+  letter-spacing: -0.02em;
+}
