@@ -1,151 +1,80 @@
 ---
-title: 'Quickstart'
-description: 'Start using Ref in under 5 minutes'
+title: "Quickstart"
+description: "Start building awesome documentation in minutes"
 ---
 
-## Setup your account
+## Get started in three steps
 
-Get started with Ref by creating your account and getting your API key.
+Get your documentation site running locally and make your first customization.
 
-### Step 1: Sign up
-
-Visit [ref.tools](https://ref.tools) and create your free account. You'll get 200 free credits to start with.
-
-### Step 2: Get your API key
-
-Once logged in, navigate to your dashboard and copy your API key. You'll need this for authentication.
-
-<Warning>
-Keep your API key secure and never share it publicly or commit it to version control.
-</Warning>
-
-## Install in your AI tool
-
-Choose your preferred AI coding tool and follow the installation guide:
-
-<CardGroup cols={2}>
-  <Card
-    title="Claude Desktop"
-    icon="robot"
-    href="/installation/claude"
-  >
-    Set up Ref with Claude Desktop using MCP
-  </Card>
-  <Card
-    title="Cursor"
-    icon="cursor-click"
-    href="/installation/cursor"
-  >
-    Install Ref in Cursor with one-click setup
-  </Card>
-  <Card
-    title="VS Code"
-    icon="code"
-    href="/installation/vscode"
-  >
-    Configure Ref in VS Code with MCP
-  </Card>
-  <Card
-    title="Direct API"
-    icon="api"
-    href="/installation/api"
-  >
-    Use Ref via REST API calls
-  </Card>
-</CardGroup>
-
-## Quick Test
-
-Let's test your Ref installation by searching for documentation:
-
-<CodeGroup>
-
-```bash Direct API
-curl -X POST https://ref.tools/api/search \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "query": "React useState hook examples"
-  }'
-```
-
-```javascript MCP Tools
-// In Claude Desktop or other MCP-enabled tools
-ref_search_documentation("React useState hook examples")
-```
-
-</CodeGroup>
-
-## Your First Search
-
-Once installed, try these example searches to see Ref in action:
+### Step 1: Set up your local environment
 
 <AccordionGroup>
-  <Accordion title="Search React Documentation">
-    Query: "How to use React hooks with TypeScript"
+  <Accordion icon="copy" title="Clone your docs locally">
+    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
     
-    This will search through React's official documentation and return relevant sections about hooks and TypeScript integration.
+    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
   </Accordion>
-
-  <Accordion title="Find API References">
-    Query: "Next.js API routes middleware examples"
+  <Accordion icon="rectangle-terminal" title="Start the preview server">
+    1. Install the Mintlify CLI: `npm i -g mint`
+    2. Navigate to your docs directory and run: `mint dev`
+    3. Open `http://localhost:3000` to see your docs live!
     
-    Searches Next.js documentation for specific examples of API route middleware implementation.
-  </Accordion>
-
-  <Accordion title="Read Specific URLs">
-    Use `ref_read_url` to extract content from specific documentation pages or GitHub README files.
+    <Tip>Your preview updates automatically as you edit files.</Tip>
   </Accordion>
 </AccordionGroup>
 
-## Understanding Credits
+### Step 2: Deploy your changes
 
-Each API call consumes credits based on the operation:
+<AccordionGroup>
+  <Accordion icon="github" title="Install our GitHub app">
+    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
+    
+    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
+</Accordion>
+<Accordion icon="palette" title="Update your site name and colors">
+    For a first change, let's update the name and colors of your docs site.
 
-- **Search Documentation**: 1 credit
-- **Read URL**: 1 credit  
-- **Web Search**: 2 credits
-- **Chat**: 1 credit
+    1. Open `docs.json` in your editor.
+    2. Change the `"name"` field to your project name.
+    3. Update the `"colors"` to match your brand.
+    4. Save and see your changes instantly at `http://localhost:3000`.
 
-Your free account includes 200 credits. Monitor your usage in the dashboard and upgrade when needed.
+    <Tip>Try changing the primary color to see an immediate difference!</Tip>
+  </Accordion>
+</AccordionGroup>
 
-## Next Steps
+### Step 3: Go live
+
+<Accordion icon="rocket" title="Publish your docs">
+  1. Commit and push your changes.
+  2. Your docs will update and be live in moments!
+</Accordion>
+
+## Next steps
+
+Now that you have your docs running, explore these key features:
 
 <CardGroup cols={2}>
-  <Card
-    title="Explore Features"
-    icon="compass"
-    href="/features/search"
-  >
-    Learn about advanced search capabilities and team features
-  </Card>
-  <Card
-    title="Index Your Docs"
-    icon="plus"
-    href="/features/indexing"
-  >
-    Add your own documentation to make it searchable
-  </Card>
-  <Card
-    title="Create a Team"
-    icon="users"
-    href="/features/teams"
-  >
-    Set up shared workspaces for your organization
-  </Card>
-  <Card
-    title="API Reference"
-    icon="book"
-    href="/api-reference/introduction"
-  >
-    Explore the full API documentation
-  </Card>
+
+<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
+  Learn MDX syntax and start writing your documentation.
+</Card>
+
+<Card title="Customize style" icon="palette" href="/essentials/settings">
+  Make your docs match your brand perfectly.
+</Card>
+
+<Card title="Add code examples" icon="square-code" href="/essentials/code">
+  Include syntax-highlighted code blocks.
+</Card>
+
+<Card title="API documentation" icon="code" href="/api-reference/introduction">
+  Auto-generate API docs from OpenAPI specs.
+</Card>
+
 </CardGroup>
 
-## Need Help?
-
-- Check our [installation guides](/installation/overview) for detailed setup instructions
-- Join our [community](https://ref.tools/discord) for support and discussions
-- [Contact us](/support/contact) if you encounter any issues
-
-Ready to dive deeper? Explore our [features](/features/search) or check out the [API reference](/api-reference/introduction).
+<Note>
+  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+</Note>

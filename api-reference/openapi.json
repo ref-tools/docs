@@ -1,8 +1,8 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Ref API",
-    "description": "Documentation search and retrieval API for AI agents and developers",
+    "title": "OpenAPI Plant Store",
+    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
     "license": {
       "name": "MIT"
     },
@@ -10,8 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://ref.tools/api",
-      "description": "Production server"
+      "url": "http://sandbox.mintlify.com"
     }
   ],
   "security": [
@@ -20,34 +19,36 @@
     }
   ],
   "paths": {
-    "/search": {
-      "post": {
-        "summary": "Search Documentation",
-        "description": "Search through indexed documentation using natural language queries",
-        "tags": ["Search"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SearchRequest"
-              }
+    "/plants": {
+      "get": {
+        "description": "Returns all plants from the system that the user has access to",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of results to return",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Search results",
+            "description": "Plant response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SearchResponse"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plant"
+                  }
                 }
               }
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -55,19 +56,35 @@
                 }
               }
             }
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new plant in the store",
+        "requestBody": {
+          "description": "Plant to add to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlant"
+              }
+            }
           },
-          "401": {
-            "description": "Unauthorized",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "plant response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/Plant"
                 }
               }
             }
           },
-          "402": {
-            "description": "Insufficient credits",
+          "400": {
+            "description": "unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -79,67 +96,32 @@
         }
       }
     },
-    "/read-url": {
-      "post": {
-        "summary": "Read URL Content",
-        "description": "Extract and process content from any URL",
-        "tags": ["Content"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ReadUrlRequest"
-              }
+    "/plants/{id}": {
+      "delete": {
+        "description": "Deletes a single plant based on the ID supplied",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of plant to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           }
-        },
+        ],
         "responses": {
-          "200": {
-            "description": "URL content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ReadUrlResponse"
-                }
-              }
-            }
+          "204": {
+            "description": "Plant deleted",
+            "content": {}
           },
           "400": {
-            "description": "Bad request",
+            "description": "unexpected error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/web-search": {
-      "post": {
-        "summary": "Web Search",
-        "description": "Search the web for real-time information",
-        "tags": ["Search"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WebSearchRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Web search results",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WebSearchResponse"
                 }
               }
             }
@@ -148,239 +130,79 @@
       }
     }
   },
+  "webhooks": {
+    "/plant/webhook": {
+      "post": {
+        "description": "Information about a new plant added to the store",
+        "requestBody": {
+          "description": "Plant added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return a 200 status to indicate that the data was received successfully"
+          }
+        }
+      }
+    }
+  },
   "components": {
     "schemas": {
-      "SearchRequest": {
+      "Plant": {
+        "required": [
+          "name"
+        ],
         "type": "object",
-        "required": ["query"],
         "properties": {
-          "query": {
-            "type": "string",
-            "description": "Search query in natural language"
+          "name": {
+            "description": "The name of the plant",
+            "type": "string"
           },
-          "maxResults": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 50,
-            "default": 10,
-            "description": "Maximum number of results to return"
-          },
-          "sources": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Specific documentation sources to search"
-          },
-          "includeContent": {
-            "type": "boolean",
-            "default": false,
-            "description": "Include full content in results"
+          "tag": {
+            "description": "Tag to specify the type",
+            "type": "string"
           }
         }
       },
-      "SearchResponse": {
-        "type": "object",
-        "properties": {
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SearchResult"
-            }
+      "NewPlant": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Plant"
           },
-          "totalResults": {
-            "type": "integer",
-            "description": "Total number of matching results"
-          },
-          "searchTime": {
-            "type": "integer",
-            "description": "Response time in milliseconds"
-          },
-          "creditsUsed": {
-            "type": "integer",
-            "description": "Credits consumed by this request"
-          },
-          "requestId": {
-            "type": "string",
-            "description": "Unique request identifier"
-          }
-        }
-      },
-      "SearchResult": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "Document title"
-          },
-          "url": {
-            "type": "string",
-            "format": "uri",
-            "description": "Source URL"
-          },
-          "excerpt": {
-            "type": "string",
-            "description": "Relevant excerpt from the document"
-          },
-          "score": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "Relevance score"
-          },
-          "source": {
-            "type": "string",
-            "description": "Documentation source name"
-          },
-          "content": {
-            "type": "string",
-            "description": "Full content (when includeContent=true)"
-          },
-          "metadata": {
+          {
+            "required": [
+              "id"
+            ],
             "type": "object",
-            "description": "Additional metadata about the document"
-          }
-        }
-      },
-      "ReadUrlRequest": {
-        "type": "object",
-        "required": ["url"],
-        "properties": {
-          "url": {
-            "type": "string",
-            "format": "uri",
-            "description": "URL to read and extract content from"
-          },
-          "format": {
-            "type": "string",
-            "enum": ["markdown", "html", "text"],
-            "default": "markdown",
-            "description": "Preferred output format"
-          },
-          "extractLinks": {
-            "type": "boolean",
-            "default": false,
-            "description": "Extract links from the content"
-          }
-        }
-      },
-      "ReadUrlResponse": {
-        "type": "object",
-        "properties": {
-          "url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL that was processed"
-          },
-          "title": {
-            "type": "string",
-            "description": "Page title"
-          },
-          "content": {
-            "type": "string",
-            "description": "Extracted content"
-          },
-          "metadata": {
-            "type": "object",
-            "description": "Page metadata"
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uri"
-            },
-            "description": "Extracted links (when extractLinks=true)"
-          },
-          "creditsUsed": {
-            "type": "integer",
-            "description": "Credits consumed by this request"
-          }
-        }
-      },
-      "WebSearchRequest": {
-        "type": "object",
-        "required": ["query"],
-        "properties": {
-          "query": {
-            "type": "string",
-            "description": "Web search query"
-          },
-          "maxResults": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 20,
-            "default": 5,
-            "description": "Maximum number of results"
-          },
-          "freshness": {
-            "type": "string",
-            "enum": ["day", "week", "month", "year"],
-            "description": "Freshness filter for results"
-          }
-        }
-      },
-      "WebSearchResponse": {
-        "type": "object",
-        "properties": {
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebSearchResult"
+            "properties": {
+              "id": {
+                "description": "Identification number of the plant",
+                "type": "integer",
+                "format": "int64"
+              }
             }
-          },
-          "searchTime": {
-            "type": "integer",
-            "description": "Response time in milliseconds"
-          },
-          "creditsUsed": {
-            "type": "integer",
-            "description": "Credits consumed by this request"
           }
-        }
-      },
-      "WebSearchResult": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "Page title"
-          },
-          "url": {
-            "type": "string",
-            "format": "uri",
-            "description": "Page URL"
-          },
-          "snippet": {
-            "type": "string",
-            "description": "Page snippet/description"
-          },
-          "publishedDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Publication date"
-          },
-          "source": {
-            "type": "string",
-            "description": "Source domain"
-          }
-        }
+        ]
       },
       "Error": {
+        "required": [
+          "error",
+          "message"
+        ],
         "type": "object",
-        "required": ["error", "message"],
         "properties": {
           "error": {
-            "type": "string",
-            "description": "Error type"
+            "type": "integer",
+            "format": "int32"
           },
           "message": {
-            "type": "string",
-            "description": "Human-readable error message"
-          },
-          "code": {
-            "type": "string",
-            "description": "Error code"
+            "type": "string"
           }
         }
       }
@@ -388,8 +210,7 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer",
-        "description": "Bearer token authentication using your Ref API key"
+        "scheme": "bearer"
       }
     }
   }
