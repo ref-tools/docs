@@ -1,0 +1,126 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Ref",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#1a1a1a",
+    "light": "#333333",
+    "dark": "#000000",
+    "anchors": {
+      "from": "#1a1a1a",
+      "to": "#333333"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:hello@ref.tools"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://ref.tools"
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    },
+    {
+      "name": "MCP Server",
+      "url": "mcp"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Documentation",
+      "icon": "book-open-cover",
+      "url": "https://ref.tools/docs"
+    },
+    {
+      "name": "Community",
+      "icon": "slack",
+      "url": "https://ref.tools/discord"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "introduction",
+        "quickstart",
+        "pricing"
+      ]
+    },
+    {
+      "group": "Features",
+      "pages": [
+        "features/search",
+        "features/teams",
+        "features/indexing",
+        "features/security"
+      ]
+    },
+    {
+      "group": "Installation",
+      "pages": [
+        "installation/overview",
+        "installation/claude",
+        "installation/cursor",
+        "installation/vscode",
+        "installation/api"
+      ]
+    },
+    {
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/authentication",
+        "api-reference/endpoints/search",
+        "api-reference/endpoints/read-url",
+        "api-reference/endpoints/web-search"
+      ]
+    },
+    {
+      "group": "MCP Server",
+      "pages": [
+        "mcp/introduction",
+        "mcp/installation",
+        "mcp/configuration",
+        "mcp/tools"
+      ]
+    },
+    {
+      "group": "Support",
+      "pages": [
+        "support/contact",
+        "support/bug-reports",
+        "support/feature-requests"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "x": "https://x.com/ref_tools",
+    "github": "https://github.com/ref-tools",
+    "linkedin": "https://www.linkedin.com/company/ref-tools"
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true,
+    "raiseIssue": true
+  },
+  "search": {
+    "prompt": "Search Ref documentation..."
+  },
+  "api": {
+    "baseUrl": "https://ref.tools/api",
+    "auth": {
+      "method": "bearer"
+    }
+  },
+  "theme": "prism"
+}

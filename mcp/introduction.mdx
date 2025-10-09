@@ -1,0 +1,375 @@
+---
+title: 'MCP Server Overview'
+description: 'Model Context Protocol integration for seamless AI tool connectivity'
+---
+
+## What is MCP?
+
+The Model Context Protocol (MCP) is an open standard that enables AI applications to securely access external data sources and tools. Ref's MCP server provides seamless integration with AI tools like Claude Desktop, VS Code, and Cursor.
+
+<CardGroup cols={2}>
+  <Card
+    title="Native Integration"
+    icon="puzzle-piece"
+  >
+    No API calls needed - tools work automatically in AI conversations
+  </Card>
+  <Card
+    title="Standardized Protocol"
+    icon="handshake"
+  >
+    Based on open standards for maximum compatibility
+  </Card>
+  <Card
+    title="Secure Communication"
+    icon="shield"
+  >
+    Encrypted communication with proper authentication
+  </Card>
+  <Card
+    title="Real-time Context"
+    icon="bolt"
+  >
+    AI tools get immediate access to relevant documentation
+  </Card>
+</CardGroup>
+
+## Available Tools
+
+The Ref MCP server provides two main tools:
+
+### ref_search_documentation
+
+Search through indexed documentation with natural language queries.
+
+**Usage**: AI tools automatically use this when you ask documentation questions.
+
+**Examples**:
+- "Find React hooks documentation"
+- "How do I handle errors in Express.js?"
+- "Show me TypeScript interface examples"
+
+### ref_read_url
+
+Extract and read content from any URL.
+
+**Usage**: Ask AI tools to read specific documentation pages or files.
+
+**Examples**:
+- "Read the Next.js deployment guide"
+- "What does this GitHub README say?"
+- "Analyze this blog post about performance"
+
+## Supported Clients
+
+<CardGroup cols={3}>
+  <Card
+    title="Claude Desktop"
+    icon="robot"
+    href="/installation/claude"
+  >
+    Native MCP support with easy configuration
+  </Card>
+  <Card
+    title="Cursor"
+    icon="cursor-click" 
+    href="/installation/cursor"
+  >
+    One-click installation via deeplinks
+  </Card>
+  <Card
+    title="VS Code"
+    icon="code"
+    href="/installation/vscode"
+  >
+    MCP extension support (with compatible extensions)
+  </Card>
+</CardGroup>
+
+## How It Works
+
+1. **Install MCP Server**: Add Ref's MCP server to your AI tool
+2. **Configure Authentication**: Provide your Ref API key
+3. **Start Using**: AI tools automatically access documentation when needed
+4. **Seamless Experience**: No manual API calls or complex integration
+
+## Installation
+
+### Quick Install
+
+Install the Ref MCP server globally:
+
+```bash
+npm install -g @ref-tools/mcp-server
+```
+
+### Configuration Example
+
+Most MCP-compatible tools use this configuration format:
+
+```json
+{
+  "mcpServers": {
+    "ref": {
+      "command": "ref-mcp-server",
+      "env": {
+        "REF_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+
+### Tool-Specific Setup
+
+Each AI tool has its own configuration method:
+
+<AccordionGroup>
+  <Accordion title="Claude Desktop">
+    Edit `claude_desktop_config.json`:
+    
+    **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+    **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+    
+    [Full Claude setup guide →](/installation/claude)
+  </Accordion>
+
+  <Accordion title="Cursor">
+    Use one-click installation:
+    
+    [Install in Cursor](cursor://install-mcp?name=ref&package=@ref-tools/mcp-server&env=REF_API_KEY)
+    
+    [Full Cursor setup guide →](/installation/cursor)
+  </Accordion>
+
+  <Accordion title="VS Code">
+    Configure through MCP extensions:
+    
+    Check marketplace for MCP-compatible extensions
+    
+    [Full VS Code setup guide →](/installation/vscode)
+  </Accordion>
+</AccordionGroup>
+
+## Configuration Options
+
+Customize the MCP server behavior:
+
+```json
+{
+  "mcpServers": {
+    "ref": {
+      "command": "ref-mcp-server",
+      "env": {
+        "REF_API_KEY": "your-api-key",
+        "REF_TIMEOUT": "30000",
+        "REF_MAX_RESULTS": "10",
+        "REF_DEBUG": "false"
+      }
+    }
+  }
+}
+```
+
+| Environment Variable | Default | Description |
+|---------------------|---------|-------------|
+| `REF_API_KEY` | Required | Your Ref API key |
+| `REF_TIMEOUT` | `30000` | Request timeout in milliseconds |
+| `REF_MAX_RESULTS` | `10` | Maximum search results |
+| `REF_DEBUG` | `false` | Enable debug logging |
+
+## Usage Examples
+
+### In Claude Desktop
+
+```text
+You: I need help with React error boundaries
+
+Claude: I'll search for React error boundaries documentation.
+
+[Uses ref_search_documentation("React error boundaries")]
+
+Based on the React documentation, error boundaries are React components that catch JavaScript errors anywhere in their child component tree...
+```
+
+### In Cursor
+
+```text
+You: Read the TypeScript handbook section on generics
+
+Cursor: I'll read that section for you.
+
+[Uses ref_read_url("https://www.typescriptlang.org/docs/handbook/generics.html")]
+
+Here's what the TypeScript handbook says about generics...
+```
+
+## Team Usage
+
+Teams can share MCP configurations:
+
+```json
+{
+  "mcpServers": {
+    "ref": {
+      "command": "ref-mcp-server",
+      "env": {
+        "REF_API_KEY": "team-api-key",
+        "REF_TEAM_ID": "your-team-id"
+      }
+    }
+  }
+}
+```
+
+Benefits:
+- Shared credit pool
+- Team-specific documentation access
+- Centralized billing and management
+
+## Troubleshooting
+
+### Common Issues
+
+<AccordionGroup>
+  <Accordion title="MCP Server Won't Start">
+    - Verify Node.js 18+ is installed
+    - Check API key is correct
+    - Ensure global npm installation worked
+    - Try running `ref-mcp-server` directly
+  </Accordion>
+
+  <Accordion title="Tools Not Available">
+    - Restart the AI tool after configuration
+    - Check configuration file syntax
+    - Verify API key permissions
+    - Look for error messages in tool logs
+  </Accordion>
+
+  <Accordion title="Search Not Working">
+    - Check available credits in dashboard
+    - Verify internet connection
+    - Try different search terms
+    - Enable debug mode for more details
+  </Accordion>
+</AccordionGroup>
+
+### Debug Mode
+
+Enable detailed logging:
+
+```json
+{
+  "env": {
+    "REF_API_KEY": "your-api-key",
+    "REF_DEBUG": "true"
+  }
+}
+```
+
+## Advanced Usage
+
+### Custom MCP Implementation
+
+Build your own MCP client:
+
+```typescript
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+
+const transport = new StdioClientTransport({
+  command: 'ref-mcp-server',
+  env: { REF_API_KEY: 'your-key' }
+});
+
+const client = new Client({ name: "my-client", version: "1.0.0" }, {
+  capabilities: {}
+});
+
+await client.connect(transport);
+
+// Use Ref tools
+const result = await client.callTool({
+  name: 'ref_search_documentation',
+  arguments: { query: 'React hooks' }
+});
+```
+
+### Protocol Details
+
+The Ref MCP server implements:
+- **Tools**: `ref_search_documentation`, `ref_read_url`
+- **Transport**: Stdio and HTTP transports
+- **Authentication**: API key via environment variables
+- **Error Handling**: Proper MCP error responses
+
+## Getting Help
+
+<CardGroup cols={2}>
+  <Card
+    title="Installation Guides"
+    icon="book"
+    href="/installation/overview"
+  >
+    Detailed setup instructions for each tool
+  </Card>
+  
+  <Card
+    title="MCP Protocol"
+    icon="link"
+    href="https://modelcontextprotocol.io"
+  >
+    Learn about the Model Context Protocol
+  </Card>
+  
+  <Card
+    title="Community Support"
+    icon="users"
+    href="https://ref.tools/discord"
+  >
+    Get help from the community
+  </Card>
+  
+  <Card
+    title="Technical Support"
+    icon="envelope"
+    href="/support/contact"
+  >
+    Contact our technical team
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Install MCP Server"
+    icon="download"
+    href="/installation/overview"
+  >
+    Choose your AI tool and set up Ref
+  </Card>
+  <Card
+    title="Explore Features"
+    icon="compass"
+    href="/features/search"
+  >
+    Learn about Ref's capabilities
+  </Card>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore direct API integration
+  </Card>
+  <Card
+    title="Join Community"
+    icon="users"
+    href="https://ref.tools/discord"
+  >
+    Connect with other users
+  </Card>
+</CardGroup>
+
+The Ref MCP server makes documentation search seamless in your AI workflow. Get started by [installing it in your preferred tool](/installation/overview)!

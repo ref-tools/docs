@@ -1,0 +1,111 @@
+/* Custom theme for Ref docs matching main app styles */
+:root {
+  /* Fonts from core.css */
+  --font-serif: 'Libre Baskerville', serif;
+  --font-mono: 'Source Code Pro', monospace;
+  
+  /* Border radius from core.css */
+  --border-radius: 4px;
+  
+  /* Typography overrides */
+  --font-family-sans: var(--font-serif);
+  --font-family-mono: var(--font-mono);
+  
+  /* Colors from core.css - Light mode */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #666;
+  --color-primary: #3366cc;
+  --color-primary-dark: #2a5594;
+  --color-background: white;
+  --color-background-secondary: #f8f9fa;
+  --color-border: #dedede;
+  --color-code-bg: #454545;
+  
+  /* Override Mintlify defaults */
+  --primary-600: #1a1a1a;
+  --primary-700: #000000;
+  --primary-800: #000000;
+  --slate-900: #1a1a1a;
+  --slate-600: #666;
+  --slate-50: #f8f9fa;
+}
+
+.bg-primary {
+  background-color: #000000;
+}
+
+/* Dark mode colors from core.css */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text-primary: #e5e5e5;
+    --color-text-secondary: #a1a1a1;
+    --color-primary: #4488ff;
+    --color-primary-dark: #3366cc;
+    --color-background: #1a1a1a;
+    --color-background-secondary: #2a2a2a;
+    --color-border: #444444;
+    --color-code-bg: #333333;
+    
+    /* Override Mintlify dark mode */
+    --primary-400: #e5e5e5;
+    --primary-500: #e5e5e5;
+    --primary-600: #e5e5e5;
+    --slate-100: #e5e5e5;
+    --slate-400: #a1a1a1;
+    --slate-900: #1a1a1a;
+    --slate-800: #2a2a2a;
+  }
+}
+
+/* Apply monospace font to body and most content */
+body, .mintlify-content {
+  font-family: var(--font-mono) !important;
+}
+
+/* Use serif only for headers */
+.mintlify-content h1,
+.mintlify-content h2,
+.mintlify-content h3,
+.mintlify-content h4,
+.mintlify-content h5,
+.mintlify-content h6 {
+  font-family: var(--font-serif) !important;
+  color: var(--color-text-primary);
+}
+
+/* Monospace for code and specific elements */
+code, pre, .font-mono {
+  font-family: var(--font-mono) !important;
+}
+
+/* Code blocks styling to match core.css */
+.mintlify-content pre {
+  background-color: var(--color-code-bg) !important;
+}
+
+/* Links styling */
+.mintlify-content a {
+  color: var(--color-text-primary);
+  transition: color 0.2s ease-in-out;
+}
+
+.mintlify-content a:hover {
+  color: var(--color-text-secondary);
+}
+
+/* Override border radius to match ref styles */
+.mintlify-content .rounded,
+.mintlify-content .rounded-md,
+.mintlify-content .rounded-lg,
+.mintlify-content button,
+.mintlify-content input,
+.mintlify-content .card,
+.mintlify-content .badge {
+  border-radius: var(--border-radius) !important;
+}
+
+/* Code blocks border radius */
+.mintlify-content pre,
+.mintlify-content code {
+  border-radius: var(--border-radius) !important;
+}

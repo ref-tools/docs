@@ -1,0 +1,558 @@
+---
+title: 'VS Code Installation'
+description: 'Configure Ref in Visual Studio Code using MCP extensions'
+---
+
+## Overview
+
+VS Code supports Ref integration through Model Context Protocol (MCP) extensions, enabling documentation search directly within your development environment.
+
+<Warning>
+MCP support in VS Code requires compatible extensions. The ecosystem is rapidly evolving, so installation steps may vary.
+</Warning>
+
+## Prerequisites
+
+- **VS Code** (latest version recommended)
+- **Node.js 18+** for running the MCP server
+- **MCP Extension** for VS Code (see supported extensions below)
+- **Ref API Key** from your [dashboard](https://ref.tools/dashboard)
+
+## Supported Extensions
+
+Currently, these VS Code extensions support MCP servers:
+
+<CardGroup cols={2}>
+  <Card
+    title="MCP Client Extension"
+    icon="puzzle-piece"
+  >
+    Official MCP client extension (when available)
+  </Card>
+  <Card
+    title="Claude Dev"
+    icon="robot"
+  >
+    Popular extension with MCP support
+  </Card>
+</CardGroup>
+
+## Installation Methods
+
+### Method 1: Using MCP Configuration File
+
+<Steps>
+  <Step title="Install MCP Server">
+    ```bash
+    npm install -g @ref-tools/mcp-server
+    ```
+  </Step>
+
+  <Step title="Create MCP Configuration">
+    Create a `.mcp.json` file in your workspace root:
+    
+    ```json
+    {
+      "mcpServers": {
+        "ref": {
+          "command": "ref-mcp-server",
+          "env": {
+            "REF_API_KEY": "your-api-key-here"
+          }
+        }
+      }
+    }
+    ```
+  </Step>
+
+  <Step title="Install MCP Extension">
+    Search for and install an MCP-compatible extension from the VS Code marketplace
+  </Step>
+
+  <Step title="Configure Extension">
+    Configure the extension to use your `.mcp.json` file
+  </Step>
+</Steps>
+
+### Method 2: Extension-Specific Setup
+
+Some extensions have their own configuration methods:
+
+<AccordionGroup>
+  <Accordion title="Claude Dev Extension">
+    1. Install the Claude Dev extension
+    2. Open extension settings
+    3. Add MCP server configuration:
+    ```json
+    {
+      "name": "ref",
+      "serverPath": "ref-mcp-server", 
+      "env": {
+        "REF_API_KEY": "your-api-key"
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Custom MCP Client">
+    For custom MCP implementations:
+    1. Follow the specific extension's documentation
+    2. Use the Ref MCP server endpoint
+    3. Configure authentication with your API key
+  </Accordion>
+</AccordionGroup>
+
+### Method 3: Direct Integration
+
+For advanced users, integrate directly with VS Code's extension API:
+
+```javascript
+// Extension development example
+const { spawn } = require('child_process');
+
+// Start Ref MCP server
+const refServer = spawn('ref-mcp-server', [], {
+  env: { 
+    ...process.env,
+    REF_API_KEY: 'your-api-key-here'
+  }
+});
+
+// Handle MCP communication
+refServer.stdout.on('data', (data) => {
+  // Process MCP messages
+});
+```
+
+## Configuration Options
+
+### Environment Variables
+
+Configure Ref's behavior:
+
+```json
+{
+  "mcpServers": {
+    "ref": {
+      "command": "ref-mcp-server",
+      "env": {
+        "REF_API_KEY": "your-api-key-here",
+        "REF_TIMEOUT": "30000",
+        "REF_MAX_RESULTS": "10",
+        "REF_CACHE_TTL": "3600"
+      }
+    }
+  }
+}
+```
+
+### VS Code Settings
+
+Add Ref-specific settings to your VS Code configuration:
+
+```json
+{
+  "ref.enabled": true,
+  "ref.autoSearch": true,
+  "ref.searchShortcut": "Ctrl+Shift+R",
+  "ref.maxResults": 10
+}
+```
+
+## Usage in VS Code
+
+### Command Palette
+
+Access Ref features through VS Code's command palette (Ctrl+Shift+P):
+
+- `Ref: Search Documentation`
+- `Ref: Read URL`
+- `Ref: Toggle Auto-Search`
+- `Ref: View Usage Statistics`
+
+### Code Context Integration
+
+Ref can provide contextual help based on your current code:
+
+<CodeGroup>
+
+```javascript Example Usage
+// Select this code and use "Ref: Explain Code"
+const [data, setData] = useState(null);
+
+useEffect(() => {
+  fetchData().then(setData);
+}, []);
+```
+
+```text Expected Response
+// Ref will search for React hooks documentation
+// and explain useState and useEffect patterns
+```
+
+</CodeGroup>
+
+### Hover Providers
+
+Some extensions enable hover documentation:
+
+```typescript
+// Hover over 'useState' to see Ref-powered documentation
+import { useState } from 'react';
+```
+
+## Available Features
+
+### Documentation Search
+
+Search through indexed documentation:
+
+```text
+Ctrl+Shift+R → "React component patterns"
+```
+
+### URL Reading
+
+Read specific documentation pages:
+
+```text
+Command: Ref: Read URL
+Input: https://react.dev/reference/react/useState
+```
+
+### Contextual Help
+
+Get help for selected code:
+
+1. Select code in editor
+2. Right-click → "Ref: Explain with Documentation" 
+3. View results in sidebar or panel
+
+## Custom Keybindings
+
+Add custom keyboard shortcuts for Ref commands:
+
+```json
+// keybindings.json
+[
+  {
+    "key": "ctrl+shift+r",
+    "command": "ref.searchDocumentation"
+  },
+  {
+    "key": "ctrl+shift+u", 
+    "command": "ref.readUrl"
+  },
+  {
+    "key": "ctrl+shift+h",
+    "command": "ref.explainCode"
+  }
+]
+```
+
+## Team Configuration
+
+### Workspace Settings
+
+Share Ref configuration across your team:
+
+```json
+// .vscode/settings.json
+{
+  "ref.teamId": "your-team-id",
+  "ref.sharedApiKey": "${REF_TEAM_API_KEY}",
+  "ref.indexSources": [
+    "company-docs",
+    "project-specific"
+  ]
+}
+```
+
+### Environment Variables
+
+Use environment variables for sensitive data:
+
+```bash
+# .env file
+REF_TEAM_API_KEY=team-key-here
+REF_TEAM_ID=team-id-here
+```
+
+## Extension Development
+
+### Creating Custom Integration
+
+Build your own VS Code extension with Ref:
+
+<Steps>
+  <Step title="Initialize Extension">
+    ```bash
+    yo code
+    # Choose "New Extension (TypeScript)"
+    ```
+  </Step>
+
+  <Step title="Add Ref Dependency">
+    ```bash
+    npm install @ref-tools/mcp-client
+    ```
+  </Step>
+
+  <Step title="Implement Ref Client">
+    ```typescript
+    import { RefClient } from '@ref-tools/mcp-client';
+    
+    const client = new RefClient({
+      apiKey: process.env.REF_API_KEY
+    });
+    
+    // Register command
+    vscode.commands.registerCommand('myext.searchRef', async () => {
+      const query = await vscode.window.showInputBox({
+        prompt: 'Search documentation'
+      });
+      
+      const results = await client.search(query);
+      // Display results
+    });
+    ```
+  </Step>
+
+  <Step title="Package Extension">
+    ```bash
+    vsce package
+    ```
+  </Step>
+</Steps>
+
+### Extension Manifest
+
+Configure your extension to use Ref:
+
+```json
+// package.json
+{
+  "contributes": {
+    "commands": [
+      {
+        "command": "myext.searchRef",
+        "title": "Search Documentation with Ref"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "myext.searchRef", 
+        "key": "ctrl+shift+r"
+      }
+    ],
+    "configuration": {
+      "properties": {
+        "myext.refApiKey": {
+          "type": "string",
+          "description": "Ref API Key"
+        }
+      }
+    }
+  }
+}
+```
+
+## Alternative Integration Methods
+
+### REST API Integration
+
+If MCP isn't suitable, use direct REST API calls:
+
+```typescript
+// VS Code extension using REST API
+import * as vscode from 'vscode';
+import axios from 'axios';
+
+async function searchRef(query: string) {
+  const response = await axios.post('https://ref.tools/api/search', {
+    query: query
+  }, {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  
+  return response.data;
+}
+```
+
+### WebView Integration
+
+Create a custom webview panel for Ref:
+
+```typescript
+// Create webview panel
+const panel = vscode.window.createWebviewPanel(
+  'refSearch',
+  'Ref Documentation Search',
+  vscode.ViewColumn.Beside,
+  {
+    enableScripts: true
+  }
+);
+
+// Load Ref web interface
+panel.webview.html = getWebviewContent();
+```
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="MCP Server Not Starting">
+    **Symptoms:** Extension can't connect to Ref
+    
+    **Solutions:**
+    - Verify Node.js 18+ is installed
+    - Check MCP server is globally installed
+    - Review VS Code output panel for errors
+    - Try manual server startup: `ref-mcp-server`
+  </Accordion>
+
+  <Accordion title="Extension Not Found">
+    **Symptoms:** Can't find MCP-compatible extensions
+    
+    **Solutions:**
+    - Search for "MCP" or "Model Context Protocol" in marketplace
+    - Check extension documentation for MCP support
+    - Consider using REST API integration instead
+    - Join VS Code community for latest extension recommendations
+  </Accordion>
+
+  <Accordion title="Commands Not Working">
+    **Symptoms:** Ref commands don't appear or don't work
+    
+    **Solutions:**
+    - Reload VS Code window
+    - Check extension is enabled and active
+    - Verify API key is configured correctly
+    - Review developer console for JavaScript errors
+  </Accordion>
+
+  <Accordion title="Authentication Issues">
+    **Symptoms:** "Unauthorized" or API key errors
+    
+    **Solutions:**
+    - Verify API key is correct and complete
+    - Check environment variables are set properly
+    - Try generating a new API key
+    - Ensure no extra quotes or spaces in configuration
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Security">
+    - Store API keys in environment variables
+    - Don't commit keys to version control
+    - Use workspace settings for team keys
+    - Regularly rotate API keys
+  </Card>
+  
+  <Card title="Performance">
+    - Enable caching for repeated queries
+    - Use specific search terms
+    - Monitor credit usage
+    - Configure appropriate timeouts
+  </Card>
+  
+  <Card title="Team Collaboration">
+    - Share workspace configuration
+    - Use team API keys for shared projects
+    - Document custom integrations
+    - Train team on Ref features
+  </Card>
+  
+  <Card title="Development">
+    - Test extensions thoroughly
+    - Handle errors gracefully
+    - Provide user feedback
+    - Follow VS Code UX guidelines
+  </Card>
+</CardGroup>
+
+## Future Developments
+
+The VS Code + MCP ecosystem is rapidly evolving. Stay updated:
+
+- **Official MCP Extension**: Microsoft is developing native MCP support
+- **Enhanced Integrations**: More sophisticated documentation integration
+- **AI Code Assistance**: Deeper integration with coding AI features
+- **Team Features**: Better collaboration tools for documentation
+
+## Getting Help
+
+<CardGroup cols={2}>
+  <Card
+    title="VS Code Community"
+    icon="users"
+    href="https://code.visualstudio.com/community"
+  >
+    Get help from VS Code developers
+  </Card>
+  
+  <Card
+    title="MCP Documentation"
+    icon="book"
+    href="https://modelcontextprotocol.io"
+  >
+    Learn about Model Context Protocol
+  </Card>
+  
+  <Card
+    title="Ref Support"
+    icon="life-ring"
+    href="/support/contact"
+  >
+    Contact Ref support team
+  </Card>
+  
+  <Card
+    title="Extension Gallery"
+    icon="puzzle-piece"
+    href="https://marketplace.visualstudio.com/vscode"
+  >
+    Browse MCP-compatible extensions
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Search Features"
+    icon="magnifying-glass"
+    href="/features/search"
+  >
+    Master documentation search techniques
+  </Card>
+  <Card
+    title="Custom Indexing"
+    icon="database"
+    href="/features/indexing"
+  >
+    Add your project documentation
+  </Card>
+  <Card
+    title="Team Setup"
+    icon="users"
+    href="/features/teams"
+  >
+    Configure team workspaces
+  </Card>
+  <Card
+    title="API Integration"
+    icon="code"
+    href="/installation/api"
+  >
+    Build custom integrations
+  </Card>
+</CardGroup>
+
+VS Code integration with Ref is powerful but may require some setup depending on your chosen extension. The MCP ecosystem continues to grow, so check back for updates and new integration options!

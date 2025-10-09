@@ -1,0 +1,330 @@
+---
+title: 'Team Management'
+description: 'Collaborate with shared workspaces and team-specific documentation'
+---
+
+## Overview
+
+Ref Teams enables organizations to collaborate effectively with shared documentation indices, centralized billing, and team-specific features. Perfect for development teams, agencies, and enterprises.
+
+<CardGroup cols={2}>
+  <Card
+    title="Shared Workspaces"
+    icon="users"
+  >
+    Collaborative access to team-specific documentation indices
+  </Card>
+  <Card
+    title="Member Management"
+    icon="user-gear"
+  >
+    Add, remove, and manage team member roles and permissions
+  </Card>
+  <Card
+    title="Centralized Billing"
+    icon="credit-card"
+  >
+    Unified subscription and credit management for the entire team
+  </Card>
+  <Card
+    title="Team Analytics"
+    icon="chart-line"
+  >
+    Monitor team usage, popular queries, and collaboration metrics
+  </Card>
+</CardGroup>
+
+## Getting Started with Teams
+
+### Creating a Team
+
+Set up your team workspace in a few simple steps:
+
+<Steps>
+  <Step title="Navigate to Team Creation">
+    Go to your dashboard and click "Create Team"
+  </Step>
+  
+  <Step title="Name Your Team">
+    Choose a descriptive name for your team workspace
+  </Step>
+  
+  <Step title="Invite Members">
+    Add team members by email with appropriate roles
+  </Step>
+  
+  <Step title="Configure Settings">
+    Set up team-specific indexing and access permissions
+  </Step>
+  
+  <Step title="Finalize and Launch">
+    Review settings and activate your team workspace
+  </Step>
+</Steps>
+
+### Team Roles
+
+Different roles provide different levels of access and control:
+
+| Role | Permissions |
+|------|-------------|
+| **Owner** | Full admin access, billing management, delete team |
+| **Admin** | Member management, index control, usage monitoring |
+| **Member** | Search and read access, contribute to team indices |
+| **Viewer** | Read-only access to team documentation |
+
+## Team Features
+
+### Shared Documentation Index
+
+Teams can create and maintain shared documentation indices:
+
+<AccordionGroup>
+  <Accordion title="Private Documentation">
+    Index internal documentation, wikis, and knowledge bases that only your team can access.
+  </Accordion>
+
+  <Accordion title="Custom Sources">
+    Add team-specific GitHub repositories, Confluence pages, or internal APIs to your searchable index.
+  </Accordion>
+
+  <Accordion title="Version Control">
+    Track changes to team documentation and maintain version history for indexed content.
+  </Accordion>
+
+  <Accordion title="Access Controls">
+    Control which team members can access specific documentation sources or indices.
+  </Accordion>
+</AccordionGroup>
+
+### Team Administration
+
+#### Inviting Members
+
+Invite new team members via email:
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST https://ref.tools/api/teams/{team_id}/invite \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "colleague@company.com",
+    "role": "member"
+  }'
+```
+
+```javascript Dashboard
+// Via the web dashboard
+1. Go to Team Settings
+2. Click "Invite Member"
+3. Enter email and select role
+4. Send invitation
+```
+
+</CodeGroup>
+
+#### Managing Roles
+
+Update member roles and permissions:
+
+- **Promote members** to admin or owner roles
+- **Adjust permissions** for specific documentation sources
+- **Remove members** who no longer need access
+- **Transfer ownership** when team leadership changes
+
+### Team Indexing
+
+Teams can index private and custom documentation sources:
+
+#### Private GitHub Repositories
+
+Index private repositories for team-specific code documentation:
+
+```bash
+# Index a private GitHub repository
+curl -X POST https://ref.tools/api/teams/{team_id}/index \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "github",
+    "url": "https://github.com/your-org/private-repo",
+    "auth": {
+      "token": "github_token_with_repo_access"
+    }
+  }'
+```
+
+#### Internal Documentation Sites
+
+Add internal wikis, Confluence, or custom documentation:
+
+```bash
+# Index internal documentation
+curl -X POST https://ref.tools/api/teams/{team_id}/index \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "web",
+    "url": "https://internal-docs.company.com",
+    "auth": {
+      "type": "basic",
+      "username": "user",
+      "password": "pass"
+    }
+  }'
+```
+
+## Billing and Credits
+
+### Team Subscription
+
+Team pricing is straightforward:
+
+- **$9 per user per month**
+- **Shared credit pool** for all team operations
+- **Volume discounts** for teams with 10+ members
+- **Flexible billing** with monthly or annual options
+
+### Credit Management
+
+Team credits work differently from individual accounts:
+
+<CardGroup cols={2}>
+  <Card title="Pooled Credits">
+    All team members share credits from a central pool
+  </Card>
+  
+  <Card title="Usage Tracking">
+    Monitor which team members are using credits and for what
+  </Card>
+  
+  <Card title="Budget Controls">
+    Set spending limits and alerts for team credit usage
+  </Card>
+  
+  <Card title="Bulk Purchasing">
+    Buy credits in bulk at discounted rates for teams
+  </Card>
+</CardGroup>
+
+### Usage Analytics
+
+Track team performance and usage:
+
+- **Most Active Members**: See who's using Ref most frequently
+- **Popular Queries**: Identify common team search patterns
+- **Documentation Gaps**: Find areas where team needs better docs
+- **Credit Efficiency**: Optimize team credit spending
+
+## Team Workflows
+
+### Documentation Migration
+
+Moving from individual to team account:
+
+<Steps>
+  <Step title="Export Individual Index">
+    Download your personal documentation index
+  </Step>
+  
+  <Step title="Create Team">
+    Set up your team workspace with appropriate members
+  </Step>
+  
+  <Step title="Import to Team">
+    Upload your individual index to the team workspace
+  </Step>
+  
+  <Step title="Update Access">
+    Configure team member access to migrated documentation
+  </Step>
+</Steps>
+
+### Onboarding New Members
+
+Best practices for adding new team members:
+
+1. **Send Welcome Email**: Include team documentation standards
+2. **Assign Buddy**: Pair new members with experienced users
+3. **Training Session**: Review team-specific indices and workflows
+4. **Access Review**: Ensure appropriate permissions are set
+
+### Team Collaboration Patterns
+
+#### Daily Development
+
+- **Code Review Support**: Search for implementation patterns during reviews
+- **Architecture Decisions**: Reference team standards and best practices
+- **Bug Investigation**: Access team-specific debugging documentation
+
+#### Project Planning
+
+- **Technical Research**: Collaborative exploration of new technologies
+- **Standards Definition**: Create and maintain team coding standards
+- **Knowledge Sharing**: Document team learnings and decisions
+
+## Security and Privacy
+
+### Data Isolation
+
+Team data is completely isolated:
+
+- **Separate Indices**: Team documentation is not accessible to other teams
+- **Encrypted Storage**: All team data is encrypted at rest and in transit
+- **Access Logs**: Complete audit trail of team member access
+
+### Compliance
+
+Teams can meet enterprise compliance requirements:
+
+- **GDPR Compliance**: Data processing agreements and user control
+- **SOC 2**: Security controls and regular audits
+- **Custom Agreements**: Enterprise data processing agreements available
+
+## Enterprise Features
+
+For larger organizations, Ref offers additional enterprise features:
+
+<CardGroup cols={2}>
+  <Card title="Single Sign-On (SSO)">
+    Integrate with your existing identity provider
+  </Card>
+  
+  <Card title="Advanced Analytics">
+    Detailed reporting and usage analytics
+  </Card>
+  
+  <Card title="Custom Integrations">
+    API access and custom workflow integrations
+  </Card>
+  
+  <Card title="Dedicated Support">
+    Priority support with dedicated success manager
+  </Card>
+</CardGroup>
+
+## Getting Started
+
+Ready to create your team?
+
+<CardGroup cols={2}>
+  <Card
+    title="Create Team"
+    icon="plus"
+    href="https://ref.tools/teams/create"
+  >
+    Set up your team workspace now
+  </Card>
+  
+  <Card
+    title="Upgrade Existing"
+    icon="arrow-up"
+    href="https://ref.tools/teams/upgrade"
+  >
+    Convert your individual account to a team
+  </Card>
+</CardGroup>
+
+Questions about teams? [Contact our sales team](mailto:sales@ref.tools) or check our [support documentation](/support/contact).

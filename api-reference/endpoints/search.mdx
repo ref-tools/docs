@@ -1,0 +1,219 @@
+---
+title: 'Search Documentation'
+description: 'Search through indexed documentation with semantic understanding'
+---
+
+## Endpoint
+
+```
+POST https://ref.tools/api/search
+```
+
+Search through Ref's indexed documentation using natural language queries with semantic understanding.
+
+## Request
+
+### Headers
+
+| Header | Value |
+|--------|-------|
+| `Authorization` | `Bearer YOUR_API_KEY` |
+| `Content-Type` | `application/json` |
+
+### Body Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `query` | string | Yes | Search query (natural language) |
+| `maxResults` | integer | No | Maximum results to return (default: 10, max: 50) |
+| `sources` | array | No | Specific documentation sources to search |
+| `includeContent` | boolean | No | Include full content in results (default: false) |
+
+### Example Request
+
+```bash
+curl -X POST https://ref.tools/api/search \
+  -H "Authorization: Bearer ref_api_1234567890abcdef" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "React component lifecycle methods",
+    "maxResults": 5,
+    "sources": ["react", "typescript"],
+    "includeContent": true
+  }'
+```
+
+## Response
+
+### Success Response (200)
+
+```json
+{
+  "results": [
+    {
+      "title": "React Component Lifecycle",
+      "url": "https://react.dev/reference/react/Component#lifecycle",
+      "excerpt": "Every component goes through several phases: mounting, updating, and unmounting. React provides lifecycle methods that let you hook into these phases.",
+      "score": 0.92,
+      "source": "react",
+      "content": "Full content when includeContent=true",
+      "metadata": {
+        "lastUpdated": "2024-01-15T10:30:00Z",
+        "type": "documentation",
+        "language": "en"
+      }
+    }
+  ],
+  "totalResults": 47,
+  "searchTime": 234,
+  "creditsUsed": 1,
+  "requestId": "req_search_12345"
+}
+```
+
+### Error Responses
+
+#### 400 Bad Request
+
+```json
+{
+  "error": "invalid_request",
+  "message": "Query parameter is required",
+  "code": "MISSING_QUERY"
+}
+```
+
+#### 401 Unauthorized
+
+```json
+{
+  "error": "unauthorized",
+  "message": "Invalid API key",
+  "code": "INVALID_API_KEY"
+}
+```
+
+#### 402 Payment Required
+
+```json
+{
+  "error": "insufficient_credits",
+  "message": "Not enough credits for this operation",
+  "code": "INSUFFICIENT_CREDITS",
+  "creditsRequired": 1,
+  "creditsAvailable": 0
+}
+```
+
+## SDK Examples
+
+<CodeGroup>
+
+```javascript JavaScript
+import { RefClient } from '@ref-tools/js-sdk';
+
+const client = new RefClient({ apiKey: 'your-api-key' });
+
+const results = await client.search({
+  query: 'React component lifecycle methods',
+  maxResults: 5,
+  sources: ['react', 'typescript'],
+  includeContent: true
+});
+
+console.log(results.results);
+```
+
+```python Python
+from ref_tools import RefClient
+
+client = RefClient(api_key='your-api-key')
+
+results = client.search(
+    query='React component lifecycle methods',
+    max_results=5,
+    sources=['react', 'typescript'],
+    include_content=True
+)
+
+print(results['results'])
+```
+
+```go Go
+package main
+
+import (
+    "fmt"
+    "github.com/ref-tools/go-sdk"
+)
+
+func main() {
+    client := ref.NewClient("your-api-key")
+    
+    results, err := client.Search(&ref.SearchRequest{
+        Query: "React component lifecycle methods",
+        MaxResults: 5,
+        Sources: []string{"react", "typescript"},
+        IncludeContent: true,
+    })
+    
+    if err != nil {
+        panic(err)
+    }
+    
+    fmt.Printf("Found %d results\n", len(results.Results))
+}
+```
+
+</CodeGroup>
+
+## Query Examples
+
+### Natural Language Queries
+
+```bash
+# Conceptual questions
+"How to handle errors in async functions"
+
+# Specific implementation
+"React useState hook with TypeScript"
+
+# Best practices
+"Node.js security best practices"
+
+# Troubleshooting
+"Fix CORS errors in Express.js"
+```
+
+### Technical Queries
+
+```bash
+# API-specific
+"GraphQL mutation with variables"
+
+# Framework features
+"Vue 3 composition API lifecycle"
+
+# Language features
+"Python async/await examples"
+
+# Tool usage
+"Docker multi-stage builds"
+```
+
+## Tips for Better Results
+
+1. **Be Specific**: Include framework names, versions, or specific concepts
+2. **Use Technical Terms**: API names, function names, and technical vocabulary work well
+3. **Ask Questions**: Natural questions often work better than keywords
+4. **Include Context**: Mention your use case or goal
+
+## Rate Limits
+
+- **Credits**: 1 credit per search request
+- **Rate Limits**: Varies by plan (see [API Introduction](/api-reference/introduction))
+
+## Related Endpoints
+
+- [Read URL](/api-reference/endpoints/read-url) - Extract content from specific URLs
+- [Web Search](/api-reference/endpoints/web-search) - Real-time web search

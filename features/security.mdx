@@ -1,0 +1,351 @@
+---
+title: 'Security & Privacy'
+description: 'Learn how Ref protects your data and ensures secure documentation access'
+---
+
+## Security Overview
+
+Ref is built with security as a fundamental principle. We implement industry-standard security practices to protect your documentation, search queries, and team data.
+
+<CardGroup cols={2}>
+  <Card
+    title="Data Encryption"
+    icon="shield"
+  >
+    All data encrypted in transit and at rest using AES-256
+  </Card>
+  <Card
+    title="Access Controls"
+    icon="key"
+  >
+    Fine-grained permissions and role-based access control
+  </Card>
+  <Card
+    title="Audit Logging"
+    icon="clipboard-list"
+  >
+    Complete audit trail of all data access and modifications
+  </Card>
+  <Card
+    title="Compliance"
+    icon="certificate"
+  >
+    SOC 2 Type II certified with GDPR compliance
+  </Card>
+</CardGroup>
+
+## Data Protection
+
+### Encryption Standards
+
+Your data is protected using enterprise-grade encryption:
+
+- **In Transit**: TLS 1.3 for all API communications
+- **At Rest**: AES-256 encryption for stored documentation
+- **Key Management**: Hardware Security Modules (HSMs) for key storage
+- **Database**: Encrypted database storage with regular key rotation
+
+### Data Isolation
+
+Each account and team maintains strict data isolation:
+
+<AccordionGroup>
+  <Accordion title="Account Separation">
+    Individual accounts cannot access each other's data or search indices
+  </Accordion>
+
+  <Accordion title="Team Boundaries">
+    Team data is completely isolated from other teams and individual accounts
+  </Accordion>
+
+  <Accordion title="Multi-Tenant Architecture">
+    Secure multi-tenant design prevents data leakage between customers
+  </Accordion>
+
+  <Accordion title="Network Segmentation">
+    Infrastructure is segmented to limit access and prevent lateral movement
+  </Accordion>
+</AccordionGroup>
+
+## Privacy Controls
+
+### Data Collection
+
+Ref collects only the minimum data necessary to provide our service:
+
+**What we collect:**
+- Search queries and results for service improvement
+- Usage analytics for billing and optimization
+- Account information for authentication and billing
+- Indexed documentation content for search functionality
+
+**What we don't collect:**
+- Personal files or code outside of public documentation
+- Sensitive authentication tokens (stored encrypted, never logged)
+- Private communications or personal data
+- Browsing history outside of Ref interactions
+
+### Data Retention
+
+Clear policies govern how long we retain your data:
+
+| Data Type | Retention Period | Purpose |
+|-----------|------------------|---------|
+| **Search Queries** | 90 days | Service optimization and debugging |
+| **Indexed Content** | Until deletion requested | Search functionality |
+| **Account Data** | Until account deletion | Authentication and billing |
+| **Audit Logs** | 2 years | Security monitoring and compliance |
+
+### Data Deletion
+
+You have full control over your data:
+
+- **Account Deletion**: Permanently removes all associated data
+- **Index Deletion**: Removes specific documentation from search
+- **Query History**: Clear your search history anytime
+- **Team Data**: Team owners can delete all team data
+
+## Access Control
+
+### Authentication
+
+Multiple authentication methods to secure your account:
+
+<CardGroup cols={2}>
+  <Card title="API Keys">
+    Secure API keys with configurable expiration and scope limits
+  </Card>
+  
+  <Card title="OAuth Integration">
+    Sign in with GitHub, Google, or other supported providers
+  </Card>
+  
+  <Card title="Multi-Factor Authentication">
+    Optional MFA for additional account security
+  </Card>
+  
+  <Card title="Single Sign-On">
+    Enterprise SSO integration with SAML and OpenID Connect
+  </Card>
+</CardGroup>
+
+### API Security
+
+Ref APIs implement multiple layers of security:
+
+```bash
+# Example of secure API request
+curl -X POST https://ref.tools/api/search \
+  -H "Authorization: Bearer ref_api_1234567890abcdef" \
+  -H "Content-Type: application/json" \
+  -H "User-Agent: MyApp/1.0" \
+  -d '{
+    "query": "React hooks tutorial"
+  }'
+```
+
+**Security features:**
+- Rate limiting to prevent abuse
+- Input validation and sanitization
+- Request signing for integrity verification
+- IP allowlisting for enterprise accounts
+
+### Team Permissions
+
+Granular control over team member access:
+
+| Permission | Owner | Admin | Member | Viewer |
+|------------|-------|-------|--------|--------|
+| **Search Documentation** | ✅ | ✅ | ✅ | ✅ |
+| **Index Documentation** | ✅ | ✅ | ❌ | ❌ |
+| **Manage Members** | ✅ | ✅ | ❌ | ❌ |
+| **View Billing** | ✅ | ✅ | ❌ | ❌ |
+| **Delete Team** | ✅ | ❌ | ❌ | ❌ |
+
+## Infrastructure Security
+
+### Cloud Security
+
+Ref runs on secure cloud infrastructure:
+
+- **AWS/Google Cloud**: Tier 1 cloud providers with extensive security certifications
+- **Container Security**: Regular security scanning of container images
+- **Network Security**: VPC isolation and security group restrictions
+- **DDoS Protection**: CloudFlare protection against distributed attacks
+
+### Monitoring & Detection
+
+Continuous security monitoring:
+
+<AccordionGroup>
+  <Accordion title="Real-time Monitoring">
+    24/7 monitoring of infrastructure, applications, and data access patterns
+  </Accordion>
+
+  <Accordion title="Anomaly Detection">
+    Machine learning-based detection of unusual access patterns or behavior
+  </Accordion>
+
+  <Accordion title="Incident Response">
+    Defined incident response procedures with automated alerting
+  </Accordion>
+
+  <Accordion title="Vulnerability Management">
+    Regular security assessments and prompt patching of vulnerabilities
+  </Accordion>
+</AccordionGroup>
+
+## Compliance & Certifications
+
+### SOC 2 Type II
+
+Ref maintains SOC 2 Type II certification, demonstrating:
+
+- **Security**: Safeguards against unauthorized access
+- **Availability**: Systems are available as agreed upon
+- **Processing Integrity**: System processing is complete and accurate
+- **Confidentiality**: Information is protected as agreed upon
+- **Privacy**: Personal information is handled according to privacy policies
+
+### GDPR Compliance
+
+Full compliance with European data protection regulations:
+
+- **Lawful Basis**: Clear legal basis for all data processing
+- **Data Subject Rights**: Easy exercise of rights to access, rectify, or delete data
+- **Data Protection Officer**: Dedicated DPO for privacy matters
+- **Privacy by Design**: Privacy considerations built into system design
+
+### Additional Compliance
+
+- **CCPA**: California Consumer Privacy Act compliance
+- **ISO 27001**: Information security management system
+- **HIPAA**: Available for healthcare customers (Business Associate Agreement)
+
+## Security Best Practices
+
+### For Individuals
+
+<CardGroup cols={2}>
+  <Card title="API Key Security">
+    - Store keys securely
+    - Rotate keys regularly
+    - Use environment variables
+    - Never commit keys to version control
+  </Card>
+  
+  <Card title="Account Security">
+    - Use strong, unique passwords
+    - Enable multi-factor authentication
+    - Review account activity regularly
+    - Report suspicious activity immediately
+  </Card>
+</CardGroup>
+
+### For Teams
+
+<Steps>
+  <Step title="Role Management">
+    Assign the minimum necessary permissions to each team member
+  </Step>
+  
+  <Step title="Regular Audits">
+    Review team member access and permissions quarterly
+  </Step>
+  
+  <Step title="Secure Integration">
+    Use secure methods to integrate Ref with your development tools
+  </Step>
+  
+  <Step title="Training">
+    Educate team members on security best practices
+  </Step>
+</Steps>
+
+## Data Processing
+
+### Third-Party Integrations
+
+When you index documentation from external sources:
+
+- **GitHub**: We use OAuth tokens with read-only repository access
+- **Web Crawling**: Public documentation only, respecting robots.txt
+- **PDF Processing**: Documents processed in isolated containers
+- **Search Providers**: External search augmented with encrypted queries
+
+### Data Processors
+
+Ref uses carefully vetted data processors:
+
+| Service | Purpose | Data Shared | Location |
+|---------|---------|-------------|----------|
+| **OpenAI** | Semantic search embeddings | Documentation text (anonymized) | US |
+| **Google Cloud** | Infrastructure and storage | Encrypted data at rest | US/EU |
+| **Stripe** | Payment processing | Billing information only | US |
+| **Mixpanel** | Analytics | Usage data (anonymized) | US |
+
+## Incident Response
+
+### Security Incidents
+
+In the event of a security incident:
+
+1. **Immediate Response**: Contain the incident within 1 hour
+2. **Investigation**: Full investigation within 24 hours  
+3. **Notification**: Affected customers notified within 24 hours
+4. **Resolution**: Complete resolution and prevention measures
+5. **Post-Mortem**: Detailed analysis and improvement recommendations
+
+### Reporting Security Issues
+
+Found a security vulnerability?
+
+<Card title="Security Contact" icon="shield-exclamation">
+  Email: security@ref.tools
+  
+  - We'll respond within 24 hours
+  - Coordinated disclosure process
+  - Security researcher recognition
+  - Potential bounty rewards
+</Card>
+
+## Transparency & Communication
+
+### Security Updates
+
+Stay informed about security:
+
+- **Security Blog**: Regular posts about security improvements
+- **Status Page**: Real-time status of security services
+- **Email Notifications**: Proactive communication about security matters
+- **Security Changelog**: Detailed log of security enhancements
+
+### Open Source Security
+
+Some of our security tools are open source:
+
+- **MCP Server**: Open source MCP implementation for transparency
+- **Security Tools**: Shared security utilities and best practices
+- **Documentation**: Open source security guides and examples
+
+## Questions about Security?
+
+<CardGroup cols={2}>
+  <Card
+    title="Contact Security Team"
+    icon="envelope"
+    href="mailto:security@ref.tools"
+  >
+    Reach out directly to our security experts
+  </Card>
+  
+  <Card
+    title="Enterprise Security"
+    icon="building"
+    href="mailto:enterprise@ref.tools"
+  >
+    Discuss enterprise security requirements
+  </Card>
+</CardGroup>
+
+Your security and privacy are our top priorities. If you have any questions or concerns, please don't hesitate to reach out.

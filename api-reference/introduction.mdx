@@ -1,33 +1,164 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: 'API Reference'
+description: 'Complete reference for the Ref REST API'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Overview
 
-## Welcome
+The Ref API provides programmatic access to all documentation search and retrieval features. Built with REST principles, it uses standard HTTP methods, status codes, and JSON for all requests and responses.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+<CardGroup cols={2}>
+  <Card
+    title="Documentation Search"
+    icon="magnifying-glass"
+    href="/api-reference/endpoints/search"
+  >
+    Search through indexed documentation with semantic understanding
+  </Card>
+  <Card
+    title="URL Reading"
+    icon="link"
+    href="/api-reference/endpoints/read-url"
+  >
+    Extract and process content from any URL
+  </Card>
+  <Card
+    title="Web Search"
+    icon="globe"
+    href="/api-reference/endpoints/web-search"
+  >
+    Real-time web search for fresh information
+  </Card>
+  <Card
+    title="Authentication"
+    icon="key"
+    href="/api-reference/authentication"
+  >
+    API key setup and authentication methods
+  </Card>
+</CardGroup>
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+## Base URL
+
+All API requests should be made to:
+
+```
+https://ref.tools/api
+```
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API endpoints require authentication using Bearer tokens in the Authorization header:
+
+```bash
+curl -X POST https://ref.tools/api/search \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "React hooks"}'
+```
+
+Get your API key from the [Ref dashboard](https://ref.tools/dashboard).
+
+## Request Format
+
+All requests must include:
+- `Content-Type: application/json` header
+- `Authorization: Bearer {api_key}` header
+- JSON request body for POST requests
+
+## Response Format
+
+All responses return JSON with this structure:
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+  "results": [...],          // Main response data
+  "totalResults": 42,        // Total number of results (if applicable)
+  "searchTime": 234,         // Response time in milliseconds
+  "creditsUsed": 1,          // Credits consumed by this request
+  "requestId": "req_12345"   // Unique request identifier
+}
 ```
+
+## Rate Limits
+
+API requests are rate-limited based on your plan:
+
+| Plan | Requests/Hour | Burst Limit |
+|------|---------------|-------------|
+| Free | 100 | 10/minute |
+| Basic | 1,000 | 50/minute |
+| Pro | 5,000 | 100/minute |
+| Team | 10,000 | 200/minute |
+
+Rate limit information is included in response headers:
+
+```
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1640995200
+```
+
+## Error Handling
+
+The API uses standard HTTP status codes:
+
+| Status Code | Meaning |
+|-------------|---------|
+| 200 | Success |
+| 400 | Bad Request - Invalid parameters |
+| 401 | Unauthorized - Invalid API key |
+| 402 | Payment Required - Insufficient credits |
+| 429 | Too Many Requests - Rate limit exceeded |
+| 500 | Internal Server Error |
+
+Error responses include detailed information:
+
+```json
+{
+  "error": "insufficient_credits",
+  "message": "Not enough credits for this operation",
+  "code": "INSUFFICIENT_CREDITS",
+  "creditsRequired": 2,
+  "creditsAvailable": 0
+}
+```
+
+## SDKs
+
+Official SDKs are available for popular languages:
+
+<CardGroup cols={2}>
+  <Card title="JavaScript">
+    ```bash
+    npm install @ref-tools/js-sdk
+    ```
+  </Card>
+  
+  <Card title="Python">
+    ```bash
+    pip install ref-tools
+    ```
+  </Card>
+  
+  <Card title="Go">
+    ```bash
+    go get github.com/ref-tools/go-sdk
+    ```
+  </Card>
+  
+  <Card title="Rust">
+    ```bash
+    cargo add ref-tools
+    ```
+  </Card>
+</CardGroup>
+
+## Getting Started
+
+1. **Get an API Key**: Sign up at [ref.tools](https://ref.tools) and copy your API key
+2. **Make a Test Request**: Try the search endpoint with a simple query
+3. **Integrate**: Use our SDKs or make direct HTTP requests
+4. **Monitor Usage**: Track your credit usage in the dashboard
+
+Ready to start? Check out the [search endpoint](/api-reference/endpoints/search) documentation.

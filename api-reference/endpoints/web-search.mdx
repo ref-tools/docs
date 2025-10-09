@@ -1,0 +1,496 @@
+---
+title: 'Web Search'
+description: 'Search the web for real-time information'
+---
+
+## Endpoint
+
+```
+POST https://ref.tools/api/web-search
+```
+
+Search the web for real-time information beyond indexed documentation. Perfect for finding recent updates, current events, and fresh content not yet in documentation indices.
+
+## Request
+
+### Headers
+
+| Header | Value |
+|--------|-------|
+| `Authorization` | `Bearer YOUR_API_KEY` |
+| `Content-Type` | `application/json` |
+
+### Body Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `query` | string | Yes | Search query |
+| `maxResults` | integer | No | Maximum results to return (default: 5, max: 20) |
+| `freshness` | string | No | Freshness filter: `day`, `week`, `month`, `year` |
+| `language` | string | No | Language code (e.g., `en`, `es`, `fr`) (default: `en`) |
+| `region` | string | No | Region code for localized results (e.g., `us`, `uk`, `ca`) |
+
+### Example Request
+
+```bash
+curl -X POST https://ref.tools/api/web-search \
+  -H "Authorization: Bearer ref_api_1234567890abcdef" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "Next.js 15 new features 2024",
+    "maxResults": 5,
+    "freshness": "month",
+    "language": "en"
+  }'
+```
+
+## Response
+
+### Success Response (200)
+
+```json
+{
+  "results": [
+    {
+      "title": "Next.js 15 - What's New in the Latest Release",
+      "url": "https://nextjs.org/blog/next-15",
+      "snippet": "Next.js 15 introduces React 19 support, improved performance with Turbopack, and new experimental features including partial prerendering...",
+      "publishedDate": "2024-01-10T00:00:00Z",
+      "source": "nextjs.org",
+      "relevanceScore": 0.95
+    },
+    {
+      "title": "Complete Guide to Next.js 15 Features",
+      "url": "https://dev.to/example/nextjs-15-features",
+      "snippet": "A comprehensive breakdown of all the new features in Next.js 15, including performance improvements and developer experience enhancements...",
+      "publishedDate": "2024-01-12T14:30:00Z",
+      "source": "dev.to",
+      "relevanceScore": 0.88
+    }
+  ],
+  "totalResults": 847,
+  "searchTime": 456,
+  "creditsUsed": 2,
+  "requestId": "req_websearch_12345"
+}
+```
+
+### Error Responses
+
+#### 400 Bad Request
+
+```json
+{
+  "error": "invalid_query",
+  "message": "Query parameter is required and cannot be empty",
+  "code": "INVALID_QUERY"
+}
+```
+
+#### 402 Payment Required
+
+```json
+{
+  "error": "insufficient_credits",
+  "message": "Not enough credits for web search operation",
+  "code": "INSUFFICIENT_CREDITS",
+  "creditsRequired": 2,
+  "creditsAvailable": 1
+}
+```
+
+## SDK Examples
+
+<CodeGroup>
+
+```javascript JavaScript
+import { RefClient } from '@ref-tools/js-sdk';
+
+const client = new RefClient({ apiKey: 'your-api-key' });
+
+const results = await client.webSearch({
+  query: 'Next.js 15 new features 2024',
+  maxResults: 5,
+  freshness: 'month'
+});
+
+console.log(results.results);
+```
+
+```python Python
+from ref_tools import RefClient
+
+client = RefClient(api_key='your-api-key')
+
+results = client.web_search(
+    query='Next.js 15 new features 2024',
+    max_results=5,
+    freshness='month'
+)
+
+print(results['results'])
+```
+
+```go Go
+package main
+
+import (
+    "fmt"
+    "github.com/ref-tools/go-sdk"
+)
+
+func main() {
+    client := ref.NewClient("your-api-key")
+    
+    results, err := client.WebSearch(&ref.WebSearchRequest{
+        Query: "Next.js 15 new features 2024",
+        MaxResults: 5,
+        Freshness: "month",
+    })
+    
+    if err != nil {
+        panic(err)
+    }
+    
+    fmt.Printf("Found %d results\n", len(results.Results))
+}
+```
+
+</CodeGroup>
+
+## Search Features
+
+### Real-Time Results
+- Fresh content from across the web
+- Recent news and announcements
+- Latest blog posts and tutorials
+- Updated documentation and guides
+
+### Quality Filtering
+- Relevance ranking by AI
+- Source authority weighting
+- Spam and low-quality filtering
+- Duplicate content removal
+
+### Content Types
+- **News Articles**: Latest industry news and updates
+- **Blog Posts**: Technical tutorials and guides
+- **Documentation**: Official docs and API references
+- **Forum Discussions**: Stack Overflow, Reddit, GitHub discussions
+- **Social Media**: Relevant posts and announcements
+
+## Query Examples
+
+### Technology Updates
+```bash
+# Find latest framework releases
+"React 19 new features release date"
+"Vue 4 roadmap 2024"
+"Angular 18 breaking changes"
+```
+
+### Problem Solving
+```bash
+# Current issues and solutions
+"NextJS build error 2024 solution"
+"TypeScript 5.3 migration guide"
+"Docker compose networking issues"
+```
+
+### Industry News
+```bash
+# Recent announcements
+"OpenAI GPT-5 announcement"
+"GitHub new features 2024"
+"AWS re:Invent 2024 announcements"
+```
+
+### Comparative Analysis
+```bash
+# Current comparisons
+"React vs Vue 2024 performance"
+"Best Node.js frameworks 2024"
+"Docker alternatives comparison"
+```
+
+## Freshness Filters
+
+### Available Options
+
+<AccordionGroup>
+  <Accordion title="day">
+    **Time Range**: Last 24 hours
+    
+    **Best For**:
+    - Breaking news
+    - Critical security updates  
+    - Emergency patches
+    - Live event coverage
+  </Accordion>
+
+  <Accordion title="week">
+    **Time Range**: Last 7 days
+    
+    **Best For**:
+    - Recent releases
+    - Weekly tech news
+    - Conference announcements
+    - New tutorials
+  </Accordion>
+
+  <Accordion title="month">
+    **Time Range**: Last 30 days
+    
+    **Best For**:
+    - Monthly updates
+    - Feature releases
+    - Technology trends
+    - Comprehensive guides
+  </Accordion>
+
+  <Accordion title="year">
+    **Time Range**: Last 12 months
+    
+    **Best For**:
+    - Annual reviews
+    - Technology adoption
+    - Long-term trends
+    - Comprehensive comparisons
+  </Accordion>
+</AccordionGroup>
+
+## Use Cases
+
+### Documentation Updates
+```bash
+# Check for recent documentation changes
+curl -X POST https://ref.tools/api/web-search \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "React 19 documentation changes migration guide",
+    "freshness": "week",
+    "maxResults": 10
+  }'
+```
+
+### Security Monitoring
+```bash
+# Find recent security advisories
+curl -X POST https://ref.tools/api/web-search \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "Node.js security vulnerability CVE 2024",
+    "freshness": "month",
+    "maxResults": 5
+  }'
+```
+
+### Technology Research
+```bash
+# Research emerging technologies
+curl -X POST https://ref.tools/api/web-search \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "WebAssembly performance benchmarks 2024",
+    "maxResults": 8
+  }'
+```
+
+## vs Documentation Search
+
+| Feature | Web Search | Documentation Search |
+|---------|------------|---------------------|
+| **Content** | Real-time web content | Indexed documentation |
+| **Freshness** | Latest information | May lag behind updates |
+| **Quality** | Variable quality | Curated, high-quality |
+| **Speed** | Slower (external APIs) | Faster (internal index) |
+| **Cost** | 2 credits | 1 credit |
+| **Coverage** | Entire web | Specific docs only |
+
+### When to Use Each
+
+**Use Web Search for**:
+- Breaking news and updates
+- Recent releases and announcements  
+- Current issues and solutions
+- Comparative analysis with latest data
+- Content not yet indexed
+
+**Use Documentation Search for**:
+- Established APIs and frameworks
+- Detailed technical documentation
+- Code examples and tutorials
+- Comprehensive guides
+- Fast, reliable information
+
+## Regional & Language Support
+
+### Language Codes
+- `en` - English (default)
+- `es` - Spanish
+- `fr` - French  
+- `de` - German
+- `ja` - Japanese
+- `zh` - Chinese
+- `ko` - Korean
+- `pt` - Portuguese
+
+### Region Codes
+- `us` - United States
+- `uk` - United Kingdom  
+- `ca` - Canada
+- `au` - Australia
+- `de` - Germany
+- `fr` - France
+- `jp` - Japan
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Query Optimization">
+    - Use specific, descriptive terms
+    - Include relevant dates or versions
+    - Add context like "2024" or "latest"
+    - Avoid overly broad queries
+  </Card>
+  
+  <Card title="Freshness Selection">
+    - Use "day" for urgent/breaking info
+    - Use "week" for recent updates
+    - Use "month" for comprehensive coverage
+    - Omit filter for all-time results
+  </Card>
+  
+  <Card title="Result Processing">
+    - Check publication dates
+    - Verify source credibility
+    - Cross-reference multiple results
+    - Consider relevance scores
+  </Card>
+  
+  <Card title="Cost Management">
+    - Web search costs 2 credits vs 1 for docs
+    - Use doc search first, web search for gaps
+    - Monitor credit usage carefully
+    - Combine with cached results when possible
+  </Card>
+</CardGroup>
+
+## Limitations
+
+### Rate Limits
+- Higher cost: **2 credits per request**
+- Same rate limits as other endpoints
+- Consider impact on credit budget
+
+### Content Quality
+- Results may include low-quality content
+- Not all sources are technically accurate
+- May include outdated information despite freshness filters
+- Requires human verification for critical decisions
+
+### Coverage
+- Limited to publicly accessible content
+- May miss some specialized or subscription-based sources
+- Language and region availability varies
+- Some content may be geo-blocked
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="No Recent Results">
+    **Problem**: Freshness filter returns too few results
+    
+    **Solutions**:
+    - Try less restrictive freshness filter
+    - Broaden query terms
+    - Remove region/language restrictions
+    - Check if topic has recent coverage
+  </Accordion>
+
+  <Accordion title="Poor Result Quality">
+    **Problem**: Results are not relevant or low quality
+    
+    **Solutions**:
+    - Make query more specific
+    - Add technical keywords
+    - Include version numbers or dates
+    - Try different query phrasing
+  </Accordion>
+
+  <Accordion title="High Credit Usage">
+    **Problem**: Web search consuming too many credits
+    
+    **Solutions**:
+    - Use documentation search first
+    - Reduce maxResults parameter
+    - Cache results for repeated queries
+    - Consider upgrading plan for higher limits
+  </Accordion>
+</AccordionGroup>
+
+## Integration Examples
+
+### Hybrid Search Strategy
+
+```javascript
+async function comprehensiveSearch(query) {
+  // Try documentation search first (cheaper, faster)
+  const docResults = await client.search({
+    query: query,
+    maxResults: 5
+  });
+  
+  // If insufficient results, supplement with web search
+  if (docResults.results.length < 3) {
+    const webResults = await client.webSearch({
+      query: query + " 2024",
+      maxResults: 5,
+      freshness: "month"
+    });
+    
+    return {
+      documentation: docResults.results,
+      web: webResults.results
+    };
+  }
+  
+  return { documentation: docResults.results };
+}
+```
+
+### News Monitoring
+
+```javascript
+async function monitorTechNews(technologies) {
+  const results = {};
+  
+  for (const tech of technologies) {
+    const news = await client.webSearch({
+      query: `${tech} updates news 2024`,
+      freshness: "week",
+      maxResults: 3
+    });
+    
+    results[tech] = news.results;
+  }
+  
+  return results;
+}
+```
+
+## Rate Limits & Credits
+
+- **Credits**: 2 credits per request
+- **Rate Limits**: Same as other API endpoints
+- **Response Time**: 2-5 seconds (external search)
+
+## Related Endpoints
+
+- [Search Documentation](/api-reference/endpoints/search) - Search indexed docs (1 credit)
+- [Read URL](/api-reference/endpoints/read-url) - Read specific URLs (1 credit)
+
+Ready to search the web? Get your API key from the [dashboard](https://ref.tools/dashboard) and start exploring real-time information!
