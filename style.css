@@ -43,6 +43,15 @@ div {
   border-bottom-right-radius: 4px;
 }
 
+.rounded-search {
+  border-radius: 4px;
+}
+
 .rounded-2xl, .rounded-xl {
   border-radius: 4px;
+}
+
+.backdrop-blur {
+  transition: none;
+  opacity: 0.9;
 }
