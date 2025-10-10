@@ -54,4 +54,5 @@ div {
 .backdrop-blur {
   transition: none;
   opacity: 0.9;
+  border-bottom: 1px solid #a1a1a1;
 }
