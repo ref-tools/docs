@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Ref",
   "colors": {
     "primary": "#454545",
     "light": "#e5e5e5",
@@ -9,10 +9,22 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
-      {
-        "tab": "Guides",
-        "groups": [
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Home",
+          "href": "https://ref.tools",
+          "icon": "house"
+        },
+        {
+          "anchor": "Blog",
+          "href": "https://ref.tools/blog",
+          "icon": "pen-to-square"
+        }
+      ]
+      
+    },
+    "groups": [
           {
             "group": "Getting started",
             "pages": [
@@ -46,42 +58,6 @@
             ]
           }
         ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          }
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://ref.tools/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://ref.tools/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
   },
   "logo": {
     "light": "/logo/light.svg",
