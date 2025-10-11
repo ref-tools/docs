@@ -1,0 +1,25 @@
+---
+title: "Gemini CLI"
+description: "Serve Ref to Gemini MCP agents."
+---
+
+## Configure
+
+1. Locate your Gemini CLI MCP config file.
+2. Add the HTTP entry for Ref.
+
+```json
+{
+  "servers": {
+    "Ref": {
+      "type": "http",
+      "url": "https://api.ref.tools/mcp?apiKey=YOUR_API_KEY"
+    }
+  }
+}
+```
+
+## Validate
+
+- Run `gemini mcp list` to confirm Ref is registered.
+- Execute a sample prompt and confirm the tool call succeeds.

@@ -1,0 +1,52 @@
+---
+title: "Quick Start"
+description: "Sign up, connect, run your first search."
+---
+
+## Create Your Account
+
+1. Sign up at the Ref dashboard.
+2. Copy the default API key.
+3. Keep the key in a secure secret manager.
+
+## Install the HTTP MCP Server
+
+```json
+{
+  "Ref": {
+    "type": "http",
+    "url": "https://api.ref.tools/mcp?apiKey=YOUR_API_KEY"
+  }
+}
+```
+
+- Works with Cursor, Claude Code, and any HTTP aware MCP client.
+- Swap `YOUR_API_KEY` for the value from the dashboard.
+
+## Legacy stdio Option
+
+```json
+{
+  "Ref": {
+    "command": "npx",
+    "args": ["ref-tools-mcp@latest"],
+    "env": {
+      "REF_API_KEY": "YOUR_API_KEY"
+    }
+  }
+}
+```
+
+- Stick to the HTTP mode unless you must pin stdio.
+- Most users only install one mode.
+
+## Verify the Tooling
+
+- Ask your agent: `TypeScript Node.js MCP general request failed error, search the docs with ref`.
+- Confirm the client makes a `search_documentation` tool call.
+- Review the returned context window before proceeding.
+
+## Track Usage Early
+
+- Watch the usage card in the dashboard after the first run.
+- Inspect credit deltas per endpoint to catch misconfigurations.

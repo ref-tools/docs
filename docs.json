@@ -22,42 +22,85 @@
           "icon": "pen-to-square"
         }
       ]
-      
+
     },
     "groups": [
-          {
-            "group": "Getting started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
+      {
+        "group": "Getting Started",
+        "pages": [
+          "getting-started/intro",
+          "getting-started/quick-start",
+          "getting-started/dashboard"
         ]
+      },
+      {
+        "group": "Resources",
+        "pages": [
+          "resources/github",
+          "resources/pdf-markdown"
+        ]
+      },
+      {
+        "group": "Comparison",
+        "pages": [
+          "comparison/context7",
+          "comparison/building-doc-search"
+        ]
+      },
+      {
+        "group": "Usage",
+        "pages": [
+          "usage/pricing",
+          "usage/credits",
+          "usage/teams",
+          "usage/rbac"
+        ]
+      },
+      {
+        "group": "Examples",
+        "pages": [
+          "examples/multi-repo",
+          "examples/vibe-code-sleep-training",
+          "examples/case-studies"
+        ]
+      },
+      {
+        "group": "Install",
+        "pages": [
+          "install/claude-code",
+          "install/cursor",
+          "install/codex",
+          "install/gemini-cli",
+          "install/vscode",
+          "install/windsurf",
+          "install/cline",
+          "install/augment",
+          "install/goose",
+          "install/roo-code",
+          "install/chatgt"
+        ]
+      },
+      {
+        "group": "Privacy & Security",
+        "pages": [
+          "privacy-security/index"
+        ]
+      },
+      {
+        "group": "Support",
+        "pages": [
+          "support/report-bug",
+          "support/request-docs",
+          "support/contact"
+        ]
+      },
+      {
+        "group": "Changelog",
+        "pages": [
+          "changelog"
+        ]
+      }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",

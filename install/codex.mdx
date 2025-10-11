@@ -1,0 +1,26 @@
+---
+title: "Codex CLI"
+description: "Use Ref inside Codex."
+---
+
+## Setup
+
+1. Export `REF_API_KEY` in your shell profile.
+2. Add the stdio block to `codex.mcp.json` if HTTP is unsupported.
+
+```json
+{
+  "Ref": {
+    "command": "npx",
+    "args": ["ref-tools-mcp@latest"],
+    "env": {
+      "REF_API_KEY": "${REF_API_KEY}"
+    }
+  }
+}
+```
+
+## Run
+
+- Restart Codex to load the server.
+- Run a test prompt and watch for Ref tool logs.

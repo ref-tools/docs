@@ -1,0 +1,23 @@
+---
+title: "Augment"
+description: "Expose Ref to Augment workflows."
+---
+
+## Configure
+
+1. Open Augment agent settings.
+2. Register Ref as an HTTP MCP server.
+
+```json
+{
+  "Ref": {
+    "type": "http",
+    "url": "https://api.ref.tools/mcp?apiKey=YOUR_API_KEY"
+  }
+}
+```
+
+## Run Smoke Test
+
+- Trigger an Augment playbook with a docs lookup step.
+- Confirm Ref handles the request without fallback.

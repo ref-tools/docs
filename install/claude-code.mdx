@@ -1,0 +1,24 @@
+---
+title: "Claude Code"
+description: "Hook Ref into Claude Code."
+---
+
+## Install Steps
+
+1. Open Claude Code.
+2. Navigate to `Settings > MCP Servers`.
+3. Add the HTTP config shown below.
+
+```json
+{
+  "Ref": {
+    "type": "http",
+    "url": "https://api.ref.tools/mcp?apiKey=YOUR_API_KEY"
+  }
+}
+```
+
+## Verify
+
+- Run a chat and confirm Claude calls `search_documentation`.
+- Inspect the returned snippet to ensure Ref responded.

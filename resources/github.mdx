@@ -1,0 +1,28 @@
+---
+title: "GitHub Indexing"
+description: "Connect repos and control sync."
+---
+
+## Connect
+
+1. Open `Resources > Repos`.
+2. Authorize Ref with GitHub OAuth.
+3. Pick each repository to track.
+
+## Sync Model
+
+- Small repos index every file.
+- Repos above 2,000 files index documentation paths.
+- Sync jobs run continuously and finish within 30 minutes.
+
+## Monitoring
+
+- The Jobs tab lists queued and running crawls.
+- Recent activity surfaces searches against private content.
+- Use the status column to catch auth or rate errors.
+
+## Best Practices
+
+- Keep repos scoped to documentation branches when possible.
+- Re-run indexing after major README or API updates.
+- Disable repos you no longer need to save credits.

@@ -1,0 +1,23 @@
+---
+title: "Goose"
+description: "Attach Ref to Goose agents."
+---
+
+## Integration
+
+1. Locate the Goose MCP config.
+2. Add Ref as an HTTP server.
+
+```json
+{
+  "Ref": {
+    "type": "http",
+    "url": "https://api.ref.tools/mcp?apiKey=YOUR_API_KEY"
+  }
+}
+```
+
+## Validation
+
+- Run a Goose task that requires docs.
+- Ensure the transcript lists Ref search hits.
