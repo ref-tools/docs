@@ -1,0 +1,29 @@
+---
+title: "Cursor"
+description: "Install Ref in Cursor IDE."
+---
+
+## Quick Install
+
+- Use the official one-click link from the dashboard.
+- Cursor opens the MCP modal with Ref prefilled.
+
+## Manual Install
+
+1. Go to `Settings > MCP Servers`.
+2. Choose HTTP server.
+3. Paste the config.
+
+```json
+{
+  "Ref": {
+    "type": "http",
+    "url": "https://api.ref.tools/mcp?apiKey=YOUR_API_KEY"
+  }
+}
+```
+
+## Smoke Test
+
+- Ask Cursor to fetch docs for a framework you indexed.
+- Confirm the response cites Ref URLs.

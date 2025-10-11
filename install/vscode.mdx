@@ -1,0 +1,28 @@
+---
+title: "VS Code"
+description: "Wire Ref into VS Code MCP clients."
+---
+
+## Requirements
+
+- Install the MCP client extension you rely on.
+- Ensure it supports HTTP MCP servers.
+
+## Add Ref
+
+1. Open the extension settings.
+2. Insert the Ref HTTP config.
+
+```json
+{
+  "Ref": {
+    "type": "http",
+    "url": "https://api.ref.tools/mcp?apiKey=YOUR_API_KEY"
+  }
+}
+```
+
+## Check
+
+- Run the extension's test command.
+- Confirm Ref responds without auth errors.

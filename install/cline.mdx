@@ -1,0 +1,25 @@
+---
+title: "Cline"
+description: "Use Ref with the Cline agent."
+---
+
+## Steps
+
+1. Open the Cline MCP configuration file.
+2. Paste the Ref HTTP server entry.
+
+```json
+{
+  "servers": {
+    "Ref": {
+      "type": "http",
+      "url": "https://api.ref.tools/mcp?apiKey=YOUR_API_KEY"
+    }
+  }
+}
+```
+
+## Confirm
+
+- Restart Cline to reload configs.
+- Run a doc lookup prompt and ensure Ref answers.

@@ -1,0 +1,24 @@
+---
+title: "RBAC"
+description: "Role-based access control for Ref teams."
+---
+
+## Roles
+
+| Role | Capabilities |
+| --- | --- |
+| Admin | Search resources, add content, invite members, manage billing |
+| Writer | Search resources and add to the index |
+| Reader | Search team resources only |
+
+## Assignments
+
+- Change roles from the team table dropdown.
+- Updates apply instantly and audit logs capture the change.
+- Invitations inherit the role defined during invite creation.
+
+## Safety Nets
+
+- Only admins can delete teams or buy credits.
+- Writers cannot change billing or remove admins.
+- Readers cannot upload new files or repos.
