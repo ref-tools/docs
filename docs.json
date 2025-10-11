@@ -43,7 +43,8 @@
       {
         "group": "Comparison",
         "pages": [
-          "comparison/context7"
+          "comparison/context7",
+          "comparison/building-doc-search"
         ]
       },
       {
