@@ -83,17 +83,12 @@
         ]
       },
       {
-        "group": "Privacy & Security",
-        "pages": [
-          "privacy-security/index"
-        ]
-      },
-      {
         "group": "Support",
         "pages": [
           "support/status",
           "support/report-bug",
           "support/request-docs",
+          "support/privacy-security",
           "support/contact"
         ]
       },
