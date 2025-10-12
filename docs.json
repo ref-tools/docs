@@ -91,6 +91,7 @@
       {
         "group": "Support",
         "pages": [
+          "support/status",
           "support/report-bug",
           "support/request-docs",
           "support/contact"
