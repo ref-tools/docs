@@ -30,12 +30,14 @@
         "pages": [
           "getting-started/intro",
           "getting-started/quick-start",
+          "getting-started/prompting",
           "getting-started/dashboard"
         ]
       },
       {
         "group": "Resources",
         "pages": [
+          "resources/index",
           "resources/github",
           "resources/pdf-markdown"
         ]
