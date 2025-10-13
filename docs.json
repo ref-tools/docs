@@ -67,7 +67,7 @@
         ]
       },
       {
-        "group": "Install",
+        "group": "Install MCP server",
         "pages": [
           "install/claude-code",
           "install/cursor",

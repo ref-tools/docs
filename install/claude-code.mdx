@@ -1,24 +1,34 @@
 ---
 title: "Claude Code"
-description: "Hook Ref into Claude Code."
+description: "Connect Claude Code to up-to-date documentation."
 ---
+
+import GetHelp from '/snippets/get-help.mdx';
+
 
 ## Install Steps
 
-1. Open Claude Code.
-2. Navigate to `Settings > MCP Servers`.
-3. Add the HTTP config shown below.
+Run the `claude` install command. You can copy a version of the command with your API key pre-populated at [ref.tools/install](https://ref.tools/install)
 
-```json
-{
-  "Ref": {
-    "type": "http",
-    "url": "https://api.ref.tools/mcp?apiKey=YOUR_API_KEY"
-  }
-}
 ```
+claude mcp add --transport http Ref https://api.ref.tools/mcp --header "x-ref-api-key: <YOUR_API_KEY>"
+```
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
 ## Verify
 
-- Run a chat and confirm Claude calls `search_documentation`.
-- Inspect the returned snippet to ensure Ref responded.
+Run the command: 
+
+```
+claude mcp list
+```
+
+You should see:
+
+```
+➜  claude mcp list
+Ref: https://api.ref.tools/mcp (HTTP)
+```
+
+<GetHelp/>
