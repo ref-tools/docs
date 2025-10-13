@@ -42,23 +42,6 @@
         ]
       },
       {
-        "group": "Usage",
-        "pages": [
-          "usage/pricing",
-          "usage/credits",
-          "usage/teams",
-          "usage/rbac"
-        ]
-      },
-      {
-        "group": "Examples",
-        "pages": [
-          "examples/multi-repo",
-          "examples/vibe-code-sleep-training",
-          "examples/case-studies"
-        ]
-      },
-      {
         "group": "Install MCP server",
         "pages": [
           "install/claude-code",
@@ -73,6 +56,23 @@
           "install/cline",
           "install/roo-code",
           "install/chatgpt"
+        ]
+      },
+      {
+        "group": "Examples",
+        "pages": [
+          "examples/case-studies",
+          "examples/multi-repo",
+          "examples/vibe-code-sleep-training"
+        ]
+      },
+      {
+        "group": "Usage",
+        "pages": [
+          "usage/pricing",
+          "usage/credits",
+          "usage/teams",
+          "usage/rbac"
         ]
       },
       {
