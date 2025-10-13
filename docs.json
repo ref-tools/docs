@@ -55,6 +55,7 @@
       {
         "group": "Install MCP server",
         "pages": [
+          "install/index",
           "install/claude-code",
           "install/codex",
           "install/gemini-cli",
