@@ -3,26 +3,14 @@ title: "PDF & Markdown"
 description: "Upload docs outside GitHub."
 ---
 
-## Upload Flow
+Manage your PDF & Markdown files at [ref.tools/resources?tab=pdf](https://ref.tools/resources?tab=pdf)
 
-1. Go to `Resources > PDF & Markdown`.
-2. Drag files or browse to select them.
-3. Watch the progress meter for each upload.
+## What can you upload?
 
-## Processing Rules
+- Upload any `*.pdf` or `*.md` files. They will be automcatically chunked and indexed.
+- The hard files size limit is 100MB per file.
+- If upload is failing with less than 100MB files, try breaking down the files into smaller peices. We've seen this be necessary for some users will medium size files and poor to mediocre internet connects.
 
-- PDFs convert to markdown before indexing.
-- Markdown keeps headings to preserve semantic search.
-- Files larger than 50 MB should be split before upload.
+## Roadmap
 
-## Versioning
-
-- Re-uploading a file replaces the previous index.
-- Job history keeps timestamps for audit trails.
-- Delete a file to reclaim storage and prevent matches.
-
-## Access Control
-
-- Uploaded files follow the same team RBAC defaults.
-- Readers can search results.
-- Writers and admins can add and remove files.
+- Long-term we would like this experience to feel like Google Drive where you can easily manage files.

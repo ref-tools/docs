@@ -38,6 +38,13 @@
         ]
       },
       {
+        "group": "MCP Server",
+        "pages": [
+          "mcp/tools",
+          "mcp/prompts"
+        ]
+      },
+      {
         "group": "Resources",
         "pages": [
           "resources/index",
