@@ -1,30 +1,18 @@
 ---
 title: "Codex CLI"
-description: "Connect Codex CLI to up-to-date documentation."
+description: "Connect Codex CLI to up-to-date and token-efficient documentation."
 ---
 
 import GetHelp from '/snippets/get-help.mdx';
 
-## Setup
+## Install Steps
 
-1. Export `REF_API_KEY` in your shell profile.
-2. Add the stdio block to `codex.mcp.json` if HTTP is unsupported.
+> 📝 TODO: Add specific Codex CLI installation instructions. Include details about exporting the API key and the configuration file setup (may use stdio instead of HTTP).
 
-```json
-{
-  "Ref": {
-    "command": "npx",
-    "args": ["ref-tools-mcp@latest"],
-    "env": {
-      "REF_API_KEY": "${REF_API_KEY}"
-    }
-  }
-}
-```
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
-## Run
+## Verify
 
-- Restart Codex to load the server.
-- Run a test prompt and watch for Ref tool logs.
+> 📝 TODO: Add verification steps for Codex. Include how to restart and test the integration with a sample prompt.
 
 <GetHelp/>

@@ -30,7 +30,7 @@
         "pages": [
           "getting-started/intro",
           "getting-started/quick-start",
-          "getting-started/prompting",
+          "getting-started/prompting"
         ]
       },
       {
@@ -39,13 +39,6 @@
           "resources/index",
           "resources/github",
           "resources/pdf-markdown"
-        ]
-      },
-      {
-        "group": "Comparison",
-        "pages": [
-          "comparison/context7",
-          "comparison/building-doc-search"
         ]
       },
       {
@@ -69,16 +62,23 @@
         "group": "Install MCP server",
         "pages": [
           "install/claude-code",
-          "install/cursor",
           "install/codex",
           "install/gemini-cli",
           "install/vscode",
+          "install/cursor",
           "install/windsurf",
-          "install/cline",
           "install/augment",
           "install/goose",
+          "install/opencode",
+          "install/cline",
           "install/roo-code",
-          "install/chatgt"
+          "install/chatgpt"
+        ]
+      },
+      {
+        "group": "Comparison",
+        "pages": [
+          "comparison/context7"
         ]
       },
       {

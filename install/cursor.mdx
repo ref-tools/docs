@@ -1,33 +1,18 @@
 ---
 title: "Cursor"
-description: "Connect Cursor to up-to-date documentation."
+description: "Connect Cursor to up-to-date and token-efficient documentation."
 ---
 
 import GetHelp from '/snippets/get-help.mdx';
 
-## Quick Install
+## Install Steps
 
-- Use the official one-click link from the dashboard.
-- Cursor opens the MCP modal with Ref prefilled.
+> 📝 TODO: Add detailed Cursor installation instructions. Include both the quick install one-click method and manual configuration steps for Settings > MCP Servers.
 
-## Manual Install
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
-1. Go to `Settings > MCP Servers`.
-2. Choose HTTP server.
-3. Paste the config.
+## Verify
 
-```json
-{
-  "Ref": {
-    "type": "http",
-    "url": "https://api.ref.tools/mcp?apiKey=YOUR_API_KEY"
-  }
-}
-```
-
-## Smoke Test
-
-- Ask Cursor to fetch docs for a framework you indexed.
-- Confirm the response cites Ref URLs.
+> 📝 TODO: Add verification steps for Cursor. This should include how to confirm Ref is listed in MCP servers and how to test with a sample documentation query.
 
 <GetHelp/>

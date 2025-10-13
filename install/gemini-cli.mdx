@@ -1,29 +1,18 @@
 ---
 title: "Gemini CLI"
-description: "Connect Gemini CLI to up-to-date documentation."
+description: "Connect Gemini CLI to up-to-date and token-efficient documentation."
 ---
 
 import GetHelp from '/snippets/get-help.mdx';
 
-## Configure
+## Install Steps
 
-1. Locate your Gemini CLI MCP config file.
-2. Add the HTTP entry for Ref.
+> 📝 TODO: Add specific Gemini CLI installation instructions. Include the config file location and the exact configuration format needed.
 
-```json
-{
-  "servers": {
-    "Ref": {
-      "type": "http",
-      "url": "https://api.ref.tools/mcp?apiKey=YOUR_API_KEY"
-    }
-  }
-}
-```
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
-## Validate
+## Verify
 
-- Run `gemini mcp list` to confirm Ref is registered.
-- Execute a sample prompt and confirm the tool call succeeds.
+> 📝 TODO: Add verification command (likely `gemini mcp list`) and expected output to confirm Ref is properly registered.
 
 <GetHelp/>
