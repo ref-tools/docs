@@ -1,7 +1,9 @@
 ---
-title: "RBAC"
+title: "Access Control"
 description: "Role-based access control for Ref teams."
 ---
+
+Ref allows you to give different members of your team different capabilities, so that you're in control of how your team uses Ref.
 
 ## Roles
 
@@ -9,16 +11,12 @@ description: "Role-based access control for Ref teams."
 | --- | --- |
 | Admin | Search resources, add content, invite members, manage billing |
 | Writer | Search resources and add to the index |
-| Reader | Search team resources only |
+| Reader | Search only |
 
-## Assignments
+## Management
 
-- Change roles from the team table dropdown.
-- Updates apply instantly and audit logs capture the change.
-- Invitations inherit the role defined during invite creation.
+Roles can be managed from [ref.tools/team](https://ref.tools/team). Make sure that your team is selected in the workspace picker in the top-left of the page.
 
-## Safety Nets
+## How to only use public docs
 
-- Only admins can delete teams or buy credits.
-- Writers cannot change billing or remove admins.
-- Readers cannot upload new files or repos.
+Some teams use Ref to only search public documentation sources. The best way to manage this is have one user sign up as an `admin` and invite the rest of the users as `readers`. Then no one will be able to index private sources. 
