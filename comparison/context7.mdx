@@ -5,13 +5,13 @@ description: "Key differences between the popular documentation search MCP serve
 
 ## Snapshot
 
-| Feature | Ref | Context7 |
+| | Context7 | Ref |
 | --- | --- | --- |
-| Approach | Iterative search + read with sessions | Simple batch retrieval |
-| Token Usage | 50-70% savings on average, up to 95% | Baseline 10K tokens per query |
-| Tools | `ref_search_documentation`, `ref_read_url` | `resolve-library-id`, `get-library-docs` |
-| Advanced MCP features | Stateful search session, pre-built prompts | None |
-| Scrape any URL | Yes | No |
+| Approach | Simple batch retrieval | Iterative search + read with sessions |
+| Token Usage | 10K tokens per query | 50-70% savings on average, up to 95% |
+| Tools | `resolve-library-id`, `get-library-docs` | `ref_search_documentation`, `ref_read_url` |
+| Advanced MCP features | None | Stateful search session, pre-built prompts |
+| Scrape any URL | No | Yes |
 
 ## Search Philosophy
 
