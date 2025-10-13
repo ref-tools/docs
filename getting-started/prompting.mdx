@@ -1,14 +1,14 @@
 ---
-title: "Prompting"
-description: "Guide coding agents to use Ref effectively."
+title: "Best Practices"
+description: "How to prompt coding agents to use Ref effectively."
 ---
 
-## Best Practices
+## TLDR
 
 1. **Use the provided `search_docs` and `my_docs` prompts** - When you know your prompt will require working with a tricky library, use Ref's default prompts.
 2. **Guide the model with rules files** - Set up a project rules file so the model always knows when you want it to use Ref.
 
-## How coding agents use Ref
+# How coding agents use Ref
 
 Coding agents leverage Ref's MCP tools to access documentation at the right moment. Understanding when and how agents use Ref helps you guide them more effectively.
 
@@ -40,7 +40,7 @@ When a coding agent detects errors related to library or API usage, they will se
 The best way to encourage this behavior is with a simple prompt in an `AGENTS.md` or similar file.
 
 
-## Guiding Agents with Rules Files
+# Guiding Agents with Rules Files
 
 Rules files let you provide consistent instructions to coding agents. They're especially powerful for directing agents to use Ref automatically.
 
