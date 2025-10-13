@@ -8,6 +8,10 @@
     "dark": "#1a1a1a"
   },
   "favicon": "/favicon.svg",
+  "banner": {
+    "content": "👷 This site is under construction. Reach out to hello@ref.tools if you have any questions!",
+    "dismissible": true 
+  },
   "navigation": {
     "global": {
       "anchors": [
