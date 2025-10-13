@@ -3,26 +3,22 @@ title: "GitHub Indexing"
 description: "Connect repos and control sync."
 ---
 
-## Connect
+## Which repos can I index?
 
-1. Open `Resources > Repos`.
-2. Authorize Ref with GitHub OAuth.
-3. Pick each repository to track.
+- You may only index repos that you are a member of. 
+- If you would like a public repo indexed that is not already, [fill out the form here](https://tally.so/r/nrvBY2).
 
-## Sync Model
+## What files are indexed?
 
-- Small repos index every file.
-- Repos above 2,000 files index documentation paths.
-- Sync jobs run continuously and finish within 30 minutes.
+- Small repos below 2,000 files index every file, including code files.
+- Repos above 2,000 files index documentation files only.
 
-## Monitoring
+## Synchronization
 
-- The Jobs tab lists queued and running crawls.
-- Recent activity surfaces searches against private content.
-- Use the status column to catch auth or rate errors.
+- Repos are synced on a 5 minute cron.
+- Indexing is incremental so Ref will compare the current commit to the most recently indexed commit. This means if you modify the git history for your repo, indexing could fail and you will need to remove and re-add the repo from Ref.
 
-## Best Practices
+## Authentication
 
-- Keep repos scoped to documentation branches when possible.
-- Re-run indexing after major README or API updates.
-- Disable repos you no longer need to save credits.
+- Ref uses personal access tokens to find and access your private repos. 
+- Adding a GitHub App for organizations is on the roadmap but not yet supported.
