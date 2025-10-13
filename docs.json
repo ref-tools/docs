@@ -9,7 +9,7 @@
   },
   "favicon": "/favicon.svg",
   "banner": {
-    "content": "👷 This site is under construction. Reach out to hello@ref.tools if you have any questions!",
+    "content": "👷 This site is under construction. If an answer is missing, reach out to hello@ref.tools",
     "dismissible": true 
   },
   "navigation": {
