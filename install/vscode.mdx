@@ -5,14 +5,31 @@ description: "Connect VS Code to up-to-date and token-efficient documentation."
 
 import GetHelp from '/snippets/get-help.mdx';
 
-## Install Steps
-
-> 📝 TODO: Add specific VS Code installation instructions. Include which MCP client extension to use and how to configure it with Ref.
+[VSCode MCP docs](https://code.visualstudio.com/docs/copilot/customization/mcp-servers)
 
 You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
+## Install Steps
+
+1. Open the VSCode command palette `Shift + Command + P (Mac)` or  `Ctrl + Shift + P (Windows/Linux)`
+2. Type `mcp` and select the `MCP: Add server...` action.
+3. Select the `HTTP` option.
+4. Enter Server URL `https://api.ref.tools/mcp?apiKey=<your-api-key>`
+5. Enter Server ID `Ref`
+
+At this point the server should be installed.
+
+
 ## Verify
 
-> 📝 TODO: Add verification steps for VS Code. Include how to test the extension and confirm Ref is responding correctly.
+1. Open the Chat UI.
+2. In the chat input box, you should see a tools icon next to the send message icon. Click it.
+
+<img src="/install/images/vscode-box.png" />
+
+3. This should open the `Configure Tools` menu. At the bottom of the list, you should see `MCP Server: Ref` with two tools enabled.
+
+<img src="/install/images/vscode-success.png" />
+
 
 <GetHelp/>
