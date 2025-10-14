@@ -5,14 +5,39 @@ description: "Connect Cursor to up-to-date and token-efficient documentation."
 
 import GetHelp from '/snippets/get-help.mdx';
 
+[Cursor MCP docs](https://cursor.com/docs/context/mcp)
+
+You can find your Ref API key at [ref.tools/keys](https://ref.tools/keys)
+
 ## Install Steps
 
-> 📝 TODO: Add detailed Cursor installation instructions. Include both the quick install one-click method and manual configuration steps for Settings > MCP Servers.
+Installing in Cursor is as easy as 1-click. Visit [ref.tools/install]()
 
-You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+You can also manually install via Cursor's settings. 
+
+1. Open `Cursor Settings`
+2. Click `Tools & MCP`
+3. Click `New MCP Server`. This will open an `mcp.json` file.
+4. Update `mcp.json`
+
+```mcp.json
+{
+  "mcpServers": {
+    "Ref": {
+      "type": "http",
+      "url": "https://api.ref.tools/mcp",
+      "headers": {
+        "x-ref-api-key": "your-api-key"
+      }
+    }
+  }
+}
+```
 
 ## Verify
 
-> 📝 TODO: Add verification steps for Cursor. This should include how to confirm Ref is listed in MCP servers and how to test with a sample documentation query.
+In `Cursor Settings` click `Tools & MCP`. 
+
+You should see Ref with a green dot. It should say `2 tools, 2 prompts enabled`.
 
 <GetHelp/>
