@@ -5,14 +5,41 @@ description: "Connect Gemini CLI to up-to-date and token-efficient documentation
 
 import GetHelp from '/snippets/get-help.mdx';
 
-## Install Steps
-
-> 📝 TODO: Add specific Gemini CLI installation instructions. Include the config file location and the exact configuration format needed.
+[Gemini CLI Docs](https://github.com/google-gemini/gemini-cli)
 
 You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
+
+## Install Steps
+
+Gemini CLI is configured through a `settings.json` file, typically found at `~/.gemini/settings.json`.
+
+To enable Ref, update `settings.json`:
+
+```settings.json
+{
+  "mcpServers": {
+    "ref": {
+      "httpUrl": "https://api.ref.tools/mcp?apiKey=<your-api-key>"
+    }
+  },
+  ...
+}%
+```
+
 ## Verify
 
-> 📝 TODO: Add verification command (likely `gemini mcp list`) and expected output to confirm Ref is properly registered.
+Run the command: 
 
+```
+gemini mcp list
+```
+
+You should see:
+
+```
+➜  gemini mcp list
+
+✓ ref: https://api.ref.tools/mcp?apiKey=<your-api-key> (http) - Connected
+```
 <GetHelp/>

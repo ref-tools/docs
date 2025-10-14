@@ -5,14 +5,45 @@ description: "Connect Codex CLI to up-to-date and token-efficient documentation.
 
 import GetHelp from '/snippets/get-help.mdx';
 
-## Install Steps
+_Updated Oct 14, 2025_
 
-> 📝 TODO: Add specific Codex CLI installation instructions. Include details about exporting the API key and the configuration file setup (may use stdio instead of HTTP).
+[Codex MCP install docs](https://github.com/openai/codex/blob/main/docs/config.md#connecting-to-mcp-servers)
 
-You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+You can find your Ref API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install
+
+Codex is configured in a `config.toml` file. This typically lives at `~/.codex/config.toml`
+
+To enable Ref update your `config.toml` to include:
+
+```config.toml
+[mcp_servers.ref]
+url = "https://api.ref.tools/mcp?apiKey=<your-api-key>"
+```
+
+If you are on an older version of Codex and you get the error `Error loading configuration: missing field 'command' in 'mcp_servers.ref'` and do not want to update, you can install the `stdio` server:
+
+```config.toml
+[mcp_servers.ref]
+command = "npx"
+args = ["-y", "ref-tools-mcp@latest"]
+env = { "REF_API_KEY" = "<your-api-key>" }
+```
 
 ## Verify
 
-> 📝 TODO: Add verification steps for Codex. Include how to restart and test the integration with a sample prompt.
+Run the command: 
 
+```
+codex mcp list
+```
+
+You should see:
+
+```
+➜  codex mcp list
+Name  Url                                                        Bearer Token Env Var  Status   Auth
+ref   https://api.ref.tools/mcp?apiKey=<your-api-key>.           -                     enabled  Unsupporte
+```
 <GetHelp/>
