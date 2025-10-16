@@ -61,7 +61,7 @@ Our security model includes the following subprocessors with specific data acces
 - **[Turbopuffer](https://turbopuffer.com)**: `Stores docs` Turbopuffer is the primary search store used by Ref. It is also used by Cursor and Notion. Stores documents, descriptions, and vector embeddings with encryption at rest and isolated namespaces. 
 - **[Firebase](https://firebase.google.com)**: `Sees and stores docs` Temporarily processes search results through Functions and temporarily caches results in Firestore with database-level access controls. All data is encrypted at rest.
 - **[Google Cloud Run](https://cloud.google.com/run)**: `Sees docs` Processes indexing jobs in isolated, transient containers. User docs will be loaded 
-- **[Google Gemini](https://ai.google.dev/gemini-api/docs)**: `Sees docs` Generates document descriptions with zero-data retention policy
+- **[Google Gemini API](https://ai.google.dev/gemini-api/docs)**: `Sees docs` Generates document descriptions following [Gemini API data retention policy](https://ai.google.dev/gemini-api/docs/usage-policies)
 - **[VoyageAI](https://www.voyageai.com/)**: `Sees docs` Creates vector embeddings of docs with zero-data retention policy  
 - **[OpenAI](https://openai.com)**: `Sees docs` Powers research agent functionality with zero-data retention policy. User data will be included in prompts sent to OpenAI.
 - **[Anthropic](https://www.anthropic.com)**: `Sees no docs` Powers evals on public documentation sets with zero-data retention policy. User data will be included in prompts sent to OpenAI.
