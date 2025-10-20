@@ -64,6 +64,7 @@
           "install/windsurf",
           "install/augment",
           "install/goose",
+          "install/droid-cli",
           "install/opencode",
           "install/cline",
           "install/roo-code",
