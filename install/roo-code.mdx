@@ -5,14 +5,40 @@ description: "Connect Roo Code to up-to-date and token-efficient documentation."
 
 import GetHelp from '/snippets/get-help.mdx';
 
-## Install Steps
-
-> 📝 TODO: Add specific Roo Code installation instructions. Include how to access and edit the MCP servers configuration.
+[Roo Code MCP docs](https://docs.roocode.com/features/mcp/using-mcp-in-roo)
 
 You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
+## Install Steps
+
+1. Click the `...` icon in the top right to expand additional menu items and selecte `MCP Servers`
+
+2. Click either `Edit Global MCP` or `Edit Project MCP`.
+
+3. Update the json file that is opened to match the following.
+
+```
+{
+  "mcpServers": {
+    "Ref": {
+      "command": "npx",
+      "args": ["ref-tools-mcp@latest"],
+      "env": {
+        "REF_API_KEY": "<YOUR_API_KEY>"
+      }
+    }
+  }
+}
+```
+
+
 ## Verify
 
-> 📝 TODO: Add verification steps for Roo Code. Include restart instructions and how to test with a documentation query.
+Open a new chat and issue the prompt.
 
+```
+what is ref tools mcp, search the docs with ref
+```
+
+This should results in a `ref_search_documentation` tool call.
 <GetHelp/>
