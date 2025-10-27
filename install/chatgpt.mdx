@@ -5,15 +5,40 @@ description: "Connect ChatGPT to up-to-date and token-efficient documentation."
 
 import GetHelp from '/snippets/get-help.mdx';
 
-
-## Install Steps
-
-> 📝 TODO: Add specific ChatGPT installation steps once the integration is finalized. This will likely include configuration details for connecting to Ref's MCP server.
+[ChatGPT MCP docs](https://platform.openai.com/docs/mcp)
 
 You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
+## Install Steps
+
+1. Open `Settings`
+
+2. Click `Apps & Connectors`
+
+3. If you are not already in developer mode, scroll to the bottom and click `Advanced settings` and toggle on Developer mode.
+
+4. Click the `Create` button in the top right of the settings modal.
+
+5. Fill in Name as `Ref`
+
+6. Fill in MCP Server URL `https://api.ref.tools/mcp?apiKey=<YOUR_API_KEY>`
+
+7. Under Authentication select `No authentication`. Your API key is set in the server url already.
+
+8. Check the `I understand` box and click Create.
+
 ## Verify
 
-> 📝 TODO: Add verification steps to confirm ChatGPT is successfully connected to Ref documentation.
+1. To use Ref, click the `+` button in the left of the prompt input, go to `More` and select `Ref`.
+
+<img src="/install/images/chatgpt-use.png" />
+
+2. Issue the following prompt.
+
+```
+what is ref tools mcp, search the docs with ref
+```
+
+This should results in a `ref_search_documentation` tool call.
 
 <GetHelp/>
