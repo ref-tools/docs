@@ -5,14 +5,36 @@ description: "Connect Windsurf to up-to-date and token-efficient documentation."
 
 import GetHelp from '/snippets/get-help.mdx';
 
-## Install Steps
-
-> 📝 TODO: Add specific Windsurf installation instructions. Include how to access settings and add the Ref HTTP endpoint configuration.
+[Windsurf Cascade MCP docs](https://docs.windsurf.com/windsurf/cascade/mcp)
 
 You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
+## Install Steps
+
+1. Open the `mcp_config.json` file. This can be found at a path like `~/.codium/windsurf/mcp_config.json` or by opening Cascade Chat and clicking the `Customizations` icon (looks like a packing box) in the top right then clicking the settings button.
+
+2. Update `mcp_config.json` as follows:
+
+```
+{
+  "mcpServers": {
+    "Ref": {
+      "command": "npx",
+      "args": ["ref-tools-mcp@latest"],
+      "env": {
+        "REF_API_KEY": "<YOUR_API_KEY>"
+      }
+    }
+  }
+}
+```
+
 ## Verify
 
-> 📝 TODO: Add verification steps for Windsurf. Include how to test with a documentation query and confirm Ref appears in the transcript.
+Click the Cascade Chat Customizations button and see that Ref is active with 2 tools.
+
+<img src="/install/images/windsurf-success.png" />
+
+If it is not, you can click on `Ref` and click the `Refresh` button on the Manage MCPs page to refresh MCPs.
 
 <GetHelp/>
