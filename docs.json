@@ -8,10 +8,6 @@
     "dark": "#1a1a1a"
   },
   "favicon": "/favicon.svg",
-  "banner": {
-    "content": "👷 This site is under construction. If an answer is missing, reach out to hello@ref.tools",
-    "dismissible": true 
-  },
   "navigation": {
     "global": {
       "anchors": [
