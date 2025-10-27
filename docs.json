@@ -65,7 +65,8 @@
           "install/cline",
           "install/roo-code",
           "install/devin",
-          "install/chatgpt"
+          "install/chatgpt",
+          "install/claude-desktop"
         ]
       },
       {

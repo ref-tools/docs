@@ -1,0 +1,33 @@
+---
+title: "Claude Desktop and Web"
+description: "Connect Claude Desktop and Web to up-to-date and token-efficient documentation."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+1. Open `Settings`
+
+2. Click `Connectors`
+
+3. Click `Add custom connector`
+
+4. Fill in Name as `Ref`
+
+5. Fill in Remote MCP Server URL `https://api.ref.tools/mcp?apiKey=<YOUR_API_KEY>`
+
+
+## Verify
+
+Start a new chat and issue the following prompt.
+
+```
+what is ref tools mcp, search the docs with ref
+```
+
+This should results in a `ref_search_documentation` tool call.
+
+<GetHelp/>
