@@ -5,14 +5,25 @@ description: "Connect Augment to up-to-date and token-efficient documentation."
 
 import GetHelp from '/snippets/get-help.mdx';
 
-## Install Steps
-
-> 📝 TODO: Add specific Augment installation instructions. Include how to access agent settings and register Ref as an HTTP MCP server.
+[Augment MCP docs](https://docs.augmentcode.com/setup-augment/mcp)
 
 You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
+## Install Steps
+
+1. Open `Augment Settings`. This can be done either from the VSCode command palette or the gear icon in Augment.
+2. Under `Tools`, click `Add remote MCP`.
+3. Update the settings to `Connection Type = HTTP` and `Authentication Type = Header`.
+4. Fill in `Url` as `https://api.ref.tools/mcp` and add a header `x-ref-api-key` with your api key as the value.
+5. Click `Add`.
+
+<img src="/install/images/augment-setup.png" />
+
+
 ## Verify
 
-> 📝 TODO: Add verification steps for Augment. Include how to test with a playbook or documentation query to confirm the integration works.
+See the Ref server present with a green dot.
+
+<img src="/install/images/augment-success.png" />
 
 <GetHelp/>
