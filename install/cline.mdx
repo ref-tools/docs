@@ -5,14 +5,43 @@ description: "Connect Cline to up-to-date and token-efficient documentation."
 
 import GetHelp from '/snippets/get-help.mdx';
 
-## Install Steps
-
-> 📝 TODO: Add specific Cline installation instructions. Include the MCP configuration file location and setup steps.
+[Cline MCP docs](https://docs.cline.bot/mcp/configuring-mcp-servers)
 
 You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
+## Install Steps
+
+
+1. Open Cline plugin in VSCode and click the `MCP Servers` button at the top. 
+
+<img src="/install/images/cline-mcp-servers-button.png" />
+
+2. Select the `Configure` tab and click `Configure MCP Servers`. This should open `cline_mcp_settings.json`.
+
+3. Update `cline_mcp_settings.json`
+
+```
+{
+  "mcpServers": {
+    "Ref": {
+      "command": "npx",
+      "args": ["ref-tools-mcp@latest"],
+      "env": {
+        "REF_API_KEY": "<YOUR_API_KEY>"
+      }
+    }
+  }
+}
+```
+
 ## Verify
 
-> 📝 TODO: Add verification steps for Cline. Include restart instructions and how to confirm Ref is responding to documentation queries.
+Open a new chat with Cline and run the following prompt.
+
+```
+what is ref tools mcp, search the docs with ref
+```
+
+This should results in a `ref_search_documentation` tool call.
 
 <GetHelp/>
