@@ -5,14 +5,40 @@ description: "Connect Goose to up-to-date and token-efficient documentation."
 
 import GetHelp from '/snippets/get-help.mdx';
 
-## Install Steps
-
-> 📝 TODO: Add specific Goose installation instructions. Include how to locate and edit the MCP configuration file.
+[Goose Extensions docs](https://block.github.io/goose/docs/getting-started/using-extensions)
 
 You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
+
+## Install Steps
+
+1. Click the `Extensions` button in the left side nav.
+
+2. Click `Add custom extension`
+
+3. Fill in Extension Name as `Ref`
+
+4. Fill in Endpoint as `https://api.ref.tools/mcp`
+
+5. Add a Request Header `x-ref-api-key` with value being your API key. 
+
+6. IMPORTANT: make sure you hit "+ Add" next to the request header to ensure it is actually added.
+
+7. Click `Add extension`
+
+<img src="/install/images/goose-settings.png" />
+
+
 ## Verify
 
-> 📝 TODO: Add verification steps for Goose. Include how to run a test task and confirm Ref appears in the transcript.
+Open a new chat and issue the prompt.
+
+```
+what is ref tools mcp, search the docs with ref
+```
+
+This should results in a `ref_search_documentation` tool call.
+
+<img src="/install/images/goose-success.png" />
 
 <GetHelp/>
