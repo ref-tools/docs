@@ -38,7 +38,8 @@
         "group": "MCP Server",
         "pages": [
           "mcp/tools",
-          "mcp/prompts"
+          "mcp/prompts",
+          "mcp/registry"
         ]
       },
       {
