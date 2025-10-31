@@ -60,6 +60,7 @@
           "install/vscode",
           "install/cursor",
           "install/windsurf",
+          "install/kiro",
           "install/augment",
           "install/goose",
           "install/droid-cli",
