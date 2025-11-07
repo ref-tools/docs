@@ -99,6 +99,7 @@
         "group": "Support",
         "pages": [
           "support/status",
+          "brand/assets",
           "support/report-bug",
           "support/request-docs",
           "support/privacy-security",
