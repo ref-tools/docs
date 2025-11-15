@@ -13,9 +13,8 @@ Ref is built with security and privacy as core principles. This page outlines ou
 
 - **MCP Implementation**: Local and remote server protocols with API key authentication
 - **Data Protection**: End-to-end encryption, isolated multi-tenant architecture, and comprehensive audit logging
-- **Compliance**: Active SOC2/ISO27001 certification process with subprocessor disclosure
+- **Compliance**: SOC2 certification in process with Vanta (see our [Trust Center](https://app.vanta.com/ref.tools/trust/b1wpncahik7twfxopx0c2))
 - **Monitoring**: Real-time health checks and public status updates
-
 
 
 ## MCP
@@ -26,7 +25,9 @@ Ref provides an [open-source](https://github.com/ref-tools/ref-tools-mcp) `stdio
 
 ### Authentication
 
-Ref uses API keys for authentication. MCP supports OAuth however the spec has been influx and there is a [recent report](https://www.obsidiansecurity.com/blog/from-well-known-to-well-pwned-common-vulnerabilities-in-ai-agents#CyberSecurity) of sever vulnerabilities due to client implementations. The complexity of a system is itself a risk factor so we've chosen to stick to the simple API key pattern for now.
+Ref allows use of API keys or OAuth for authentication. Ref's implementation of MCP OAuth is in beta as of Nov 15, 2025. Ref also supports SSO for organizations via [Scalekit](https://www.scalekit.com/). 
+
+The easiest way to rollout Ref to an organization is a combination of SSO and MCP OAuth. If you are interested in MCP OAuth and/or SSO, please reach out to `help@ref.tools`
 
 ## Data Handling
 
@@ -52,8 +53,8 @@ We take data isolation very seriously in our multi-tenant environment:
 ## Compliance
 
 ### Certifications
-- **SOC2 and ISO27001**: Currently in progress with vendor support
-- Updates will be provided as certifications are completed
+- **SOC2**: Currently in progress with [Vanta](https://www.vanta.com)
+- For more information, see out [Trust Center](https://app.vanta.com/ref.tools/trust/b1wpncahik7twfxopx0c2)
 
 ### Subprocessors & Data Access
 Our security model includes the following subprocessors with specific data access patterns:
@@ -71,8 +72,9 @@ Our security model includes the following subprocessors with specific data acces
 - **[Mixpanel](https://mixpanel.com)**: `Sees no docs` Analyzes product usage analytics.
 - **[Sentry](https://sentry.io)**: `Sees no docs` Monitors errors and performance with anonymized telemetry data.
 - **[Google Workspace](https://workspace.google.com)**: `Sees no docs` Used for communication and coordination.
-- **[Slack](https://slack.com)**: `Sees no docs data` Used to communicate with partners.
-- **[GitHub](https://github.com)**: `Sees no docs data` Used for version control.
+- **[Slack](https://slack.com)**: `Sees no docs` Used to communicate with partners.
+- **[GitHub](https://github.com)**: `Sees no docs` Used for version control.
+- **[Scalekit](https://scalekit.com)**: `Sees no docs` Used for SSO (Firebase is the IdP) and MCP OAuth.
 
 ### Monitoring & Health Checks
 - Health check endpoint: `api.ref.tools/ping`
