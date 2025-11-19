@@ -115,8 +115,8 @@
     ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/ref-wordmark-light.svg",
+    "dark": "/logo/ref-wordmark-dark.svg"
   },
   "navbar": {
     "links": [
