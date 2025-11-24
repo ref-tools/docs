@@ -9,10 +9,11 @@ Ref runs as a **streamable HTTP server** that implements the Model Context Proto
 
 ### Authentication
 
-Ref's API accepts authentication in two ways:
+Ref's API accepts authentication in three ways:
 
 1. **As a header**: `x-ref-api-key: YOUR_API_KEY`
 2. **As a query parameter**: `?apiKey=YOUR_API_KEY`
+3. **OAuth**: Include neither header or query param and your MCP client will initiate OAuth sign-in.
 
 The streamable HTTP endpoint is available at `https://api.ref.tools/mcp`.
 
