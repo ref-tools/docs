@@ -19,6 +19,24 @@ The streamable HTTP endpoint is available at `https://api.ref.tools/mcp`.
 
 You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
+### OAuth and Teams
+
+If you use OAuth in combination with [Teams](/usage/teams), you may need to specify the team you want Ref to access. Ref will do it's best to intelligently pick the correct team but you may want to manually force a specific team.
+
+Here is the algorithm Ref uses to pick the user or team scope:
+```
+For base OAuth url https://api.ref.tools/mcp if the user belongs to:
+  - no teams -> user scope
+  - one team -> team scope for the users single team
+  - multiple teams -> user scope, require specifying team
+
+When specifying scope in OAuth url https://api.ref.tools/mcp?scope=(user|{team_id})
+  - scope=user -> user scope
+  - scope={team_id} -> team scope
+```
+
+Team ids have the format `t-<hash>`. You can find the team OAuth url at [ref.tools/install](https://ref.tools/install)
+
 ---
 
 ## Installation Guides
