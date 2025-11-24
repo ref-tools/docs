@@ -45,7 +45,7 @@
       {
         "group": "Resources",
         "pages": [
-          "resources/index",
+          "resources/overview",
           "resources/github",
           "resources/pdf-markdown"
         ]
