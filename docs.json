@@ -22,7 +22,6 @@
           "icon": "pen-to-square"
         }
       ]
-
     },
     "groups": [
       {
@@ -36,11 +35,7 @@
       },
       {
         "group": "MCP Server",
-        "pages": [
-          "mcp/tools",
-          "mcp/prompts",
-          "mcp/registry"
-        ]
+        "pages": ["mcp/tools", "mcp/prompts", "mcp/registry"]
       },
       {
         "group": "Resources",
@@ -64,6 +59,7 @@
           "install/augment",
           "install/goose",
           "install/droid-cli",
+          "install/amp",
           "install/opencode",
           "install/cline",
           "install/roo-code",
@@ -92,9 +88,7 @@
       },
       {
         "group": "Comparison",
-        "pages": [
-          "comparison/context7"
-        ]
+        "pages": ["comparison/context7"]
       },
       {
         "group": "Support",
@@ -109,9 +103,7 @@
       },
       {
         "group": "Changelog",
-        "pages": [
-          "changelog"
-        ]
+        "pages": ["changelog"]
       }
     ]
   },
@@ -133,10 +125,7 @@
     }
   },
   "contextual": {
-    "options": [
-     "copy",
-     "view"
-   ]
+    "options": ["copy", "view"]
   },
   "footer": {
     "socials": {
