@@ -15,7 +15,9 @@ description: "Key differences between the popular documentation search MCP serve
 | Private repos | Paid add-on | Included |
 | PDF & file upload | No | Yes |
 | Repo indexing | Paid | Free |
+| Prompt injection protection | No | Yes ([Centure.ai](https://centure.ai/)) |
 | Pricing | $10/mo for 500 queries | $9/mo for 1,000 queries |
+
 
 ## Search Philosophy
 
@@ -68,6 +70,8 @@ Both servers optimize for **token usage** because:
 **Free repo indexing:** Index your own repositories at no additional cost. Context7 charges for this feature.
 
 **Matches how agents work:** Ref's search + read tools align with how frontier models are trained. OpenAI explicitly requires this pattern for Deep Research integration, signaling this is the future of agentic search.
+
+**Prompt injection protection:** Ref uses [Centure.ai](https://centure.ai/) to detect and block prompt injection attacks in real-time. When your agent scrapes external websites or processes user-uploaded content, Centure's multi-modal analysis protects against malicious instructions embedded in text, images, or other data sources. Context7 offers no protection against these attacks.
 
 **Enterprise-ready:** Built-in GitHub, PDF, and Markdown indexing with team RBAC, no custom pipelines required.
 
