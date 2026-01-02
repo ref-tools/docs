@@ -7,27 +7,31 @@ description: "Key differences between the popular documentation search MCP serve
 
 | | Context7 | Ref |
 | --- | --- | --- |
-| Approach | Simple batch retrieval | Iterative search + read with sessions |
-| Token Usage | 10K tokens per query | 50-70% savings on average, up to 95% |
-| Tools | `resolve-library-id`, `get-library-docs` | `ref_search_documentation`, `ref_read_url` |
-| Advanced MCP features | None | Stateful search session, pre-built prompts |
+| Approach | Batch retrieval | Iterative search + read |
+| Content | Code snippets | Any content type (source of truth) |
+| Token optimization | Consistent ~3k tokens/query | Adaptive 500-5k tokens/query |
+| Tools | `resolve-library-id`, `query-docs` | `ref_search_documentation`, `ref_read_url` |
 | Scrape any URL | No | Yes |
+| Private repos | Paid add-on | Included |
+| PDF & file upload | No | Yes |
+| Repo indexing | Paid | Free |
+| Pricing | $10/mo for 500 queries | $9/mo for 1,000 queries |
 
 ## Search Philosophy
 
+Both Context7 and Ref now use stateful sessions to optimize token usage and avoid duplicate results. Where they differ is in search patterns and feature depth.
+
 ### Context7's Approach
 
-Context7 uses a **naive RAG strategy**: given a query, fetch the most relevant documents up to a fixed number of tokens (typically 10K). This "dump and hope" approach assumes what you need is in that bundle of content.
+Context7 asks your agent to pick a library and then query that library's docs.
 
 **Strengths:**
-- Simple, predictable behavior
+- Pre-processed code snippets
 - One of the most popular MCP servers showing why MCP is valuable
 
 **Limitations:**
-- Doesn't match iterative agent/human search patterns
-- Fixed token budget may be too much or too little
-- Costly to iterate (10K tokens per retry)
-- Cannot avoid returning duplicate results across queries
+- Batch retrieval doesn't match iterative agent/human search patterns
+- Limited to snippets from public documentation—no private repos, PDFs, or file uploads without paid upgrades
 
 ### Ref's Approach
 
@@ -36,36 +40,37 @@ Ref uses **agentic search with MCP sessions**: provides search() and read() tool
 2. Selectively read only relevant documents
 3. Iterate efficiently with session state
 
+Ref emphasizes **source of truth** access so agents can read any content from docs (explanations, warnings, prose, code), not just pre-extracted code snippets. This prevents information loss from pre-processing while still returning only the relevant chunks needed.
+
 **Session-powered improvements:**
+- **Adaptive token usage** - agents choose which pages to read, so simple queries return only what's needed while complex queries can dig deeper
 - **Never return same link twice** - agents can access prior results from context
 - **On-the-fly extraction** - automatically filter large pages (e.g., 90K token Figma docs → 5K relevant tokens)
 - **Pre-fetching** - results are cached for faster reads
 
-**Results:**
-- 50-70% average token savings vs 10K baseline
-- Up to 95% savings on some queries (500 tokens vs 10K)
-- No drop in recall quality
+## Why Token Efficiency Matters
 
-## Evaluation Metrics
-
-Ref optimizes for **token usage** because:
+Both servers optimize for **token usage** because:
 - Tokens cost money
 - [Context rot](https://research.trychroma.com/context-rot): irrelevant tokens degrade output quality
 - Agents build context over multiple searches, so session-level metrics matter more than single-query precision
 
 ## Why Ref Wins
 
-**Dramatic token savings:** 50-70% average reduction vs naive RAG approaches, with up to 95% savings on some queries. This translates to real cost savings and better output quality through reduced context rot.
+**2x the value:** $9/month gets you 1,000 queries on Ref vs. 500 queries for $10/month on Context7. That's more than double the queries per dollar.
+
+**Agent-controlled retrieval:** Ref lets your agent decide which pages to read, adapting token usage to the task at hand. Context7 returns fixed batches—the agent only picks a library, then gets whatever the system decides to send back.
+
+**Source of truth access:** Ref can retrieve any content type from documentation—explanatory text, warnings, prose, and code—returning only the relevant chunks needed. Context7 limits results to pre-extracted code snippets, which can miss important context and explanations.
+
+**More sources, no extra cost:** Ref includes private GitHub repos, PDF indexing, and file uploads in the base plan. Context7 charges extra for private repos and doesn't support PDFs or file uploads at all.
+
+**Free repo indexing:** Index your own repositories at no additional cost. Context7 charges for this feature.
 
 **Matches how agents work:** Ref's search + read tools align with how frontier models are trained. OpenAI explicitly requires this pattern for Deep Research integration, signaling this is the future of agentic search.
 
-**Session-powered intelligence:**
-- Never returns duplicate links across queries
-- Automatically extracts relevant sections from large docs (e.g., 90K token pages → 5K relevant tokens)
-- Enables efficient iteration without re-fetching prior results
-
 **Enterprise-ready:** Built-in GitHub, PDF, and Markdown indexing with team RBAC, no custom pipelines required.
 
-## Lean more
+## Learn more
 
 Learn more about [how Ref evaluates agentic search](https://ref.tools/blog/how-make-search-good) and [how Ref leverages advanced MCP features](https://ref.tools/blog/how-does-ref-mcp) from the blog.
