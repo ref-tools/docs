@@ -1,0 +1,43 @@
+---
+title: "Zed"
+description: "Connect Zed to up-to-date and token-efficient documentation."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[Zed MCP docs](https://zed.dev/docs/ai/mcp)
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+1. Open the agent thread UI in right dock with `cmd + R`.
+2. In the top right, click the `...` icon and under MCP Servers, select `Add Custom Server...`. This should open the `Add MCP Server` modal.
+3. In the bottom left of the modal click `Configure Remote` server.
+4. Replace the entire content of the input JSON with the following and click `Add Server`.
+
+```json
+{
+  "Ref": {
+    "url": "https://api.ref.tools/mcp?apiKey=<your api key>"
+  }
+}
+```
+
+## Verify
+
+1. Open a new thread in the agent thread panel and select the `...` settings icon then click `Settings`.
+2. You should see Ref enabled in the Model Context Protocol (MCP) Servers section.
+
+## Using Ref in Zed
+
+You can use the built in auto-complete prompt `/search_docs` to search documentation with Ref.
+
+Example prompt:
+```
+/search_docs what is ref tools mcp server
+```
+
+This should result in a `ref_search_documentation` tool call.
+
+<GetHelp/>
