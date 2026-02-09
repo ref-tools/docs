@@ -21,10 +21,10 @@ You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 {
   "mcpServers": {
     "Ref": {
-      "command": "npx",
-      "args": ["ref-tools-mcp@latest"],
-      "env": {
-        "REF_API_KEY": "<YOUR_API_KEY>"
+      "type": "streamable-http",
+      "url": "https://api.ref.tools/mcp",
+      "headers": {
+        "X-ref-API-Key": "<YOUR_API_KEY>"
       }
     }
   }
