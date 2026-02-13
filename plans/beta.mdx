@@ -1,0 +1,105 @@
+---
+title: "Ref Plans"
+description: "Overview of Ref Plans and information for beta users"
+---
+
+Thank you for your interest in https://plan.ref.tools!
+
+# How to get started
+
+1. Signup for Ref https://ref.tools/signup
+
+2. *(Optional but recommended)* Connect your GitHub and repos to the index https://ref.tools/resources?tab=github 
+
+3. Visit https://plan.ref.tools and start your first plan!
+
+
+# Quick Demo: My workflow with Plans
+
+Ref Plans is a tool for researching and writing Plans and orchestrating agents that implement them. 
+
+Here's a quick demo of my coding workflow with Ref Plans. I'm a solo developer so see below for more collaborative workflows.
+
+<iframe
+  className="w-full aspect-video rounded-xl"
+  src="https://www.youtube.com/embed/o3rXggX-ts8"
+  title="Demo of my workflow with Ref Plans"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+
+# Why use Ref Plans?
+
+- **Write and iterate on long-lived AI plans that span multiple code changes** - The */plan* modes in tools like Claude or Cursor are great for individual code changes. However, they are ephemeral. Commonly I'm building a feature that should be broken down to multiple code changes and I want to write and review one cohesive plan.
+- **Lower the mental load of context switching** - Managing multiple agents means context switching regularly. Plans provide a clean space to organize and clarify your thinking. When I was managing a bunch of agents ad hoc prior to Plans I felt tense and frazzled and with Ref Plans I felt noticably calmer and more relaxed.
+- **Gather context and feedback from other humans** - One of the richest sources of context is the wisdom and expertise of our human teammates. Plans lets you send AI plans to teammates for comments and collaborative editing, as easily as any other web-based collaboration tool.
+- **Build a rich history of all features and changes** - As you and your team do more planning in Ref, you naturally build up an knowledge base that's easily kept up-to-date of all feature decisions and code changes. 
+- **Background agents let you work on your phone and close your tabs** - Ref runs Claude Code as a background agent in the cloud so you can open the web app on your phone or start an agent and close browser tabs without worrying about losing state.
+- **It's composible, use only the parts you want** - Ref's MCP-first architecture means you can connect use Ref's built-in Claude Code or buid custom workflows and connect any agent of your choosing.
+
+
+# Options and different ways to work
+
+Plans are intended to be flexible to match your workflow but here are a few high-level choices to make.
+
+### Index your codebase with Ref and do research in the web client
+
+This is how I work. I prefer having 1 primary development enviroment that is purely for testing and polishing features. I actively checkout and test remote branches but have a cloud agent write the code.
+
+### Connect to the MCP and do planning locally
+
+If you prefer not to have Ref index your codebase or are out of Ref credits and don't want to buy more, you can still use Ref to manage and iterate on your Plans. The MCP server provides all the same tools to any agent of your choosing.
+
+<iframe
+  className="w-full aspect-video rounded-xl"
+  src="https://www.youtube.com/embed/wOcMU86CCew"
+  title="Demo setting up Ref Plan MCP with Claude Code"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+
+### Claude Code /plan hook
+
+If you have the perfect local Claude Code setup and you just want to collaborate on Plans more easily, we got you! There is a 
+
+INSTALL INSTRUCTIONS AND DEMO
+
+## Working with a Team
+
+There are a few ways Ref Plans get better with teams:
+
+- Share and comment on each others plans.
+- As a manager or lead, connect the MCP server and have you agent review active and recently finished plans to understand your team's state.
+
+<iframe
+  className="w-full aspect-video rounded-xl"
+  src="https://www.youtube.com/embed/81P-V2X1yts"
+  title="Demo setting up Ref Plan MCP with Claude Code"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+
+# New tiers and prices
+
+This new launch comes with an update to Ref's pricing. Since Ref credits can now be used for AI generation, we're adding tiers with more credits at discounted prices for heavy users.
+
+<img src="/images/pricing.png" />
+
+**There will be no price changes to existing subscriptions.** Existing Basic and Team subscriptions will continue to get 1000 credits for $9/mo and will have Free tier limits for indexing and Plans.
+
+Extra usage now costs $10 per 1000 credits.
+
+# Roadmap
+
+- **WYSIWYG Editor** - There is so much work I'd like to do to make the editor experience better. The highest priority is a beautiful WYSIWYG editor.
+- **MCP Client** - You should be able to connect other MCP servers to Ref's background agent.
+- **Main app integation** - Plans is almost an entirely separate app from the classic Ref MCP server. It needs to be integrated and included in landing pages and docs etc
+- **Custom HTTP Endpoint Agents** - I'd like to make it easier to connect to any agent platform.
+
+Let me know what else should be on there!
+
+# Questions?
+
+Email: matt@ref.tools
+
+Discord: https://discord.gg/dUuz5V2TM3 (tag @mjd)
