@@ -30,7 +30,7 @@ Here's a quick demo of my coding workflow with Ref Plans. I'm a solo developer s
 
 # Why use Ref Plans?
 
-- **Write and iterate on long-lived AI plans that span multiple code changes** - The */plan* modes in tools like Claude or Cursor are great for individual code changes. However, they are ephemeral. Commonly I'm building a feature that should be broken down to multiple code changes and I want to write and review one cohesive plan.
+- **Write and iterate on long-lived AI plans that span multiple PRs** - The */plan* modes in tools like Claude or Cursor are ephemeral. Commonly I'm building a feature that should be broken down to multiple code changes and I want to write and review one cohesive plan.
 - **Lower the mental load of context switching** - Managing multiple agents means context switching regularly. Plans provide a clean space to organize and clarify your thinking. When I was managing a bunch of agents ad hoc prior to Plans I felt tense and frazzled and with Ref Plans I felt noticably calmer and more relaxed.
 - **Gather context and feedback from other humans** - One of the richest sources of context is the wisdom and expertise of our human teammates. Plans lets you send AI plans to teammates for comments and collaborative editing, as easily as any other web-based collaboration tool.
 - **Build a rich history of all features and changes** - As you and your team do more planning in Ref, you naturally build up an knowledge base that's easily kept up-to-date of all feature decisions and code changes. 
@@ -42,7 +42,7 @@ Here's a quick demo of my coding workflow with Ref Plans. I'm a solo developer s
 
 Plans are intended to be flexible to match your workflow but here are a few high-level choices to make.
 
-### Index your codebase with Ref and do research in the web client
+### (Recommended) Index your codebase with Ref and do research in the web client
 
 This is how I work. I prefer having 1 primary development enviroment that is purely for testing and polishing features. I actively checkout and test remote branches but have a cloud agent write the code.
 
