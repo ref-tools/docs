@@ -54,7 +54,24 @@ Plans are intended to be flexible to match your workflow but here are a few high
 
 ### (Recommended) Index your codebase with Ref and do research in the web client
 
-This is how I work. I prefer having 1 primary development enviroment that is purely for testing and polishing features. I actively checkout and test remote branches but have a cloud agent write the code.
+Use Ref as your main driver and orchestrator. Here's my two-phase workflow which I call **Plan and Polish**.
+
+1. Do research and context engineering in Plan. I start with my notes and ask the agent to research the codebase and breakdown in to tasks.
+2. Once a plan feels good, I launch a background or cloud agent to implement it task by task. Sometimes multiple tasks in parallel.
+3. As background agents finish, checkout the branch locallly to test and verify. Ask the background agent for any fixes. Checkout and test other branches while it works.
+4. As tasks are finished, have my local agent open and merge PRs and update the Plan doc based on progress and ways we've diverged from the initial plan.
+
+### Provide context from Linear or Github PRs and Issues
+
+Lots of your context for planning lives outside the codebase, often in Linear or GitHub. Here's a Linear/GitHub Issues driven version of the same workflow.
+
+To connect Linear, click the Linear logo button in the chat panel. To connect GitHub issues and PRs you must connect GitHub and add repos to Ref.
+
+1. Do research and context engineering in Plan. Add Linear ticket or GitHub issue links and ask the agent to research the codebase and breakdown in to tasks.
+2. Once a plan feels good, launch a background or cloud agent to implement it task by task. Sometimes multiple tasks in parallel.
+3. As background agents finish, checkout the branch locallly to test and verify. Ask the background agent for any fixes. Checkout and test other branches while it works.
+4. As tasks are finished, have my local agent open and merge PRs and update the Plan doc based on progress and ways we've diverged from the initial plan.
+5. Have the Ref agent update Linear and GitHub based on progress.
 
 ### Connect to the MCP and do planning locally
 
@@ -70,9 +87,19 @@ If you prefer not to have Ref index your codebase or are out of Ref credits and 
 
 ### Claude Code /plan hook
 
-If you have the perfect local Claude Code setup and you just want to collaborate on Plans more easily, we got you! There is a 
+If you have the perfect local Claude Code setup and you just want to collaborate on Plans more easily, we got you! Install is as simple as:
 
-INSTALL INSTRUCTIONS AND DEMO
+```
+curl -fsSL https://api.plan.ref.tools/plugins/install/ref-plan-hook | bash
+```
+
+<iframe
+  className="w-full aspect-video rounded-xl"
+  src="https://www.youtube.com/embed/JtC-hWGnHEI"
+  title="Demo setting up Ref Plan MCP with Claude Code"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
 
 ## Working with a Team
 
