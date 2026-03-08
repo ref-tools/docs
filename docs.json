@@ -104,6 +104,10 @@
             "pages": [
               "plans/workflows/overview",
               "plans/workflows/roles",
+              "plans/workflows/role-early-career",
+              "plans/workflows/role-senior-staff",
+              "plans/workflows/role-tech-lead",
+              "plans/workflows/role-vibecoder",
               "plans/workflows/claude-code-hook"
             ]
           },
