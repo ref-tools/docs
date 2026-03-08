@@ -1,0 +1,44 @@
+---
+title: "Amp"
+description: "Connect Amp to Ref Plans."
+---
+
+import GetHelp from "/snippets/get-help.mdx";
+
+How to set up the Ref Plans MCP server with [Amp CLI](https://ampcode.com/manual#mcp).
+
+## Install
+
+Run the `amp` install command:
+
+```
+amp mcp add RefPlan https://api.plan.ref.tools/mcp --header "x-ref-api-key: <YOUR_API_KEY>"
+```
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys).
+
+For plan-specific mode:
+
+```
+amp mcp add RefPlan "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>" --header "x-ref-api-key: <YOUR_API_KEY>"
+```
+
+## Verify
+
+Run the command:
+
+```
+amp mcp doctor
+```
+
+You should see:
+
+```
+➜  amp mcp doctor
+User settings: <filepath>
+Workspace settings: <filepath>
+
+RefPlan (user settings): connected
+```
+
+<GetHelp />

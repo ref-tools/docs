@@ -1,0 +1,48 @@
+---
+title: "Droid CLI"
+description: "Connect Factory Droid CLI to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[Droid CLI MCP install docs](https://docs.factory.ai/cli/configuration/mcp)
+
+You can find your Ref API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install
+
+Start Droid
+
+```
+droid
+```
+
+Run the `/mcp` command
+
+```
+/mcp add --type http RefPlan "https://api.plan.ref.tools/mcp?apiKey=<your-api-key>"
+```
+
+For plan-specific mode:
+
+```
+/mcp add --type http RefPlan "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>&apiKey=<your-api-key>"
+```
+
+## Verify
+
+Start Droid:
+
+```
+droid
+```
+
+Run the `/mcp` command in the Droid TUI
+
+```
+/mcp list
+```
+
+You should see `RefPlan` listed with the Ref Plans MCP URL.
+
+<GetHelp/>

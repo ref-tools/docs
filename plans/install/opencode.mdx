@@ -1,0 +1,38 @@
+---
+title: "OpenCode"
+description: "Connect OpenCode to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[Opencode MCP docs](https://opencode.ai/docs/mcp-servers/)
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+1. Create or update an `opencode.jsonc` file in your project:
+
+```
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "RefPlan": {
+      "type": "remote",
+      "url": "https://api.plan.ref.tools/mcp",
+      "enabled": true,
+      "headers": {
+        "x-ref-api-key": "YOUR_API_KEY"
+      }
+    }
+  }
+}
+```
+
+For plan-specific mode, use `"url": "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>"`.
+
+## Verify
+
+Open a new chat and ask the agent to list your plans or read a specific plan.
+
+<GetHelp/>

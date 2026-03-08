@@ -1,0 +1,61 @@
+---
+title: "Best Practices"
+description: "How to write plans that get great results from coding agents."
+---
+
+## TLDR
+
+1. **Start with a clear outline** — Be specific about what to build, include constraints, and reference existing patterns.
+2. **Let the agent research** — Don't try to write perfect tasks yourself. Give the agent your intent and let it research the codebase.
+3. **Review before launching** — Read through the agent's proposed tasks and implementation steps. Catch issues early.
+
+## Plan structure
+
+A good plan follows this structure:
+
+1. **Summary** — One or two paragraphs describing what you're building and why.
+2. **Relevant Files** — Key files the agent should read to understand the existing codebase patterns.
+3. **Relevant Docs** — Links to external documentation, API references, or design specs.
+4. **Tasks** — Each task has:
+   - A clear title
+   - Implementation steps (specific enough that an agent can follow them)
+   - Verification criteria (how to confirm the task is done correctly)
+
+## Tips for writing good outlines
+
+**Be specific about what to build.** "Add dark mode" is vague. "Add a dark mode toggle to the settings page that persists the user's preference in localStorage and applies a dark theme using our existing Tailwind dark: classes" gives the agent something to work with.
+
+**Include constraints.** If there are libraries you want to use (or avoid), performance requirements, or compatibility needs, say so up front.
+
+**Reference existing patterns.** If your codebase has conventions, point to an example. "Follow the same pattern as `UserSettings.tsx` for the new component" saves a lot of back-and-forth.
+
+## Iterative refinement
+
+Plans are collaborative documents. Use comments in the chat panel to:
+
+- Ask the agent to dig deeper into a specific area
+- Request changes to the task breakdown
+- Add context you forgot in the initial outline
+- Get the agent to update tasks based on what you learned during implementation
+
+## When to use multiple plans vs. multiple tasks
+
+**Multiple tasks in one plan** when the work is part of a single coherent feature or change. The tasks share context and should be understood together.
+
+**Multiple plans** when the work is independent. Different features, different areas of the codebase, or different timelines. Each plan is self-contained.
+
+## Using Manual tool topics
+
+Ref's agent has built-in knowledge about plan structure. You can use these topics in the chat panel:
+
+- **`structure-a-plan`** — Ask the agent to organize your rough notes into a well-structured plan
+- **`update-a-plan`** — Ask the agent to revise the plan based on new information or progress
+
+<Columns cols={2}>
+<Card icon="arrow-right" title="Workflows" href="/plans/workflows/overview">
+Different ways to use Ref Plans.
+</Card>
+<Card icon="plug" title="Integrations" href="/plans/integrations/overview">
+Connect Ref Plans to your tools.
+</Card>
+</Columns>

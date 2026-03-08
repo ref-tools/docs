@@ -1,0 +1,55 @@
+---
+title: "Windsurf"
+description: "Connect Windsurf to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[Windsurf Cascade MCP docs](https://docs.windsurf.com/windsurf/cascade/mcp)
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+1. Open the `mcp_config.json` file. This can be found at a path like `~/.codium/windsurf/mcp_config.json` or by opening Cascade Chat and clicking the `Customizations` icon (looks like a packing box) in the top right then clicking the settings button.
+
+2. Update `mcp_config.json` as follows:
+
+```
+{
+  "mcpServers": {
+    "RefPlan": {
+      "command": "npx",
+      "args": ["ref-tools-mcp@latest", "--plan-server"],
+      "env": {
+        "REF_API_KEY": "<YOUR_API_KEY>",
+        "REF_PLAN_SERVER": "https://api.plan.ref.tools/mcp"
+      }
+    }
+  }
+}
+```
+
+Alternatively, if Windsurf supports HTTP MCP servers, use:
+
+```
+{
+  "mcpServers": {
+    "RefPlan": {
+      "type": "http",
+      "url": "https://api.plan.ref.tools/mcp",
+      "headers": {
+        "x-ref-api-key": "<YOUR_API_KEY>"
+      }
+    }
+  }
+}
+```
+
+For plan-specific mode, append `?plan=<PLAN_ID>` to the URL.
+
+## Verify
+
+Click the Cascade Chat Customizations button and see that RefPlan is active.
+
+<GetHelp/>

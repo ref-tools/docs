@@ -1,0 +1,24 @@
+---
+title: "Claude Desktop and Web"
+description: "Connect Claude Desktop and Web to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+1. Open `Settings`
+2. Click `Connectors`
+3. Click `Add custom connector`
+4. Fill in Name as `RefPlan`
+5. Fill in Remote MCP Server URL `https://api.plan.ref.tools/mcp?apiKey=<YOUR_API_KEY>`
+
+For plan-specific mode, use `https://api.plan.ref.tools/mcp?plan=<PLAN_ID>&apiKey=<YOUR_API_KEY>` as the URL.
+
+## Verify
+
+Start a new chat and ask the agent to list your plans or read a specific plan.
+
+<GetHelp/>

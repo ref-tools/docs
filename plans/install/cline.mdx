@@ -1,0 +1,39 @@
+---
+title: "Cline"
+description: "Connect Cline to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[Cline MCP docs](https://docs.cline.bot/mcp/configuring-mcp-servers)
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+1. Open Cline plugin in VSCode and click the `MCP Servers` button at the top.
+2. Select the `Configure` tab and click `Configure MCP Servers`. This should open `cline_mcp_settings.json`.
+3. Update `cline_mcp_settings.json`
+
+```
+{
+  "mcpServers": {
+    "RefPlan": {
+      "command": "npx",
+      "args": ["ref-tools-mcp@latest", "--plan-server"],
+      "env": {
+        "REF_API_KEY": "<YOUR_API_KEY>",
+        "REF_PLAN_SERVER": "https://api.plan.ref.tools/mcp"
+      }
+    }
+  }
+}
+```
+
+For plan-specific mode, set `"REF_PLAN_SERVER": "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>"`.
+
+## Verify
+
+Open a new chat with Cline and ask the agent to list your plans or read a specific plan.
+
+<GetHelp/>

@@ -1,0 +1,33 @@
+---
+title: "Claude Code Web"
+description: "Send tasks to Claude Code in the cloud from Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+Claude Code Web is a webhook-based integration that lets you send plan tasks to Claude Code running in a cloud environment.
+
+## Setup
+
+1. Go to **Settings** in Ref Plans
+2. Click the **Agent Settings** tab
+3. Select the **Webhooks** tab
+4. Toggle on **Claude Code Web**
+
+## How it works
+
+When you send a task to Claude Code Web, Ref appends progress-reporting instructions to the task prompt. These instructions include curl commands that the agent uses to report status back to Ref.
+
+This means Claude Code Web will automatically update your plan with its progress as it works through the task.
+
+## Cloud environment configuration
+
+If you are running Claude Code Web in a sandboxed environment with limited network access, you must allow outbound requests to:
+
+```
+https://api.plan.ref.tools
+```
+
+Update your cloud environment settings to whitelist this URL, otherwise the agent won't be able to report progress back to Ref.
+
+<GetHelp/>

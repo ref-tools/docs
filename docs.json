@@ -20,77 +20,150 @@
           "anchor": "Blog",
           "href": "https://ref.tools/blog",
           "icon": "pen-to-square"
+        },
+        {
+          "anchor": "Ref Plans",
+          "href": "https://plan.ref.tools",
+          "icon": "list-check"
         }
       ]
     },
+    "tabs": [
+      {
+        "tab": "Context",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "context/getting-started/intro",
+              "context/getting-started/quick-start",
+              "context/getting-started/best-practices",
+              "context/getting-started/mcp-overview"
+            ]
+          },
+          {
+            "group": "MCP Server",
+            "pages": [
+              "context/mcp/tools",
+              "context/mcp/prompts",
+              "context/mcp/registry"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "context/resources/overview",
+              "context/resources/github",
+              "context/resources/pdf-markdown"
+            ]
+          },
+          {
+            "group": "Install MCP Server",
+            "pages": [
+              "context/install/index",
+              "context/install/claude-code",
+              "context/install/codex",
+              "context/install/gemini-cli",
+              "context/install/vscode",
+              "context/install/zed",
+              "context/install/cursor",
+              "context/install/antigravity",
+              "context/install/windsurf",
+              "context/install/kiro",
+              "context/install/augment",
+              "context/install/goose",
+              "context/install/droid-cli",
+              "context/install/amp",
+              "context/install/opencode",
+              "context/install/cline",
+              "context/install/roo-code",
+              "context/install/devin",
+              "context/install/chatgpt",
+              "context/install/claude-desktop"
+            ]
+          },
+          {
+            "group": "Comparison",
+            "pages": ["context/comparison/context7"]
+          }
+        ]
+      },
+      {
+        "tab": "Plans",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "plans/getting-started/intro",
+              "plans/getting-started/quick-start",
+              "plans/getting-started/best-practices"
+            ]
+          },
+          {
+            "group": "Workflows",
+            "pages": [
+              "plans/workflows/overview",
+              "plans/workflows/roles",
+              "plans/workflows/claude-code-hook"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "plans/integrations/overview",
+              "plans/integrations/cursor",
+              "plans/integrations/devin",
+              "plans/integrations/claude-code-web",
+              "plans/integrations/codex",
+              "plans/integrations/linear",
+              "plans/integrations/github"
+            ]
+          },
+          {
+            "group": "Collaboration",
+            "pages": [
+              "plans/collaboration/sharing",
+              "plans/collaboration/reviews",
+              "plans/collaboration/team-visibility"
+            ]
+          },
+          {
+            "group": "Install MCP Server",
+            "pages": [
+              "plans/install/index",
+              "plans/install/claude-code",
+              "plans/install/codex",
+              "plans/install/gemini-cli",
+              "plans/install/vscode",
+              "plans/install/zed",
+              "plans/install/cursor",
+              "plans/install/antigravity",
+              "plans/install/windsurf",
+              "plans/install/kiro",
+              "plans/install/augment",
+              "plans/install/goose",
+              "plans/install/droid-cli",
+              "plans/install/amp",
+              "plans/install/opencode",
+              "plans/install/cline",
+              "plans/install/roo-code",
+              "plans/install/devin",
+              "plans/install/chatgpt",
+              "plans/install/claude-desktop"
+            ]
+          }
+        ]
+      }
+    ],
     "groups": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "getting-started/intro",
-          "getting-started/quick-start",
-          "getting-started/best-practices",
-          "getting-started/mcp-overview"
-        ]
-      },
-      {
-        "group": "MCP Server",
-        "pages": ["mcp/tools", "mcp/prompts", "mcp/registry"]
-      },
-      {
-        "group": "Resources",
-        "pages": [
-          "resources/overview",
-          "resources/github",
-          "resources/pdf-markdown"
-        ]
-      },
-      {
-        "group": "Install MCP server",
-        "pages": [
-          "install/index",
-          "install/claude-code",
-          "install/codex",
-          "install/gemini-cli",
-          "install/vscode",
-          "install/zed",
-          "install/cursor",
-          "install/antigravity",
-          "install/windsurf",
-          "install/kiro",
-          "install/augment",
-          "install/goose",
-          "install/droid-cli",
-          "install/amp",
-          "install/opencode",
-          "install/cline",
-          "install/roo-code",
-          "install/devin",
-          "install/chatgpt",
-          "install/claude-desktop"
-        ]
-      },
-      {
-        "group": "Examples",
-        "pages": [
-          "examples/case-studies",
-          "examples/multi-repo",
-          "examples/vibe-code-sleep-training"
-        ]
-      },
       {
         "group": "Usage",
         "pages": [
           "usage/pricing",
           "usage/credits",
           "usage/teams",
-          "usage/enterprise",
-          "usage/rbac"
+          "usage/enterprise"
         ]
-      },
-      {
-        "group": "Comparison",
-        "pages": ["comparison/context7"]
       },
       {
         "group": "Support",
@@ -141,5 +214,43 @@
       "og:type": "website",
       "og:site_name": "Ref"
     }
-  }
+  },
+  "redirects": [
+    { "source": "/getting-started/intro", "destination": "/context/getting-started/intro" },
+    { "source": "/getting-started/quick-start", "destination": "/context/getting-started/quick-start" },
+    { "source": "/getting-started/best-practices", "destination": "/context/getting-started/best-practices" },
+    { "source": "/getting-started/mcp-overview", "destination": "/context/getting-started/mcp-overview" },
+    { "source": "/mcp/tools", "destination": "/context/mcp/tools" },
+    { "source": "/mcp/prompts", "destination": "/context/mcp/prompts" },
+    { "source": "/mcp/registry", "destination": "/context/mcp/registry" },
+    { "source": "/resources/overview", "destination": "/context/resources/overview" },
+    { "source": "/resources/github", "destination": "/context/resources/github" },
+    { "source": "/resources/pdf-markdown", "destination": "/context/resources/pdf-markdown" },
+    { "source": "/install", "destination": "/context/install/index" },
+    { "source": "/install/index", "destination": "/context/install/index" },
+    { "source": "/install/claude-code", "destination": "/context/install/claude-code" },
+    { "source": "/install/codex", "destination": "/context/install/codex" },
+    { "source": "/install/gemini-cli", "destination": "/context/install/gemini-cli" },
+    { "source": "/install/vscode", "destination": "/context/install/vscode" },
+    { "source": "/install/zed", "destination": "/context/install/zed" },
+    { "source": "/install/cursor", "destination": "/context/install/cursor" },
+    { "source": "/install/antigravity", "destination": "/context/install/antigravity" },
+    { "source": "/install/windsurf", "destination": "/context/install/windsurf" },
+    { "source": "/install/kiro", "destination": "/context/install/kiro" },
+    { "source": "/install/augment", "destination": "/context/install/augment" },
+    { "source": "/install/goose", "destination": "/context/install/goose" },
+    { "source": "/install/droid-cli", "destination": "/context/install/droid-cli" },
+    { "source": "/install/amp", "destination": "/context/install/amp" },
+    { "source": "/install/opencode", "destination": "/context/install/opencode" },
+    { "source": "/install/cline", "destination": "/context/install/cline" },
+    { "source": "/install/roo-code", "destination": "/context/install/roo-code" },
+    { "source": "/install/devin", "destination": "/context/install/devin" },
+    { "source": "/install/chatgpt", "destination": "/context/install/chatgpt" },
+    { "source": "/install/claude-desktop", "destination": "/context/install/claude-desktop" },
+    { "source": "/comparison/context7", "destination": "/context/comparison/context7" },
+    { "source": "/examples/case-studies", "destination": "/context/getting-started/intro" },
+    { "source": "/examples/multi-repo", "destination": "/context/getting-started/intro" },
+    { "source": "/examples/vibe-code-sleep-training", "destination": "/context/getting-started/intro" },
+    { "source": "/plans/beta", "destination": "/plans/getting-started/intro" }
+  ]
 }

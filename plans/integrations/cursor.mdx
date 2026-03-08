@@ -1,0 +1,37 @@
+---
+title: "Cursor Background Agents"
+description: "Launch Cursor background agents from Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+Cursor Background Agents let you launch coding agents that run in the background, directly from your plans.
+
+## Connect Cursor
+
+1. Go to **Settings** in Ref Plans
+2. Click the **Agent Settings** tab
+3. Select the **Cursor** tab
+4. Enter your Cursor API key
+5. Configure the repository and ref/branch you want the agent to work on
+
+## Launch an agent
+
+1. Open your plan and select a task
+2. Click **Launch Agent** and choose **Cursor**
+3. Configure the prompt — Ref pre-populates it with the task details
+4. Click **Launch**
+
+The agent will start working on your task in the background.
+
+## Status tracking
+
+Once launched, Ref tracks the agent's progress:
+
+- **Working** — The agent is actively implementing the task
+- **Finished** — The agent has completed its work
+- **PR Created** — A pull request URL is shown when the agent creates one
+
+Cursor reports progress back to Ref automatically, so you can monitor multiple agents from your plan.
+
+<GetHelp/>

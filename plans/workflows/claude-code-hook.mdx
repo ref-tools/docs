@@ -1,0 +1,57 @@
+---
+title: "Claude Code /plan Hook"
+description: "Automatically create a Ref Plan when you exit plan mode in Claude Code."
+---
+
+The Claude Code `/plan` hook automatically creates a Ref Plan when you exit plan mode in Claude Code. Your plan opens in the browser, ready to share, refine, and send to agents.
+
+## Install
+
+Run the install script:
+
+```
+curl -fsSL https://api.plan.ref.tools/plugins/install/ref-plan-hook | bash
+```
+
+## Configuration
+
+The hook authenticates with your Ref API key. You can configure it in two ways:
+
+**Environment variable:**
+```
+export REF_API_KEY=your-api-key
+```
+
+**Config file** (`~/.ref/config.json`):
+```json
+{
+  "apiKey": "your-api-key"
+}
+```
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys).
+
+### Custom base URL
+
+If you need to point to a different API endpoint (e.g. for staging), set the `REF_BASE_URL` environment variable:
+
+```
+export REF_BASE_URL=https://your-custom-endpoint.example.com
+```
+
+## How it works
+
+1. You enter `/plan` mode in Claude Code as usual
+2. When you exit plan mode, the hook fires
+3. A new Ref Plan is created with your plan content
+4. The plan opens in your default browser
+
+**Note:** If you are at the limit number of plans for your tier, the hook will fail silently.
+
+<iframe
+  className="w-full aspect-video rounded-xl"
+  src="https://www.youtube.com/embed/JtC-hWGnHEI"
+  title="Demo of Claude Code /plan hook"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>

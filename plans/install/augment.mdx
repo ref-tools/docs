@@ -1,0 +1,26 @@
+---
+title: "Augment"
+description: "Connect Augment to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[Augment MCP docs](https://docs.augmentcode.com/setup-augment/mcp)
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+1. Open `Augment Settings`. This can be done either from the VSCode command palette or the gear icon in Augment.
+2. Under `Tools`, click `Add remote MCP`.
+3. Update the settings to `Connection Type = HTTP` and `Authentication Type = Header`.
+4. Fill in `Url` as `https://api.plan.ref.tools/mcp` and add a header `x-ref-api-key` with your API key as the value.
+5. Click `Add`.
+
+For plan-specific mode, use `https://api.plan.ref.tools/mcp?plan=<PLAN_ID>` as the URL.
+
+## Verify
+
+See the RefPlan server present with a green dot.
+
+<GetHelp/>

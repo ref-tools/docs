@@ -1,0 +1,45 @@
+---
+title: "Gemini CLI"
+description: "Connect Gemini CLI to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[Gemini CLI Docs](https://github.com/google-gemini/gemini-cli)
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+Gemini CLI is configured through a `settings.json` file, typically found at `~/.gemini/settings.json`.
+
+To enable Ref Plans, update `settings.json`:
+
+```settings.json
+{
+  "mcpServers": {
+    "ref-plan": {
+      "httpUrl": "https://api.plan.ref.tools/mcp?apiKey=<your-api-key>"
+    }
+  }
+}
+```
+
+For plan-specific mode, use `"httpUrl": "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>&apiKey=<your-api-key>"`.
+
+## Verify
+
+Run the command:
+
+```
+gemini mcp list
+```
+
+You should see:
+
+```
+➜  gemini mcp list
+
+✓ ref-plan: https://api.plan.ref.tools/mcp?apiKey=<your-api-key> (http) - Connected
+```
+<GetHelp/>

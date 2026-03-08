@@ -1,0 +1,28 @@
+---
+title: "Goose"
+description: "Connect Goose to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[Goose Extensions docs](https://block.github.io/goose/docs/getting-started/using-extensions)
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+1. Click the `Extensions` button in the left side nav.
+2. Click `Add custom extension`
+3. Fill in Extension Name as `RefPlan`
+4. Fill in Endpoint as `https://api.plan.ref.tools/mcp`
+5. Add a Request Header `x-ref-api-key` with value being your API key.
+6. IMPORTANT: make sure you hit "+ Add" next to the request header to ensure it is actually added.
+7. Click `Add extension`
+
+For plan-specific mode, use `https://api.plan.ref.tools/mcp?plan=<PLAN_ID>` as the endpoint.
+
+## Verify
+
+Open a new chat and ask the agent to list your plans or read a specific plan.
+
+<GetHelp/>

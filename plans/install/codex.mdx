@@ -1,0 +1,40 @@
+---
+title: "Codex CLI"
+description: "Connect Codex CLI to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[Codex MCP install docs](https://github.com/openai/codex/blob/main/docs/config.md#connecting-to-mcp-servers)
+
+You can find your Ref API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install
+
+Codex is configured in a `config.toml` file. This typically lives at `~/.codex/config.toml`
+
+To enable Ref Plans, update your `config.toml` to include:
+
+```config.toml
+[mcp_servers.ref-plan]
+url = "https://api.plan.ref.tools/mcp?apiKey=<your-api-key>"
+```
+
+For plan-specific mode:
+
+```config.toml
+[mcp_servers.ref-plan]
+url = "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>&apiKey=<your-api-key>"
+```
+
+## Verify
+
+Run the command:
+
+```
+codex mcp list
+```
+
+You should see `ref-plan` listed with the Ref Plans MCP URL.
+
+<GetHelp/>
