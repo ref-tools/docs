@@ -1,0 +1,61 @@
+---
+title: "Ways to Work with Plans"
+description: "Different approaches to planning and orchestrating coding agents."
+---
+
+Ref Plans is flexible — there's no single "right" workflow. Here are the most common approaches.
+
+## Plan and Polish (recommended)
+
+Use Ref as your main driver and orchestrator. This is a two-phase workflow:
+
+1. **Plan phase** — Research and context engineer in the web client. Start with your notes and ask the agent to research the codebase and break the work into tasks.
+2. **Launch phase** — Send tasks to background or cloud agents. Sometimes multiple tasks in parallel.
+3. **Test phase** — As agents finish, checkout branches locally to test and verify. Ask the agent for any fixes.
+4. **Merge phase** — Have your local agent open and merge PRs. Update the plan based on progress and any changes from the initial approach.
+
+<iframe
+  className="w-full aspect-video rounded-xl"
+  src="https://www.youtube.com/embed/o3rXggX-ts8"
+  title="Demo of my workflow with Ref Plans"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+
+## Linear / GitHub-driven planning
+
+Pull context from your project management tools directly into your plans.
+
+1. **Research** — Add Linear ticket or GitHub issue links to your plan. Ask the agent to research the codebase and break the work into tasks.
+2. **Launch** — Send tasks to agents for implementation.
+3. **Track** — As agents finish, test locally and merge PRs.
+4. **Update** — Have the Ref agent update Linear and GitHub based on progress.
+
+To connect Linear, click the Linear logo button in the chat panel. To connect GitHub issues and PRs, connect GitHub and add repos at [ref.tools/resources](https://ref.tools/resources).
+
+## Local MCP server
+
+If you prefer not to have Ref index your codebase, or you're out of credits and don't want to buy more, you can still use Ref to manage and iterate on your plans. The MCP server provides all the same tools to any agent of your choosing.
+
+<iframe
+  className="w-full aspect-video rounded-xl"
+  src="https://www.youtube.com/embed/wOcMU86CCew"
+  title="Demo setting up Ref Plan MCP with Claude Code"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+
+## Claude Code /plan hook
+
+If you have a great local Claude Code setup and just want to collaborate on plans more easily, install the `/plan` hook. Every time you exit plan mode in Claude Code, it automatically creates a Ref Plan and opens it in your browser.
+
+Learn more in the [Claude Code /plan hook guide](/plans/workflows/claude-code-hook).
+
+<Columns cols={2}>
+<Card icon="users" title="Plans for Your Role" href="/plans/workflows/roles">
+How different roles use Ref Plans.
+</Card>
+<Card icon="plug" title="Integrations" href="/plans/integrations/overview">
+Connect agents and external services.
+</Card>
+</Columns>

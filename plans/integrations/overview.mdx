@@ -1,0 +1,53 @@
+---
+title: "Integrations Overview"
+description: "Connect Ref Plans to coding agents and external services."
+---
+
+Ref Plans integrates with coding agents (where you send tasks for implementation) and context sources (where you pull planning context from).
+
+## Agent destinations
+
+When a task is ready, you can send it to one of these agents to implement the code:
+
+| Agent | Type | Description |
+| --- | --- | --- |
+| [Cursor Background Agents](/plans/integrations/cursor) | API | Launches a Cursor background agent via API key |
+| [Devin](/plans/integrations/devin) | API | Launches a Devin session via API key |
+| [Claude Code Web](/plans/integrations/claude-code-web) | Webhook | Sends task to Claude Code in the cloud |
+| [Codex](/plans/integrations/codex) | Webhook | Sends task to OpenAI Codex |
+| Cursor Local | Webhook | Sends task to your local Cursor instance |
+| Copy & Paste | Webhook | Copies the task prompt for manual use in any agent |
+
+**API-based agents** connect directly through API keys. Ref launches the agent and tracks its progress automatically.
+
+**Webhook-based agents** work by appending progress-reporting instructions to the task prompt. The agent reports back to Ref via curl commands included in the prompt.
+
+## Context sources
+
+Pull context from your project management and development tools into your plans:
+
+| Source | Description |
+| --- | --- |
+| [Linear](/plans/integrations/linear) | Attach Linear tickets for context; agent can update ticket status |
+| [GitHub Issues & PRs](/plans/integrations/github) | Attach GitHub issues and PRs; track PRs linked to plans |
+
+<CardGroup cols={2}>
+  <Card title="Cursor Background Agents" icon="arrow-pointer" href="/plans/integrations/cursor">
+    Launch Cursor background agents from your plans.
+  </Card>
+  <Card title="Devin" icon="hexagon-nodes" href="/plans/integrations/devin">
+    Launch Devin sessions from your plans.
+  </Card>
+  <Card title="Claude Code Web" icon="cloud" href="/plans/integrations/claude-code-web">
+    Send tasks to Claude Code in the cloud.
+  </Card>
+  <Card title="Codex" icon="openai" href="/plans/integrations/codex">
+    Send tasks to OpenAI Codex.
+  </Card>
+  <Card title="Linear" icon="circle-nodes" href="/plans/integrations/linear">
+    Connect Linear tickets to your plans.
+  </Card>
+  <Card title="GitHub" icon="github" href="/plans/integrations/github">
+    Connect GitHub issues and PRs to your plans.
+  </Card>
+</CardGroup>

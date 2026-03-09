@@ -1,0 +1,38 @@
+---
+title: "Roo Code"
+description: "Connect Roo Code to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[Roo Code MCP docs](https://docs.roocode.com/features/mcp/using-mcp-in-roo)
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+1. Click the `...` icon in the top right to expand additional menu items and select `MCP Servers`
+2. Click either `Edit Global MCP` or `Edit Project MCP`.
+3. Update the json file that is opened to match the following.
+
+```
+{
+  "mcpServers": {
+    "RefPlan": {
+      "type": "streamable-http",
+      "url": "https://api.plan.ref.tools/mcp",
+      "headers": {
+        "X-ref-API-Key": "<YOUR_API_KEY>"
+      }
+    }
+  }
+}
+```
+
+For plan-specific mode, use `"url": "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>"`.
+
+## Verify
+
+Open a new chat and ask the agent to list your plans or read a specific plan.
+
+<GetHelp/>

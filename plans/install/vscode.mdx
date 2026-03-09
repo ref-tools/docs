@@ -1,6 +1,6 @@
 ---
 title: "VS Code"
-description: "Connect VS Code to up-to-date and token-efficient documentation."
+description: "Connect VS Code to Ref Plans."
 ---
 
 import GetHelp from '/snippets/get-help.mdx';
@@ -14,22 +14,15 @@ You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 1. Open the VSCode command palette `Shift + Command + P (Mac)` or  `Ctrl + Shift + P (Windows/Linux)`
 2. Type `mcp` and select the `MCP: Add server...` action.
 3. Select the `HTTP` option.
-4. Enter Server URL `https://api.ref.tools/mcp?apiKey=<your-api-key>`
-5. Enter Server ID `Ref`
+4. Enter Server URL `https://api.plan.ref.tools/mcp?apiKey=<your-api-key>`
+5. Enter Server ID `RefPlan`
 
-At this point the server should be installed.
-
+For plan-specific mode, use `https://api.plan.ref.tools/mcp?plan=<PLAN_ID>&apiKey=<your-api-key>`.
 
 ## Verify
 
 1. Open the Chat UI.
 2. In the chat input box, you should see a tools icon next to the send message icon. Click it.
-
-<img src="/install/images/vscode-box.png" />
-
-3. This should open the `Configure Tools` menu. At the bottom of the list, you should see `MCP Server: Ref` with two tools enabled.
-
-<img src="/install/images/vscode-success.png" />
-
+3. This should open the `Configure Tools` menu. You should see `MCP Server: RefPlan` with tools enabled.
 
 <GetHelp/>

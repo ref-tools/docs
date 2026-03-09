@@ -1,0 +1,137 @@
+---
+title: "Installation"
+description: "Install the Ref Plans MCP server in your preferred coding environment"
+---
+
+## About the Ref Plans MCP Server
+
+Ref Plans has its own MCP server, separate from the [Ref Context MCP server](/context/install/index). It lets coding agents read, write, and manage your plans directly.
+
+The streamable HTTP endpoint is available at `https://api.plan.ref.tools/mcp`.
+
+### Two modes
+
+**Plan-specific mode** — Work on a single plan by appending the plan ID to the URL:
+```
+https://api.plan.ref.tools/mcp?plan=<PLAN_ID>
+```
+
+In this mode, the agent has access to tools for reading, writing, editing, and commenting on that specific plan.
+
+**General mode** — Manage multiple plans using the base URL:
+```
+https://api.plan.ref.tools/mcp
+```
+
+In this mode, the agent can list, create, and navigate across your plans.
+
+### Authentication
+
+The Ref Plans API accepts authentication in three ways:
+
+1. **As a header**: `x-ref-api-key: YOUR_API_KEY`
+2. **As a query parameter**: `?apiKey=YOUR_API_KEY`
+3. **OAuth**: Include neither header nor query param and your MCP client will initiate OAuth sign-in.
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys).
+
+### Team-scoped access
+
+To access plans under a specific team, add the team ID as a query parameter:
+```
+https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>
+```
+
+### Available tools
+
+**Plan-specific mode** provides:
+- `Read` — Read the current plan content
+- `Write` — Write or replace plan content
+- `Edit` — Edit specific sections of the plan
+- `Manual` — Access built-in planning guidance topics
+- `Comments` — Read and write comments on the plan
+- `PrLinks` — Attach pull request links to the plan
+
+**General mode** adds:
+- `List` — List your plans
+- `Create` — Create a new plan
+
+---
+
+## Installation Guides
+
+Choose your coding environment below to get started:
+
+<CardGroup cols={2}>
+  <Card title="Cursor" icon="arrow-pointer" href="/plans/install/cursor">
+    Connect Cursor to Ref Plans.
+  </Card>
+
+  <Card title="Claude Code" icon="asterisk" href="/plans/install/claude-code">
+    Connect Claude Code to Ref Plans.
+  </Card>
+
+  <Card title="Claude Desktop" icon="desktop" href="/plans/install/claude-desktop">
+    Connect Claude Desktop and Web to Ref Plans.
+  </Card>
+
+  <Card title="VS Code" icon="code" href="/plans/install/vscode">
+    Connect VS Code to Ref Plans.
+  </Card>
+
+  <Card title="Antigravity" icon="rocket" href="/plans/install/antigravity">
+    Connect Antigravity to Ref Plans.
+  </Card>
+
+  <Card title="Windsurf" icon="wind" href="/plans/install/windsurf">
+    Connect Windsurf to Ref Plans.
+  </Card>
+
+  <Card title="Cline" icon="robot" href="/plans/install/cline">
+    Connect Cline to Ref Plans.
+  </Card>
+
+  <Card title="Kiro" icon="ghost" href="/plans/install/kiro">
+    Connect Kiro to Ref Plans.
+  </Card>
+
+  <Card title="Roo Code" icon="paw" href="/plans/install/roo-code">
+    Connect Roo Code to Ref Plans.
+  </Card>
+
+  <Card title="Goose" icon="dove" href="/plans/install/goose">
+    Connect Goose to Ref Plans.
+  </Card>
+
+  <Card title="Amp" icon="arrow-up" href="/plans/install/amp">
+    Connect Amp to Ref Plans.
+  </Card>
+
+  <Card title="Augment" icon="wand-magic-sparkles" href="/plans/install/augment">
+    Connect Augment to Ref Plans.
+  </Card>
+
+  <Card title="ChatGPT" icon="comment" href="/plans/install/chatgpt">
+    Connect ChatGPT to Ref Plans.
+  </Card>
+
+  <Card title="Devin" icon="hexagon-nodes" href="/plans/install/devin">
+    Connect Devin to Ref Plans.
+  </Card>
+
+  <Card title="OpenCode" icon="code-branch" href="/plans/install/opencode">
+    Connect OpenCode to Ref Plans.
+  </Card>
+
+  <Card title="Codex CLI" icon="openai" href="/plans/install/codex">
+    Connect Codex CLI to Ref Plans.
+  </Card>
+
+  <Card title="Droid CLI" icon="user-robot" href="/plans/install/droid-cli">
+    Connect Factory Droid CLI to Ref Plans.
+  </Card>
+
+  <Card title="Gemini CLI" icon="gem" href="/plans/install/gemini-cli">
+    Connect Gemini CLI to Ref Plans.
+  </Card>
+</CardGroup>

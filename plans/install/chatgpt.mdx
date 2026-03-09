@@ -1,0 +1,30 @@
+---
+title: "ChatGPT"
+description: "Connect ChatGPT to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[ChatGPT MCP docs](https://platform.openai.com/docs/mcp)
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+1. Open `Settings`
+2. Click `Apps & Connectors`
+3. If you are not already in developer mode, scroll to the bottom and click `Advanced settings` and toggle on Developer mode.
+4. Click the `Create` button in the top right of the settings modal.
+5. Fill in Name as `RefPlan`
+6. Fill in MCP Server URL `https://api.plan.ref.tools/mcp?apiKey=<YOUR_API_KEY>`
+7. Under Authentication select `No authentication`. Your API key is set in the server url already.
+8. Check the `I understand` box and click Create.
+
+For plan-specific mode, use `https://api.plan.ref.tools/mcp?plan=<PLAN_ID>&apiKey=<YOUR_API_KEY>` as the URL.
+
+## Verify
+
+1. To use Ref Plans, click the `+` button in the left of the prompt input, go to `More` and select `RefPlan`.
+2. Ask the agent to list your plans or read a specific plan.
+
+<GetHelp/>

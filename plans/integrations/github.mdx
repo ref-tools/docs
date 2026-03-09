@@ -1,0 +1,38 @@
+---
+title: "GitHub Issues & PRs"
+description: "Connect GitHub issues and pull requests to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+The GitHub integration lets you attach issues and pull requests to your plans for context, and track PRs linked to plan tasks.
+
+## Setup
+
+GitHub integration requires connecting your GitHub account and adding repos to Ref:
+
+1. Visit [ref.tools/resources](https://ref.tools/resources) and connect your GitHub account
+2. Add the repositories you want to use with Ref Plans
+
+Once connected, you can reference GitHub issues and PRs in your plans.
+
+## Attaching issues and PRs
+
+Paste a GitHub issue or PR link directly into your plan editor. The agent can read the issue details for context when researching and structuring your plan.
+
+## PR tracking
+
+As agents implement tasks and create pull requests, you can link those PRs to your plan:
+
+- Use the **PR dropdown** in the plan UI to attach PRs to specific tasks
+- The agent can also use the **PrLinks** tool via MCP to attach PRs programmatically
+
+This gives you a single view of all the code changes associated with your plan.
+
+## Tips
+
+- Attach GitHub issues before asking the agent to research — it provides valuable context about what needs to be built
+- Link PRs to tasks as agents create them to track implementation progress
+- The agent can read issue comments and PR descriptions for additional context
+
+<GetHelp/>

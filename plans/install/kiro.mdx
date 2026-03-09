@@ -1,0 +1,39 @@
+---
+title: "Kiro"
+description: "Connect Kiro to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+[Kiro MCP configuration docs](https://kiro.dev/docs/mcp/configuration/)
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys)
+
+## Install Steps
+
+1. Open the Kiro left side panel via the Kiro ghost icon.
+2. At the bottom, see the `MCP SERVERS` section and mouse over it to see the `Open MCP Config` button. This will open `mcp.json`
+3. Update `mcp.json` as follows:
+
+```json
+{
+  "mcpServers": {
+    "RefPlan": {
+      "url": "https://api.plan.ref.tools/mcp",
+      "headers": {
+        "x-ref-api-key": "<YOUR_API_KEY>"
+      },
+      "disabled": false
+    }
+  }
+}
+```
+
+For plan-specific mode, use `"url": "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>"`.
+
+## Verify
+
+1. Open the MCP Server view in the Kiro feature panel
+2. You should see `RefPlan` listed with a green status indicator
+
+<GetHelp/>

@@ -1,0 +1,41 @@
+---
+title: "Claude Code"
+description: "Connect Claude Code to Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+How to set up the Ref Plans MCP server with [Claude Code](https://www.claude.com/product/claude-code).
+
+## Install
+
+Run the `claude` install command:
+
+```
+claude mcp add --transport http RefPlan https://api.plan.ref.tools/mcp --header "x-ref-api-key: <YOUR_API_KEY>"
+```
+
+You can find your API key at [ref.tools/keys](https://ref.tools/keys).
+
+For plan-specific mode, append the plan ID:
+
+```
+claude mcp add --transport http RefPlan "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>" --header "x-ref-api-key: <YOUR_API_KEY>"
+```
+
+## Verify
+
+Run the command:
+
+```
+claude mcp list
+```
+
+You should see:
+
+```
+➜  claude mcp list
+RefPlan: https://api.plan.ref.tools/mcp (HTTP)
+```
+
+<GetHelp/>
