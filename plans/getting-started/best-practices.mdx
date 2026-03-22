@@ -46,10 +46,32 @@ Plans are collaborative documents. Use comments in the chat panel to:
 
 ## Using Manual tool topics
 
-Ref's agent has built-in knowledge about plan structure. You can use these topics in the chat panel:
+Ref's agent has built-in knowledge about plan structure and workflows. You can use these topics in the chat panel via the `Manual` tool:
 
 - **`structure-a-plan`** — Ask the agent to organize your rough notes into a well-structured plan
 - **`update-a-plan`** — Ask the agent to revise the plan based on new information or progress
+- **`read-code-or-docs`** — Guidance on researching code and documentation using Ref tools before writing or updating plans
+
+### Role-based topics
+
+These topics are primarily used by the system during [multi-agent orchestration](/plans/workflows/multi-agent), but you can reference them directly too:
+
+- **`role-orchestrator`** — Workflow guidance for orchestrator agents managing teams of implementation and review agents. Covers how to launch agents, coordinate via messaging, and update the plan after merges.
+- **`role-implementer`** — Workflow guidance for coding agents creating PRs. Covers rules for implementation agents: focus on code, message parent with PR URL when done, don't update the plan.
+- **`role-reviewer`** — Workflow guidance for agents reviewing PRs. Covers how to use GitHub tools (`ReadPR`, `ReviewPR`, `MergePR`) to review diffs, approve, and report results to the orchestrator.
+
+## Install the MCP server in all your agents
+
+For the best results, install the Ref Plans MCP server in every coding agent you use — Cursor, Claude Code, Devin, and any others. This ensures:
+
+- **Full plan context** — Agents can read the plan directly instead of relying on a pasted prompt snippet
+- **Progress updates** — Agents can update the plan with progress and mark tasks complete as they work
+- **Built-in guidance** — Agents can use the `Manual` tool for workflow guidance
+- **Orchestration support** — Agents can communicate with the orchestrator via `SendMessage` during multi-agent workflows
+
+Without the MCP server, agents only see the initial prompt you send them. With it, they have access to the full plan, can report back, and can coordinate with other agents.
+
+See the [installation guide](/plans/install/index) for setup instructions for each agent.
 
 <Columns cols={2}>
 <Card icon="arrow-right" title="Workflows" href="/plans/workflows/overview">

@@ -127,6 +127,7 @@
             "group": "Workflows",
             "pages": [
               "plans/workflows/overview",
+              "plans/workflows/multi-agent",
               "plans/workflows/claude-code-hook"
             ]
           },

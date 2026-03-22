@@ -22,6 +22,21 @@ Use Ref as your main driver and orchestrator. This is a two-phase workflow:
   allowFullScreen
 ></iframe>
 
+## Agent Orchestration
+
+For fully automated multi-agent workflows. An orchestrator agent manages the entire cycle — launching implementation agents, coordinating reviews, and merging PRs — with minimal human intervention.
+
+1. **Plan** — Research and iterate on the plan in the web client or via MCP.
+2. **Orchestrate** — An orchestrator agent launches implementation agents (Cursor, Devin) in parallel via `LaunchAgent`. Each agent gets a self-contained prompt with all context.
+3. **Review** — The orchestrator launches `ref-thread` agents to review PRs. Reviewers read diffs, approve, and report back.
+4. **Merge** — Ref agents merge approved PRs. The orchestrator updates the plan and repeats until done.
+
+This builds on "Plan and Polish" by automating the launch, review, and merge phases. It requires the MCP server installed, agent API keys configured, and Factory Settings enabled.
+
+<Card icon="robot" title="Multi-Agent Orchestration Guide" href="/plans/workflows/multi-agent">
+Full guide to launching and coordinating multiple agents from a plan.
+</Card>
+
 ## Linear / GitHub-driven planning
 
 Pull context from your project management tools directly into your plans.

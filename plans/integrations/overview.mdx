@@ -5,22 +5,37 @@ description: "Connect Ref Plans to coding agents and external services."
 
 Ref Plans integrates with coding agents (where you send tasks for implementation) and context sources (where you pull planning context from).
 
-## Agent destinations
+## Cloud agents (API-based)
 
-When a task is ready, you can send it to one of these agents to implement the code:
+Cloud agents connect directly through API keys. Ref launches the agent and tracks its progress automatically — no manual intervention required. These agents can also be launched programmatically by an orchestrator agent via the [`LaunchAgent`](/plans/workflows/multi-agent) MCP tool as part of [multi-agent orchestration](/plans/workflows/multi-agent).
 
-| Agent | Type | Description |
-| --- | --- | --- |
-| [Cursor Background Agents](/plans/integrations/cursor) | API | Launches a Cursor background agent via API key |
-| [Devin](/plans/integrations/devin) | API | Launches a Devin session via API key |
-| [Claude Code Web](/plans/integrations/claude-code-web) | Webhook | Sends task to Claude Code in the cloud |
-| [Codex](/plans/integrations/codex) | Webhook | Sends task to OpenAI Codex |
-| Cursor Local | Webhook | Sends task to your local Cursor instance |
-| Copy & Paste | Webhook | Copies the task prompt for manual use in any agent |
+| Agent | Description |
+| --- | --- |
+| [Cursor Background Agents](/plans/integrations/cursor) | Launches a Cursor background agent via API key. Writes code, creates branches, and opens PRs. |
+| [Devin](/plans/integrations/devin) | Launches a Devin session via API key. Writes code, creates branches, and opens PRs. |
 
-**API-based agents** connect directly through API keys. Ref launches the agent and tracks its progress automatically.
+Cloud agents provide:
+- **Automatic launch** — Ref starts the agent session for you
+- **Status tracking** — Progress updates flow back to Ref automatically
+- **Orchestration support** — Can be launched by an orchestrator agent via `LaunchAgent` with `harness: "cursor"` or `harness: "devin"`
 
-**Webhook-based agents** work by appending progress-reporting instructions to the task prompt. The agent reports back to Ref via curl commands included in the prompt.
+Configure API keys in **Settings > Agent Settings** at [plan.ref.tools](https://plan.ref.tools).
+
+## Launcher agents (webhook-based)
+
+Launcher agents work by appending progress-reporting instructions (curl commands) to the task prompt. You initiate the agent session yourself, and the agent reports back to Ref by executing the webhook commands included in the prompt.
+
+| Agent | Description |
+| --- | --- |
+| [Claude Code Web](/plans/integrations/claude-code-web) | Sends task to Claude Code in the cloud |
+| [Codex](/plans/integrations/codex) | Sends task to OpenAI Codex |
+| Cursor Local | Sends task to your local Cursor instance |
+| Copy & Paste | Copies the task prompt for manual use in any agent |
+
+Launcher agents require you to:
+1. Click **Launch Agent** in the plan UI to generate the prompt
+2. Start the agent session yourself (or paste the prompt)
+3. The agent executes the embedded webhook commands to report progress back to Ref
 
 ## Context sources
 
