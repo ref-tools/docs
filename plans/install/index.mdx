@@ -56,6 +56,46 @@ https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>
 - `List` — List your plans
 - `Create` — Create a new plan
 
+### Agent orchestration tools
+
+When agent orchestration is enabled in Factory Settings, these additional tools become available in both plan-specific and general mode:
+
+- `LaunchAgent` — Launch a sub-agent on Cursor, Devin, or ref-thread to work in parallel. Specify the harness type, a prompt with full context, and the plan IDs to associate the agent with.
+- `SendMessage` — Send messages to child agents or back to a parent agent. Used for coordination — child agents report completion (with PR URLs), and parents send follow-up instructions.
+
+These tools require:
+1. **Factory Settings enabled** — Go to **Settings > Factory MCP** at [plan.ref.tools](https://plan.ref.tools) and toggle on the master switch
+2. **Per-harness toggles** — Enable the specific harnesses you want to use (Cursor, Devin)
+3. **API keys configured** — Set up Cursor and/or Devin API keys in **Settings > Agent Settings**
+
+The Factory Settings page also provides a ready-to-paste MCP config snippet for connecting your orchestrating agent.
+
+See the [multi-agent orchestration guide](/plans/workflows/multi-agent) for full details on using these tools.
+
+### GitHub tools
+
+A separate set of MCP tools for working with GitHub issues and pull requests is available at:
+
+```
+https://api.plan.ref.tools/github-mcp
+```
+
+These tools are available when GitHub is connected and repos are indexed:
+
+- `GetIssue` — Get issue details and comments from an indexed repository
+- `CommentOnIssue` — Post a comment on a GitHub issue
+- `SearchIssues` — Search issues in an indexed repository
+- `ReadPR` — Read PR details, list changed files, and read diffs for specific files
+- `ReviewPR` — Submit a review (approve, request changes, comment) on a PR
+- `MergePR` — Merge a PR or mark a draft PR as ready for review
+- `SearchPRs` — Search pull requests in an indexed repository
+
+These tools require:
+1. **GitHub account connected** at [ref.tools/resources](https://ref.tools/resources)
+2. **Repos added** — Add the repositories you want to use with GitHub tools
+
+`ReviewPR` and `MergePR` availability depends on your GitHub permissions settings. See the [GitHub integration page](/plans/integrations/github) for setup details.
+
 ---
 
 ## Installation Guides
