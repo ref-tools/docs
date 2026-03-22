@@ -124,12 +124,12 @@
             ]
           },
           {
-              "group": "Workflows",
-              "pages": [
-                "plans/workflows/overview",
-                "plans/workflows/multi-agent",
-                "plans/workflows/claude-code-hook"
-              ]
+            "group": "Workflows",
+            "pages": [
+              "plans/workflows/overview",
+              "plans/workflows/multi-agent",
+              "plans/workflows/claude-code-hook"
+            ]
           },
           {
             "group": "Plans for Your Role",
