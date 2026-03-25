@@ -23,9 +23,11 @@ Manage the capabilities of different team members with role-based access control
 
 | Role | Capabilities |
 | --- | --- |
-| Admin | Search resources, add content, invite members, manage billing |
-| Writer | Search resources and add to the index |
-| Reader | Search only |
+| Admin | Search context index, add content to index, invite members, manage billing |
+| Writer | Search context index and add content to index |
+| Reader | Search context index |
+
+> All team members can read and write plans regardless of role. Reader and Writer roles only affect permissions for the shared context index (indexed repositories).
 
 ### 5. Unified billing
 Manage your team's bill from a single account.
