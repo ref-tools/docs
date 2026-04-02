@@ -1,0 +1,38 @@
+---
+title: "Asana"
+description: "Connect Asana tasks to Ref Plans for context and status updates."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+The Asana integration lets you attach Asana tasks to your plans for context and have agents update task status based on progress.
+
+## Connect Asana
+
+1. Go to **Settings** in Ref Plans
+2. Click the **Integrations** tab
+3. Find the **Asana** section
+4. Enter your Personal Access Token (PAT)
+5. Click **Test Connection** to verify
+6. Click **Save**
+
+You can generate a PAT from the [Asana developer console](https://app.asana.com/0/my-apps).
+
+## Usage
+
+Once connected, agents can work with Asana tasks in your plans.
+
+When you provide an Asana task, the agent can:
+
+- **Read task details** — The agent uses the task name, description, assignee, due date, and status as context when researching and structuring your plan
+- **Update task fields** — As tasks are completed, the agent can update the task status, assignee, due date, and other fields
+- **Add comments** — The agent can add comments to tasks to report progress or share context
+
+## Tips
+
+- Agents need a task GID to work with specific Asana tasks — you can find the GID in the task URL or share the task link directly in conversation
+- Share Asana task links in conversation so the agent can extract the task GID automatically
+- You can reference multiple tasks in a single plan if they're related
+- The agent can update Asana based on progress, keeping your project management in sync
+
+<GetHelp/>
