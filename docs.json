@@ -150,6 +150,7 @@
               "plans/integrations/claude-code-web",
               "plans/integrations/codex",
               "plans/integrations/linear",
+              "plans/integrations/asana",
               "plans/integrations/github"
             ]
           },
