@@ -1,5 +1,5 @@
 ---
-title: "Get Started with Ref Plans"
+title: "Get Started"
 description: "Write a durable plan, research your codebase, and launch coding agents — go from idea to shipped PR without losing context between sessions."
 ---
 
@@ -35,17 +35,23 @@ Ref works best with cloud agents like Cursor or Devin, but it also works with lo
   </Step>
 
   <Step title="Connect a cloud agent">
-    Before you can launch agents, connect at least one cloud agent via API key.
+    Before you can launch agents, configure at least one agent in Settings.
 
     1. Open **Settings** in Ref Plans (gear icon)
     2. Click the **Agents** tab
-    3. Choose your agent and enter its API key
+    3. Choose your agent and enter its API key (or follow the launcher flow for agents that do not use an API key)
 
-    **Cursor Background Agents** — Paste your Cursor API key. You'll also configure which repository and branch the agent should work on when you launch a task.
-
-    **Devin** — Paste your Devin API key. Optionally, install the Ref Plans MCP server in Devin's MCP marketplace (`https://api.plan.ref.tools/mcp`) so Devin can send messages back to an orchestrator.
-
-    **Other agents (Claude Code Web, Codex)** — These work as "launcher" agents — Ref generates a prompt with embedded webhook commands. You paste it into the agent yourself, and it reports progress back via the webhooks. No API key needed.
+    <Tabs>
+      <Tab title="Cursor">
+        Paste your **Cursor** API key. You'll also configure which repository and branch the agent should work on when you launch a task.
+      </Tab>
+      <Tab title="Devin">
+        Paste your **Devin** API key. Optionally, install the Ref Plans MCP server in Devin's MCP marketplace (`https://api.plan.ref.tools/mcp`) so Devin can send messages back to an orchestrator.
+      </Tab>
+      <Tab title="Claude Code Web & Codex">
+        These work as **launcher** agents — Ref generates a prompt with embedded webhook commands. You paste it into the agent yourself, and it reports progress back via the webhooks. No API key needed.
+      </Tab>
+    </Tabs>
 
     <Tip>
       **Giving agents access to your plans via MCP** — Cloud agents (Cursor, Devin) are launched and tracked automatically via their API keys — they don't need MCP access for basic task execution. However, if you want an agent to read, write, or collaborate on your plan documents directly, you can install the Ref Plans MCP server (`https://api.plan.ref.tools/mcp`) in that agent's environment. This is optional for single-agent workflows but required for multi-agent orchestration. See the [MCP Installation guide](/plans/install/index) for setup instructions.

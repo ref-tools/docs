@@ -15,9 +15,9 @@ div {
   letter-spacing: -0.02em;
 }
 
-.border-b {
-  border-bottom: none;
-}
+/* Do not add a global `.border-b { border-bottom: none }` here. Mintlify's <Tabs>
+   (and other UI) use Tailwind's border-b for the active tab underline; stripping
+   it site-wide makes tabs look like plain text with no selection state. */
 
 /* .relative.hidden.items-center.flex-1.justify-center {
   display: none;
