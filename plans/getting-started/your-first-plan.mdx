@@ -1,18 +1,16 @@
 ---
 title: "Your First Plan"
-description: "Go from a rough idea to merged PRs in about ten minutes — connect a repo, plan with AI, and let coding agents do the implementation."
+description: "Get Ref Plans running at full power in about ten minutes."
 ---
 
-In this guide you'll connect a repo, plan a feature with AI, and hand off the work to coding agents that open PRs for you. It takes about ten minutes.
-
-By the end you'll have a connected repo, a configured agent, and a clear path from rough idea to merged code.
+Get Ref Plans running at full power in about ten minutes.
 
 <Steps>
   <Step title="Sign up">
     Create an account at [plan.ref.tools](https://plan.ref.tools). You'll land on a blank doc — your space to think through what you want to build.
 
     <Frame>
-      <img src="/images/plans/empty-plan.png" alt="The plan editor immediately after creating a new plan — empty document with the title field focused, the chat panel on the right side, and the toolbar at the top." />
+      <img src="/images/your-first/ref1-empty-editor.png" alt="The plan editor immediately after creating a new plan — empty document titled 'Untitled Plan', the chat panel on the right with quick actions, and a banner prompting you to connect GitHub." />
     </Frame>
   </Step>
 
@@ -26,7 +24,7 @@ By the end you'll have a connected repo, a configured agent, and a clear path fr
     Once indexed, Ref can read files, find existing patterns, and reference them when structuring your tasks.
 
     <Frame>
-      <img src="/images/plans/resources-tab.png" alt="The Resources page with the GitHub tab selected, showing connected repos with green checkmarks and the Connect GitHub button." />
+      <img src="/images/your-first/ref2-repos-list.png" alt="The Your Resources page with the Repos tab selected, showing a list of GitHub repositories with branch selectors and 'Add to Ref' buttons." />
     </Frame>
   </Step>
 
@@ -39,25 +37,19 @@ By the end you'll have a connected repo, a configured agent, and a clear path fr
 
     <Tabs>
       <Tab title="Cursor">
-        Paste your **Cursor** API key. You'll also configure which repository and branch to work on when you launch a task.
+        Paste your **Cursor** API key. Get one from [cursor.com/dashboard](https://cursor.com/dashboard?tab=cloud-agents) under the **Cloud Agents** tab.
 
         <Frame>
           <img src="/images/plans/settings-cursor.png" alt="The Agents settings tab configured for Cursor — API key entered, repo and branch selectors visible." />
         </Frame>
       </Tab>
       <Tab title="Devin">
-        Paste your **Devin** API key.
-
-        <Frame>
-          <img src="/images/plans/settings-devin.png" alt="The Agents settings tab configured for Devin — API key entered with a green Connected indicator." />
-        </Frame>
+        Paste your **Devin** API key. Get one from [app.devin.ai/settings/api-keys](https://app.devin.ai/settings/api-keys).
       </Tab>
       <Tab title="Warp OZ">
-        Paste your **Warp** API key. To create one, open the Warp desktop app and go to **Settings > Platform**. You can optionally specify an environment ID if you have more than one.
+        Paste your **Warp API key** (starts with `wk-...`). In the Warp desktop app, open **Settings > Platform** and create an API key.
 
-        <Frame>
-          <img src="/images/plans/settings-warp-oz.png" alt="The Agents settings tab configured for Warp OZ — API key entered and optional environment ID field." />
-        </Frame>
+        - **Environment ID** (optional) — most users with a single environment can leave this blank.
       </Tab>
       <Tab title="Claude Code, Codex, and more">
         These work as **launcher** agents — Ref generates a prompt with embedded webhook commands. You paste it into the agent yourself, and it reports progress back via the webhooks. No API key needed.
@@ -74,7 +66,9 @@ By the end you'll have a connected repo, a configured agent, and a clear path fr
       </Tab>
     </Tabs>
 
-    We recommend installing the [Ref Plans MCP server](/plans/install/index) (`https://api.plan.ref.tools/mcp`) in your agent's environment. This lets agents read and collaborate on your plan documents directly, and is required for multi-agent orchestration.
+    <Tip>
+      **Giving agents access to your plans via MCP** — Cloud agents (Cursor, Devin) are launched and tracked automatically via their API keys — they don't need MCP access for basic task execution. However, if you want an agent to read, write, or collaborate on plan documents, or message other agents, you can install the [Ref Plans MCP server](/plans/install/index) in that agent's environment. This is optional for single-agent workflows but required for multi-agent orchestration.
+    </Tip>
   </Step>
 
   <Step title="Write down what you're working on">
@@ -88,10 +82,6 @@ By the end you'll have a connected repo, a configured agent, and a clear path fr
     This is your thinking space. Get everything important out of your head and onto the page.
 
     If you want to pull in context from Linear, Asana, or GitHub Issues, you'll need to connect those first — see the [Integrations guide](/plans/integrations/overview) for setup.
-
-    <Frame>
-      <img src="/images/plans/plan-with-notes.png" alt="A plan document with rough, unstructured notes — a title like 'Add user invite flow' and bullet points describing the feature." />
-    </Frame>
   </Step>
 
   <Step title="Build the plan with Ref">
@@ -109,12 +99,14 @@ By the end you'll have a connected repo, a configured agent, and a clear path fr
 
     Go back and forth — ask it to split a task, add detail, or reconsider an approach. Use comments to leave notes for yourself or teammates.
 
-    <Frame>
-      <img src="/images/plans/agent-thread-research.png" alt="Split view showing a partially structured plan on the left with tasks taking shape, and the chat panel on the right with the agent researching the codebase." />
+    <Frame caption="Ref researches your codebase and drafts a plan">
+      <img src="/images/your-first/ref4-agent-writing-plan.png" alt="Split view showing rough notes in the plan editor on the left, and the chat panel on the right where Ref is researching the codebase and writing tasks." />
     </Frame>
 
-    <Frame>
-      <img src="/images/plans/plan-with-comments.png" alt="The structured plan with a comment thread on a task — a teammate asking a question and the plan author replying." />
+    <br />
+
+    <Frame caption="Have agents address comments directly on the plan">
+      <img src="/images/your-first/ref5-comment.png" alt="A comment thread on a task — the author leaving feedback, and the chat panel showing Ref addressing the comment and updating the plan." />
     </Frame>
   </Step>
 
@@ -135,12 +127,15 @@ By the end you'll have a connected repo, a configured agent, and a clear path fr
 
     When a task finishes, a PR appears directly in your plan. You can provide higher-level feedback as work progresses, or enable **auto-merge** to let Ref review and merge PRs on your behalf.
 
-    <Frame>
-      <img src="/images/plans/plan-with-agents-running.png" alt="The plan with agent orchestration in progress — the chat panel showing the user asking to launch agents, tasks in mixed states of complete and working." />
-    </Frame>
-
-    <Frame>
-      <img src="/images/plans/plan-with-pr.png" alt="The plan after all agents have finished — each task has a complete status badge with PR links, and the chat panel shows the agent summarizing results." />
+    <Frame caption="Manage multiple agents directly from Ref">
+      <Tabs>
+        <Tab title="Cursor">
+          <img src="/images/your-first/ref6-many-cursor-threads.png" alt="Manage multiple agents directly from Ref." />
+        </Tab>
+        <Tab title="Devin">
+          <img src="/images/your-first/ref7-many-devin-threads.png" alt="Manage multiple agents directly from Ref." />
+        </Tab>
+      </Tabs>
     </Frame>
   </Step>
 </Steps>
