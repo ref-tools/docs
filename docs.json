@@ -119,7 +119,7 @@
             "group": "Getting Started",
             "pages": [
               "plans/getting-started/intro",
-              "plans/getting-started/get-started",
+              "plans/getting-started/your-first-plan",
               "plans/getting-started/best-practices"
             ]
           },
@@ -285,6 +285,7 @@
     { "source": "/examples/multi-repo", "destination": "/context/getting-started/intro" },
     { "source": "/examples/vibe-code-sleep-training", "destination": "/context/getting-started/intro" },
     { "source": "/plans/beta", "destination": "/plans/getting-started/intro" },
-    { "source": "/plans/getting-started/quick-start", "destination": "/plans/getting-started/get-started" }
+    { "source": "/plans/getting-started/quick-start", "destination": "/plans/getting-started/your-first-plan" },
+    { "source": "/plans/getting-started/get-started", "destination": "/plans/getting-started/your-first-plan" }
   ]
 }
