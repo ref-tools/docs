@@ -119,6 +119,7 @@
             "group": "Getting Started",
             "pages": [
               "plans/getting-started/intro",
+              "plans/getting-started/get-started",
               "plans/getting-started/quick-start",
               "plans/getting-started/best-practices"
             ]
