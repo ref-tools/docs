@@ -1,0 +1,158 @@
+---
+title: "Your First Plan"
+description: "Get Ref Plans running at full power in about ten minutes."
+---
+
+Get Ref Plans running at full power in about ten minutes.
+
+<Steps>
+  <Step title="Sign up">
+    Create an account at [plan.ref.tools](https://plan.ref.tools). You'll land on a blank doc — your space to think through what you want to build.
+
+    <Frame>
+      <img src="/images/your-first/ref1-empty-editor.png" alt="The plan editor immediately after creating a new plan — empty document titled 'Untitled Plan', the chat panel on the right with quick actions, and a banner prompting you to connect GitHub." />
+    </Frame>
+  </Step>
+
+  <Step title="Connect your codebase">
+    Link a GitHub repo so Ref can read your code and write plans that match your architecture.
+
+    1. Go to [ref.tools/resources](https://ref.tools/resources?tab=github)
+    2. Click **Connect GitHub** and authorize Ref
+    3. Select the repos you want to index and click **Add to Ref**
+
+    Once indexed, Ref can read files, find existing patterns, and reference them when structuring your tasks.
+
+    <Frame>
+      <img src="/images/your-first/ref2-repos-list.png" alt="The Your Resources page with the Repos tab selected, showing a list of GitHub repositories with branch selectors and 'Add to Ref' buttons." />
+    </Frame>
+  </Step>
+
+  <Step title="Pick a coding agent">
+    Choose which coding agent Ref should use to implement your tasks.
+
+    1. Open **Settings** (gear icon)
+    2. Click the **Agents** tab
+    3. Select an agent and enter its API key (or follow the launcher flow for agents that don't use one)
+
+    <Tabs>
+      <Tab title="Cursor">
+        Paste your **Cursor** API key. Get one from [cursor.com/dashboard](https://cursor.com/dashboard?tab=cloud-agents) under the **Cloud Agents** tab.
+
+        <Frame>
+          <img src="/images/plans/settings-cursor.png" alt="The Agents settings tab configured for Cursor — API key entered, repo and branch selectors visible." />
+        </Frame>
+      </Tab>
+      <Tab title="Devin">
+        Paste your **Devin** API key. Get one from [app.devin.ai/settings/api-keys](https://app.devin.ai/settings/api-keys).
+      </Tab>
+      <Tab title="Warp OZ">
+        Paste your **Warp API key** (starts with `wk-...`). In the Warp desktop app, open **Settings > Platform** and create an API key.
+
+        - **Environment ID** (optional) — most users with a single environment can leave this blank.
+      </Tab>
+      <Tab title="Claude Code, Codex, and more">
+        These work as **launcher** agents — Ref generates a prompt with embedded webhook commands. You paste it into the agent yourself, and it reports progress back via the webhooks. No API key needed.
+
+        Supported launchers:
+        - Claude Code Web
+        - Codex (Cloud and Desktop)
+        - Conductor
+        - Factory
+        - Windsurf
+        - Zed
+        - GitHub Copilot
+        - Cursor Desktop
+      </Tab>
+    </Tabs>
+
+    <Tip>
+      **Giving agents access to your plans via MCP** — Cloud agents (Cursor, Devin) are launched and tracked automatically via their API keys — they don't need MCP access for basic task execution. However, if you want an agent to read, write, or collaborate on plan documents, or message other agents, you can install the [Ref Plans MCP server](/plans/install/index) in that agent's environment. This is optional for single-agent workflows but required for multi-agent orchestration.
+    </Tip>
+  </Step>
+
+  <Step title="Write down what you're working on">
+    No need for perfect formatting — just get your ideas down:
+
+    - A rough description of the feature or bug
+    - Links to a Linear ticket or GitHub issue
+    - A schema, API shape, or data model
+    - Bullet points, stream of consciousness, whatever gets it across
+
+    This is your thinking space. Get everything important out of your head and onto the page.
+
+    If you want to pull in context from Linear, Asana, or GitHub Issues, you'll need to connect those first — see the [Integrations guide](/plans/integrations/overview) for setup.
+  </Step>
+
+  <Step title="Build the plan with Ref">
+    Open the chat panel and ask Ref to turn your notes into tasks. For example:
+
+    ```
+    Research the codebase and break this into tasks with
+    implementation steps and verification criteria.
+    ```
+
+    Ref will:
+    - Read relevant files from your indexed repos
+    - Identify existing patterns (auth, DB models, API routes)
+    - Structure your notes into tasks with file paths and verification steps
+
+    Go back and forth — ask it to split a task, add detail, or reconsider an approach. Use comments to leave notes for yourself or teammates.
+
+    <Frame caption="Ref researches your codebase and drafts a plan">
+      <img src="/images/your-first/ref4-agent-writing-plan.png" alt="Split view showing rough notes in the plan editor on the left, and the chat panel on the right where Ref is researching the codebase and writing tasks." />
+    </Frame>
+
+    <br />
+
+    <Frame caption="Have agents address comments directly on the plan">
+      <img src="/images/your-first/ref5-comment.png" alt="A comment thread on a task — the author leaving feedback, and the chat panel showing Ref addressing the comment and updating the plan." />
+    </Frame>
+  </Step>
+
+  <Step title="Ship it">
+    When your tasks are ready, tell Ref to start implementing. You can pick specific tasks or hand off the whole plan:
+
+    ```
+    Implement tasks 1-3.
+    ```
+
+    ```
+    Implement the plan.
+    ```
+
+    Ref spins up a separate coding agent for each task, pre-loaded with the task details, file references, and repo context. Multiple tasks run in parallel, each on its own branch.
+
+    You can keep working while implementation runs. Progress flows back automatically — watch status updates come in, and continue refining upcoming tasks.
+
+    When a task finishes, a PR appears directly in your plan. You can provide higher-level feedback as work progresses, or enable **auto-merge** to let Ref review and merge PRs on your behalf.
+
+    <Frame caption="Manage multiple agents directly from Ref">
+      <Tabs>
+        <Tab title="Cursor">
+          <img src="/images/your-first/ref6-many-cursor-threads.png" alt="Manage multiple agents directly from Ref." />
+        </Tab>
+        <Tab title="Devin">
+          <img src="/images/your-first/ref7-many-devin-threads.png" alt="Manage multiple agents directly from Ref." />
+        </Tab>
+      </Tabs>
+    </Frame>
+  </Step>
+</Steps>
+
+## What's next?
+
+<CardGroup cols={2}>
+  <Card title="Best Practices" icon="trophy" href="/plans/getting-started/best-practices">
+    Learn how to write plans that get great results.
+  </Card>
+  <Card title="Multi-Agent Orchestration" icon="robot" href="/plans/workflows/multi-agent">
+    Set up fully automated multi-agent orchestration.
+  </Card>
+  <Card title="Integrations" icon="plug" href="/plans/integrations/overview">
+    Connect Linear or GitHub issues for richer context.
+  </Card>
+  <Card title="Local Agents" icon="terminal" href="/plans/install/index">
+    Using Claude Code, Codex, or another local agent? Install the MCP server to connect them to Ref.
+  </Card>
+</CardGroup>
