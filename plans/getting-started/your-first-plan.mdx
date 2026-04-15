@@ -73,6 +73,94 @@ By the end you'll have a connected repo, a configured agent, and a clear path fr
     </Tip>
   </Step>
 
+  <Step title="Install the MCP server (optional)">
+    Installing the Ref Plans MCP server gives your coding agent direct access to read, write, and collaborate on plan documents. It's required for multi-agent orchestration but completely optional for single-agent workflows — Ref launches agents automatically without it.
+
+    <AccordionGroup>
+      <Accordion title="How to install the Ref Plans MCP server">
+        <Tabs>
+          <Tab title="Cursor">
+            {/* TODO: Add screenshot of MCP setup in Cursor */}
+
+            Open **Settings > MCP** in Cursor, or edit `.cursor/mcp.json` directly:
+
+            ```json
+            {
+              "mcpServers": {
+                "ref-plans": {
+                  "url": "https://api.plan.ref.tools/mcp",
+                  "headers": {
+                    "Authorization": "Bearer YOUR_REF_API_KEY"
+                  }
+                }
+              }
+            }
+            ```
+
+            Replace `YOUR_REF_API_KEY` with your key from [plan.ref.tools/settings](https://plan.ref.tools/settings).
+          </Tab>
+          <Tab title="Devin">
+            {/* TODO: Add screenshot of MCP setup in Devin */}
+
+            In the Devin dashboard, go to **Settings > MCP Servers** and add the Ref Plans server:
+
+            - **URL:** `https://api.plan.ref.tools/mcp`
+            - **Header:** `Authorization: Bearer YOUR_REF_API_KEY`
+          </Tab>
+          <Tab title="Warp">
+            {/* TODO: Add screenshot of MCP setup in Warp */}
+
+            In Warp, open **Settings > AI > MCP Servers** and add a new entry for the Ref Plans server. See the [MCP install docs](/plans/install/index) for step-by-step instructions.
+          </Tab>
+          <Tab title="Claude Code">
+            {/* TODO: Add screenshot of MCP setup in Claude Code */}
+
+            Use the `claude mcp add` CLI command:
+
+            ```bash
+            claude mcp add ref-plans --transport http https://api.plan.ref.tools/mcp
+            ```
+
+            Or add it manually to `.claude/settings.json`:
+
+            ```json
+            {
+              "mcpServers": {
+                "ref-plans": {
+                  "url": "https://api.plan.ref.tools/mcp",
+                  "headers": {
+                    "Authorization": "Bearer YOUR_REF_API_KEY"
+                  }
+                }
+              }
+            }
+            ```
+          </Tab>
+          <Tab title="VS Code / Copilot">
+            {/* TODO: Add screenshot of MCP setup in VS Code / Copilot */}
+
+            Add the server to `.vscode/mcp.json` in your project root:
+
+            ```json
+            {
+              "servers": {
+                "ref-plans": {
+                  "url": "https://api.plan.ref.tools/mcp",
+                  "headers": {
+                    "Authorization": "Bearer YOUR_REF_API_KEY"
+                  }
+                }
+              }
+            }
+            ```
+          </Tab>
+        </Tabs>
+      </Accordion>
+    </AccordionGroup>
+
+    You can always come back and install this later — it's fine to skip ahead for now. For detailed instructions, see the full [MCP install docs](/plans/install/index).
+  </Step>
+
   <Step title="Write down what you're working on">
     No need for perfect formatting — just get your ideas down:
 
