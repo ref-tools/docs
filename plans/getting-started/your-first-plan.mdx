@@ -35,26 +35,88 @@ By the end you'll have a connected repo, a configured agent, and a clear path fr
 
     1. Open **Settings** (gear icon)
     2. Click the **Agents** tab
-    3. Select an agent and enter its API key (or follow the launcher flow for agents that don't use one)
+    3. Select an agent and follow the setup instructions below
 
     <Tabs>
       <Tab title="Cursor">
-        Paste your **Cursor** API key. Get one from [cursor.com/dashboard](https://cursor.com/dashboard?tab=cloud-agents) under the **Cloud Agents** tab.
+        **1. Add your API key**
 
-        <Frame>
-          <img src="/images/plans/settings-cursor.png" alt="The Agents settings tab configured for Cursor — API key entered, repo and branch selectors visible." />
-        </Frame>
+        Paste your **Cursor** API key in the Agents settings tab. Get one from [cursor.com/dashboard](https://cursor.com/dashboard?tab=cloud-agents) under the **Cloud Agents** tab.
+
+
+        <Accordion title="2. (Optional) Install MCP server so agents can send messages and access the plan directly">
+          Installing the Ref Plans MCP server lets Cursor read, write, and collaborate on plan documents. It's optional for single-agent workflows but required for [multi-agent orchestration](/plans/workflows/multi-agent).
+
+          **Add the MCP server**
+
+          Open **cursor.com**, click **MCPs**, click the `+` button and select `Custom MCP` then fill in the form or json as follows.
+
+          ```json
+          {
+            "mcpServers": {
+              "ref-plan": {
+                "type": "http",
+                "url": "https://api.plan.ref.tools/mcp",
+                "headers": {
+                  "x-ref-api-key": "YOUR_REF_API_KEY"
+                }
+              }
+            }
+          }
+          ```
+
+          Replace `YOUR_REF_API_KEY` with your key from [ref.tools/keys](https://ref.tools/keys).
+
+          **Configure security rules**
+
+          Cursor's cloud agents run in a sandbox that blocks external network requests by default. You need to allowlist `api.plan.ref.tools` so the agent can reach the MCP server.
+
+          In the Cursor dashboard, go to **Cloud Agents > Security Rules** and add `api.plan.ref.tools` to the allowed domains.
+
+          See the full [Cursor MCP install guide](/plans/install/cursor) for details.
+        </Accordion>
       </Tab>
       <Tab title="Devin">
-        Paste your **Devin** API key. Get one from [app.devin.ai/settings/api-keys](https://app.devin.ai/settings/api-keys).
+        **1. Add your API key**
+
+        Paste your **Devin** API key in the Agents settings tab. Get one from [app.devin.ai/settings/api-keys](https://app.devin.ai/settings/api-keys).
+
+        <Accordion title="2. (Optional) Install MCP server so agents can send messages and access the plan directly">
+          Installing the Ref Plans MCP server lets Devin read, write, and collaborate on plan documents. It's optional for single-agent workflows but required for [multi-agent orchestration](/plans/workflows/multi-agent).
+
+          **Add the MCP server**
+
+          In the Devin dashboard, go to [Settings > MCP Marketplace](https://app.devin.ai/settings/mcp-marketplace) and click **Add MCP Server**:
+
+          1. **Name:** `ref-plan`
+          2. **URL:** `https://api.plan.ref.tools/mcp`
+          3. Add a header `x-ref-api-key` with your API key from [ref.tools/keys](https://ref.tools/keys)
+          4. Click **Enable**
+
+          **Configure security rules**
+
+          Devin runs in a sandboxed environment. If your workspace has network restrictions, ensure `api.plan.ref.tools` is allowed. Devin typically permits MCP server URLs automatically once enabled.
+
+          See the full [Devin MCP install guide](/plans/install/devin) for details.
+        </Accordion>
       </Tab>
       <Tab title="Warp OZ">
-        Paste your **Warp API key** (starts with `wk-...`). In the Warp desktop app, open **Settings > Platform** and create an API key.
+        **1. Add your API key**
+
+        Paste your **Warp API key** (starts with `wk-...`) in the Agents settings tab. In the Warp desktop app, open **Settings > Platform** and create an API key.
 
         - **Environment ID** (optional) — most users with a single environment can leave this blank.
+
+        <Accordion title="2. (Optional) Install MCP server so agents can send messages and access the plan directly">
+          Installing the Ref Plans MCP server lets Warp read, write, and collaborate on plan documents. It's optional for single-agent workflows but required for [multi-agent orchestration](/plans/workflows/multi-agent).
+
+          See the [MCP install docs](/plans/install/index) for step-by-step setup. If your environment restricts outbound network access, ensure `api.plan.ref.tools` is allowed.
+        </Accordion>
       </Tab>
       <Tab title="Claude Code, Codex, and more">
-        These work as **launcher** agents — Ref generates a prompt with embedded webhook commands. You paste it into the agent yourself, and it reports progress back via the webhooks. No API key needed.
+        **1. No API key needed**
+
+        These work as **launcher** agents — Ref generates a prompt with embedded webhook commands. You paste it into the agent yourself, and it reports progress back via the webhooks.
 
         Supported launchers:
         - Claude Code Web
@@ -65,100 +127,14 @@ By the end you'll have a connected repo, a configured agent, and a clear path fr
         - Zed
         - GitHub Copilot
         - Cursor Desktop
+
+        <Accordion title="2. (Optional) Install MCP server so agents can send messages and access the plan directly">
+          Installing the Ref Plans MCP server lets these agents read, write, and collaborate on plan documents directly. It's optional for single-agent workflows but required for [multi-agent orchestration](/plans/workflows/multi-agent).
+
+          See the [MCP install docs](/plans/install/index) for step-by-step setup instructions for your agent.
+        </Accordion>
       </Tab>
     </Tabs>
-
-    <Tip>
-      **Giving agents access to your plans via MCP** — Cloud agents (Cursor, Devin) are launched and tracked automatically via their API keys — they don't need MCP access for basic task execution. However, if you want an agent to read, write, or collaborate on plan documents, or message other agents, you can install the [Ref Plans MCP server](/plans/install/index) in that agent's environment. This is optional for single-agent workflows but required for multi-agent orchestration.
-    </Tip>
-  </Step>
-
-  <Step title="Install the MCP server (optional)">
-    Installing the Ref Plans MCP server gives your coding agent direct access to read, write, and collaborate on plan documents. It's required for multi-agent orchestration but completely optional for single-agent workflows — Ref launches agents automatically without it.
-
-    <AccordionGroup>
-      <Accordion title="How to install the Ref Plans MCP server">
-        <Tabs>
-          <Tab title="Cursor">
-            {/* TODO: Add screenshot of MCP setup in Cursor */}
-
-            Open **Settings > MCP** in Cursor, or edit `.cursor/mcp.json` directly:
-
-            ```json
-            {
-              "mcpServers": {
-                "ref-plans": {
-                  "url": "https://api.plan.ref.tools/mcp",
-                  "headers": {
-                    "Authorization": "Bearer YOUR_REF_API_KEY"
-                  }
-                }
-              }
-            }
-            ```
-
-            Replace `YOUR_REF_API_KEY` with your key from [plan.ref.tools/settings](https://plan.ref.tools/settings).
-          </Tab>
-          <Tab title="Devin">
-            {/* TODO: Add screenshot of MCP setup in Devin */}
-
-            In the Devin dashboard, go to **Settings > MCP Servers** and add the Ref Plans server:
-
-            - **URL:** `https://api.plan.ref.tools/mcp`
-            - **Header:** `Authorization: Bearer YOUR_REF_API_KEY`
-          </Tab>
-          <Tab title="Warp">
-            {/* TODO: Add screenshot of MCP setup in Warp */}
-
-            In Warp, open **Settings > AI > MCP Servers** and add a new entry for the Ref Plans server. See the [MCP install docs](/plans/install/index) for step-by-step instructions.
-          </Tab>
-          <Tab title="Claude Code">
-            {/* TODO: Add screenshot of MCP setup in Claude Code */}
-
-            Use the `claude mcp add` CLI command:
-
-            ```bash
-            claude mcp add ref-plans --transport http https://api.plan.ref.tools/mcp
-            ```
-
-            Or add it manually to `.claude/settings.json`:
-
-            ```json
-            {
-              "mcpServers": {
-                "ref-plans": {
-                  "url": "https://api.plan.ref.tools/mcp",
-                  "headers": {
-                    "Authorization": "Bearer YOUR_REF_API_KEY"
-                  }
-                }
-              }
-            }
-            ```
-          </Tab>
-          <Tab title="VS Code / Copilot">
-            {/* TODO: Add screenshot of MCP setup in VS Code / Copilot */}
-
-            Add the server to `.vscode/mcp.json` in your project root:
-
-            ```json
-            {
-              "servers": {
-                "ref-plans": {
-                  "url": "https://api.plan.ref.tools/mcp",
-                  "headers": {
-                    "Authorization": "Bearer YOUR_REF_API_KEY"
-                  }
-                }
-              }
-            }
-            ```
-          </Tab>
-        </Tabs>
-      </Accordion>
-    </AccordionGroup>
-
-    You can always come back and install this later — it's fine to skip ahead for now. For detailed instructions, see the full [MCP install docs](/plans/install/index).
   </Step>
 
   <Step title="Write down what you're working on">
