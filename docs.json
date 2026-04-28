@@ -151,7 +151,8 @@
               "plans/integrations/codex",
               "plans/integrations/linear",
               "plans/integrations/asana",
-              "plans/integrations/github"
+              "plans/integrations/github",
+              "plans/integrations/slack"
             ]
           },
           {

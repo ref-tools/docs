@@ -1,0 +1,42 @@
+---
+title: "Slack"
+description: "Create and update Ref Plans directly from Slack threads."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+The Slack integration connects your team's conversations to structured plans. @mention the Ref bot in any Slack thread, and it automatically creates a plan from the conversation — researching your codebase and producing tasks, decisions, and verification criteria.
+
+## Connect Slack
+
+1. Go to **Settings** in Ref Plans
+2. Click the **Integrations** tab
+3. Select **Slack**
+4. Click **Connect Slack**
+5. Authorize Ref in the Slack popup
+6. Once authorized, the integration is active for your team
+
+Only team admins can connect the Slack integration.
+
+## Create Plans from Slack
+
+@mention the Ref bot in any Slack thread to create a plan. The agent reads the full thread, researches your indexed repositories, and produces a structured implementation plan. It replies in the thread with a link to the finished plan.
+
+## Follow Up in Threads
+
+@mention the bot again in the same thread to update the existing plan. Ask it to add a section, change the scope, or refine a task — the agent picks up where it left off. It only creates a new plan if you explicitly ask for one.
+
+## Key Features
+
+- **Thread → Plan in seconds** — @mention the bot in a thread and get a fully researched implementation plan
+- **Conversational updates** — Follow-up @mentions update the existing plan instead of creating duplicates
+- **Codebase-aware** — The agent researches your indexed repositories to produce plans grounded in your actual code
+- **Team-connected** — Plans are created under your Ref team with team-level visibility
+
+## Requirements
+
+- A Ref account
+- A Ref team with at least one indexed GitHub repository (recommended for best results)
+- Team admin permissions to install the Slack integration
+
+<GetHelp/>
