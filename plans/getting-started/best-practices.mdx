@@ -21,22 +21,6 @@ A good plan follows this structure:
    - Implementation steps (specific enough that an agent can follow them)
    - Verification criteria (how to confirm the task is done correctly)
 
-### Collapse long sections
-
-Use collapse blocks when a section is useful but long, especially file lists. The plan editor shows the summary by default, and readers can click the chevron to expand the full markdown body.
-
-```md
-:::collapse h2
-Files — 12 files, 4 dirs
-Mostly in `src/components/` and `src/lib/`
-:::
-- `src/components/Editor.tsx` - root editor component
-- `src/lib/wysiwygPlugin.ts` - decoration engine
-:::end
-```
-
-`:::collapse h1`, `h2`, or `h3` controls the title weight. Lines before the bare `:::` are the collapsed summary; lines after it and before `:::end` are the expanded body. Agents use collapse blocks automatically for long file lists, usually more than about eight bullets.
-
 ## Tips for writing good outlines
 
 **Be specific about what to build.** "Add dark mode" is vague. "Add a dark mode toggle to the settings page that persists the user's preference in localStorage and applies a dark theme using our existing Tailwind dark: classes" gives the agent something to work with.
