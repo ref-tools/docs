@@ -152,7 +152,8 @@
               "plans/integrations/linear",
               "plans/integrations/asana",
               "plans/integrations/github",
-              "plans/integrations/slack"
+              "plans/integrations/slack",
+              "plans/integrations/custom-mcp"
             ]
           },
           {

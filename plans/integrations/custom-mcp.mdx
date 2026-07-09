@@ -1,0 +1,67 @@
+---
+title: "Custom MCP Servers"
+description: "Connect your own remote MCP servers to ref-thread agents."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+Custom MCP servers let you attach remote MCP tools to ref-thread agents. Connect a server once, then choose which connected servers and integrations are available to each thread.
+
+## Connect a custom MCP server
+
+1. Go to **Settings** in Ref Plans
+2. Click the **Integrations** or **Connectors** tab
+3. Add a custom MCP server with a name and URL
+4. Choose an authentication method:
+   - **None** — Use for public or unauthenticated servers
+   - **Custom headers** — Add static headers, such as an API key or bearer token
+   - **OAuth** — Use the authorization-code flow with dynamic client registration; no manual client ID or client secret setup is required
+5. Click **Verify** or **Save** to connect to the server
+6. Review the tools Ref found on the server, then save the connection
+
+Ref verifies the server before saving it. If the server is unreachable or returns an invalid MCP response, Ref rejects the connection and shows an inline error.
+
+## Usage
+
+After you connect a custom MCP server, choose when to attach it to a ref-thread:
+
+1. Open a plan and start or select a ref-thread
+2. In the message composer, click the **+** connectors button
+3. Use the checkbox rows grouped under **MCP Servers** and **Integrations** to choose which connected tools attach to that thread's runs
+4. Send your message
+
+Connector selection is per-thread. Changing the checkboxes overrides your Settings defaults for that thread only; other threads and your defaults are unaffected.
+
+Use **Configure Integrations** in the connectors menu to jump back to Settings when you need to add, remove, or update a connection.
+
+## Support
+
+| Feature | Support | Notes |
+|---|---|---|
+| Transport: Streamable HTTP | ✅ Supported | The only transport supported for custom servers. |
+| Transport: stdio / legacy HTTP+SSE | ❌ Not supported | Only remote HTTP(S) servers can be added. |
+| Capability: Tools | ✅ Supported | The only capability currently exercised. |
+| Capability: Resources | ❌ Not supported | Not surfaced to the agent. |
+| Capability: Prompts | ❌ Not supported | Not surfaced to the agent. |
+| Auth: None | ✅ Supported | |
+| Auth: Custom headers (API key / bearer token) | ✅ Supported | |
+| Auth: OAuth 2.0 with dynamic client registration | ✅ Supported | Tokens refresh automatically. |
+| Attach scope: ref-thread agents | ✅ Supported | |
+| Attach scope: other harnesses (Cursor, Devin, Warp OZ) | ❌ Not supported | Those harnesses manage their own MCP configs today. |
+| Sharing scope: team-shared servers | ❌ Not supported | Configs are user-scoped only, like Linear/Asana. |
+
+## Example: Figma MCP
+
+To connect a third-party remote MCP server such as Figma:
+
+1. Go to **Settings > Integrations** or **Settings > Connectors**
+2. Add a custom MCP server named **Figma**
+3. Enter `https://mcp.figma.com/mcp` as the server URL
+4. Choose the authentication method required by the server
+5. Click **Verify** or **Save**
+6. Confirm that Ref lists the server's tools, then save the connection
+7. Open a ref-thread, click the **+** connectors button, and enable **Figma** under **MCP Servers**
+
+The next run in that thread can use the connected server's tools. For example, ask the ref-thread to inspect a Figma file or pull design context, and the agent will have the Figma MCP tools available for that run.
+
+<GetHelp/>
