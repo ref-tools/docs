@@ -30,89 +30,6 @@
     },
     "tabs": [
       {
-        "tab": "Context",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "pages": [
-              "context/getting-started/intro",
-              "context/getting-started/quick-start",
-              "context/getting-started/best-practices",
-              "context/getting-started/mcp-overview"
-            ]
-          },
-          {
-            "group": "MCP Server",
-            "pages": [
-              "context/mcp/tools",
-              "context/mcp/prompts",
-              "context/mcp/registry"
-            ]
-          },
-          {
-            "group": "Resources",
-            "pages": [
-              "context/resources/overview",
-              "context/resources/github",
-              "context/resources/pdf-markdown"
-            ]
-          },
-          {
-            "group": "Install MCP Server",
-            "pages": [
-              "context/install/index",
-              "context/install/claude-code",
-              "context/install/codex",
-              "context/install/gemini-cli",
-              "context/install/vscode",
-              "context/install/zed",
-              "context/install/cursor",
-              "context/install/antigravity",
-              "context/install/windsurf",
-              "context/install/kiro",
-              "context/install/augment",
-              "context/install/goose",
-              "context/install/droid-cli",
-              "context/install/amp",
-              "context/install/opencode",
-              "context/install/cline",
-              "context/install/roo-code",
-              "context/install/devin",
-              "context/install/chatgpt",
-              "context/install/claude-desktop"
-            ]
-          },
-          {
-            "group": "Comparison",
-            "pages": ["context/comparison/context7"]
-          },
-          {
-            "group": "Usage",
-            "pages": [
-              "usage/pricing",
-              "usage/credits",
-              "usage/teams",
-              "usage/enterprise"
-            ]
-          },
-          {
-            "group": "Support",
-            "pages": [
-              "support/status",
-              "brand/assets",
-              "support/report-bug",
-              "support/request-docs",
-              "support/privacy-security",
-              "support/contact"
-            ]
-          },
-          {
-            "group": "Changelog",
-            "pages": ["changelog"]
-          }
-        ]
-      },
-      {
         "tab": "Plans",
         "groups": [
           {
@@ -187,6 +104,89 @@
               "plans/install/chatgpt",
               "plans/install/claude-desktop"
             ]
+          },
+          {
+            "group": "Usage",
+            "pages": [
+              "usage/pricing",
+              "usage/credits",
+              "usage/teams",
+              "usage/enterprise"
+            ]
+          },
+          {
+            "group": "Support",
+            "pages": [
+              "support/status",
+              "brand/assets",
+              "support/report-bug",
+              "support/request-docs",
+              "support/privacy-security",
+              "support/contact"
+            ]
+          },
+          {
+            "group": "Changelog",
+            "pages": ["changelog"]
+          }
+        ]
+      },
+      {
+        "tab": "Context",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "context/getting-started/intro",
+              "context/getting-started/quick-start",
+              "context/getting-started/best-practices",
+              "context/getting-started/mcp-overview"
+            ]
+          },
+          {
+            "group": "MCP Server",
+            "pages": [
+              "context/mcp/tools",
+              "context/mcp/prompts",
+              "context/mcp/registry"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "context/resources/overview",
+              "context/resources/github",
+              "context/resources/pdf-markdown"
+            ]
+          },
+          {
+            "group": "Install MCP Server",
+            "pages": [
+              "context/install/index",
+              "context/install/claude-code",
+              "context/install/codex",
+              "context/install/gemini-cli",
+              "context/install/vscode",
+              "context/install/zed",
+              "context/install/cursor",
+              "context/install/antigravity",
+              "context/install/windsurf",
+              "context/install/kiro",
+              "context/install/augment",
+              "context/install/goose",
+              "context/install/droid-cli",
+              "context/install/amp",
+              "context/install/opencode",
+              "context/install/cline",
+              "context/install/roo-code",
+              "context/install/devin",
+              "context/install/chatgpt",
+              "context/install/claude-desktop"
+            ]
+          },
+          {
+            "group": "Comparison",
+            "pages": ["context/comparison/context7"]
           },
           {
             "group": "Usage",
