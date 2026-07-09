@@ -9,11 +9,12 @@ Ref Plans supports a PR-style review workflow so you can get structured feedback
 
 1. **Request a review** — The plan owner requests a review by entering a reviewer's email address
 2. **Reviewer is notified** — The reviewer receives an email notification and sees an unread indicator in their sidebar
-3. **Review the plan** — The reviewer reads through the plan and either:
+3. **Open in review mode** — When the requested reviewer opens the plan, they land directly in review mode instead of a normal read view
+4. **Review the plan** — The reviewer reads through the plan and either:
    - **Approves** the plan — signals it's ready for implementation
    - **Requests changes** — signals the plan needs more work
-4. **Iterate** — If changes are requested, the owner updates the plan and re-requests review
-5. **Withdraw** — A reviewer can withdraw their review at any time
+5. **Iterate** — If changes are requested, the owner updates the plan and re-requests review
+6. **Withdraw** — A reviewer can withdraw their review at any time
 
 ## Review statuses
 
@@ -23,9 +24,13 @@ Ref Plans supports a PR-style review workflow so you can get structured feedback
 | Approved | The reviewer has approved the plan |
 | Changes requested | The reviewer wants changes before approving |
 
+When an agent requests a review with the `Comments` MCP tool's `request_review` action or waits on one with `AwaitReview`, the tool result includes a direct link to the review, not just the review status.
+
 ## Access and permissions
 
 Requesting a review automatically grants the reviewer **write access** to the plan. This lets them leave inline comments and suggest edits directly.
+
+Reviewer replies and comment threads also appear in the plan's sidebar, so feedback stays available in a persistent thread list as well as inline in the document.
 
 ## Email notifications
 
