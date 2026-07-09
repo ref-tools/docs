@@ -1,0 +1,58 @@
+---
+title: "Ref vs Notion & Google Docs"
+description: "Why general-purpose document tools are different from Ref's plan-to-agent workflow."
+---
+
+## Snapshot
+
+| | Notion & Google Docs | Ref |
+| --- | --- | --- |
+| Best for | Prose, notes, specs, and general team documentation | Engineering plans that drive agent implementation |
+| Developer workflow | Comments, suggestions, and collaborative editing | Comment -> review -> resolve workflow modeled after PR review |
+| Codebase awareness | Manual links, pasted snippets, or context you add yourself | Reads connected repos to research and ground plans in your code |
+| Agent handoff | Copy a doc or prompt into an external agent | Launch and track Cursor, Devin, Codex, Claude Code, and more from the plan |
+| Progress tracking | Separate from the doc unless you build a custom process | Agent status, updates, and PR links flow back into the plan |
+
+## General Docs vs Engineering Plans
+
+Notion and Google Docs are excellent places to write prose, organize team knowledge, and collaborate on general documents. Ref is built for a different job: moving engineering work through the plan -> agent -> PR loop.
+
+### Notion and Google Docs' Approach
+
+Notion and Google Docs give teams a familiar shared writing surface.
+
+**Strengths:**
+- Fast collaborative editing for prose and specs
+- Flexible formatting, comments, and sharing
+- Strong fit for evergreen company docs, meeting notes, and broad knowledge bases
+
+**Limitations for this workflow:**
+- Comments and suggestions are not connected to an engineering review state, task handoff, or PR outcome
+- The document does not know your codebase unless someone manually pastes links and snippets
+- Coding agents do not launch from the doc or report progress back into it by default
+
+### Ref's Approach
+
+Ref treats the plan as the live workspace for in-flight engineering work. The plan is not just where the prose lives; it is where the team reviews the decisions, starts the agents, and tracks what comes back.
+
+Ref emphasizes three pieces that general-purpose docs do not try to own:
+
+1. **Developer workflow** - Ref's comment -> review -> resolve loop works more like a PR review than an open-ended document thread. Feedback can be tied to plan changes before implementation starts.
+2. **Codebase indexing** - Ref reads connected repos, researches existing patterns, and grounds the plan in your actual code instead of relying only on manually pasted context.
+3. **Coding-agent integration** - Launch Cursor, Devin, Codex, Claude Code, and more from the plan. Agents read the plan as context, work from the same source of truth, and report progress back through MCP tools.
+
+## Why Ref Wins for This Job
+
+**Plan review before implementation:** Ref gives teams a place to review the important decisions before a diff exists. That moves alignment earlier, when it is cheaper to change direction.
+
+**Code-aware planning:** Because Ref can read your connected repos, plans can reference real file paths, architecture, APIs, and existing patterns. The plan starts closer to the code the agent will change.
+
+**Agent-native handoff:** The same document that captures the decision can launch the implementation agent. There is less copy/paste between a planning doc, a chat thread, and a PR.
+
+**Progress comes back to the source of truth:** Agents can send status, questions, and PR links back to the plan, keeping the coordination surface in one place.
+
+**Purpose-built, not general-purpose:** Notion and Google Docs remain great tools for prose and general docs. Ref is purpose-built for collaborative engineering plans that become agent work and PRs.
+
+## Learn more
+
+Learn more about [writing your first plan](/plans/getting-started/your-first-plan), [reviewing plans](/plans/collaboration/reviews), and [orchestrating multiple agents](/plans/workflows/multi-agent).

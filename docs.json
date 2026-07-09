@@ -189,6 +189,13 @@
             ]
           },
           {
+            "group": "Comparison",
+            "pages": [
+              "plans/comparison/notion-google-docs",
+              "plans/comparison/markdown-in-repo"
+            ]
+          },
+          {
             "group": "Usage",
             "pages": [
               "usage/pricing",
