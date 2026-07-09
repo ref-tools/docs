@@ -1,0 +1,85 @@
+---
+title: "Custom Launchers"
+description: "Deep-link into Ref Plans from any tool that can construct a URL."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+Custom launchers let external tools open Ref Plans directly. Build a link to `https://plan.ref.tools/new`, optionally include starting content or a first agent prompt, and send users into a new plan.
+
+## URL pattern
+
+Use the `/new` route with optional URL-encoded query parameters:
+
+```text
+https://plan.ref.tools/new?content=<urlencoded>&prompt=<urlencoded>
+```
+
+| Parameter | Description |
+| --- | --- |
+| `content` | Seeds the new plan's initial markdown content. |
+| `prompt` | Sends the first chat message immediately after the plan is created. This starts an agent thread, and the plan opens focused on that thread. |
+
+Both parameters are optional. If you omit both, Ref creates a blank untitled plan, the same as clicking **New Plan** in the UI.
+
+## Examples
+
+Create a blank plan:
+
+```text
+https://plan.ref.tools/new
+```
+
+Create a plan with initial markdown content:
+
+```text
+https://plan.ref.tools/new?content=%23%20API%20cleanup%0A%0A-%20%5B%20%5D%20Audit%20legacy%20endpoints%0A-%20%5B%20%5D%20Draft%20migration%20plan
+```
+
+Create a plan with initial content and immediately ask Ref to research it:
+
+```text
+https://plan.ref.tools/new?prompt=Research%20this%20request%20and%20draft%20an%20implementation%20plan&content=%23%20Checkout%20performance%20issue%0A%0AUsers%20report%20slow%20checkout%20after%20the%20latest%20release.%0A%0Ahttps%3A%2F%2Flinear.app%2Facme%2Fissue%2FENG-123%2Fcheckout-performance
+```
+
+## Worked example: Linear
+
+You can wire this pattern into any tool that can construct a URL. For Linear, add a custom link, automation, or internal workflow that builds a Ref URL from the ticket title and ticket link.
+
+For example, start with:
+
+```text
+prompt=Research this ticket and draft a plan
+content=# ENG-123: Checkout performance
+
+https://linear.app/acme/issue/ENG-123/checkout-performance
+```
+
+URL-encode those values and append them to `/new`:
+
+```text
+https://plan.ref.tools/new?prompt=Research+this+ticket+and+draft+a+plan&content=%23%20ENG-123%3A%20Checkout%20performance%0A%0Ahttps%3A%2F%2Flinear.app%2Facme%2Fissue%2FENG-123%2Fcheckout-performance
+```
+
+When the user opens the link, Ref creates a new plan with the ticket title and link already in the document. It also sends the prompt as the first chat message, so the plan opens directly into an agent thread researching the ticket.
+
+If your automation can run code, build the URL with your platform's URL encoder instead of hand-encoding strings:
+
+```js
+const url = new URL('https://plan.ref.tools/new');
+url.searchParams.set('prompt', 'Research this ticket and draft a plan');
+url.searchParams.set(
+  'content',
+  `# ${ticket.identifier}: ${ticket.title}
+
+${ticket.url}`
+);
+```
+
+## Requirements
+
+- The user must be logged in to [plan.ref.tools](https://plan.ref.tools)
+- The new plan is created in the user's currently selected workspace, whether personal or team
+- Both `content` and `prompt` should be URL-encoded before they are added to the link
+
+<GetHelp/>
