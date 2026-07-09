@@ -7,9 +7,10 @@ description: "How Ref plans complement README files, design docs, ADRs, and agen
 
 | | Markdown in the Repo | Ref |
 | --- | --- | --- |
-| Best for | Durable documentation that should live with code | Live planning and coordination before the diff |
-| Review timing | Usually reviewed in the same PR as the code change | Reviewed before implementation starts |
-| Collaboration model | Static artifact plus PR comments | Comments, review mode, agent threads, and progress updates |
+| Best for | Versioning plans with the code | Cross-functional collaboration and orchestration |
+| ⭐ Collaboration | Static artifact plus PR comments | Comments, review mode, rich content, agent threads, and progress updates |
+| Format | Text-only markdown files | Rich plans with images, diagrams, widgets, comments, and agent threads |
+| Access | Requires repo access and comfort working in Git | Shareable with engineers, PMs, designers, and other cross-functional partners |
 | Repo scope | Tied to one repository | Works across repos, teams, and pre-repo ideas |
 | Agent handoff | Agents read files after you point them there | Agents launch from the plan and report back to it |
 | Long-term record | Versioned with the codebase | Can graduate settled decisions into repo docs |
@@ -31,26 +32,30 @@ Committed markdown gives engineering teams a versioned record.
 
 **Limitations for in-flight work:**
 - It is often reviewed after or alongside the code change, when much of the implementation direction is already set
-- Collaboration happens through commits and PR comments rather than a dedicated planning review flow
+- Collaboration happens through commits and PR comments rather than a dedicated planning review flow that cross-functional partners can easily join
+- Markdown is text-only, while in-flight planning often benefits from images, diagrams, prototypes, and richer context
 - A repo document is naturally scoped to that repo, which can be awkward for cross-repo or pre-repo work
 - Agent launch, progress reporting, and PR tracking require separate tooling or manual coordination
 
 ### Ref's Approach
 
-Ref puts the plan before the diff. The team can discuss scope, architecture, risks, and task breakdown while the work is still cheap to reshape.
+Ref puts the plan before the diff. The team can discuss scope, architecture, risks, and task breakdown while the work is still cheap to reshape, and cross-functional collaborators can participate without living inside the repo.
 
 Plans are live workspaces for in-flight engineering:
 
 1. **Front-loaded decisions** - Review the plan before agents or people start changing files, instead of discovering disagreement in the implementation PR.
-2. **Active collaboration** - Comments, review mode, parallel agent threads, and progress reporting all happen on the plan itself.
-3. **Cross-repo scope** - A plan can cover multiple repos, a new repo that does not exist yet, or a product decision that has not been mapped to code.
-4. **Agent-native execution** - Agents launch from the plan, read it as context, ask questions there, and report PRs back to the same workspace.
+2. **Cross-functional collaboration** - PMs, designers, support, and operators can review the same plan as engineers, without needing repo access or a Git workflow.
+3. **Rich context** - Plans can include images, diagrams, widgets, comments, and agent threads alongside the written plan.
+4. **Cross-repo scope** - A plan can cover multiple repos, a new repo that does not exist yet, or a product decision that has not been mapped to code.
+5. **Agent-native execution** - Agents launch from the plan, read it as context, ask questions there, and report PRs back to the same workspace.
 
 ## Why Ref Wins for This Job
 
 **Earlier alignment:** Repo markdown is usually part of the same change set as the code. Ref plans are reviewed before the diff, so teams can agree on the shape of the work first.
 
-**A live workspace, not only an artifact:** Ref keeps comments, review state, agent threads, progress updates, and PR links together while the work is happening.
+**Cross-functional collaboration:** Ref plans are accessible to the people who need to shape the work, not only the people who live in the repo. Product, design, support, and engineering can comment on the same plan before implementation starts.
+
+**A rich workspace, not only an artifact:** Ref keeps images, diagrams, widgets, comments, review state, agent threads, progress updates, and PR links together while the work is happening.
 
 **Better fit for multi-repo work:** A single plan can coordinate work across services, apps, docs, and infrastructure without forcing the plan into one repository.
 
