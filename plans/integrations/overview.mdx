@@ -13,11 +13,12 @@ Cloud agents connect directly through API keys. Ref launches the agent and track
 | --- | --- |
 | [Cursor Background Agents](/plans/integrations/cursor) | Launches a Cursor background agent via API key. Writes code, creates branches, and opens PRs. |
 | [Devin](/plans/integrations/devin) | Launches a Devin session via API key. Writes code, creates branches, and opens PRs. |
+| [Warp OZ](/plans/integrations/warp-oz) | Launches a Warp OZ agent via API key. Writes code, creates branches, and opens PRs. |
 
 Cloud agents provide:
 - **Automatic launch** — Ref starts the agent session for you
 - **Status tracking** — Progress updates flow back to Ref automatically
-- **Orchestration support** — Can be launched by an orchestrator agent via `LaunchAgent` with `harness: "cursor"` or `harness: "devin"`
+- **Orchestration support** — Can be launched by an orchestrator agent via `LaunchAgent` with `harness: "cursor"`, `harness: "devin"`, or `harness: "warp-oz"`
 
 Configure API keys in **Settings > Agent Settings** at [plan.ref.tools](https://plan.ref.tools).
 
@@ -58,6 +59,9 @@ Connect your own remote MCP server to make its tools available to ref-thread age
   </Card>
   <Card title="Devin" icon="hexagon-nodes" href="/plans/integrations/devin">
     Launch Devin sessions from your plans.
+  </Card>
+  <Card title="Warp OZ" icon="terminal" href="/plans/integrations/warp-oz">
+    Launch Warp OZ agents from your plans.
   </Card>
   <Card title="Claude Code Web" icon="cloud" href="/plans/integrations/claude-code-web">
     Send tasks to Claude Code in the cloud.
