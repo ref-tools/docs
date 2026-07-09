@@ -50,18 +50,4 @@ Use **Configure Integrations** in the connectors menu to jump back to Settings w
 | Attach scope: other harnesses (Cursor, Devin, Warp OZ) | ❌ Not supported | Those harnesses manage their own MCP configs today. |
 | Sharing scope: team-shared servers | ❌ Not supported | Configs are user-scoped only, like Linear/Asana. |
 
-## Example: Figma MCP
-
-To connect a third-party remote MCP server such as Figma:
-
-1. Go to **Settings > Integrations** or **Settings > Connectors**
-2. Add a custom MCP server named **Figma**
-3. Enter `https://mcp.figma.com/mcp` as the server URL
-4. Choose the authentication method required by the server
-5. Click **Verify** or **Save**
-6. Confirm that Ref lists the server's tools, then save the connection
-7. Open a ref-thread, click the **+** connectors button, and enable **Figma** under **MCP Servers**
-
-The next run in that thread can use the connected server's tools. For example, ask the ref-thread to inspect a Figma file or pull design context, and the agent will have the Figma MCP tools available for that run.
-
 <GetHelp/>
