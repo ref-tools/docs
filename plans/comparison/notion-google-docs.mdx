@@ -7,7 +7,8 @@ description: "Why general-purpose document tools are different from Ref's plan-t
 
 | | Notion & Google Docs | Ref |
 | --- | --- | --- |
-| Best for | Prose, notes, specs, and general team documentation | Engineering plans that drive agent implementation |
+| Best for | Full-featured document editing for many kinds of teams and docs | Focused engineering plans that drive agent implementation |
+| Scope | Broad editor features for writing, publishing, databases, wikis, and general collaboration | Scoped to the engineering plan -> agent -> PR loop |
 | Developer workflow | Comments, suggestions, and collaborative editing | Comment -> review -> resolve workflow modeled after PR review |
 | Codebase awareness | Manual links, pasted snippets, or context you add yourself | Reads connected repos to research and ground plans in your code |
 | Agent handoff | Copy a doc or prompt into an external agent | Launch and track Cursor, Devin, Codex, Claude Code, and more from the plan |
@@ -15,25 +16,27 @@ description: "Why general-purpose document tools are different from Ref's plan-t
 
 ## General Docs vs Engineering Plans
 
-Notion and Google Docs are excellent places to write prose, organize team knowledge, and collaborate on general documents. Ref is built for a different job: moving engineering work through the plan -> agent -> PR loop.
+Notion and Google Docs are excellent document editors. They have broad feature sets for writing, publishing, databases, wikis, and general collaboration across many kinds of teams. Ref is intentionally narrower: it is scoped specifically for engineers moving work through the plan -> agent -> PR loop.
 
 ### Notion and Google Docs' Approach
 
-Notion and Google Docs give teams a familiar shared writing surface.
+Notion and Google Docs give teams familiar, full-featured document editing surfaces.
 
 **Strengths:**
 - Fast collaborative editing for prose and specs
 - Flexible formatting, comments, and sharing
+- Broad document-editor features that support many non-engineering workflows
 - Strong fit for evergreen company docs, meeting notes, and broad knowledge bases
 
 **Limitations for this workflow:**
+- Many document-editor features are useful in other contexts but unnecessary for engineering planning and agent orchestration
 - Comments and suggestions are not connected to an engineering review state, task handoff, or PR outcome
 - The document does not know your codebase unless someone manually pastes links and snippets
 - Coding agents do not launch from the doc or report progress back into it by default
 
 ### Ref's Approach
 
-Ref treats the plan as the live workspace for in-flight engineering work. The plan is not just where the prose lives; it is where the team reviews the decisions, starts the agents, and tracks what comes back.
+Ref treats the plan as the live workspace for in-flight engineering work. It does not try to be a general document editor; it focuses on the pieces engineers need to review decisions, start agents, and track what comes back.
 
 Ref emphasizes three pieces that general-purpose docs do not try to own:
 
@@ -51,7 +54,7 @@ Ref emphasizes three pieces that general-purpose docs do not try to own:
 
 **Progress comes back to the source of truth:** Agents can send status, questions, and PR links back to the plan, keeping the coordination surface in one place.
 
-**Purpose-built, not general-purpose:** Notion and Google Docs remain great tools for prose and general docs. Ref is purpose-built for collaborative engineering plans that become agent work and PRs.
+**Scoped for engineers:** Notion and Google Docs remain great tools for prose and general docs. Ref is deliberately scoped to collaborative engineering plans that become agent work and PRs, without carrying a broad document editor's full feature surface into that workflow.
 
 ## Learn more
 
