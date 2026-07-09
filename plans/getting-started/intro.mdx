@@ -3,9 +3,11 @@ title: "Overview"
 description: "Ref Plans in one page."
 ---
 
-Ref Plans is a tool for writing, iterating, and collaborating on plans for coding agents. It's a persistent, document-first approach to agent orchestration.
+Ref Plans is the shared source of truth for AI-generated software: the place teams create the plan before code gets written, review the decisions that matter, and keep humans and agents aligned while the work is in flight.
 
-Instead of ephemeral chat sessions that disappear when you close a tab, Plans give you a durable workspace where context survives across sessions, teammates can collaborate, and multiple agents can work in parallel.
+AI coding makes individual engineers faster, but it can make the team slower when review cannot keep up with everything people and agents are building. Ref closes that gap by moving alignment earlier: review the plan before the diff, then let agents build with the context already agreed on.
+
+For leaders, the pain is that review cannot keep up; Ref gives the team a shared place to align on the plan before the diff. For individual engineers, AI velocity creates brain-fry — too many changes, too little context, too many places to look — and Ref keeps the work understandable.
 
 ## How it works
 
@@ -23,11 +25,28 @@ Instead of ephemeral chat sessions that disappear when you close a tab, Plans gi
 
 ## Why use Ref Plans?
 
-- **Persistent docs, not ephemeral chat** — Plans live as documents you can revisit, share, and iterate on over days or weeks. Context doesn't vanish when you close a tab.
-- **Human review before code** — Catch architecture issues and align on approach before agents write a single line. Review plans like you'd review a design doc.
-- **Parallel agent orchestration** — Send different tasks to different agents at the same time. Track their progress from one place.
-- **Context that survives sessions** — Plans maintain the full history of research, decisions, and progress. New agents pick up where the last one left off.
-- **Web-based and mobile-friendly** — Start a plan on your laptop, review it on your phone, launch agents from anywhere.
+- **Planning is not polishing** — Writing the plan is where you decide what should happen; polishing the diff is too late to discover the team disagreed on the approach.
+- **Engineering is deciding what matters** — You make the decisions that shape the work, and agents fill in the implementation details around them.
+- **Engineering is multiplayer by default** — Plans give teammates, reviewers, and agents one shared workspace for comments, review, progress, and handoff.
+- **The doc is the state; chat is the action** — The plan stays as the primary focus of the work, while AI threads help research, refine, launch agents, and report progress back.
+
+## FAQ
+
+**How is this different from Notion or Google Docs?**
+
+Ref is built for the developer workflow: comments become reviewable and resolvable like a PR, Ref reads your repos to ground the plan, and coding agents launch and report progress from the doc. [See the full comparison.](/plans/comparison/notion-google-docs)
+
+**How is this different from markdown in the repo?**
+
+Repo markdown usually lands after code and gets reviewed with the diff; a Ref plan front-loads decisions before the diff and stays a live workspace during in-flight work. [See the full comparison.](/plans/comparison/markdown-in-repo)
+
+**Is this session logging?**
+
+No. Ref pulls the key decisions out front so human eyes get on them early, instead of archiving an LLM summary no one reads.
+
+**Is this agent memory/skills?**
+
+No. Decisions stay reviewable in refs that agents read as context; this is not auto-generated skills.
 
 <Columns cols={2}>
 <Card icon="rocket" title="Get Started" href="/plans/getting-started/your-first-plan">
