@@ -50,6 +50,8 @@ https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>
 - `Manual` — Access built-in planning guidance topics
 - `Comments` — Read and write comments on the plan
 - `PrLinks` — Attach pull request links to the plan
+- `upload_media` — Upload an image and receive a `mediaId`. Pass either `url` for a publicly fetchable HTTPS image URL, or `mimeType` to receive a signed `uploadUrl` for a client-side PUT. `mimeType` is required only when `url` is absent; never pass both. `request_media_upload` remains as a deprecated alias for one release.
+- `insert_media` — Insert uploaded image markdown into the plan using the `mediaId` returned by `upload_media`
 
 **General mode** adds:
 - `List` — List your plans

@@ -13,6 +13,10 @@ Click below an image to add or edit its caption. Drag a corner handle to resize 
 
 For agents, the caption is what they see inline as a lightweight placeholder on every read, and agents can view the actual pixels or upload new images via the Ref Plans MCP server tools.
 
+When an agent already has an image URL, such as a short-lived Figma MCP asset URL like `https://www.figma.com/api/mcp/asset/...`, it can call `upload_media` with `url` to let the server fetch and store the image. That returns a `mediaId`, which the agent then passes to `insert_media` with the target line and optional alt text.
+
+If the agent has raw image bytes instead, it can use the signed-URL flow: call `upload_media` with `mimeType`, PUT the bytes to the returned `uploadUrl`, then call `insert_media` with the same `mediaId`.
+
 ## Mermaid diagrams
 
 Fenced ```` ```mermaid ```` code blocks render as live diagrams inline. They include zoom and expand controls, and their styling is theme-aware so diagrams match light and dark mode.
