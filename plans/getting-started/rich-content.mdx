@@ -7,15 +7,35 @@ Ref Plans support more than plain markdown. Use rich content when screenshots, d
 
 ## Images
 
-Drag an image file onto the doc or paste one from your clipboard to insert it. Images are full width by default, and scaled-down images are centered so smaller screenshots do not hug the left edge.
+Drag an image file onto the doc or paste one from your clipboard to insert it. Standalone images with no explicit width render at most about 480px tall, based on their intrinsic dimensions, and scaled-down images are centered so smaller screenshots do not hug the left edge. Existing docs get this cap automatically; nothing needs to be rewritten. Click an image to open it in a lightbox for the full-size view.
 
-Click below an image to add or edit its caption. Drag a corner handle to resize it. Click an image to select it; press **Backspace** to delete the selected image. Click an image to open it in a lightbox for a closer look.
+Click below an image to add or edit its caption. Drag a corner handle to resize a standalone image. Click an image to select it; press **Backspace** to delete the selected image.
+
+Two or more image lines with no blank line between them render side by side as one grid, with up to three equal-width cells per row before wrapping. This uses normal markdown image syntax, so the same lines stay portable and render as stacked images on GitHub.
+
+```markdown
+![Step 1](ref-media://aaa?iw=800&ih=600)
+![Step 2](ref-media://bbb?iw=800&ih=600)
+![Step 3](ref-media://ccc?iw=800&ih=600)
+```
+
+Add a blank line between image lines to split them back into standalone blocks.
+
+```markdown
+![Before](ref-media://aaa?iw=800&ih=600)
+
+![After](ref-media://bbb?iw=800&ih=600)
+```
 
 For agents, the caption is what they see inline as a lightweight placeholder on every read, and agents can view the actual pixels or upload new images via the Ref Plans MCP server tools.
 
 When an agent already has an image URL, such as a short-lived Figma MCP asset URL like `https://www.figma.com/api/mcp/asset/...`, it can call `upload_media` with `url` to let the server fetch and store the image. That returns a `mediaId`, which the agent then passes to `insert_media` with the target line and optional alt text.
 
 If the agent has raw image bytes instead, it can use the signed-URL flow: call `upload_media` with `mimeType`, PUT the bytes to the returned `uploadUrl`, then call `insert_media` with the same `mediaId`.
+
+`insert_media` also accepts an optional `displayWidth` integer from 120 to 2000. It sets the rendered width in pixels for a standalone image and writes the same `w` URI parameter that the editor's drag-resize handle writes, such as `![Login screen](ref-media://abc123?w=400&iw=1200&ih=800)`. `displayWidth` is ignored for images inside a grid, where cells are equal-width; omit it when you want the default height cap.
+
+To build a browsable layout, call `insert_media` at successive `afterLine` values so the image lines land adjacent and form a grid. Use `displayWidth` when you want one standalone image at a specific size.
 
 ## Mermaid diagrams
 
