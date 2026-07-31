@@ -1,0 +1,65 @@
+---
+title: "Conductor Cloud"
+description: "Launch Conductor Cloud agents from Ref Plans."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+Conductor Cloud integration lets you launch Conductor agents directly from your plans and track their progress.
+
+This is the **API-based** harness (`api.conductor.build`). It is separate from the **Conductor** desktop deep-link launcher, which opens the Conductor desktop app via webhook-style prompts. Both can appear in Ref; configure and launch **Conductor Cloud** when you want Ref to create and track sessions through the Conductor API.
+
+## Get a Conductor API key
+
+1. Open [app.conductor.build/users/api-keys](https://app.conductor.build/users/api-keys)
+2. Create an API key
+3. Copy the key for the next step
+
+## Connect Conductor Cloud
+
+1. Go to **Settings** in Ref Plans
+2. Click the **Agent Settings** tab
+3. Select the **Conductor Cloud** tab
+4. Paste your Conductor API key and use **Test** to validate it
+5. Pick a **default project**
+
+Optionally set a default agent and model. Conductor's docs recommend passing an explicit model rather than relying on defaults.
+
+## How Conductor is organized
+
+Conductor nests work in three layers:
+
+**project** (1 repo) → **workspace** (1 branch, 1 git worktree, 1 cloud sandbox) → **session** (1 agent chat tab)
+
+Sessions inside a workspace share files, branch, and running processes. A branch can be checked out in only one workspace at a time, which makes the workspace the PR unit.
+
+## Choose a workspace mode
+
+In the Conductor Cloud settings tab, choose how launches create workspaces:
+
+- **New workspace per launch (default)** — Each launch gets its own branch and sandbox, matching how Cursor, Devin, and Warp OZ behave. Each agent produces its own PR.
+- **Always use one workspace** — New sessions land as additional chat tabs in one configured workspace, sharing its sandbox and branch. Pick a workspace after selecting a default project.
+
+Orchestrators fanning out parallel children should stay on **new workspace per launch**. A fixed workspace is for *sequential* work — a follow-up, a reviewer, or a specialist picking up the same branch with a warm sandbox. Several agents running at once in one workspace would share a worktree, compete for the same sandbox ports, and can only produce one PR between them.
+
+## Launch an agent
+
+1. Open your plan and select a task
+2. Click **Launch Agent** and choose **Conductor Cloud**
+3. Review the prompt — Ref pre-populates it with the task details
+4. Click **Launch**
+
+## Status tracking
+
+Ref tracks the Conductor Cloud agent status:
+
+- **Working** — The agent is actively implementing the task
+- **Finished** — The agent has completed its work
+
+Conductor reports only `idle`, `working`, and `error`, and has no terminal "finished" state. Ref treats a session as finished once it goes idle *after* having been observed working.
+
+Unlike Cursor, Devin, and Warp OZ, Conductor's API exposes no PR URL, so completion notifications do not include a pull request link. The link Ref stores is Conductor's `deepLink`, which opens the Conductor desktop app.
+
+You can monitor agent progress directly from your plan without switching to Conductor.
+
+<GetHelp/>
