@@ -59,17 +59,12 @@ https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>
 
 ### Agent orchestration tools
 
-When agent orchestration is enabled in Factory Settings, these additional tools become available in both plan-specific and general mode:
+These additional tools are available in both plan-specific and general mode:
 
-- `LaunchAgent` — Launch a sub-agent on Cursor, Devin, or ref-thread to work in parallel. Specify the harness type, a prompt with full context, and the plan IDs to associate the agent with.
+- `LaunchAgent` — Launch a sub-agent on Cursor, Devin, Warp OZ, Conductor Cloud, or ref-thread to work in parallel. Specify the harness type, a prompt with full context, and the plan IDs to associate the agent with.
 - `SendMessage` — Send messages to child agents or back to a parent agent. Used for coordination — child agents report completion (with PR URLs), and parents send follow-up instructions.
 
-These tools require:
-1. **Factory Settings enabled** — Go to **Settings > Factory MCP** at [plan.ref.tools](https://plan.ref.tools) and toggle on the master switch
-2. **Per-harness toggles** — Enable the specific harnesses you want to use (Cursor, Devin)
-3. **API keys configured** — Set up Cursor and/or Devin API keys in **Settings > Agent Settings**
-
-The Factory Settings page also provides a ready-to-paste MCP config snippet for connecting your orchestrating agent.
+`LaunchAgent` requires API keys configured for the harnesses you want to use — set up Cursor and/or Devin API keys in **Settings > Agent Settings**.
 
 See the [multi-agent orchestration guide](/plans/workflows/multi-agent) for full details on using these tools.
 
