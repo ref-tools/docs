@@ -26,6 +26,10 @@ Ref Plans supports a PR-style review workflow so you can get structured feedback
 
 When an agent requests a review with the `Comments` MCP tool's `request_review` action or waits on one with `AwaitReview`, the tool result includes a direct link to the review, not just the review status.
 
+A review an agent requests always comes back to you — the account whose API key the session uses — so no reviewer address is involved. To have someone else review the plan, request the review in the app and enter their email address.
+
+Both `request_review` and `AwaitReview` are available only in MCP sessions you connect yourself with your own API key. Agents that Ref launches and runs for you do not get either one: their work is reviewed in the app, on the plan they were launched on.
+
 ## Access and permissions
 
 Requesting a review automatically grants the reviewer **write access** to the plan. This lets them leave inline comments and suggest edits directly.
