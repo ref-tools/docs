@@ -5,6 +5,10 @@ description: "Connect Ref Plans to coding agents and external services."
 
 Ref Plans integrates with coding agents (where you send tasks for implementation) and context sources (where you pull planning context from).
 
+## Orchestrate
+
+**Orchestrate** is the first entry in the **Launch Agent** menu and is always available, whichever agents you have enabled. Instead of sending one task to one agent, it hands the whole plan to a Ref orchestrator that delegates implementation to a cloud agent you have configured — Cursor Cloud, Devin, Warp OZ, or Conductor Cloud. By default the orchestrator reviews every PR against the plan before sign-off and leaves merging to you; you can turn review off, and turn merging on once you have connected a GitHub personal access token. See [multi-agent orchestration](/plans/workflows/multi-agent).
+
 ## Cloud agents (API-based)
 
 Cloud agents connect directly through API keys. Ref launches the agent and tracks its progress automatically — no manual intervention required. These agents can also be launched programmatically by an orchestrator agent via the [`LaunchAgent`](/plans/workflows/multi-agent) MCP tool as part of [multi-agent orchestration](/plans/workflows/multi-agent).
@@ -30,9 +34,18 @@ Launcher agents work by appending progress-reporting instructions (curl commands
 | Agent | Description |
 | --- | --- |
 | [Claude Code Web](/plans/integrations/claude-code-web) | Sends task to Claude Code in the cloud |
-| [Codex](/plans/integrations/codex) | Sends task to OpenAI Codex |
-| Cursor Local | Sends task to your local Cursor instance |
-| Copy & Paste | Copies the task prompt for manual use in any agent |
+| [Codex Cloud](/plans/integrations/codex) | Sends task to OpenAI Codex |
+| Cursor Desktop | Opens the task in the Cursor desktop app |
+| Codex Desktop | Opens the task in the Codex desktop app |
+| Claude Code Desktop | Opens the task in the Claude Code desktop app |
+| Conductor | Opens the task in the Conductor desktop app |
+| Factory | Opens the task in the Factory desktop app |
+| Windsurf | Opens the task in Windsurf |
+| Zed | Opens the task in Zed |
+| GitHub Copilot | Opens the task in GitHub Copilot chat in VS Code |
+| Copy to clipboard | Copies the task prompt for manual use in any agent |
+
+Desktop agents open through a deep link that carries the prompt with it; the rest copy the prompt for you to paste.
 
 Launcher agents require you to:
 1. Click **Launch Agent** in the plan UI to generate the prompt
