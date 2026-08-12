@@ -123,6 +123,7 @@
               "usage/pricing",
               "usage/credits",
               "usage/teams",
+              "usage/rbac",
               "usage/enterprise"
             ]
           },
@@ -206,6 +207,7 @@
               "usage/pricing",
               "usage/credits",
               "usage/teams",
+              "usage/rbac",
               "usage/enterprise"
             ]
           },
