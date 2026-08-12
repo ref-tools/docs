@@ -1,0 +1,62 @@
+---
+title: "Markup Mode"
+description: "Draw feedback on a plan and send it to an agent to apply."
+---
+
+Some feedback is faster to draw than to write: an arrow to the step that runs in the wrong order, a circle around the paragraph that overreaches. Markup mode puts a drawing layer over the rendered plan so you can mark it up the way you would mark up a printout, then hand the marked-up page to an agent.
+
+## Enter markup mode
+
+Click the marker button in the plan header, or press `Cmd + Shift + M`. Click the button again, or press the same keys, to leave.
+
+Markup mode is available in the plan editor on desktop. Shortcuts on this page use `Cmd`; on Windows and Linux, use `Ctrl` instead.
+
+While markup mode is open, the plan is read-only — everything you draw sits on top of the document rather than in it, and edits from your collaborators keep arriving underneath.
+
+## Draw, type, or speak
+
+Three gestures cover everything:
+
+- **Left-click and drag** — draws strokes, arrows, and shapes in red ink
+- **Click anywhere** — drops a note you can type into
+- **Hold right-click** — speak; the transcript becomes a note when you release
+
+Hold-to-speak needs a browser that can access your microphone, and permission to use it. Where speech capture is unavailable, the option is not offered.
+
+Annotations are anchored to the lines they were drawn on, so they scroll with the document.
+
+## Tools
+
+The toolbar sets what a left-click drag draws:
+
+| Tool | Key | Draws |
+| --- | --- | --- |
+| Draw | `D` | Freehand ink |
+| Arrow | `A` | A straight arrow |
+| Rectangle | `R` | A rectangle |
+| Line | `L` | A straight line |
+
+## Adjust what you drew
+
+- **Move** — drag any stroke or shape; drag a note by its body
+- **Reshape** — select a shape, then drag one of its endpoints or corners
+- **Resize a note** — select it, then drag the handle on either side
+- **Edit a note** — double-click it; an empty note is discarded when you click away
+- **Delete** — select an annotation and press `Delete` or `Backspace`
+- **Undo and redo** — `Cmd + Z` and `Cmd + Shift + Z`, or the toolbar buttons
+
+`Escape` clears the current selection. Pressing it again leaves markup mode.
+
+## Send the markup
+
+Press `Cmd + Enter` or click **Send markup**.
+
+Ref screenshots each annotated region of the rendered plan with your ink drawn on top and starts an agent thread with those images attached. Annotations that sit close together in the document are captured in one image; annotations in different parts of the plan become separate images.
+
+The agent reads the current plan, interprets each screenshot — strokes circle, underline, cross out, connect, or point at the content to change, and the notes say what you want done — and applies the edits to the plan, leaving unrelated content untouched. Where an annotation is ambiguous, it picks the most reasonable interpretation and says so in chat.
+
+Sending leaves markup mode and opens the new thread in the chat panel, so you can watch the edits land and reply if the agent read something the wrong way.
+
+## Leaving without sending
+
+**Cancel**, `Escape`, and the marker button all leave markup mode. Annotations are not saved with the plan: anything you have not sent is discarded when you leave markup mode or open another plan.
