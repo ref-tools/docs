@@ -1,20 +1,11 @@
 ---
-title: "Quick Install"
-description: "Set up Ref in Claude Code and Codex with one command."
+title: "Local agents"
+description: "Set up Claude Code and Codex with one command, and see their sessions in Ref Plans."
 ---
 
 import GetHelp from '/snippets/get-help.mdx';
 
-Ref only changes how you work once it is inside the agent you already use, and doing that by hand means registering an MCP server in every agent, on every machine. One command does it instead: it installs Ref into Claude Code and Codex on your machine, signs you in through your browser, and sets up the planning loop, so on substantial tasks the agent drafts a Ref plan and pauses for your review before it writes code.
-
-## Requirements
-
-| Requirement | Detail |
-| --- | --- |
-| Operating system | macOS or Linux, Intel or ARM. Linux works on glibc and musl distributions. Windows is not supported. |
-| Coding agent | Claude Code, Codex, or both, on your `PATH`. Codex must be version 0.138.0 or newer — an older one is skipped with a warning, and Claude Code still installs. |
-| Tools | `curl`. Node.js is not needed, at install time or afterwards. |
-| Account | A Ref account — you approve the install from your browser. |
+One command connects the coding agents on your machine to Ref. After it runs, those sessions show up in your Ref Plans sidebar with live status, and on substantial work the agent drafts a plan and waits for your review before it writes code.
 
 ## Install
 
@@ -22,35 +13,29 @@ Ref only changes how you work once it is inside the agent you already use, and d
 curl -fsSL https://api.plan.ref.tools/plugins/install/local-agent | bash
 ```
 
-One run sets up every supported agent it finds on your `PATH`. If it finds neither Claude Code nor Codex, it stops and says so without changing anything.
+One run sets up every supported agent it finds — Claude Code, Codex, or both. If it finds neither, it stops and says so without changing anything.
 
-## What the installer does
+**There is no API key to copy.** The installer opens your browser, the page names the machine asking to connect, and you click **Approve**. The link is good for ten minutes; if it expires you can paste a key from [ref.tools/keys](https://ref.tools/keys) instead. A machine that already holds a working Ref key is reused, and you are not asked again.
 
-<Steps>
-  <Step title="Installs the ref binary">
-    The binary lands under `~/.ref`. Your `PATH` and your shell startup files are not modified, and the download is checksum-verified before it runs. If the binary cannot be installed, the run stops there — before it configures any agent.
-  </Step>
+Claude Code is ready as soon as the run finishes. Codex needs one more step from you: run `codex`, and when it says **Hooks need review**, answer **Trust all and continue**. Ref stays off in Codex until you do. Codex also needs version 0.138.0 or newer — an older one is skipped with a warning, and Claude Code still installs.
 
-  <Step title="Signs you in through your browser">
-    There is no API key to copy. The installer prints an approval link and opens it in your browser, where the page names the machine asking and gives you **Approve** or **Cancel**. Approving mints a new API key and delivers it to your terminal.
+Agent sessions that are already running keep their old configuration until you restart them, so restart any session you had open.
 
-    The link is good for ten minutes. If it expires, the installer offers to let you paste a key from [ref.tools/keys](https://ref.tools/keys) instead. If the machine already holds a working Ref key, the installer reuses it and never prompts.
+Re-running the command is safe, and it is also the update path — run it again to move to the current version.
 
-    The key is written to `~/.ref/config.json`, readable only by you. It stays valid until you revoke it at [ref.tools/keys](https://ref.tools/keys).
-  </Step>
+## Supported platforms
 
-  <Step title="Installs the Ref plugin into each agent">
-    Both agents get the same thing: a session-start hook, a stop hook, and the Plans MCP server, packaged as a plugin. See [what gets added to your agent](#what-gets-added-to-your-agent) below.
-  </Step>
+| Platform | Support |
+| --- | --- |
+| macOS | Apple silicon and Intel |
+| Linux | x86_64 and arm64, on glibc and musl distributions |
+| Windows | Not supported |
 
-  <Step title="Reports what is ready">
-    The run closes with a line per agent. Claude Code is ready immediately. Codex needs one more step from you: run `codex`, and when it says **Hooks need review**, answer **Trust all and continue**. Ref stays off in Codex until you do.
-  </Step>
-</Steps>
+You need `curl`. Node.js is not needed, at install time or afterwards.
 
-## Install one agent only
+## Install one agent, or uninstall
 
-To set up a single agent, use its own command instead of the bare one:
+To set up a single agent, use its own command:
 
 ```
 curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?agent=claude-code' | bash
@@ -60,64 +45,60 @@ curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?agent=claude-
 curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?agent=codex' | bash
 ```
 
-**Keep the quotes.** The `?agent=` parameter has to survive your shell. Unquoted, the URL serves the unified installer rather than the targeted one — and on an uninstall that removes more state than you asked for.
+**Keep the quotes.** The `?agent=` parameter has to survive your shell. Unquoted, the URL serves the unified installer rather than the targeted one — and on an uninstall that removes more than you asked for.
 
-## Verify
-
-The installer's own closing summary is the first check: a line per agent, and `You're set.` when nothing is left to do.
-
-For Claude Code, you can confirm the MCP server separately:
-
-```
-claude mcp list
-```
-
-You should see `plugin:ref:Plans` listed.
-
-## Re-running and updates
-
-Re-running the install command is safe. It rewrites the plugin files in place rather than stacking a second copy, and reuses the key already on the machine instead of asking you to approve again. If one agent reported an error, re-running is how you finish it — the agent that already succeeded is left as it is.
-
-The same command is the update path. Run it again to move to the current version of the binary and the plugins.
-
-## What gets added to your agent
-
-Everything Ref installs rides inside a plugin, so the config you own is left alone.
-
-**Claude Code** — a plugin directory under `~/.claude/skills/ref`, which Claude Code loads on its own. Your `settings.json` is never touched.
-
-**Codex** — two plugins served from a local marketplace at `~/.ref/codex-plugins`, plus one line in `~/.codex/.env` holding your API key, readable only by you. Codex's MCP config can name an environment variable but cannot run a command to fetch a key, which is why that one line lives outside the plugin.
-
-In each agent, the plugin adds:
-
-- **A session-start hook** — tells the agent to read Ref's planning guidance before it starts work, so it routes the request instead of diving straight into the first file.
-- **A stop hook** — checks the turn actually reached the end state it committed to, and nudges the agent to finish rather than stopping halfway, including when a plan review it requested is still pending.
-- **The Plans MCP server** — read, write, comment on, and create plans from inside the agent. This is the same server the [manual install guides](/plans/install/index) configure.
-
-A second plugin, installed alongside it, records agent lifecycle events locally. A capture policy fetched from Ref during install decides what may leave your machine: file contents, prompts, and command arguments are dropped before anything is sent, and what ships is the shape of a session — tool names, counts, timings, and the working directory.
-
-To stop recording without uninstalling anything else:
-
-```
-~/.ref/bin/ref record disable
-```
-
-That choice survives reinstalls and updates. Undo it with `~/.ref/bin/ref record enable`.
-
-## Uninstall
+To remove Ref from every agent that has it:
 
 ```
 curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?mode=uninstall' | bash -s -- --uninstall
 ```
 
-This removes the plugins from every agent that has them, then removes the binary and the key store once no agent still needs them. Add flags after `--`:
+Your API key stays active on your account afterwards — revoke it at [ref.tools/keys](https://ref.tools/keys) if you are done with it.
 
-| Flag | Effect |
+## Your sessions in Ref Plans
+
+Once a session touches a plan — reading it, writing to it, creating it, reviewing it — that session appears in the Ref Plans sidebar under the plan, and stays there while it works. A session working across two plans appears under both.
+
+Each row names the agent it is running in, a short label the agent writes for what it is working on (falling back to the repo or folder name), and its current state:
+
+| What you see | What it means |
 | --- | --- |
-| `--only claude` or `--only codex` | Limit the run to one agent. Repeatable. The other agent keeps working. |
-| `--purge` | With `--uninstall`, also delete the locally recorded session data. Without it, that data survives, so a reinstall keeps its place. |
+| A spinner | Working. Hovering names the tool in flight and how long it has been running |
+| Waiting for approval | The session is blocked on a permission it needs from you |
+| Agent asked a question | The session is blocked on an answer from you |
+| Waiting for your next prompt | Idle, with nothing in flight |
+| Session finished | The session ended normally |
+| Process ended unexpectedly | The session died before it finished |
 
-Your API key stays active on your account after an uninstall — revoke it at [ref.tools/keys](https://ref.tools/keys) if you are done with it. Agent sessions that are already running keep the old key until you restart them.
+The plan row above lights up while any of its sessions is working or waiting on you, so a collapsed sidebar still tells you where things stand. Hovering a row also names the machine it is running on, which matters once you have more than one.
+
+Rows are honest about what they can see. If a machine stops reporting, or your own browser goes offline, the row dims and drops its live claims rather than showing a stale spinner.
+
+## What your agent does differently
+
+Every connected session starts by asking Ref how to handle your request, and the answer routes the work into one of a few shapes:
+
+- **Plan** — you should decide something before work starts. The agent drafts a plan and asks you to review it before it builds.
+- **Investigation** — you want to understand something. The digging lands as a document with a link, instead of terminal output that scrolls away.
+- **Receipt** — the path was already clear. The agent does the work, then records what it did.
+
+Genuinely small asks are still answered in chat with no document at all. That is a normal outcome, not a failure.
+
+The shape is judged by the decisions involved, not by the size of the change. A mechanical edit across thirty files is a receipt; a one-line change that settles a non-obvious design call is a plan.
+
+## Plan review and the wait
+
+When the agent drafts a plan, it genuinely stops and waits for you.
+
+The review request opens in your browser as a full-screen ask: which agent is asking, and its note on what it wants reviewed. **Start review** takes you into the plan, where you comment inline and then choose **Approve**, **Request changes**, or **Comment**. In the sidebar, the request reads *waiting for your feedback…* for as long as the agent is holding.
+
+Requesting changes is a loop, not a stopping point — the agent revises the plan and asks again. On approval it implements, and where the change lands as a pull request, that pull request links back to the plan.
+
+Reviews from an agent are the same review workflow people use on each other's plans; see [review requests](/plans/collaboration/reviews) for the rest of it.
+
+## Rating the trigger
+
+When an agent decides on its own to write something up, you get one question about that decision: was creating it the right call, or should it have just answered next time? Your answers tune how eagerly your agents reach for a document in future. The question is only ever about the decision to write — the content is what reviews and comments are for.
 
 ## Other agents
 
