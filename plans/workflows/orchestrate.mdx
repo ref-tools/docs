@@ -1,0 +1,55 @@
+---
+title: "Orchestrate"
+description: "Hand a plan to Ref and let it run cloud agents through implementation, review, and merge."
+---
+
+Launching an agent per task means you own the queue: you start each one, read each PR, and decide what lands. Orchestrate hands that loop to Ref — it delegates implementation to a cloud agent, reviews the PRs that come back against the plan, and stops wherever your permissions stop it.
+
+## How it works
+
+Orchestrate is the first option in the agent launcher on a plan. It's always available there — unlike the coding agents, it can't be switched off under **Enabled agents**. Once you've picked a delegate, the row shows Ref alongside that agent, with a summary of the current model, review, and merge choices.
+
+Launching starts an orchestrator agent in the plan's chat panel. It is instructed to:
+
+- Delegate implementation tasks to your chosen delegate by default
+- Review every PR against the plan before sign-off, or skip review
+- Merge PRs once they're approved, or leave merging to a human
+
+You can add your own instructions in **Additional instructions** before launching, and they're appended to the ones above.
+
+Orchestrate runs inside Ref, so there is no MCP server to install for it.
+
+## Delegates
+
+The delegate is the cloud agent Ref assigns implementation work to. Only configured delegates can be selected; picking an unconfigured one takes you to its settings.
+
+| Delegate | Needs |
+| --- | --- |
+| Cursor Cloud | API key and a repository |
+| Devin | API key |
+| Warp OZ | API key |
+| Conductor Cloud | API key and a project |
+
+The model dropdown controls the orchestrator itself, not the delegate. It defaults to **Auto**, and you can pin a specific model instead.
+
+## The two controls, and where they live
+
+Review and merge are governed separately, in two different settings panels.
+
+- **Review every PR against the plan** — lives in **Settings → Agents → Orchestrator**. On by default. This is the default for new orchestrator launches; you can also change it per launch from the Orchestrate row in the launcher.
+- **Allow PR Merges** — lives in **Settings → GitHub**. Off by default, and it requires a GitHub personal access token: GitHub's API does not let app-based tokens merge on your behalf. It is the single permission the merge tool honors, so no orchestrator setting can work around it.
+
+The split is deliberate. Merging is an account-wide GitHub permission that applies to every Ref agent, so it stays with your other GitHub permissions rather than being duplicated per launcher. Turning review off does not grant merging, and turning merging on does not skip review.
+
+## What the orchestrator can do on GitHub
+
+The orchestrator reads and acts on pull requests through your GitHub connection, so it only reaches repos you've connected and indexed in Ref. Two permissions in **Settings → GitHub** shape what it can do there:
+
+- **Allow PR Reviews** — on by default. Lets agents approve, request changes, comment on a PR, and mark a draft PR ready for review.
+- **Allow PR Merges** — off by default. Lets agents merge an approved PR.
+
+With merging off, the orchestrator can still take the work all the way to a reviewed PR and leave the merge to you.
+
+<Card icon="robot" title="Multi-Agent Orchestration" href="/plans/workflows/multi-agent">
+  Driving orchestration yourself from an agent over MCP, instead of from the launcher.
+</Card>
