@@ -1,0 +1,36 @@
+---
+title: "One"
+description: "Connect Ref Plans to 250+ apps through the One MCP server."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+A plan is only as good as the context behind it, and most of that context lives in apps that have no dedicated Ref integration.
+
+One closes that gap. It is a remote MCP server that Ref has already configured, so connecting it takes one click instead of a name, a URL, and an auth method. Connect your agent to 250+ apps through [One](https://www.withone.ai) — search, read docs, and execute actions across Gmail, Slack, HubSpot, Stripe, and more. Browse [available apps](https://www.withone.ai/knowledge).
+
+## Connect One
+
+1. Go to **Settings** in Ref Plans
+2. Click the **Integrations** tab
+3. Find the **MCP Servers** section
+4. Click **Connect One**
+5. Complete the authorization in the popup window
+
+Ref saves One as a remote MCP server called `one` and starts the OAuth authorization flow for you. When you finish authorizing, Ref re-checks the connection and stores the tools One reports back.
+
+**Connect One** appears only while One is not connected. Once it is connected, One takes its place in the **MCP Servers** list, showing its tool count — expand the count to see each tool name and description.
+
+## Usage
+
+One is a custom MCP server, so everything on the [Custom MCP Servers](/plans/integrations/custom-mcp) page applies to it: which agents can reach its tools, how you attach it to a single ref-thread from the **+** connectors button in the message composer, and what the connection supports. One appears there under **MCP Servers**, listed as `one`.
+
+## Manage the connection
+
+In the **MCP Servers** section of **Settings > Integrations**:
+
+- **Enabled** — Clear this checkbox to keep One out of your defaults; a thread that selects it explicitly still attaches it
+- **Connect** — Shown when One needs authorization, and reopens the authorization popup
+- **Remove** — Deletes the connection and brings the **Connect One** button back
+
+<GetHelp/>
