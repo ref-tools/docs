@@ -82,6 +82,7 @@
             "pages": [
               "plans/collaboration/sharing",
               "plans/collaboration/reviews",
+              "plans/collaboration/markup",
               "plans/collaboration/team-visibility"
             ]
           },
