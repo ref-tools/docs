@@ -37,7 +37,7 @@ The model dropdown controls the orchestrator itself, not the delegate. It defaul
 Review and merge are governed separately, in two different settings panels.
 
 - **Review every PR against the plan** — lives in **Settings → Agents → Orchestrator**. On by default. This is the default for new orchestrator launches; you can also change it per launch from the Orchestrate row in the launcher.
-- **Allow PR Merges** — lives in **Settings → GitHub**. Off by default, and it requires a GitHub personal access token: GitHub's API does not let app-based tokens merge on your behalf. It is the single permission the merge tool honors, so no orchestrator setting can work around it.
+- **Allow PR Merges** — lives in **Settings → GitHub**. Off by default, and it needs a GitHub personal access token: GitHub's API does not let app-based tokens merge on your behalf. It is the single permission the merge tool honors, so no orchestrator setting can work around it.
 
 The split is deliberate. Merging is an account-wide GitHub permission that applies to every Ref agent, so it stays with your other GitHub permissions rather than being duplicated per launcher. Turning review off does not grant merging, and turning merging on does not skip review.
 
