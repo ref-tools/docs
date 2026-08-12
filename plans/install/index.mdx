@@ -47,15 +47,20 @@ https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>
 - `Read` — Read the current plan content
 - `Write` — Write or replace plan content
 - `Edit` — Edit specific sections of the plan
+- `Rename` — Change the plan's title
 - `Manual` — Access built-in planning guidance topics
 - `Comments` — Read and write comments on the plan
 - `PrLinks` — Attach pull request links to the plan
+- `AwaitReview` — Wait for the plan's review verdict and return it with the reviewer's comments. Each call holds for up to 50 seconds and returns even if nothing has landed yet, so the agent calls it again until a verdict settles.
 - `upload_media` — Upload an image and receive a `mediaId`. Pass either `url` for a publicly fetchable HTTPS image URL, or `mimeType` to receive a signed `uploadUrl` for a client-side PUT. `mimeType` is required only when `url` is absent; never pass both. `request_media_upload` remains as a deprecated alias for one release.
 - `insert_media` — Insert uploaded image markdown into the plan using the `mediaId` returned by `upload_media`
+- `view_media` — View an image already in the plan. `Read` returns image markdown as raw `ref-media://` URIs, which are not fetchable directly, so pass the `mediaId` here to get a temporary link to the image. Sizes are `thumb`, `standard` (the default), and `original`. Ask for the pixels inline with `format: "image"` only when the agent cannot fetch links, since inline pixels cost vision tokens immediately, and use `original` only when the standard view is genuinely not enough, since it is full resolution.
 
 **General mode** adds:
 - `List` — List your plans
-- `Create` — Create a new plan
+- `Create` — Create a new plan. `kind` says what the document is: `plan` (the default) for work to be reviewed and implemented, `explanation` for an explanation delivered as a link, or `receipt` for a record of work already completed. `initiative` records whose call it was to create the document — `user` when it was asked for, `agent` when the agent decided to write one.
+
+`AwaitReview`, the `Comments` tool's `request_review` action, and `Create`'s `initiative` parameter exist only in sessions you connect yourself with your own API key — the installs on this page. Agents that Ref launches and runs for you connect as orchestrated sessions, where those three are not available at all.
 
 ### Agent orchestration tools
 
