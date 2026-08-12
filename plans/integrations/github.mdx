@@ -42,7 +42,7 @@ Reading a PR and merging it are very different levels of trust, so Ref keeps the
 The two action toggles sit under **PR & Issue Actions** on that page.
 
 - **Allow PR Merges** is the one place merging is decided — nothing else grants it. When it is off, an agent orchestrating your plan is told to leave merging to a human.
-- **Allow PR Merges** requires a personal access token connected to your Ref account. The toggle stays unavailable until you connect one, because GitHub's API does not let app-based tokens merge on your behalf. Connect a token at [ref.tools/resources](https://ref.tools/resources).
+- **Allow PR Merges** needs a personal access token connected to your Ref account. The toggle stays unavailable until you connect one, because GitHub's API does not let app-based tokens merge on your behalf. Connect a token at [ref.tools/resources](https://ref.tools/resources).
 - Turning **GitHub Enabled** off cuts agents off from GitHub entirely — the GitHub tools refuse to connect.
 - Review and merge calls re-check these settings when they run, so revoking a permission takes effect on the agent's next call.
 
@@ -54,7 +54,7 @@ Agents work with issues and PRs through a separate MCP endpoint from the one use
 https://api.plan.ref.tools/github-mcp
 ```
 
-It requires a connected GitHub account and repos added to Ref.
+It needs a connected GitHub account and repos added to Ref.
 
 | Tool | What it does |
 | --- | --- |
