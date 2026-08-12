@@ -88,6 +88,7 @@
           {
             "group": "Install MCP Server",
             "pages": [
+              "plans/install/local-agent",
               "plans/install/index",
               "plans/install/claude-code",
               "plans/install/codex",

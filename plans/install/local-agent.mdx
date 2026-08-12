@@ -1,0 +1,126 @@
+---
+title: "Quick Install"
+description: "Set up Ref in Claude Code and Codex with one command."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+Ref only changes how you work once it is inside the agent you already use, and doing that by hand means registering an MCP server in every agent, on every machine. One command does it instead: it installs Ref into Claude Code and Codex on your machine, signs you in through your browser, and sets up the planning loop, so on substantial tasks the agent drafts a Ref plan and pauses for your review before it writes code.
+
+## Requirements
+
+| Requirement | Detail |
+| --- | --- |
+| Operating system | macOS or Linux, Intel or ARM. Linux works on glibc and musl distributions. Windows is not supported. |
+| Coding agent | Claude Code, Codex, or both, on your `PATH`. Codex must be version 0.138.0 or newer — an older one is skipped with a warning, and Claude Code still installs. |
+| Tools | `curl`. Node.js is not required, at install time or afterwards. |
+| Account | A Ref account — you approve the install from your browser. |
+
+## Install
+
+```
+curl -fsSL https://api.plan.ref.tools/plugins/install/local-agent | bash
+```
+
+One run sets up every supported agent it finds on your `PATH`. If it finds neither Claude Code nor Codex, it stops and says so without changing anything.
+
+## What the installer does
+
+<Steps>
+  <Step title="Installs the ref binary">
+    The binary lands under `~/.ref`. Your `PATH` and your shell startup files are not modified, and the download is checksum-verified before it runs. If the binary cannot be installed, the run stops there — before it configures any agent.
+  </Step>
+
+  <Step title="Signs you in through your browser">
+    There is no API key to copy. The installer prints an approval link and opens it in your browser, where the page names the machine asking and gives you **Approve** or **Cancel**. Approving mints a new API key and delivers it to your terminal.
+
+    The link is good for ten minutes. If it expires, the installer offers to let you paste a key from [ref.tools/keys](https://ref.tools/keys) instead. If the machine already holds a working Ref key, the installer reuses it and never prompts.
+
+    The key is written to `~/.ref/config.json`, readable only by you. It stays valid until you revoke it at [ref.tools/keys](https://ref.tools/keys).
+  </Step>
+
+  <Step title="Installs the Ref plugin into each agent">
+    Both agents get the same thing: a session-start hook, a stop hook, and the Plans MCP server, packaged as a plugin. See [what gets added to your agent](#what-gets-added-to-your-agent) below.
+  </Step>
+
+  <Step title="Reports what is ready">
+    The run closes with a line per agent. Claude Code is ready immediately. Codex needs one more step from you: run `codex`, and when it says **Hooks need review**, answer **Trust all and continue**. Ref stays off in Codex until you do.
+  </Step>
+</Steps>
+
+## Install one agent only
+
+To set up a single agent, use its own command instead of the bare one:
+
+```
+curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?agent=claude-code' | bash
+```
+
+```
+curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?agent=codex' | bash
+```
+
+**Keep the quotes.** The `?agent=` parameter has to survive your shell. Unquoted, the URL serves the unified installer rather than the targeted one — and on an uninstall that removes more state than you asked for.
+
+## Verify
+
+The installer's own closing summary is the first check: a line per agent, and `You're set.` when nothing is left to do.
+
+For Claude Code, you can confirm the MCP server separately:
+
+```
+claude mcp list
+```
+
+You should see `plugin:ref:Plans` listed.
+
+## Re-running and updates
+
+Re-running the install command is safe. It rewrites the plugin files in place rather than stacking a second copy, and reuses the key already on the machine instead of asking you to approve again. If one agent reported an error, re-running is how you finish it — the agent that already succeeded is left as it is.
+
+The same command is the update path. Run it again to move to the current version of the binary and the plugins.
+
+## What gets added to your agent
+
+Everything Ref installs rides inside a plugin, so the config you own is left alone.
+
+**Claude Code** — a plugin directory under `~/.claude/skills/ref`, which Claude Code loads on its own. Your `settings.json` is never touched.
+
+**Codex** — two plugins served from a local marketplace at `~/.ref/codex-plugins`, plus one line in `~/.codex/.env` holding your API key, readable only by you. Codex's MCP config can name an environment variable but cannot run a command to fetch a key, which is why that one line lives outside the plugin.
+
+In each agent, the plugin adds:
+
+- **A session-start hook** — tells the agent to read Ref's planning guidance before it starts work, so it routes the request instead of diving straight into the first file.
+- **A stop hook** — checks the turn actually reached the end state it committed to, and nudges the agent to finish rather than stopping halfway, including when a plan review it requested is still pending.
+- **The Plans MCP server** — read, write, comment on, and create plans from inside the agent. This is the same server the [manual install guides](/plans/install/index) configure.
+
+A second plugin, installed alongside it, records agent lifecycle events locally. A capture policy fetched from Ref during install decides what may leave your machine: file contents, prompts, and command arguments are dropped before anything is sent, and what ships is the shape of a session — tool names, counts, timings, and the working directory.
+
+To stop recording without uninstalling anything else:
+
+```
+~/.ref/bin/ref record disable
+```
+
+That choice survives reinstalls and updates. Undo it with `~/.ref/bin/ref record enable`.
+
+## Uninstall
+
+```
+curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?mode=uninstall' | bash -s -- --uninstall
+```
+
+This removes the plugins from every agent that has them, then removes the binary and the key store once no agent still needs them. Add flags after `--`:
+
+| Flag | Effect |
+| --- | --- |
+| `--only claude` or `--only codex` | Limit the run to one agent. Repeatable. The other agent keeps working. |
+| `--purge` | With `--uninstall`, also delete the locally recorded session data. Without it, that data survives, so a reinstall keeps its place. |
+
+Your API key stays active on your account after an uninstall — revoke it at [ref.tools/keys](https://ref.tools/keys) if you are done with it. Agent sessions that are already running keep the old key until you restart them.
+
+## Other agents
+
+This command covers Claude Code and Codex. For every other agent — Cursor, VS Code, Zed, Windsurf, and the rest — register the MCP server by hand with the [installation guides](/plans/install/index).
+
+<GetHelp/>
