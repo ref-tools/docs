@@ -1,11 +1,11 @@
 ---
 title: "Local agents"
-description: "Set up Claude Code and Codex with one command, and see their sessions in Ref Plans."
+description: "Connect Claude Code and Codex to Ref with one command."
 ---
 
 import GetHelp from '/snippets/get-help.mdx';
 
-One command connects the coding agents on your machine to Ref. After it runs, those sessions show up in your Ref Plans sidebar with live status, and on substantial work the agent drafts a plan and waits for your review before it writes code.
+Connecting the coding agents on your machine to Ref does three things. Your sessions appear in Ref next to the plans they are working on. Your agents work out when a piece of work deserves a plan of its own. And when one decides it does, it drafts that plan and asks you to review it before it writes any code.
 
 ## Install
 
@@ -13,95 +13,56 @@ One command connects the coding agents on your machine to Ref. After it runs, th
 curl -fsSL https://api.plan.ref.tools/plugins/install/local-agent | bash
 ```
 
-One run sets up every supported agent it finds — Claude Code, Codex, or both. If it finds neither, it stops and says so without changing anything.
+- Authorizes and configures the Ref MCP server
+- Installs and signs in the `ref` helper
+- Configures every detected agent for local session tracking in Ref
+- Configures every detected agent for automatic plan creation and the review loop
 
-**There is no API key to copy.** The installer opens your browser, the page names the machine asking to connect, and you click **Approve**. The link is good for ten minutes; if it expires you can paste a key from [ref.tools/keys](https://ref.tools/keys) instead. A machine that already holds a working Ref key is reused, and you are not asked again.
+<sup>\* Active sessions may require restart.</sup>
 
-Claude Code is ready as soon as the run finishes. Codex needs one more step from you: run `codex`, and when it says **Hooks need review**, answer **Trust all and continue**. Ref stays off in Codex until you do. Codex also needs version 0.138.0 or newer — an older one is skipped with a warning, and Claude Code still installs.
-
-Agent sessions that are already running keep their old configuration until you restart them, so restart any session you had open.
-
-Re-running the command is safe, and it is also the update path — run it again to move to the current version.
-
-## Supported platforms
-
-| Platform | Support |
-| --- | --- |
-| macOS | Apple silicon and Intel |
-| Linux | x86_64 and arm64, on glibc and musl distributions |
-| Windows | Not supported |
-
-You need `curl`. Node.js is not needed, at install time or afterwards.
-
-## Install one agent, or uninstall
-
-To set up a single agent, use its own command:
-
-```
-curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?agent=claude-code' | bash
-```
-
-```
-curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?agent=codex' | bash
-```
-
-**Keep the quotes.** The `?agent=` parameter has to survive your shell. Unquoted, the URL serves the unified installer rather than the targeted one — and on an uninstall that removes more than you asked for.
-
-To remove Ref from every agent that has it:
+### Uninstall
 
 ```
 curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?mode=uninstall' | bash -s -- --uninstall
 ```
 
-Your API key stays active on your account afterwards — revoke it at [ref.tools/keys](https://ref.tools/keys) if you are done with it.
+## Support
+
+| | Support | Notes |
+| --- | --- | --- |
+| Claude Code | ✅ Supported | |
+| Codex | ✅ Supported | Needs 0.138.0 or newer |
+| macOS | ✅ Supported | Apple silicon and Intel |
+| Linux | ✅ Supported | x86_64 and arm64, on glibc and musl |
+| Windows | ❌ Not supported | |
+
+Using something else? Every other agent can [connect the MCP server by hand](/plans/install/index). Want first-class support for a harness? [Tell us which one](https://tally.so/r/wQW0x8).
+
+## How it works
+
+Your agent emits lifecycle events as it works — a session starting, a tool running, a prompt landing, a session ending. Ref reads those events to map each session to the plans it touches, and to report what that session is doing right now. That mapping is what puts a session in your sidebar, and those events are what keep its state current.
 
 ## Your sessions in Ref Plans
 
-Once a session touches a plan — reading it, writing to it, creating it, reviewing it — that session appears in the Ref Plans sidebar under the plan, and stays there while it works. A session working across two plans appears under both.
+A session appears in the sidebar under any plan it touches — reading, writing, creating, or reviewing — and stays there while it works. A session working across two plans appears under both.
 
-Each row names the agent it is running in, a short label the agent writes for what it is working on (falling back to the repo or folder name), and its current state:
+Each row names the agent it is running in, a short label for what it is working on, and its current state:
 
-| What you see | What it means |
-| --- | --- |
-| A spinner | Working. Hovering names the tool in flight and how long it has been running |
-| Waiting for approval | The session is blocked on a permission it needs from you |
-| Agent asked a question | The session is blocked on an answer from you |
-| Waiting for your next prompt | Idle, with nothing in flight |
-| Session finished | The session ended normally |
-| Process ended unexpectedly | The session died before it finished |
+| | State | What it means |
+| --- | --- | --- |
+| ![](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGE4YTk0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjkiIG9wYWNpdHk9Ii4zIi8+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDAgMC05LTkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==) | **Working** | Hovering names the tool in flight and how long it has run |
+| ![](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjI2YTAwIiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PHBhdGggZD0iTTkuNSA5YTIuNSAyLjUgMCAxIDEgMy42IDIuMjVjLS43LjM1LTEuMS45LTEuMSAxLjc1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjE3IiByPSIxIiBmaWxsPSIjYjI2YTAwIiBzdHJva2U9Im5vbmUiLz48L3N2Zz4=) | **Waiting for approval** | Blocked on a permission it needs from you |
+| ![](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjI2YTAwIiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PHBhdGggZD0iTTkuNSA5YTIuNSAyLjUgMCAxIDEgMy42IDIuMjVjLS43LjM1LTEuMS45LTEuMSAxLjc1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjE3IiByPSIxIiBmaWxsPSIjYjI2YTAwIiBzdHJva2U9Im5vbmUiLz48L3N2Zz4=) | **Agent asked a question** | Blocked on an answer from you |
+| ![](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzhhOGE5NCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iNiIvPjwvc3ZnPg==) | **Waiting for your next prompt** | Idle, nothing in flight |
+| ![](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmU3ZDMyIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0yMiAxMS4wOFYxMmExMCAxMCAwIDEgMS01LjkzLTkuMTQiLz48cG9seWxpbmUgcG9pbnRzPSIyMiA0IDEyIDE0LjAxIDkgMTEuMDEiLz48L3N2Zz4=) | **Session finished** | Ended normally |
+| ![](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzYyODI4IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PGxpbmUgeDE9IjE1IiB5MT0iOSIgeDI9IjkiIHkyPSIxNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjkiIHkxPSI5IiB4Mj0iMTUiIHkyPSIxNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+) | **Session ended unexpectedly** | Died before it finished |
 
-The plan row above lights up while any of its sessions is working or waiting on you, so a collapsed sidebar still tells you where things stand. Hovering a row also names the machine it is running on, which matters once you have more than one.
+## Plans your agent creates
 
-Rows are honest about what they can see. If a machine stops reporting, or your own browser goes offline, the row dims and drops its live claims rather than showing a stale spinner.
+**Three kinds of document.** Your agent picks one based on what the work needs: a **plan** when there is a decision to make before work starts, an **investigation** when you want to understand something, or a **receipt** when the path was already clear and it just records what it did. Small asks are answered in chat with no document at all.
 
-## What your agent does differently
+**Review requested.** When your agent drafts a plan, it asks you to review it and then waits. The request opens in your browser and names the agent asking. You comment inline, then **Approve**, **Request changes**, or **Comment**. Requesting changes is a loop — the agent revises and asks again. On approval it implements, and the pull request links back to the plan. It is the same workflow as [reviewing a teammate's plan](/plans/collaboration/reviews).
 
-Every connected session starts by asking Ref how to handle your request, and the answer routes the work into one of a few shapes:
-
-- **Plan** — you should decide something before work starts. The agent drafts a plan and asks you to review it before it builds.
-- **Investigation** — you want to understand something. The digging lands as a document with a link, instead of terminal output that scrolls away.
-- **Receipt** — the path was already clear. The agent does the work, then records what it did.
-
-Genuinely small asks are still answered in chat with no document at all. That is a normal outcome, not a failure.
-
-The shape is judged by the decisions involved, not by the size of the change. A mechanical edit across thirty files is a receipt; a one-line change that settles a non-obvious design call is a plan.
-
-## Plan review and the wait
-
-When the agent drafts a plan, it genuinely stops and waits for you.
-
-The review request opens in your browser as a full-screen ask: which agent is asking, and its note on what it wants reviewed. **Start review** takes you into the plan, where you comment inline and then choose **Approve**, **Request changes**, or **Comment**. In the sidebar, the request reads *waiting for your feedback…* for as long as the agent is holding.
-
-Requesting changes is a loop, not a stopping point — the agent revises the plan and asks again. On approval it implements, and where the change lands as a pull request, that pull request links back to the plan.
-
-Reviews from an agent are the same review workflow people use on each other's plans; see [review requests](/plans/collaboration/reviews) for the rest of it.
-
-## Rating the trigger
-
-When an agent decides on its own to write something up, you get one question about that decision: was creating it the right call, or should it have just answered next time? Your answers tune how eagerly your agents reach for a document in future. The question is only ever about the decision to write — the content is what reviews and comments are for.
-
-## Other agents
-
-This command covers Claude Code and Codex. For every other agent — Cursor, VS Code, Zed, Windsurf, and the rest — register the MCP server by hand with the [installation guides](/plans/install/index).
+**Tell us if it got it wrong.** When an agent decides on its own to write something up, you get one question: was creating it the right call? Your answers tune how eagerly your agents reach for a document next time.
 
 <GetHelp/>
