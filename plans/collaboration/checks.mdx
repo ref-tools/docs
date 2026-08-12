@@ -1,0 +1,43 @@
+---
+title: "Plan Checks"
+description: "Run one-click quality passes over a plan before any code is written."
+---
+
+A plan is where the real decisions live, and a bad one is far cheaper to fix there than in a pull request. Checks are one-click passes over the current plan: some tighten it for you, some hand back a list of problems for you to decide on.
+
+## Running a check
+
+Open the checks menu from the editor controls — the button is labelled **Run plan check**. On a narrow screen it sits in the header's overflow menu as **Run a check**.
+
+Each entry in the menu shows the check's name, what it looks for, and a tag saying what it will do to your plan. Choosing one starts its own chat thread, named after the check, and the agent reads the current plan before doing anything else.
+
+## What a check will do to your plan
+
+The tag next to each check tells you how far it goes:
+
+- **Edits plan** — the check rewrites the plan in place.
+- **Reviews in chat** — the check replies in the thread with a numbered list of findings and asks which ones you want applied. It does not touch the document until you answer.
+- **Adds section** — the check writes what it found into a new section of the plan.
+
+## Available checks
+
+| Check | Looks for | Action |
+| --- | --- | --- |
+| Coherence | Do all sections tell a consistent story? | Edits plan |
+| Pre-mortem | Imagine this plan failed — what went wrong? | Reviews in chat |
+| Shorten | Cut each task to its core components | Edits plan |
+| Extract Human | Separate manual steps from what an agent can code | Edits plan |
+| Challenge | Devil's advocate — why might this be wrong? | Reviews in chat |
+| Flag Assumptions | Highlight things the plan assumes but hasn't verified | Reviews in chat |
+| Backwards Compat | Will this break existing users, APIs, or data? | Reviews in chat |
+| Data Migration | Does this touch schemas, migrations, or stored data? | Adds section |
+| Security | Check for auth issues, data exposure, injection risks | Reviews in chat |
+| Find Related Plans | Discover other plans covering overlapping topics or repos | Adds section |
+
+## After a check runs
+
+For a **Reviews in chat** check, reply in the same thread with the findings you want applied, and the agent applies only those. Findings you skip leave the plan untouched.
+
+Checks that edit the plan or add a section change the document directly, so read the result before you launch agents against it.
+
+When the plan reads the way you want it to, [request a review](/plans/collaboration/reviews) from a teammate.
