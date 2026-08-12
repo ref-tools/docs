@@ -37,6 +37,8 @@ If the agent has raw image bytes instead, it can use the signed-URL flow: call `
 
 To build a browsable layout, call `insert_media` at successive `afterLine` values so the image lines land adjacent and form a grid. Use `displayWidth` when you want one standalone image at a specific size.
 
+Images you upload, whether from the editor or through the MCP server, count against your media storage limit. The Free tier includes 1 GB; see [Pricing](/usage/pricing) for the limit on each tier.
+
 ## Mermaid diagrams
 
 Fenced ```` ```mermaid ```` code blocks render as live diagrams inline. They include zoom and expand controls, and their styling is theme-aware so diagrams match light and dark mode.
