@@ -86,4 +86,22 @@ Everything between the bare `:::` and `:::end` is the body region. It is appende
 
 A collapse block must close with `:::end` or it renders as plain text.
 
+Nesting is supported. A completed task can wrap a collapsed file list inside its own collapse block:
+
+```mdx
+:::collapse
+# Task 8: ✅ Consolidate Feature-Flag Hygiene
+:::
+…completed-task detail…
+:::collapse
+## Files — 19 files, 8 directories
+:::
+- file list
+:::end
+…more detail…
+:::end
+```
+
+Each `:::end` closes only the innermost open block, so every `:::collapse` needs its own matching `:::end`. Nesting works in the body of a collapse block (after the bare `:::` separator), not in the header region between `:::collapse` and the separator.
+
 Agents write Mermaid diagrams, HTML widgets, and collapse blocks automatically when they are relevant, such as auto-collapsing long file lists. Ask Ref for a wireframe/diagram to discover widgets.
