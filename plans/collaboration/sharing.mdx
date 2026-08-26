@@ -1,24 +1,44 @@
 ---
 title: "Sharing Plans"
-description: "Share plans with teammates via links, email, or team visibility."
+description: "Share plans with view or edit access via links, email, or team visibility."
 ---
 
-Ref Plans offers several ways to share your work with others.
+Ref Plans offers several ways to share your work with others. Each share can grant **Can view** or **Can edit**.
 
 ## Link sharing
 
-Toggle on **link sharing** from the Share button in the plan header. Anyone with the link can view and edit the plan — no account required for viewing.
+Set link access from the Share button in the plan header. One dropdown controls who the link admits:
 
-This is the fastest way to share a plan for quick feedback.
+- **Restricted** — Only people you've added can access the plan
+- **Public — can view** — Anyone with the link can view
+- **Public — can edit** — Anyone with the link can edit
+
+New public links default to **Public — can view**. Existing public links keep their previous access — plans that were already public when sharing implied edit stay **Public — can edit**.
+
+Anyone with a public link can read the plan without signing in. The view updates live, stays view-only, and includes a path to sign up. Public plans are not indexed by search engines.
+
+Signed-in visitors who open a shared link get the full app experience, and the plan appears in their Recents.
+
+Changing a public link from **can edit** to **can view** moves connected viewers into the view-only experience immediately, without kicking them out. Changing **can view** to **can edit** takes effect the next time they reload.
 
 ## Email-based access
 
 Add specific people by email from the Share modal:
 
 1. Click the **Share** button in the plan header
-2. Enter an email address
+2. Enter an email address and choose **Can view** or **Can edit**
 3. The recipient receives an invitation email with a link to the plan
-4. They get edit access once they sign in
+4. They get the access you chose once they sign in
+
+You can change a person's access later from their menu in the Share panel. Changing an invitee from **Can edit** to **Can view** takes effect the next time they reload.
+
+## View-only access
+
+Signed-in viewers see a live document with a **View only** badge. They cannot edit content, the title, comments, PR links, or media. Existing comments are visible read-only.
+
+Viewers can still chat and run agents on the plan. Agent runs bill the viewer, and the agent cannot edit the plan.
+
+Access levels are enforced server-side everywhere, including the API and MCP. The same level applies whether someone opens the plan in the browser or through an agent.
 
 ## Team visibility
 
@@ -27,13 +47,13 @@ For plans created under a team, you can control how the plan appears to other te
 - **Personal** — Only you see the plan in your sidebar. Other team members won't discover it through search or browsing.
 - **Shared** — The entire team can discover the plan in their sidebar and search results.
 
-**Note:** Team visibility only controls sidebar and search discoverability. Team members who have a direct link can always access the plan regardless of the visibility setting.
+**Note:** Team visibility only controls sidebar and search discoverability. Team members who have a direct link can always access the plan regardless of the visibility setting. Their access level comes from team membership — admins and writers can edit; readers can view — and is not affected by the link setting. When someone has more than one grant, the strongest one wins.
 
 ## How to share
 
 1. Open your plan
 2. Click the **Share** button in the plan header
 3. Choose your sharing method:
-   - Toggle **link sharing** for open access
-   - Add emails for targeted access
+   - Set link access to **Restricted**, **Public — can view**, or **Public — can edit**
+   - Add emails and choose **Can view** or **Can edit** for each person
    - Set **visibility** to control team discoverability
