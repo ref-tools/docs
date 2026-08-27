@@ -36,6 +36,8 @@ Some GitHub MCP tools are gated by toggles in **Settings**. Open **Settings** in
 - **Allow PR Reviews** governs `ReviewPR` and `UpdatePR`. Editing a PR title or description follows this toggle, not the merge one.
 - **Allow PR Merges** governs `MergePR`. Merging additionally requires a Personal Access Token connected to your Ref account, because GitHub's merge API needs **Contents: write**, which app installation tokens do not carry.
 
+`MergePR` also exposes a mark-ready action governed by **Allow PR Reviews**, so the tool stays available — limited to marking drafts ready — when only reviews are enabled.
+
 `UpdatePR` needs only **Pull requests: write**, so it works on a GitHub App installation token and does not require a Personal Access Token.
 
 ## Tips
