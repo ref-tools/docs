@@ -29,6 +29,50 @@ As agents implement tasks and create pull requests, you can link those PRs to yo
 
 This gives you a single view of all the code changes associated with your plan.
 
+## Agent permissions
+
+Reading a PR and merging it are very different levels of trust, so Ref keeps them behind separate switches. Open **Settings** in Ref Plans and select **GitHub** to set them.
+
+| Setting | Default | What it allows |
+| --- | --- | --- |
+| **GitHub Enabled** | On | Agents can read issues and pull requests from your indexed repos |
+| **Allow PR Reviews** | On | Agents can approve or request changes on pull requests, and mark a draft PR ready for review |
+| **Allow PR Merges** | Off | Agents can merge pull requests on your behalf |
+
+The two action toggles sit under **PR & Issue Actions** on that page.
+
+- **Allow PR Merges** is the one place merging is decided — nothing else grants it. When it is off, an agent orchestrating your plan is told to leave merging to a human.
+- **Allow PR Merges** needs a personal access token connected to your Ref account. The toggle stays unavailable until you connect one, because GitHub's API does not let app-based tokens merge on your behalf. Connect a token at [ref.tools/resources](https://ref.tools/resources).
+- Turning **GitHub Enabled** off cuts agents off from GitHub entirely — the GitHub tools refuse to connect.
+- Review and merge calls re-check these settings when they run, so revoking a permission takes effect on the agent's next call.
+
+## GitHub tools for agents
+
+Agents work with issues and PRs through a separate MCP endpoint from the one used for plans:
+
+```
+https://api.plan.ref.tools/github-mcp
+```
+
+It needs a connected GitHub account and repos added to Ref.
+
+| Tool | What it does |
+| --- | --- |
+| `GetIssue` | Read issue details and comments |
+| `CommentOnIssue` | Post a comment on an issue |
+| `SearchIssues` | Search issues in one repo |
+| `ReadPR` | Read PR details, list changed files, read the diff for one file, and read reviews and comments |
+| `SearchPRs` | Search pull requests in one repo |
+| `CreatePR` | Open a pull request, optionally as a draft |
+| `ReviewPR` | Approve, request changes, or comment on a pull request |
+| `MergePR` | Merge a pull request, or mark a draft ready for review |
+
+Your permissions shape the tool list an agent is handed when it connects, not just what happens when it calls:
+
+- With **Allow PR Reviews** off, `ReviewPR` is not offered at all, and `MergePR` loses its mark-ready action.
+- With **Allow PR Merges** off, `MergePR` cannot merge.
+- With both off, `MergePR` is not offered at all.
+
 ## Tips
 
 - Attach GitHub issues before asking the agent to research — it provides valuable context about what needs to be built
