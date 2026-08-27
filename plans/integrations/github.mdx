@@ -29,6 +29,17 @@ As agents implement tasks and create pull requests, you can link those PRs to yo
 
 This gives you a single view of all the code changes associated with your plan.
 
+## Agent permissions
+
+Some GitHub MCP tools are gated by toggles in **Settings**. Open **Settings** in Ref Plans and select **GitHub**:
+
+- **Allow PR Reviews** governs `ReviewPR` and `UpdatePR`. Editing a PR title or description follows this toggle, not the merge one.
+- **Allow PR Merges** governs `MergePR`. Merging additionally requires a Personal Access Token connected to your Ref account, because GitHub's merge API needs **Contents: write**, which app installation tokens do not carry.
+
+`MergePR` also exposes a mark-ready action governed by **Allow PR Reviews**, so the tool stays available — limited to marking drafts ready — when only reviews are enabled.
+
+`UpdatePR` needs only **Pull requests: write**, so it works on a GitHub App installation token and does not require a Personal Access Token.
+
 ## Tips
 
 - Attach GitHub issues before asking the agent to research — it provides valuable context about what needs to be built
