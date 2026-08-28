@@ -5,7 +5,7 @@ description: "Launch and coordinate multiple coding agents working in parallel f
 
 import GetHelp from '/snippets/get-help.mdx';
 
-Multi-agent orchestration lets a Ref agent (the orchestrator) spawn sub-agents on Cursor, Devin, Warp OZ, or internal ref-threads, send them messages, and receive updates back — all via MCP tools. This is the most automated way to use Ref Plans.
+Multi-agent orchestration lets a Ref agent (the orchestrator) spawn sub-agents on Cursor, Devin, Warp OZ, Conductor Cloud, or internal ref-threads, send them messages, and receive updates back — all via MCP tools. This is the most automated way to use Ref Plans.
 
 ## How it works
 
@@ -34,14 +34,15 @@ Launches a sub-agent to work in parallel. Available harness types:
 | `cursor` | Implementation tasks | Launches a Cursor background agent that writes code and creates PRs |
 | `devin` | Implementation tasks | Launches a Devin session that writes code and creates PRs |
 | `warp-oz` | Implementation tasks | Launches a Warp OZ agent that writes code and creates PRs |
+| `conductor-cloud` | Implementation tasks | Launches a Conductor Cloud session that writes code in a Conductor workspace |
 | `ref-thread` | Review and lightweight tasks | Launches an internal Ref agent that can read PRs, review diffs, approve, and merge |
 
 Key parameters:
 - **`planIds`** — Plan IDs the agent should be associated with
 - **`prompt`** — The complete task request with all context, requirements, and instructions
-- **`harness`** — Where to run the agent: `cursor`, `devin`, `warp-oz`, or `ref-thread`
+- **`harness`** — Where to run the agent: `cursor`, `devin`, `warp-oz`, `conductor-cloud`, or `ref-thread`
 - **`taskShortDescription`** — Brief label for the agent (~10 words)
-- **`repo`** / **`branch`** / **`model`** — Optional overrides (Cursor only)
+- **`repo`** / **`branch`** / **`model`** — Optional overrides for the `cursor` and `conductor-cloud` harnesses. Leave `repo` out and Cursor falls back to your configured repository, Conductor Cloud to its configured project
 
 ### SendMessage
 
@@ -53,6 +54,7 @@ Sends a message between parent and child agents. This is how agents communicate:
 Parameters:
 - **`agentId`** — The agent to send the message to
 - **`message`** — The message content
+- **`fromAgentId`** — The agent sending the message. Always pass your own agent ID; it defaults to the current agent only in agent-scoped MCP sessions
 
 ## Typical workflow
 
@@ -61,7 +63,7 @@ Parameters:
     Research and iterate on your plan in the web client or via MCP. Break work into tasks that can be implemented independently.
   </Step>
   <Step title="Orchestrate">
-    An orchestrator agent reads the plan and launches implementation agents (Cursor, Devin, or Warp OZ) in parallel via `LaunchAgent`. Each agent gets a self-contained prompt with all the context it needs.
+    An orchestrator agent reads the plan and launches implementation agents (Cursor, Devin, Warp OZ, or Conductor Cloud) in parallel via `LaunchAgent`. Each agent gets a self-contained prompt with all the context it needs.
   </Step>
   <Step title="Review">
     As implementation agents finish and report back with PR URLs, the orchestrator launches `ref-thread` agents to review each PR. Reviewers have access to GitHub tools (`ReadPR`, `ReviewPR`, `MergePR`) to inspect diffs and approve.
@@ -86,7 +88,7 @@ Here's what a typical orchestration session looks like:
 
 ## Harness selection guide
 
-**Use `cursor`, `devin`, or `warp-oz` for implementation** — these agents write code, create branches, and open PRs. Choose based on which service you have configured and prefer.
+**Use `cursor`, `devin`, `warp-oz`, or `conductor-cloud` for implementation** — these agents write code in your repo. Cursor, Devin, and Warp OZ create branches and open PRs, and Ref picks up the PR URL as they work; Conductor Cloud works in a Conductor workspace. Choose based on which service you have configured and prefer.
 
 **Use `ref-thread` for reviews** — ref-thread agents have access to GitHub PR tools (`ReadPR`, `ReviewPR`, `MergePR`, `SearchPRs`) that implementation agents do not. Always use ref-thread for PR review tasks.
 
@@ -95,7 +97,7 @@ Here's what a typical orchestration session looks like:
 To use multi-agent orchestration, you need:
 
 1. **Ref Plans MCP server installed** in your orchestrating agent — see the [install guide](/plans/install/index)
-2. **API keys configured** for Cursor, Devin, and/or Warp OZ in [Agent Settings](https://plan.ref.tools/settings) — required for `cursor`, `devin`, and `warp-oz` harnesses
+2. **API keys configured** for Cursor, Devin, Warp OZ, and/or Conductor Cloud in [Agent Settings](https://plan.ref.tools/settings) — needed for the `cursor`, `devin`, `warp-oz`, and `conductor-cloud` harnesses
 3. **GitHub connected** at [ref.tools/resources](https://ref.tools/resources) — required for ref-thread reviewers to access PR tools
 
 ## Parent/child messaging rules
@@ -103,6 +105,7 @@ To use multi-agent orchestration, you need:
 - Child agents **must** message their parent when done (include the PR URL if one was created) or when stuck
 - Parents can send follow-up instructions or corrections to any child via `SendMessage`
 - Agents can only message their direct parent or their own children — no cross-communication
+- Don't message an agent to acknowledge receipt of its message, and don't acknowledge an acknowledgement
 - The workflow is message-driven: after launching agents, wait for messages rather than polling
 
 <GetHelp/>
