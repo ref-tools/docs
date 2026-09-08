@@ -47,7 +47,8 @@ https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>
 - `Read` — Read the current plan content
 - `Write` — Write or replace plan content
 - `Edit` — Edit specific sections of the plan
-- `Manual` — Access built-in planning guidance topics
+- `ListSkills` — List the available skills and their ids
+- `Skill` — Load a skill by id for planning and workflow guidance
 - `Comments` — Read and write comments on the plan
 - `PrLinks` — Attach pull request links to the plan
 - `Media` — Handle images in a plan with `action: upload | insert | view`. `upload` stores an image from a publicly fetchable HTTPS `url`, or pass `mimeType` (never both) to receive a signed `uploadUrl` for a client-side PUT. `insert` places `![alt](ref-media://mediaId)` after a line (`afterLine` is 1-indexed; `0` inserts at the top; consecutive inserts render as a grid, three per row; `displayWidth` sets the rendered width of a standalone image). `view` returns a signed URL, or inline pixels when the client cannot fetch one (`size` is thumb, standard, or original). At read level (viewer link), the tool exposes only `action: view`.

@@ -46,23 +46,18 @@ Plans are collaborative documents. Use comments in the chat panel to:
 
 **Multiple plans** when the work is independent. Different features, different areas of the codebase, or different timelines. Each plan is self-contained.
 
-## Using Manual tool topics
+## Using skills
 
-Ref's agent has built-in knowledge about plan structure and workflows. You can use these topics in the chat panel via the `Manual` tool:
+Ref's agent has built-in knowledge about plan structure and workflows, packaged as skills. In the chat panel, the agent uses two tools to reach them:
 
-- **`structure-a-plan`** — Ask the agent to organize your rough notes into a well-structured plan
-- **`update-a-plan`** — Ask the agent to revise the plan based on new information or progress
-- **`read-code-or-docs`** — Guidance on researching code and documentation using Ref tools before writing or updating plans
-- **`html-widgets`** — Guidance for using sandboxed HTML widgets for wireframes, dashboards, and prototypes
-- **`planning-guidance`** — Guidance on when to draft a Ref plan, request a review, and wait for the verdict
+- **`ListSkills`** — Lists the skills available in the current session, with the id of each and when it applies
+- **`Skill`** — Loads one skill by its full id (for example `ref/writing-a-ref`) so the agent can follow its guidance
 
-### Role-based topics
+Skills cover the same ground the agent needs for everyday plan work: structuring rough notes into a plan, updating a plan as work progresses, researching code and docs before writing, building sandboxed HTML widgets, and knowing when to draft a plan, request a review, and wait for the verdict.
 
-These topics are primarily used by the system during [multi-agent orchestration](/plans/workflows/multi-agent), but you can reference them directly too:
+### Role skills
 
-- **`role-orchestrator`** — Workflow guidance for orchestrator agents managing teams of implementation and review agents. Covers how to launch agents, coordinate via messaging, and update the plan after merges.
-- **`role-implementer`** — Workflow guidance for coding agents creating PRs. Covers rules for implementation agents: focus on code, message parent with PR URL when done, don't update the plan.
-- **`role-reviewer`** — Workflow guidance for agents reviewing PRs. Covers how to use GitHub tools (`ReadPR`, `ReviewPR`, `MergePR`) to review diffs, approve, and report results to the orchestrator.
+Some skills are primarily loaded by the system during [multi-agent orchestration](/plans/workflows/multi-agent), but you can ask the agent to load them directly too. They cover the orchestrator role (launching agents, coordinating via messaging, updating the plan after merges), the implementer role (focus on code, message the parent with the PR URL when done, don't update the plan), and the reviewer role (using `ReadPR`, `ReviewPR`, and `MergePR` to review diffs, approve, and report back).
 
 ## Install the MCP server in all your agents
 
@@ -70,7 +65,7 @@ For the best results, install the Ref Plans MCP server in every coding agent you
 
 - **Full plan context** — Agents can read the plan directly instead of relying on a pasted prompt snippet
 - **Progress updates** — Agents can update the plan with progress and mark tasks complete as they work
-- **Built-in guidance** — Agents can use the `Manual` tool for workflow guidance
+- **Built-in guidance** — Agents can use `ListSkills` and `Skill` for workflow guidance
 - **Orchestration support** — Agents can communicate with the orchestrator via `SendMessage` during multi-agent workflows
 
 Without the MCP server, agents only see the initial prompt you send them. With it, they have access to the full plan, can report back, and can coordinate with other agents.
