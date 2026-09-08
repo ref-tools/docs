@@ -9,31 +9,38 @@ _While many teams and individuals already trusting Ref, please note that we are 
 
 ## Overview
 
-Ref is built with security and privacy as core principles. This page outlines our security architecture, data handling practices, and compliance efforts. Key areas include:
+Ref is built with security and privacy as core principles. This page outlines our security architecture, data handling practices, and compliance efforts for both Ref products.
 
-- **MCP Implementation**: Local and remote server protocols with API key authentication
-- **Data Protection**: End-to-end encryption, isolated multi-tenant architecture, and comprehensive audit logging
+**Ref Context** indexes your documentation and repositories and serves search over MCP, so coding agents can look up the exact snippet they need without stuffing docs into the prompt.
+
+**Ref Plans** is a collaborative workspace for plan documents, plus hosted agents that read and write those plans and your connected repos.
+
+Key areas include:
+
+- **MCP Implementation**: Local and remote server protocols with API key, OAuth, or session authentication
+- **Data Protection**: Encryption in transit and at rest, isolated multi-tenant architecture, and comprehensive audit logging
 - **Compliance**: SOC2 certification in process with Vanta (see our [Trust Center](https://trust.ref.tools))
 - **Monitoring**: Real-time health checks and public status updates
 
-
 ## MCP
 
-### Protocols
+### Ref Context
 
-Ref provides an [open-source](https://github.com/ref-tools/ref-tools-mcp) `stdio` server that can be run locally and a `streamable-http` that is connected to remotely. 
+Ref Context provides an [open-source](https://github.com/ref-tools/ref-tools-mcp) `stdio` server that can be run locally and a `streamable-http` server at `api.ref.tools` that is connected to remotely.
 
-### Authentication
+Context accepts API keys or OAuth for authentication. Organizations can also use SSO via [Scalekit](https://www.scalekit.com/).
 
-Ref allows use of API keys or OAuth for authentication. Ref's implementation of MCP OAuth is in beta as of Nov 15, 2025. Ref also supports SSO for organizations via [Scalekit](https://www.scalekit.com/). 
+The easiest way to roll out Context to an organization is a combination of SSO and MCP OAuth. If you are interested in MCP OAuth and/or SSO, please reach out to `help@ref.tools`.
 
-The easiest way to rollout Ref to an organization is a combination of SSO and MCP OAuth. If you are interested in MCP OAuth and/or SSO, please reach out to `help@ref.tools`
+### Ref Plans
+
+The Plans MCP server is available at `api.plan.ref.tools/mcp`. Separate GitHub, Asana, and Slack MCP endpoints live on the same host. Plans authenticates with a Firebase session or an API key.
 
 ## Data Handling
 
 ### Encryption
 - **In Transit**: All data is encrypted during transit. Ref uses MCP streamable-http transport.
-- **At Rest**: Documents and search indices are encrypted at rest in our database.
+- **At Rest**: Documents, search indices, and plan content are encrypted at rest.
 - **Customer Managed Keys**: Turbopuffer supports customer managed encryption keys (available upon request).
 
 ### Data Isolation
@@ -42,41 +49,94 @@ We take data isolation very seriously in our multi-tenant environment:
 - Indexing jobs run in single, transient, isolated containers. Your documents and credentials are never present at the same time as another team's data.
 - All application data reads go through Firestore rules that enforce user access at the database level.
 
+### Where your plan content lives
+
+**Live document:** While a plan is open, a PartyKit room on Cloudflare holds the realtime collaboration state.
+
+**Durable storage:** Firestore stores plan metadata, version snapshots, comment threads, and settings. Google Cloud Storage stores version history, uploaded media, and agent session transcripts. Session transcripts are deleted automatically after 7 days. Plan content is encrypted in transit and at rest.
+
+### Plans access control
+
+Access is enforced server-side: owner → team → email invite → link setting (private / public-view / public-edit). Firestore security rules block all client writes to plans and keep secrets (Slack, Anthropic, Vanta, Drata, MCP credentials) in server-only collections. PartyKit re-verifies access on every connection and enforces read-only mode.
+
+### Agent isolation
+
+Each agent thread is a separate process on Ref's Cloud Run plan server holding only the launching user's credentials, and agents only see repos that user has connected. See [Ref Agents](#ref-agents) for the tool and network boundary.
+
+### Observability
+
+Session replay masks all text and form inputs by default. Production RUM user context is identifier-only.
+
 ### Audit Logging
-- Complete activity logging for users and teams available at [ref.tools/activity](https://ref.tools/activity)
-- Logs include user identity, tool calls, and arguments
+- **Context**: Complete activity logging for users and teams available at [ref.tools/activity](https://ref.tools/activity). Logs include user identity, tool calls, and arguments.
+- **Plans**: Thread history (messages and tool calls) is stored per plan. Team admins can export change-control records via `/api/compliance`.
 
 ### Incident Response
-- Internal monitoring via Sentry and Google Cloud alerting tools
+- Internal monitoring via Sentry, Datadog, and Google Cloud alerting tools
 - Status updates published at [ref.tools/status](https://ref.tools/status) during incidents
+
+## Ref Agents
+
+A Ref agent is a hosted Claude Code. Each thread runs as its own process on Ref's servers using the Claude Agent SDK, configured entirely by Ref. Agents have no disk or shell access and no general network access. They work only through Skills and MCP tools.
+
+## AI Models & Training
+
+Ref never trains, fine-tunes, or evaluates models on customer content or actions. Every model provider we use (Claude and Gemini on Vertex AI, VoyageAI, OpenAI) runs under zero-data-retention terms; ElevenLabs processes voice audio for transcription only.
+
+The one exception is the opt-in Fable 5.1 model, served through Vertex AI under [Google's Advanced AI Safety Addendum](https://cloud.google.com/terms/advanced-ai-safety-addendum). Users will see a one-time notice the first time you select it, and team admins can turn off non-ZDR models for everyone under **Settings → Team admin → Data retention**.
+
+If you use your own Anthropic key or Claude subscription, or launch Cursor, Devin, or other coding agents, those requests run under your agreement with that vendor.
 
 ## Compliance
 
 ### Certifications
 - **SOC2**: Currently in progress with [Vanta](https://www.vanta.com)
-- For more information, see out [Trust Center](https://trust.ref.tools)
+- For more information, see our [Trust Center](https://trust.ref.tools). The tables below are a summary; the Trust Center is the canonical subprocessor list.
 
-### Subprocessors & Data Access
-Our security model includes the following subprocessors with specific data access patterns:
+### Subprocessors
 
-- **[Turbopuffer](https://turbopuffer.com)**: `Stores docs` Turbopuffer is the primary search store used by Ref. It is also used by Cursor and Notion. Stores documents, descriptions, and vector embeddings with encryption at rest and isolated namespaces. 
-- **[Firebase](https://firebase.google.com)**: `Sees and stores docs` Temporarily processes search results through Functions and temporarily caches results in Firestore with database-level access controls. All data is encrypted at rest.
-- **[Google Cloud Run](https://cloud.google.com/run)**: `Sees docs` Processes indexing jobs in isolated, transient containers. User docs will be loaded 
-- **[Google Vertex AI](https://ai.google.dev/gemini-api/docs)**: `Sees docs` Generates document description with zero-data retention policy.
-- **[VoyageAI](https://www.voyageai.com/)**: `Sees docs` Creates vector embeddings of docs with zero-data retention policy  
-- **[OpenAI](https://openai.com)**: `Sees docs` Powers research agent functionality with zero-data retention policy. User data will be included in prompts sent to OpenAI.
-- **[Anthropic](https://www.anthropic.com)**: `Sees no docs` Powers evals on public documentation sets with zero-data retention policy.
-- **[Stripe](https://stripe.com)**: `Sees no docs` Processes payment information with PCI-compliant security standards.
-- **[Postmark](https://postmarkapp.com)**: `Sees no docs` Delivers transactional emails with user contact information.
-- **[Mailchimp](https://mailchimp.com)**: `Sees no docs` Manages marketing communications and newsletter subscriptions.
-- **[Mixpanel](https://mixpanel.com)**: `Sees no docs` Analyzes product usage analytics.
-- **[Sentry](https://sentry.io)**: `Sees no docs` Monitors errors and performance with anonymized telemetry data.
-- **[Google Workspace](https://workspace.google.com)**: `Sees no docs` Used for communication and coordination.
-- **[Slack](https://slack.com)**: `Sees no docs` Used to communicate with partners.
-- **[GitHub](https://github.com)**: `Sees no docs` Used for version control.
-- **[Scalekit](https://scalekit.com)**: `Sees no docs` Used for SSO (Firebase is the IdP) and MCP OAuth.
+Ref holds the contract with these vendors. Data flows under our terms.
+
+| Vendor | Used by | Access | Purpose |
+| --- | --- | --- | --- |
+| [Turbopuffer](https://turbopuffer.com) | Context | Stores docs | Turbopuffer is the primary search store used by Ref. It is also used by Cursor and Notion. Stores documents, descriptions, and vector embeddings with encryption at rest and isolated namespaces. |
+| [Firebase](https://firebase.google.com) | Both | Stores docs + Stores plans | Temporarily processes search results through Functions and temporarily caches results in Firestore with database-level access controls. Firestore also stores plan metadata, version snapshots, comment threads, and settings. All data is encrypted at rest. |
+| [Google Cloud Run](https://cloud.google.com/run) | Both | Sees docs + plans + repo code | Processes indexing jobs in isolated, transient containers. User docs are loaded only for the duration of the job and never sit alongside another team's data. Plans agents run as isolated processes on the Cloud Run plan server. |
+| [Google Cloud Storage](https://cloud.google.com/storage) | Both | Stores plans | Stores plan version history, uploaded images and attachments, agent session transcripts, and diagnostic logs from local agents. Session transcripts are deleted automatically after 7 days. All data is encrypted at rest. |
+| [Cloudflare (PartyKit)](https://www.cloudflare.com) | Plans | Stores plans | Hosts the realtime collaboration layer for plans. Holds the live document state while a plan is open; durable snapshots are saved to Firestore. |
+| [Google Vertex AI](https://cloud.google.com/vertex-ai) (Claude + Gemini) | Both | Sees docs + plans + repo code | For Context, generates document descriptions. For Plans, runs the Claude models that power agents by default, and Gemini generates plan and thread titles. Zero-data retention for every model except Fable 5.1, which is disclosed under [AI Models & Training](#ai-models--training). |
+| [VoyageAI](https://www.voyageai.com/) | Context | Sees docs | Creates vector embeddings of docs with zero-data retention policy. |
+| [OpenAI](https://openai.com) | Context | Sees docs | Powers research agent functionality with zero-data retention policy. User data will be included in prompts sent to OpenAI. |
+| [Anthropic](https://www.anthropic.com) | Plans | Sees plans + repo code | By default, Plans reaches Claude through Vertex AI (zero-data-retention). Requests go directly to Anthropic only when a team supplies its own Anthropic API key or a member connects a personal Claude subscription, under the customer's own agreement with Anthropic. |
+| [ElevenLabs](https://elevenlabs.io) | Plans | Hears voice audio | Provides realtime speech-to-text for voice input in Markup Mode. Your browser streams audio directly to ElevenLabs using a short-lived, single-use token issued by Ref. Audio is processed for transcription only. |
+| [Stripe](https://stripe.com) | Both | Sees no content | Processes payment information with PCI-compliant security standards. |
+| [Postmark](https://postmarkapp.com) | Both | Sees plan titles + comment text | Delivers transactional email. Notifications for comments, reviews, and shares include the plan title, a preview of the comment, and the message it replies to. |
+| [Mailchimp](https://mailchimp.com) | Both | Sees no content | Manages marketing communications and newsletter subscriptions. |
+| [Mixpanel](https://mixpanel.com) | Both | Sees no content | Analyzes product usage analytics. |
+| [Datadog](https://www.datadoghq.com) | Plans | Sees no content | Monitors server performance, errors, and logs. Browser monitoring and session replay mask all text and form inputs by default, so plan content is never recorded. |
+| [Sentry](https://sentry.io) | Context | Sees no content | Monitors errors and performance with anonymized telemetry data. |
+| [Statsig](https://www.statsig.com) | Both | Sees no content | Manages feature flags. Receives user and team identifiers only. |
+| [Google Workspace](https://workspace.google.com) | Both | Sees no content | Used for communication and coordination. |
+| [Scalekit](https://scalekit.com) | Both | Sees no content | Used for SSO (Firebase is the IdP) and MCP OAuth. |
+
+### Integrations you connect
+
+Nothing flows to these until a user or team admin connects them, and each runs under the customer's own agreement with that vendor.
+
+| Integration | Product | Ref sends | Ref receives | Notes |
+| --- | --- | --- | --- | --- |
+| Cursor / Devin / Warp OZ / Conductor Cloud | Plans | The task prompt (task text + plan content, plus any inlined marketplace skills), and for Cursor/Conductor the target repo, branch, and model — posted with the customer's API key to the customer's own account. | Agent/session ID, status, branch name, and result URL, stored on the agent record for status refresh. | Your API keys are held on Ref's servers only and are never returned to the browser. |
+| Claude Code Web / Codex | Plans | Nothing server-side — the user copies the generated prompt (task + plan content) and pastes it in themselves. | Nothing. | Runs entirely under your own Anthropic or OpenAI account. Ref does not contact these services on your behalf. |
+| GitHub | Both | No code. Ref only reads from GitHub; it never pushes commits or branches. The only writes are PR descriptions, reviews, issue comments, and merge / ready-for-review requests a Plans agent submits on your behalf through the GitHub API, against branches your own coding agent already pushed under your own credentials. | Repository contents that Context indexes, plus the issues, pull requests, diffs, and check results that Plans agents read; these enter the agent's context and can be written into the plan. | Connected with the Ref GitHub App (per user or team) or a personal access token you provide. Runs under your own GitHub account and terms — GitHub is not a Ref subprocessor because Ref sends it no customer data to process. Your installation token or PAT is stored on Ref's servers only. |
+| Linear / Asana | Plans | Ticket updates and comments the agent writes on the user's behalf. | Ticket titles, descriptions, and comments the agent reads; these enter the agent's context and can be written into the plan. | Your access token is stored on Ref's servers only and is made available solely to agents you start. No other user's agent can use it. |
+| Granola | Plans | Tool calls (meeting search, transcript fetch). | Meeting lists and transcripts, which enter the agent's context and can be written into the plan. | Connected with OAuth. Your Granola token is stored on Ref's servers only. |
+| Custom MCP servers | Plans | Whatever tool arguments the agent passes — can include plan content and repo code. | Whatever the customer's server returns. | Ref relays tool calls to your server. Any headers or OAuth tokens you configure are stored on Ref's servers only. How your server handles the data it receives is governed by you, not Ref. |
+| Vanta / Drata (customer's) | Plans | Nightly change-control evidence: merged-PR records (repo, PR, author, merge time, review verdict, bypass reason) with links back to the plan, pushed to the *customer's* compliance account. | Upload receipts only. | Only active for teams that have turned on change control. This is separate from Ref's own SOC2 program, which also uses Vanta. |
+| Slack | Plans | Replies the agent posts in the thread (plan link, acknowledgement, completion update). When a thread already has a plan, the @mention text is also sent to Gemini on Vertex AI to classify intent. | The @mention text (becomes the plan's initial content), the mentioning user's email (to map to a Ref account), and any thread or channel messages the agent reads. | Your workspace's bot token is stored on Ref's servers only. |
+
+Customer API keys and tokens for these integrations are stored on Ref's servers only and never returned to the browser.
 
 ### Monitoring & Health Checks
-- Health check endpoint: `api.ref.tools/ping`
+- Health check endpoints: `api.ref.tools/ping` (Context) and `api.plan.ref.tools/ping` (Plans)
 - Internal monitoring and alerting infrastructure
 - Status page: [ref.tools/status](https://ref.tools/status)
