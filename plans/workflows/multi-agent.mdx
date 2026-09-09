@@ -105,4 +105,8 @@ To use multi-agent orchestration, you need:
 - Agents can only message their direct parent or their own children — no cross-communication
 - The workflow is message-driven: after launching agents, wait for messages rather than polling
 
+### Waiting on CI
+
+CI, deploys, and humans do not send messages — "wait for a message" only covers child agents. A `ref-thread` agent waiting on one of those arms a wake with the `Schedule` tool (`action: create`, `delaySeconds`), ends its turn, and is woken with its own message to check again. A reviewer that finds checks still running can then merge on green without a human nudging it. `Schedule` is a ref-thread tool: Cursor, Devin, and Warp OZ children do not have it, so nothing on this page asks them to schedule anything.
+
 <GetHelp/>
