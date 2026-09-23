@@ -15,11 +15,73 @@ Custom MCP servers let you attach remote MCP tools to ref-thread agents. Connect
 4. Choose an authentication method:
    - **None** — Use for public or unauthenticated servers
    - **Custom headers** — Add static headers, such as an API key or bearer token
-   - **OAuth** — Use the authorization-code flow with dynamic client registration; no manual client ID or client secret setup is required
+   - **OAuth** — Use the authorization-code flow, either with dynamic client registration or with a client ID and secret you registered yourself
 5. Click **Verify** or **Save** to connect to the server
 6. Review the tools Ref found on the server, then save the connection
 
 Ref verifies the server before saving it. If the server is unreachable or returns an invalid MCP response, Ref rejects the connection and shows an inline error.
+
+A server config defines exactly one server, so add them one at a time. Ref rejects anything it does not support — a stdio entry such as `command` or `args`, another transport, an unrecognized field — with an error on each offending field rather than dropping it silently, so a saved server always matches the config you wrote.
+
+## OAuth
+
+Not every authorization server supports dynamic registration, and some will not issue a refresh token unless the authorization request carries a parameter of their own. Ref handles both cases.
+
+- **Dynamic client registration** — Ref registers a client with the authorization server for you. There is no client ID or client secret to create.
+- **Pre-registered client** — You supply the client ID and client secret of a client you registered with the authorization server yourself.
+
+Both use the authorization-code flow, and both refresh access tokens automatically. When Ref cannot refresh — the authorization server never issued a refresh token, or it rejects the refresh — the server is marked as needing authentication and you authorize it again.
+
+Configure a pre-registered client in the server's JSON config:
+
+```json
+{
+  "mcpServers": {
+    "my-server": {
+      "type": "http",
+      "url": "https://mcp.example.com/mcp",
+      "oauth": {
+        "clientId": "your-client-id",
+        "clientSecret": "your-client-secret"
+      }
+    }
+  }
+}
+```
+
+Changing the client ID, the client secret, or the authorization parameters on a saved server invalidates the tokens issued to the earlier client, so you authorize the server again before it can be used.
+
+## Extra authorization parameters
+
+Some authorization servers only return a refresh token when the authorization request asks for one in their own way. Google's, for example, needs `access_type=offline`, and often `prompt=consent` alongside it. Send those as `authorizationParams`:
+
+```json
+{
+  "mcpServers": {
+    "my-server": {
+      "type": "http",
+      "url": "https://mcp.example.com/mcp",
+      "oauth": {
+        "clientId": "your-client-id",
+        "clientSecret": "your-client-secret",
+        "authorizationParams": {
+          "access_type": "offline",
+          "prompt": "consent"
+        }
+      }
+    }
+  }
+}
+```
+
+Ref forwards four parameters and no others:
+
+- `access_type`
+- `prompt`
+- `login_hint`
+- `include_granted_scopes`
+
+Any other parameter is rejected when you save the config. The parameters that define the flow — client ID, redirect URI, state, scope, resource, and the PKCE challenge — are always set by Ref and cannot be overridden.
 
 ## Usage
 
@@ -45,7 +107,10 @@ Use **Configure Integrations** in the connectors menu to jump back to Settings w
 | Capability: Prompts | ❌ Not supported | Not surfaced to the agent. |
 | Auth: None | ✅ Supported | |
 | Auth: Custom headers (API key / bearer token) | ✅ Supported | |
-| Auth: OAuth 2.0 with dynamic client registration | ✅ Supported | Tokens refresh automatically. |
+| Auth: OAuth 2.0 with dynamic client registration | ✅ Supported | Ref registers the client for you. Tokens refresh automatically. |
+| Auth: OAuth 2.0 with a pre-registered client | ✅ Supported | You supply the client ID and client secret. Tokens refresh automatically. |
+| Auth: Extra authorization parameters | ✅ Supported | `access_type`, `prompt`, `login_hint`, and `include_granted_scopes` only. |
+| Config: More than one server per config | ❌ Not supported | A config defines exactly one server. |
 | Attach scope: ref-thread agents | ✅ Supported | |
 | Attach scope: other harnesses (Cursor, Devin, Warp OZ) | ❌ Not supported | Those harnesses manage their own MCP configs today. |
 | Sharing scope: team-shared servers | ❌ Not supported | Configs are user-scoped only, like Linear/Asana. |
