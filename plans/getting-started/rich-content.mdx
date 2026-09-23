@@ -132,8 +132,10 @@ You can add a custom title after the marker:
 > Read the agent's proposed tasks and implementation steps. Catch issues before anyone starts coding.
 ```
 
+`> [!TIP]-` opens collapsed, `> [!TIP]+` opens expanded, and a bare `> [!TIP]` is not collapsible — Obsidian's rule, so existing callouts do not change. The author's `+` or `-` only decides the first load; after that the fold state is the reader's.
+
 The marker must be the first line of the blockquote. A `[!WARNING]` later in the quote is just text.
 
-The same markdown renders as an alert on GitHub and as a callout in Obsidian, so a plan that uses callouts stays readable when you paste it into a pull request or an Obsidian vault.
+The same markdown is a callout in Obsidian. On GitHub, only a bare `> [!TIP]` is an alert; `> [!TIP]-`, `> [!TIP]+`, and a custom title render as a plain block quote with the marker visible as text.
 
 Agents write Mermaid diagrams, HTML widgets, collapse blocks, and callouts automatically when they are relevant, such as auto-collapsing long file lists. Ask Ref for a wireframe/diagram to discover widgets.
