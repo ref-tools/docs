@@ -74,6 +74,7 @@
               "plans/integrations/github",
               "plans/integrations/slack",
               "plans/integrations/custom-mcp",
+              "plans/integrations/one",
               "plans/integrations/custom-launchers"
             ]
           },
