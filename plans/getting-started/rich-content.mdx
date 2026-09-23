@@ -113,6 +113,19 @@ Use a callout when one warning, prerequisite, or gotcha should stand out from th
 > Review the proposed tasks before launching agents. A bad split is cheaper to fix here than after three PRs are open.
 ```
 
+<Frame>
+  <img
+    className="block dark:hidden"
+    src="/images/callouts/five-types-light.png"
+    alt="Note, Tip, Important, Warning, and Caution callouts stacked in the light editor. Each has a captioned frame, a type badge on the top edge, and a one-line body."
+  />
+  <img
+    className="hidden dark:block"
+    src="/images/callouts/five-types-dark.png"
+    alt="Note, Tip, Important, Warning, and Caution callouts stacked in the dark editor. Each has a captioned frame, a type badge on the top edge, and a one-line body."
+  />
+</Frame>
+
 The first line of the blockquote is the marker: `> [!TYPE]`. The lines after it are the body.
 
 Five types, written for the person reading the plan:
@@ -132,7 +145,46 @@ You can add a custom title after the marker:
 > Read the agent's proposed tasks and implementation steps. Catch issues before anyone starts coding.
 ```
 
+<Frame>
+  <img
+    className="block dark:hidden"
+    src="/images/callouts/custom-title-light.png"
+    alt="Warning callout in the light editor with the custom title Review before launch in bold above the body Check the changelog before you ship."
+  />
+  <img
+    className="hidden dark:block"
+    src="/images/callouts/custom-title-dark.png"
+    alt="Warning callout in the dark editor with the custom title Review before launch in bold above the body Check the changelog before you ship."
+  />
+</Frame>
+
 `> [!TIP]-` opens collapsed, `> [!TIP]+` opens expanded, and a bare `> [!TIP]` is not collapsible — Obsidian's rule, so existing callouts do not change. The author's `+` or `-` only decides the first load; after that the fold state is the reader's.
+
+<Frame>
+  <img
+    className="block dark:hidden"
+    src="/images/callouts/tip-collapsed-light.png"
+    alt="Collapsed Tip callout in the light editor: a right-pointing chevron beside the retained preview line Check the response headers before you retry."
+  />
+  <img
+    className="hidden dark:block"
+    src="/images/callouts/tip-collapsed-dark.png"
+    alt="Collapsed Tip callout in the dark editor: a right-pointing chevron beside the retained preview line Check the response headers before you retry."
+  />
+</Frame>
+
+<Frame>
+  <img
+    className="block dark:hidden"
+    src="/images/callouts/tip-expanded-light.png"
+    alt="Expanded Tip callout in the light editor: a downward chevron beside Check the response headers before you retry, with The reset time tells you when the budget refills on the next line."
+  />
+  <img
+    className="hidden dark:block"
+    src="/images/callouts/tip-expanded-dark.png"
+    alt="Expanded Tip callout in the dark editor: a downward chevron beside Check the response headers before you retry, with The reset time tells you when the budget refills on the next line."
+  />
+</Frame>
 
 The marker must be the first line of the blockquote. A `[!WARNING]` later in the quote is just text.
 
