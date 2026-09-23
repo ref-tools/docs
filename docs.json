@@ -81,6 +81,7 @@
             "group": "Collaboration",
             "pages": [
               "plans/collaboration/sharing",
+              "plans/collaboration/checks",
               "plans/collaboration/reviews",
               "plans/collaboration/team-visibility"
             ]
