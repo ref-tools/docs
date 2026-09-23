@@ -1,6 +1,6 @@
 ---
 title: "Rich Content"
-description: "Add images, diagrams, interactive widgets, and collapsible detail sections to your plans."
+description: "Add images, diagrams, interactive widgets, callouts, and collapsible detail sections to your plans."
 ---
 
 Ref Plans support more than plain markdown. Use rich content when screenshots, diagrams, prototypes, or long supporting details make the plan easier to understand.
@@ -104,4 +104,34 @@ Nesting is supported. A completed task can wrap a collapsed file list inside its
 
 Each `:::end` closes only the innermost open block, so every `:::collapse` needs its own matching `:::end`. Nesting works in the body of a collapse block (after the bare `:::` separator), not in the header region between `:::collapse` and the separator.
 
-Agents write Mermaid diagrams, HTML widgets, and collapse blocks automatically when they are relevant, such as auto-collapsing long file lists. Ask Ref for a wireframe/diagram to discover widgets.
+## Callouts
+
+Use a callout when one warning, prerequisite, or gotcha should stand out from the rest of the plan.
+
+```markdown
+> [!WARNING]
+> Review the proposed tasks before launching agents. A bad split is cheaper to fix here than after three PRs are open.
+```
+
+The first line of the blockquote is the marker: `> [!TYPE]`. The lines after it are the body.
+
+Five types, written for the person reading the plan:
+
+- **Note** — extra context you should notice while skimming
+- **Tip** — a better or easier way to do something
+- **Important** — something you need in order to succeed
+- **Warning** — be careful here; skipping this leads to problems
+- **Caution** — this action is destructive. Ref follows GitHub in treating Caution, not Warning, as the destructive type.
+
+You can add a custom title after the marker:
+
+```markdown
+> [!WARNING] Review before launch
+> Read the agent's proposed tasks and implementation steps. Catch issues before anyone starts coding.
+```
+
+The marker must be the first line of the blockquote. A `[!WARNING]` later in the quote is just text.
+
+The same markdown renders as an alert on GitHub and as a callout in Obsidian, so a plan that uses callouts stays readable when you paste it into a pull request or an Obsidian vault.
+
+Agents write Mermaid diagrams, HTML widgets, collapse blocks, and callouts automatically when they are relevant, such as auto-collapsing long file lists. Ask Ref for a wireframe/diagram to discover widgets.
