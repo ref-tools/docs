@@ -41,12 +41,12 @@ flowchart LR
 
 A team admin sets this up in **Settings > Change control**.
 
-1. **Add repositories.** Install the Ref GitHub App and pick your repositories.
+1. **Add repositories.** Install the Ref GitHub App on your GitHub organization, then pick your repositories. The App posts the checks. An org owner may need to approve it.
 2. **Record every merge.** This starts when you add a repository.
 3. **Forward plan approvals to GitHub.** Turn this on to post approvals on PRs.
 4. **Require an approved plan to merge.** Optional. Also mark `Ref: plan approved` as required in your GitHub ruleset.
 
-Each teammate should connect GitHub in **Settings > GitHub**.
+Each teammate should connect GitHub in **Settings > GitHub**, so their approvals post from their own account.
 
 <Tip>
 To skip generated files in conformance, list them in `.ref/scope-exempt.yml` at the repository root.
