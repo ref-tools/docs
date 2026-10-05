@@ -23,11 +23,11 @@ Change control connects plan approvals in Ref to pull requests on GitHub.
 | Ref: plan approved | Whether the plan is approved, and by whom |
 | Ref: plan conformance | Whether each changed file is in the plan |
 
-If a PR has changes the plan doesn't cover, conformance lists those files. You can add them to the plan or move them to another PR.
+If a PR has changes the plan doesn't cover, conformance lists those files. You can add them to the plan and get it approved again, or move them to another PR.
 
 ### Forwarding
 
-If the PR matches the plan, Ref posts an approval. If it has unplanned changes, Ref posts a comment that lists those files.
+By default, if the PR matches the plan, Ref posts an approval. If it has unplanned changes, Ref posts a comment that lists those files.
 
 ```mermaid
 flowchart LR
@@ -56,5 +56,5 @@ To skip generated files in conformance, list them in `.ref/scope-exempt.yml` at 
 
 - **Start with recording.** Turn on forwarding once your team is used to it.
 - **Write the plan first,** especially for agent work.
-- **Protect sensitive code.** List paths like auth or billing in `.ref/risk-paths.yml`. Then turn on "Risky paths also need a pull request approval" in **Approvals**, so those files always get a code review.
+- **Protect sensitive code.** List paths like auth or billing in `.ref/risk-paths.yml`. Then turn on "Risky paths also need a pull request approval" in **Approvals**, so those files need a code review too.
 - **Skip plans for small fixes.** Turn on "A pull request approval also counts" in **Approvals**.
