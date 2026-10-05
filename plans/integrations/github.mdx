@@ -9,12 +9,12 @@ The GitHub integration lets you attach issues and pull requests to your plans fo
 
 ## Setup
 
-GitHub integration requires connecting your GitHub account and adding repos to Ref:
+Set up GitHub in **Settings > GitHub** in Ref Plans. It has two parts.
 
-1. Visit [ref.tools/resources](https://ref.tools/resources) and connect your GitHub account
-2. Add the repositories you want to use with Ref Plans
+1. **Install the Ref GitHub App** under **Installed on**. Pick the accounts and repositories Ref can reach. On a GitHub organization, an org owner may need to approve it.
+2. **Connect your GitHub account** under **Account**. Agents can then review and merge as you, and your plan approvals post to GitHub as your own reviews.
 
-Once connected, you can reference GitHub issues and PRs in your plans.
+The App gives Ref access to your repositories. Your account connection lets Ref act as you.
 
 ## Attaching issues and PRs
 
@@ -31,14 +31,11 @@ This gives you a single view of all the code changes associated with your plan. 
 
 ## Agent permissions
 
-Some GitHub MCP tools are gated by toggles in **Settings**. Open **Settings** in Ref Plans and select **GitHub**:
+Under **Agents can** in **Settings > GitHub**, choose what agents may do:
 
-- **Allow PR Reviews** governs `ReviewPR` and `UpdatePR`. Editing a PR title or description follows this toggle, not the merge one.
-- **Allow PR Merges** governs `MergePR`. Merging additionally requires a Personal Access Token connected to your Ref account, because GitHub's merge API needs **Contents: write**, which app installation tokens do not carry.
-
-`MergePR` also exposes a mark-ready action governed by **Allow PR Reviews**, so the tool stays available — limited to marking drafts ready — when only reviews are enabled.
-
-`UpdatePR` needs only **Pull requests: write**, so it works on a GitHub App installation token and does not require a Personal Access Token.
+- **Read issues and pull requests** lets agents read issues, PRs and diffs in your installed repos.
+- **Review pull requests** lets agents approve, request changes, and edit PR titles and descriptions as you. It governs `ReviewPR`, `UpdatePR`, and marking drafts ready in `MergePR`.
+- **Merge pull requests** lets agents merge as you once checks and branch rules pass. It governs merging in `MergePR`, and needs your GitHub account connected.
 
 ## Tips
 
