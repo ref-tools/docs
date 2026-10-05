@@ -11,19 +11,11 @@ Change control connects plan approvals in Ref to pull requests on GitHub.
 ## How it works
 
 1. **Link a PR to a plan.** PRs that agents open from a plan are linked automatically. You can also paste the plan link into the PR description.
-2. **A teammate approves the plan** with a [review](/plans/collaboration/reviews).
-3. **Ref adds two checks to the PR.** They update on every push.
-4. **Ref posts the approval on the PR,** if forwarding is on. It shows as a review from the approver's GitHub account.
-5. **Ref records each merge.**
+2. **Ref checks the PR against its plan.** `Ref: plan approved` shows whether the plan is approved. `Ref: plan conformance` shows whether each changed file is in the plan. Both update on every push.
+3. **Plan approvals are forwarded to the PR.** When a teammate approves the plan with a [review](/plans/collaboration/reviews), Ref posts that approval on the PR from their GitHub account, if forwarding is on.
+4. **Ref records each merge,** and whether it had an approved plan. Find them in **Settings > Change control**, or [get Slack alerts](#set-it-up) when something merges without one.
 
-### The two checks
-
-| Check | What it shows |
-| --- | --- |
-| Ref: plan approved | Whether the plan is approved, and by whom |
-| Ref: plan conformance | Whether each changed file is in the plan |
-
-If a PR has changes the plan doesn't cover, conformance lists those files. You can add them to the plan and get it approved again, or move them to another PR.
+If a PR changes files the plan doesn't cover, the `Ref: plan conformance` check lists them. Add those changes to the plan and get it approved again, or move them to another PR.
 
 ### Forwarding
 
@@ -45,6 +37,8 @@ A team admin sets this up in **Settings > Change control**.
 2. **Record every merge.** This starts when you add a repository.
 3. **Forward plan approvals to GitHub.** Turn this on to post approvals on PRs.
 4. **Require an approved plan to merge.** Optional. Also mark `Ref: plan approved` as required in your GitHub ruleset.
+
+To get Slack alerts, [connect Slack](/plans/integrations/slack), then pick a channel under **Alerts** in **Settings > Change control**.
 
 Each teammate should connect GitHub in **Settings > GitHub**, so their approvals post from their own account.
 
