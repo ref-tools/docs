@@ -87,12 +87,16 @@ These tools are available when GitHub is connected and repos are indexed:
 - `SearchPRs` — Search pull requests in an indexed repository
 - `CreatePR` — Open a pull request
 - `UpdatePR` — Edit the title and description of an existing pull request
+- `SearchWorkflowRuns` — List recent Actions runs in an indexed repo, filter by branch, PR, workflow, status
+- `ReadWorkflowRun` — Run summary, jobs and steps, failed-job log tail, artifacts
+- `ManageWorkflowRun` — Re-run, re-run failed jobs, or cancel a run
+- `DispatchWorkflow` — List manually runnable workflows and their inputs, and dispatch one
 
 These tools require:
 1. **GitHub account connected** at [ref.tools/resources](https://ref.tools/resources)
 2. **Repos added** — Add the repositories you want to use with GitHub tools
 
-`ReviewPR`, `UpdatePR`, and `MergePR` availability depends on your GitHub permissions settings. See the [GitHub integration page](/plans/integrations/github) for which toggle governs each tool.
+`ReviewPR`, `UpdatePR`, and `MergePR` availability depends on your GitHub permissions settings. `ManageWorkflowRun` and `DispatchWorkflow` need Actions write access. See the [GitHub integration page](/plans/integrations/github) for which toggle or App permission governs each tool.
 
 ---
 

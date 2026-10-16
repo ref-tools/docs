@@ -37,6 +37,8 @@ Under **Agents can** in **Settings > GitHub**, choose what agents may do:
 - **Review pull requests** lets agents approve, request changes, and edit PR titles and descriptions as you. It governs `ReviewPR`, `UpdatePR`, and marking drafts ready in `MergePR`.
 - **Merge pull requests** lets agents merge as you once checks and branch rules pass. It governs merging in `MergePR`, and needs your GitHub account connected.
 
+`SearchWorkflowRuns` and `ReadWorkflowRun` use the Ref GitHub App's optional **Actions: read** permission (or a connected PAT). `ManageWorkflowRun` and `DispatchWorkflow` have no Settings toggle; they need the Ref GitHub App's **Actions: Read and write** permission approved on the installation (org owners see an approval prompt from GitHub), or a connected Personal Access Token with Actions access. Without either, the tools return a message naming the missing permission.
+
 ## Tips
 
 - Attach GitHub issues before asking the agent to research — it provides valuable context about what needs to be built
