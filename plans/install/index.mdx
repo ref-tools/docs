@@ -61,11 +61,11 @@ https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>
 
 These additional tools are available in both plan-specific and general mode:
 
-- `LaunchAgent` — Launch a sub-agent on Cursor, Devin, Warp OZ, Conductor Cloud, local ACP, or ref-thread to work in parallel. Specify the harness type, a prompt with full context, and the plan IDs to associate the agent with.
-- `SendMessage` — Send messages to child agents or back to a parent agent. Used for coordination — child agents report completion (with PR URLs), and parents send follow-up instructions (including prompts to local ACP children).
-- `ManageAgent` — Watch and drive a local ACP agent you launched: `read` (status, compact log, `afterSeq` / `waitSeconds`), `answer_permission` (not `allow_always`), `set_config`, `cancel`, or `stop`. Prompting stays in `SendMessage`. Registered only when local ACP (`local_acp`) is on.
+- `LaunchAgent` — Launch a sub-agent on Cursor, Devin, Warp OZ, Conductor Cloud, local agents (early access), or ref-thread to work in parallel. Specify the harness type, a prompt with full context, and the plan IDs to associate the agent with.
+- `SendMessage` — Send messages to child agents or back to a parent agent. Used for coordination — child agents report completion (with PR URLs), and parents send follow-up instructions (including prompts to local children).
+- `ManageAgent` — Watch and drive a local agent you launched: `read` (status, compact log, `afterSeq` / `waitSeconds`), `answer_permission` (not `allow_always`), `set_config`, `cancel`, or `stop`. Prompting stays in `SendMessage`. Available with local agents (early access).
 
-`LaunchAgent` requires API keys configured for the harnesses you want to use — set up Cursor and/or Devin API keys in **Settings > Agent Settings**. Local ACP also needs a paired device and `local_acp` on.
+`LaunchAgent` requires API keys configured for the harnesses you want to use — set up Cursor and/or Devin API keys in **Settings > Agent Settings**. Local agents are in early access: they need a paired machine running the Ref CLI (`ref`), and your account in the early-access group.
 
 See the [multi-agent orchestration guide](/plans/workflows/multi-agent) for full details on using these tools.
 
