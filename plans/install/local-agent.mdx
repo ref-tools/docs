@@ -1,0 +1,67 @@
+---
+title: "Local agents"
+description: "Connect Claude Code and Codex to Ref with one command."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+Connecting the coding agents on your machine to Ref does three things. Your sessions appear in Ref next to the plans they are working on. Your agents work out when a piece of work deserves a plan of its own. And when one decides it does, it drafts that plan and asks you to review it before it writes any code.
+
+## Install
+
+```
+curl -fsSL https://api.plan.ref.tools/plugins/install/local-agent | bash
+```
+
+- Authorizes and configures the Ref MCP server
+- Installs and signs in the `ref` helper
+- Configures every detected agent for local session tracking in Ref
+- Configures every detected agent for automatic plan creation and the review loop
+
+<sup>\* Active sessions may require restart.</sup>
+
+### Uninstall
+
+```
+curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?mode=uninstall' | bash -s -- --uninstall
+```
+
+## Support
+
+<CardGroup cols={2}>
+  <Card title="Claude Code" icon="asterisk" />
+  <Card title="Codex" icon="openai" />
+</CardGroup>
+
+Runs on **macOS** (Apple silicon and Intel) and **Linux** (x86_64 and arm64, on glibc and musl). Windows is not supported yet. Codex needs 0.138.0 or newer.
+
+Every other agent can [connect the MCP server by hand](/plans/install/index). Want first-class support for a harness? [Tell us which one](https://tally.so/r/wQW0x8).
+
+## How it works
+
+Your agent emits lifecycle events as it works — a session starting, a tool running, a prompt landing, a session ending. Ref reads those events to map each session to the plans it touches, and to report what that session is doing right now. That mapping is what puts a session in your sidebar, and those events are what keep its state current.
+
+## Your sessions in Ref Plans
+
+A session appears in the sidebar under any plan it touches — reading, writing, creating, or reviewing — and stays there while it works. A session working across two plans appears under both.
+
+Each row names the agent it is running in, a short label for what it is working on, and its current state:
+
+| | State | What it means |
+| --- | --- | --- |
+| ![](/images/state-working.svg) | **Working** | Hovering names the tool in flight and how long it has run |
+| ![](/images/state-question.svg) | **Waiting for approval** | Blocked on a permission it needs from you |
+| ![](/images/state-question.svg) | **Agent asked a question** | Blocked on an answer from you |
+| ![](/images/state-idle.svg) | **Waiting for your next prompt** | Idle, nothing in flight |
+| ![](/images/state-done.svg) | **Session finished** | Ended normally |
+| ![](/images/state-failed.svg) | **Session ended unexpectedly** | Died before it finished |
+
+## Plans your agent creates
+
+**Three kinds of document.** Your agent picks one based on what the work needs: a **plan** when there is a decision to make before work starts, an **investigation** when you want to understand something, or a **receipt** when the path was already clear and it just records what it did. Small asks are answered in chat with no document at all.
+
+**Review requested.** When your agent drafts a plan, it asks you to review it and then waits. The request opens in your browser and names the agent asking. You comment inline, then **Approve**, **Request changes**, or **Comment**. Requesting changes is a loop — the agent revises and asks again. On approval it implements, and the pull request links back to the plan. It is the same workflow as [reviewing a teammate's plan](/plans/collaboration/reviews).
+
+**Tell us if it got it wrong.** When an agent decides on its own to write something up, you get one question: was creating it the right call? Your answers tune how eagerly your agents reach for a document next time.
+
+<GetHelp/>
