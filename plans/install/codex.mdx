@@ -7,9 +7,17 @@ import GetHelp from '/snippets/get-help.mdx';
 
 [Codex MCP install docs](https://github.com/openai/codex/blob/main/docs/config.md#connecting-to-mcp-servers)
 
-You can find your Ref API key at [ref.tools/keys](https://ref.tools/keys)
+## Recommended: install script
 
-## Install
+The [one-line installer](/plans/install#install-with-one-command) sets up Codex with the `ref` CLI, hooks, and the Ref MCP server. It signs you in through the browser — no API key needed:
+
+```sh
+curl -fsSL https://api.plan.ref.tools/plugins/install/local-agent | bash
+```
+
+## Manual install
+
+You can find your Ref API key at [ref.tools/keys](https://ref.tools/keys).
 
 Codex is configured in a `config.toml` file. This typically lives at `~/.codex/config.toml`
 
