@@ -3,6 +3,28 @@ title: "Installation"
 description: "Install the Ref Plans MCP server in your preferred coding environment"
 ---
 
+## Install with one command
+
+For Claude Code and Codex, run:
+
+```sh
+curl -fsSL https://api.plan.ref.tools/plugins/install/local-agent | bash
+```
+
+This installs the `ref` CLI, hooks so Ref can track local agents, and the Ref MCP server. It signs you in through the browser — no API key needed.
+
+Re-run the same command to upgrade. To sign in as a different account:
+
+```sh
+curl -fsSL https://api.plan.ref.tools/plugins/install/local-agent | bash -s -- --reconnect
+```
+
+To uninstall:
+
+```sh
+curl -fsSL 'https://api.plan.ref.tools/plugins/install/local-agent?mode=uninstall' | bash -s -- --uninstall
+```
+
 ## About the Ref Plans MCP Server
 
 Ref Plans has its own MCP server, separate from the [Ref Context MCP server](/context/install/index). It lets coding agents read, write, and manage your plans directly.
@@ -100,9 +122,9 @@ These tools require:
 
 ---
 
-## Installation Guides
+## Manual setup
 
-Choose your coding environment below to get started:
+For other clients, or to configure the MCP server yourself, choose your coding environment:
 
 <CardGroup cols={2}>
   <Card title="Cursor" icon="arrow-pointer" href="/plans/install/cursor">
