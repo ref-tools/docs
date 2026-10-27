@@ -112,6 +112,10 @@
             ]
           },
           {
+            "group": "Skills and plugins",
+            "pages": ["plans/skills"]
+          },
+          {
             "group": "Comparison",
             "pages": [
               "plans/comparison/notion-google-docs",
