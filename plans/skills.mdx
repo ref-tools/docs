@@ -1,0 +1,53 @@
+---
+title: "Skills and plugins"
+description: "Install Ref skills and plugins from the public marketplace"
+---
+
+The [ref-tools/marketplace](https://github.com/ref-tools/marketplace) repo is the public home for Ref agent skills and optional MCP plugins. Install from it when you want ui-sweep or docs search as plugins, or when you prefer to add the Ref MCP server from the marketplace instead of the install script.
+
+| Plugin | What it does |
+|---|---|
+| `ref-skills` | Agent skills for Ref. Includes **ui-sweep**: sandbox a web app, catalog every screen into a Ref, report bugs with fix proposals, and leave a reusable `.ui-sweep/` scaffold; with `--fix`, ship draft PRs. Invoke as `/ref-skills:ui-sweep`. |
+| `ref-context` | [Ref docs search](/context/install/index) MCP: `ref_search_documentation` over public and private docs. Not included in the install script. |
+| `ref-plan` | [Ref](/plans/install/index) MCP server: list, read, and write refs, and coordinate sub-agents. Most people get this from the [install script](/plans/install/index) instead. |
+
+## Claude Code
+
+```sh
+claude plugin marketplace add ref-tools/marketplace
+claude plugin install ref-skills@ref-tools
+```
+
+MCP plugins (pass your key from [ref.tools/keys](https://ref.tools/keys)):
+
+```sh
+claude plugin install ref-context@ref-tools --config api_key=YOUR_REF_API_KEY
+claude plugin install ref-plan@ref-tools --config api_key=YOUR_REF_API_KEY
+```
+
+## Codex
+
+**ui-sweep** via Codex's skill installer:
+
+```text
+Use the skill-installer skill to install https://github.com/ref-tools/marketplace/tree/main/plugins/ref-skills/skills/ui-sweep
+```
+
+Or copy it manually (Codex loads skills from `$CODEX_HOME/skills/<name>`, default `~/.codex/skills`):
+
+```sh
+git clone --depth 1 https://github.com/ref-tools/marketplace /tmp/ref-marketplace
+mkdir -p ~/.codex/skills
+cp -R /tmp/ref-marketplace/plugins/ref-skills/skills/ui-sweep ~/.codex/skills/
+```
+
+Restart Codex so it picks up the skill.
+
+**ref-context** (OAuth):
+
+```sh
+codex plugin marketplace add ref-tools/marketplace
+codex plugin add ref-context@ref-skills
+```
+
+For the Ref MCP server on Codex, use the [install script](/plans/install/index) (Codex plugins cannot take an API key).
