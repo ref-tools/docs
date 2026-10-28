@@ -116,6 +116,10 @@
             "pages": ["plans/skills"]
           },
           {
+            "group": "Agent prompts",
+            "pages": ["plans/prompts/setup"]
+          },
+          {
             "group": "Comparison",
             "pages": [
               "plans/comparison/notion-google-docs",

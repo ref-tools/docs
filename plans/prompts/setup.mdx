@@ -1,0 +1,60 @@
+---
+title: "Set up Ref for your agent"
+description: "First-run setup for Ref in Codex, Claude Desktop or any MCP host: check the connection, then start a first garden."
+---
+
+<Info>
+This page is instructions for your agent. To set up Ref, share this page with your agent and ask it to follow along. It only reads until you approve a first garden, and it won't change anything in your repo.
+</Info>
+
+| Version | Published |
+|---|---|
+| 0.1.0 | October 28, 2026 |
+
+## Why set up Ref
+
+Refs are documents your agents write and you review: plans, findings and proof of finished work, all in one place your team can read and comment on. A garden is the best first ref. It reads your recent work and suggests small, well-scoped jobs an agent can take on, so you start with something useful instead of a blank page.
+
+## For the agent: one-time setup
+
+The user just connected Ref and asked you to set it up. Check the connection, tell them what you found, propose one first artifact (a garden) and start it only once they say yes. Keep every message short. Read only; change nothing until they approve.
+
+Until they say yes, use only `List`, `Read` and `Skill` from the Ref MCP. Never call `AwaitReview`, `Share` or `Comments` `request_review`, here or in the garden: OAuth connections can't use them.
+
+### 1. Check the connection
+
+Call `List` with `limit: 50`.
+
+- If the Ref MCP's tools aren't available at all, point the user to [Install Ref](https://docs.ref.tools/plans/install/index) and stop.
+- If `List` fails with an auth error, tell them to reconnect Ref from this app's connector or plugin settings and stop.
+- Otherwise name the account from the owner on their own refs, or just say "connected" when they have none.
+
+### 2. Look for an existing garden
+
+A garden is a ref they own whose title starts with "🌱" and contains "Garden". Until you find one, call `List` again with `offset` raised by 50 each time, up to the `Total` in its footer.
+
+If one exists, give its URL, offer to open it and stop there unless they ask for a fresh run.
+
+### 3. Check the machine
+
+A garden reads a local repo, so it needs a shell.
+
+- If you can't run commands here, say a garden runs from a coding agent (Claude Code or Codex) opened in a repository, and take the "no" branch of step 5.
+- Otherwise run `git rev-parse --show-toplevel` and `gh auth status`.
+- If the folder isn't a git checkout, ask them to open a repository folder and run setup again.
+- If `gh` is missing or signed out, tell them to run `gh auth login` and choose GitHub.com.
+
+Don't propose anything until both checks pass.
+
+### 4. Report and propose
+
+In a few lines: the account, the repo, and that `gh` is signed in. Say what Ref does in one or two sentences (see "Why set up Ref" above). Then propose a garden, naming everything it reads:
+
+> Start your first garden? It takes about 25 minutes. It reads this repo's git and GitHub history, your agent memory and instruction files, your agent session logs (counted, never quoted), your refs and your connected tools, all read-only. It changes nothing in the repo, and the garden ref it writes is private to you.
+
+Wait for a clear yes. Silence, a question or "maybe" is not a yes.
+
+### 5. Start the garden, or leave a way back
+
+- **On yes**, load `Skill` with id `ref/garden-v5` from the Ref MCP and follow it from the top for this repo, with the tools it names. When it finishes, give the garden link.
+- **On no**, give [plan.ref.tools/start](https://plan.ref.tools/start?source=mcp_app) and say they can run setup again by asking "Set up Ref".
