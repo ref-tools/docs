@@ -1,0 +1,70 @@
+---
+title: "Migrating from Conductor"
+description: "Conductor is joining Meta and Conductor Cloud shuts down on November 20, 2026. Here's how to run parallel Claude Code agents, in the cloud and on your laptop, with your team in Ref."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+## What happened
+
+[Conductor](https://conductor.build) has been [acquired by Meta](https://www.conductor.build/announcement). If you're looking for a replacement, Ref is where your team runs its coding agents together, with one shared doc per project that carries the context, so work hands off between people and agents.
+
+## Why Ref
+
+Ref is where your team runs its coding agents together.
+
+- **Hand off without pasting chat logs.** Each project has one shared doc that carries the context. A teammate, an agent, or you tomorrow can pick up where the last one stopped.
+- **Run agents anywhere.** Run Claude Code on your laptop under your own login, with Codex and OpenCode over ACP rolling out. Or use a cloud harness like [Cursor, Devin or Warp OZ](/plans/integrations/overview).
+- **One doc per project, not a pile of threads.** The top ref shows where things stand. Each workstream is a sub-ref with its own agent, which you can see and steer from the browser or from [Slack](/plans/integrations/slack).
+- **Context that outlives the chat.** Decisions, diagrams and what each agent tried stay in the doc for the next person or agent.
+- **Review when it matters.** [Approve Tasks](/plans/collaboration/reviews) before code starts, and check each PR before it merges.
+
+The rest of this page takes what you did in Conductor and shows how to do it in Ref.
+
+## Set up Ref
+
+<Steps>
+  <Step title="Install">
+    On the laptop you want agents to use, run this from your repo:
+    ```bash
+    curl -fsSL https://api.plan.ref.tools/plugins/install/local-agent | bash
+    ```
+    It installs the `ref` CLI, connects Claude Code and Codex to Ref, and opens your browser to sign in. It needs `claude` or `codex` on your PATH. To connect by hand instead, see [Claude Code](/plans/install/claude-code) or [Codex](/plans/install/codex).
+  </Step>
+  <Step title="Pair your laptop">Approve the laptop in the browser, then run `ref launch enable` in each repo you want agents to work in.</Step>
+  <Step title="Write your first ref">Open Ref, describe the work, and ask for Tasks. See [Your first plan](/plans/getting-started/your-first-plan).</Step>
+</Steps>
+
+## Run parallel agents
+
+**In Conductor**, you manage agents one by one. Each workspace was a git worktree on its own branch.
+
+**In Ref**, you can do the same thing. You can also work in a notebook to manage multiple agents working on the same shared context. See [Multi-agent workflows](/plans/workflows/multi-agent).
+
+## Use your existing subscriptions to Claude Code, Codex or OpenCode
+
+Ref drives those agents over the [Agent Client Protocol](https://agentclientprotocol.com) (ACP). Claude Code runs on your paired laptop or cloud machine under your own login, so its usage counts against your own Claude plan. Support for Codex and OpenCode is rolling out. Ref starts each agent and messages it while it works.
+
+## Run in the cloud, with your laptop when you need it
+
+**In Conductor Cloud**, agents ran on Conductor's machines.
+
+**In Ref**, the Ref agent runs in the cloud and can send work to your paired laptop or cloud machine. Ref also integrates with cloud harnesses as well: [Cursor, Devin or Warp OZ](/plans/integrations/overview). To get an always-on machine of your own, set up an [exe.dev box](/plans/integrations/exe-dev) and pair it the same way as a laptop.
+
+Ref includes a hosted Claude Code agent which supports bring-your-own-key.
+
+## Review and steer
+
+**In Conductor**, you left comments in the Diff Viewer and they went back to the agent.
+
+**In Ref**, you [comment and review](/plans/collaboration/reviews) on the ref or the PR, a reviewer agent checks the PR, and your comments go to the agent doing the work.
+
+## Work as a team
+
+**In Ref**, a ref is [shared with your team](/plans/collaboration/team-visibility) with [view or edit access](/plans/collaboration/sharing). Teammates see which agents are running and where each Task stands, comment, and run their own agents on the same ref. [@mention Ref in Slack](/plans/integrations/slack) to turn a thread into a ref. You can't yet read or message a teammate's agent conversation; hand off through the ref and its comments.
+
+## Bring your repo setup
+
+Ref uses your existing Codex or Claude Code installation so there is no additional setup. 
+
+<GetHelp/>

@@ -66,7 +66,6 @@
               "plans/integrations/cursor",
               "plans/integrations/devin",
               "plans/integrations/warp-oz",
-              "plans/integrations/conductor-cloud",
               "plans/integrations/exe-dev",
               "plans/integrations/claude-code-web",
               "plans/integrations/codex",
@@ -120,7 +119,8 @@
             "group": "Comparison",
             "pages": [
               "plans/comparison/notion-google-docs",
-              "plans/comparison/markdown-in-repo"
+              "plans/comparison/markdown-in-repo",
+              "plans/comparison/migrating-from-conductor"
             ]
           },
           {
@@ -305,6 +305,7 @@
     { "source": "/examples/vibe-code-sleep-training", "destination": "/context/getting-started/intro" },
     { "source": "/plans/beta", "destination": "/plans/getting-started/intro" },
     { "source": "/plans/getting-started/quick-start", "destination": "/plans/getting-started/your-first-plan" },
-    { "source": "/plans/getting-started/get-started", "destination": "/plans/getting-started/your-first-plan" }
+    { "source": "/plans/getting-started/get-started", "destination": "/plans/getting-started/your-first-plan" },
+    { "source": "/plans/integrations/conductor-cloud", "destination": "/plans/comparison/migrating-from-conductor" }
   ]
 }

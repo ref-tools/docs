@@ -14,7 +14,6 @@ Cloud agents connect directly through API keys. Ref launches the agent and track
 | [Cursor Background Agents](/plans/integrations/cursor) | Launches a Cursor background agent via API key. Writes code, creates branches, and opens PRs. |
 | [Devin](/plans/integrations/devin) | Launches a Devin session via API key. Writes code, creates branches, and opens PRs. |
 | [Warp OZ](/plans/integrations/warp-oz) | Launches a Warp OZ agent via API key. Writes code, creates branches, and opens PRs. |
-| [Conductor Cloud](/plans/integrations/conductor-cloud) | Launches a Conductor Cloud session via API key. Writes code and creates branches in a Conductor workspace. |
 
 ## Your own cloud machine
 
@@ -27,7 +26,7 @@ Pair an always-on Linux VM the same way you pair a laptop. Ref launches Claude C
 Cloud agents provide:
 - **Automatic launch** — Ref starts the agent session for you
 - **Status tracking** — Progress updates flow back to Ref automatically
-- **Orchestration support** — Can be launched by an orchestrator agent via `LaunchAgent` with `harness: "cursor"`, `harness: "devin"`, `harness: "warp-oz"`, or `harness: "conductor-cloud"`
+- **Orchestration support** — Can be launched by an orchestrator agent via `LaunchAgent` with `harness: "cursor"`, `harness: "devin"`, or `harness: "warp-oz"`
 
 Configure API keys in **Settings > Agent Settings** at [plan.ref.tools](https://plan.ref.tools).
 
@@ -75,9 +74,6 @@ Use [Custom Launchers](/plans/integrations/custom-launchers) to deep-link into R
   </Card>
   <Card title="Warp OZ" icon="terminal" href="/plans/integrations/warp-oz">
     Launch Warp OZ agents from your plans.
-  </Card>
-  <Card title="Conductor Cloud" icon="server" href="/plans/integrations/conductor-cloud">
-    Launch Conductor Cloud agents from your plans.
   </Card>
   <Card title="Claude Code Web" icon="cloud" href="/plans/integrations/claude-code-web">
     Send tasks to Claude Code in the cloud.
