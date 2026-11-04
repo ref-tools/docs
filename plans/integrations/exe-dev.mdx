@@ -1,0 +1,62 @@
+---
+title: "exe.dev"
+description: "Run Ref agents on your own always-on exe.dev cloud machine."
+---
+
+import GetHelp from '/snippets/get-help.mdx';
+
+An [exe.dev](https://exe.dev) box is a persistent Linux VM you reach over SSH. Paired with Ref, it works like a laptop that's always on: Ref launches Claude Code on it from any ref, using your own login.
+
+## Set up an exe.dev box
+
+<Steps>
+  <Step title="Create the box">
+    Run `ssh exe.dev` and follow the prompts to sign up and choose a plan. Then create a box and connect:
+
+    ```bash
+    ssh exe.dev new --name my-box
+    ssh my-box.exe.xyz
+    ```
+
+    If the short host form fails, use the username form: `ssh vm+my-box@vm.exe.xyz`.
+  </Step>
+  <Step title="Sign in to your agent">
+    The default `exeuntu` image ships `claude` and `codex` preinstalled. Update Claude with `sudo exeuntu update claude`.
+
+    Run `claude` and sign in with your Claude subscription (open the printed URL on your own computer). For Codex, run `codex login` — check Codex docs for its headless or device-auth flag if you need it. Clone your repo onto the box.
+  </Step>
+</Steps>
+
+<Warning>
+Don't use exe.dev's LLM gateway (`ANTHROPIC_BASE_URL=https://llm.int.exe.xyz`) for Ref-driven runs. Ref clears `ANTHROPIC_*` variables when it starts Claude Code, so it uses your Claude Code sign-in.
+</Warning>
+
+<Steps>
+  <Step title="Install Ref">
+    ```bash
+    curl -fsSL https://api.plan.ref.tools/plugins/install/remote-agent | bash
+    ```
+
+    Over SSH it prints a pairing URL: open it on your own computer and approve. With no terminal (scripts), set `REF_API_KEY` first. Needs `claude` or `codex` on `PATH`; Linux x86_64 and arm64 are supported.
+  </Step>
+  <Step title="Enable your repo">
+    From the repo on the box:
+
+    ```bash
+    ref launch enable --repo my-repo=$(pwd)
+    ```
+
+    This installs the systemd user unit `~/.config/systemd/user/ref-daemon.service` and enables linger so it survives reboots. If it prints `sudo loginctl enable-linger <user>`, run that.
+
+    If systemd isn't available, re-running the installer restarts its keepalive after a reboot.
+  </Step>
+  <Step title="Check it">
+    The box appears under Agent settings in Ref, named by its hostname. Ask a ref's agent to launch a Task on it.
+  </Step>
+</Steps>
+
+<Note>
+Codex and OpenCode over ACP are rolling out; today Ref drives Claude Code on paired machines for most accounts.
+</Note>
+
+<GetHelp/>
