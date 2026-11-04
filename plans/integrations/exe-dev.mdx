@@ -23,7 +23,7 @@ An [exe.dev](https://exe.dev) box is a persistent Linux VM you reach over SSH. P
   <Step title="Sign in to your agent">
     The default `exeuntu` image ships `claude` and `codex` preinstalled. Update Claude with `sudo exeuntu update claude`.
 
-    Run `claude` and sign in with your Claude subscription (open the printed URL on your own computer). For Codex, run `codex login` — check Codex docs for its headless or device-auth flag if you need it. Clone your repo onto the box.
+    Run `claude` and sign in with your Claude subscription (open the printed URL on your own computer). For Codex over SSH, run `codex login --device-auth` (beta; turn on device code login in your ChatGPT security settings first). Clone your repo onto the box.
   </Step>
 </Steps>
 
