@@ -67,6 +67,7 @@
               "plans/integrations/devin",
               "plans/integrations/warp-oz",
               "plans/integrations/conductor-cloud",
+              "plans/integrations/exe-dev",
               "plans/integrations/claude-code-web",
               "plans/integrations/codex",
               "plans/integrations/linear",
