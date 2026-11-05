@@ -49,18 +49,34 @@ In this mode, the agent can list, create, and navigate across your plans.
 
 ### Authentication
 
-The Ref Plans API accepts authentication in two ways:
+OAuth is the default. An API key is the fallback.
 
-1. **As a header**: `x-ref-api-key: YOUR_API_KEY`
-2. **As a query parameter**: `?apiKey=YOUR_API_KEY`
+1. **OAuth**: Send neither header nor query param; your client will ask you to sign in.
+2. **API key, as a header**: `x-ref-api-key: YOUR_API_KEY`
+3. **API key, as a query parameter**: `?apiKey=YOUR_API_KEY`
 
 You can find your API key at [ref.tools/keys](https://ref.tools/keys).
 
+`AwaitReview` and `Share` are API-key only. An OAuth connection does not include them. For the local agent review loop, use the [install script](#install-with-one-command) above, or connect with an API key.
+
 ### Team-scoped access
 
-To access plans under a specific team, add the team ID as a query parameter:
+Add `?teamId=<TEAM_ID>` to the MCP URL to pick a team for an OAuth connection:
+
 ```
 https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>
+```
+
+With plan-specific mode:
+
+```
+https://api.plan.ref.tools/mcp?plan=<PLAN_ID>&teamId=<TEAM_ID>
+```
+
+An API key uses the same parameter. Send it as the `x-ref-api-key` header, or put it on the URL:
+
+```
+https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>&apiKey=YOUR_API_KEY
 ```
 
 ### Available tools

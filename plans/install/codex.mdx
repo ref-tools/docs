@@ -15,13 +15,41 @@ The [one-line installer](/plans/install#install-with-one-command) sets up Codex 
 curl -fsSL https://api.plan.ref.tools/plugins/install/local-agent | bash
 ```
 
-## Manual install
+Use this script for the local agent review loop. `AwaitReview` and `Share` are API-key only, and an OAuth connection does not include them.
 
-You can find your Ref API key at [ref.tools/keys](https://ref.tools/keys).
+## Manual install
 
 Codex is configured in a `config.toml` file. This typically lives at `~/.codex/config.toml`
 
-To enable Ref Plans, update your `config.toml` to include:
+Add Ref Plans with no API key:
+
+```config.toml
+[mcp_servers.ref]
+url = "https://api.plan.ref.tools/mcp"
+```
+
+Then sign in:
+
+```
+codex mcp login ref
+```
+
+For plan-specific mode:
+
+```config.toml
+[mcp_servers.ref]
+url = "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>"
+```
+
+To use a specific team, see [Team-scoped access](/plans/install#team-scoped-access).
+
+### Codex app
+
+In the Codex app, add a custom MCP server with type `Streamable HTTP` and URL `https://api.plan.ref.tools/mcp`. Leave the bearer token and headers empty, then sign in.
+
+## API key
+
+You can find your Ref API key at [ref.tools/keys](https://ref.tools/keys).
 
 ```config.toml
 [mcp_servers.ref-plan]
@@ -43,6 +71,6 @@ Run the command:
 codex mcp list
 ```
 
-You should see `ref-plan` listed with the Ref Plans MCP URL.
+You should see `ref` listed with the Ref Plans MCP URL.
 
 <GetHelp/>

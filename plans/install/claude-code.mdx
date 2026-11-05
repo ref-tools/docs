@@ -15,9 +15,27 @@ The [one-line installer](/plans/install#install-with-one-command) sets up Claude
 curl -fsSL https://api.plan.ref.tools/plugins/install/local-agent | bash
 ```
 
+Use this script for the local agent review loop. `AwaitReview` and `Share` are API-key only, and an OAuth connection does not include them.
+
 ## Manual install
 
-Run the `claude` install command:
+Add the server with no API key, then sign in:
+
+```
+claude mcp add --transport http ref https://api.plan.ref.tools/mcp
+```
+
+In Claude Code, run `/mcp` and choose `Authenticate`. Sign in on Ref's page.
+
+For plan-specific mode:
+
+```
+claude mcp add --transport http ref "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>"
+```
+
+To use a specific team, see [Team-scoped access](/plans/install#team-scoped-access).
+
+## API key
 
 ```
 claude mcp add --transport http RefPlan https://api.plan.ref.tools/mcp --header "x-ref-api-key: <YOUR_API_KEY>"
@@ -43,7 +61,7 @@ You should see:
 
 ```
 ➜  claude mcp list
-RefPlan: https://api.plan.ref.tools/mcp (HTTP)
+ref: https://api.plan.ref.tools/mcp (HTTP)
 ```
 
 <GetHelp/>

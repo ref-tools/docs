@@ -5,9 +5,7 @@ description: "Connect Cursor to Ref Plans."
 
 import GetHelp from '/snippets/get-help.mdx';
 
-[Cursor MCP docs](https://cursor.com/docs/context/mcp)
-
-You can find your Ref API key at [ref.tools/keys](https://ref.tools/keys)
+[Cursor MCP docs](https://cursor.com/docs/mcp)
 
 ## Install Steps
 
@@ -15,6 +13,25 @@ You can find your Ref API key at [ref.tools/keys](https://ref.tools/keys)
 2. Click `Tools & MCP`
 3. Click `New MCP Server`. This will open an `mcp.json` file.
 4. Update `mcp.json`
+
+```mcp.json
+{
+  "mcpServers": {
+    "RefPlan": {
+      "type": "http",
+      "url": "https://api.plan.ref.tools/mcp"
+    }
+  }
+}
+```
+
+Leave out `headers`. Cursor asks you to sign in. Sign in on Ref's page.
+
+For plan-specific mode, use `"url": "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>"`. To use a specific team, see [Team-scoped access](/plans/install#team-scoped-access).
+
+## API key
+
+You can find your Ref API key at [ref.tools/keys](https://ref.tools/keys).
 
 ```mcp.json
 {
