@@ -22,7 +22,7 @@ Use this script for the local agent review loop. `AwaitReview` and `Share` are A
 Add the server with no API key, then sign in:
 
 ```
-claude mcp add --transport http ref https://api.plan.ref.tools/mcp
+claude mcp add --transport http RefPlan https://api.plan.ref.tools/mcp
 ```
 
 In Claude Code, run `/mcp` and choose `Authenticate`. Sign in on Ref's page.
@@ -30,7 +30,7 @@ In Claude Code, run `/mcp` and choose `Authenticate`. Sign in on Ref's page.
 For plan-specific mode:
 
 ```
-claude mcp add --transport http ref "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>"
+claude mcp add --transport http RefPlan "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>"
 ```
 
 To use a specific team, see [Team-scoped access](/plans/install#team-scoped-access).
@@ -61,7 +61,7 @@ You should see:
 
 ```
 ➜  claude mcp list
-ref: https://api.plan.ref.tools/mcp (HTTP)
+RefPlan: https://api.plan.ref.tools/mcp (HTTP)
 ```
 
 <GetHelp/>

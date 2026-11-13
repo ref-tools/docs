@@ -24,20 +24,20 @@ Codex is configured in a `config.toml` file. This typically lives at `~/.codex/c
 Add Ref Plans with no API key:
 
 ```config.toml
-[mcp_servers.ref]
+[mcp_servers.ref-plan]
 url = "https://api.plan.ref.tools/mcp"
 ```
 
 Then sign in:
 
 ```
-codex mcp login ref
+codex mcp login ref-plan
 ```
 
 For plan-specific mode:
 
 ```config.toml
-[mcp_servers.ref]
+[mcp_servers.ref-plan]
 url = "https://api.plan.ref.tools/mcp?plan=<PLAN_ID>"
 ```
 
@@ -71,6 +71,6 @@ Run the command:
 codex mcp list
 ```
 
-You should see `ref` listed with the Ref Plans MCP URL.
+You should see `ref-plan` listed with the Ref Plans MCP URL.
 
 <GetHelp/>

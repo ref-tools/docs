@@ -67,17 +67,7 @@ Add `?teamId=<TEAM_ID>` to the MCP URL to pick a team for an OAuth connection:
 https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>
 ```
 
-With plan-specific mode:
-
-```
-https://api.plan.ref.tools/mcp?plan=<PLAN_ID>&teamId=<TEAM_ID>
-```
-
-An API key uses the same parameter. Send it as the `x-ref-api-key` header, or put it on the URL:
-
-```
-https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>&apiKey=YOUR_API_KEY
-```
+An API key already picks its team, so `teamId` isn't needed, and a `teamId` for a different team is refused.
 
 ### Available tools
 
