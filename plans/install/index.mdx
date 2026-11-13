@@ -67,6 +67,8 @@ Add `?teamId=<TEAM_ID>` to the MCP URL to pick a team for an OAuth connection:
 https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>
 ```
 
+Without `teamId`, an OAuth connection can read refs from every team you're on, but new refs are created in your individual space. Add `?teamId=<TEAM_ID>` if you want new refs in a team.
+
 An API key already picks its team, so `teamId` isn't needed, and a `teamId` for a different team is refused.
 
 ### Available tools
