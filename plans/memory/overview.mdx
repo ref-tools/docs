@@ -1,0 +1,110 @@
+---
+title: "Memory"
+description: "Carry useful context between conversations and coding agents, with memories you can inspect and correct."
+---
+
+## Stop teaching every agent the same things
+
+Every new conversation can mean explaining yourself again: how you want changes reviewed, which constraints matter, where to find the right dashboard, or why a decision was made. Switching agents adds another reset.
+
+Ref memory gives that context a place to live beyond a single chat or coding tool. Save a useful fact through Ref, and another connected agent can retrieve it when working with the same Ref account and space. With automatic memory enabled in a supported host, the agent receives a personal memory index as its conversation context is built.
+
+The benefit is continuity: fewer repeated corrections, less setup when switching tools, and a clearer record of the context your agents are using.
+
+## What you gain
+
+**Carry your preferences between agents.** A preference saved through Claude Code can be read through Codex. You can choose the agent that fits the task without rebuilding all of its context about you.
+
+**Make corrections useful next time.** “Explain the trade-off before proposing a rewrite” can become a durable preference instead of feedback that disappears with the chat. Agents are guided to update an existing memory when a fact changes.
+
+**Keep context inspectable.** Memories are small, readable refs with titles, summaries, and links. You can open a memory, check what it says, and correct it. The context that shapes an agent's work does not have to remain buried in an old conversation.
+
+**Keep native memory working.** Ref runs alongside the host's native memory. When automatic memory is enabled, its guidance asks the agent to also save relevant durable facts to Ref. You can keep the benefits of native memory while making selected context available to other connected agents.
+
+## An example across two agents
+
+Suppose you tell Claude Code:
+
+> Remember in Ref: when reviewing a change for me, lead with the user-visible behavior, then explain the implementation and validation.
+
+After the Ref Memory tool confirms the save, that preference is stored in Ref. In a new Codex chat connected to the same account and Ref space, an enabled memory hook can surface its summary. Codex can read the full memory before applying it to your next review.
+
+If your preference changes, say:
+
+> Update that Ref memory: put risks and limitations before implementation details.
+
+The agent is guided to correct the existing memory. Already-open conversations may still contain an earlier snapshot; ask them to refresh Ref memory when the change matters immediately.
+
+## What belongs in memory?
+
+Use memory for information that should remain useful after this task ends:
+
+- Working preferences, such as how you want explanations or reviews structured.
+- Corrections to how an agent approaches your work.
+- Lasting project context that is not already clear from the code or a ref.
+- References to useful documents, dashboards, or other sources.
+
+Keep the current task and its progress in its ref. Keep repository conventions in the repository. Never ask an agent to save passwords, tokens, or other credentials as memory.
+
+## Start with an explicit request
+
+Connect the [Ref Plans MCP server](/plans/install/index), then ask:
+
+> Remember in Ref that I prefer a short recommendation before the detailed explanation.
+
+You do not need a memory plugin for explicit requests. A connected host with access to the `Memory` and `Read` tools can save and retrieve memories when asked. Verify that the tool confirmed the save; an agent saying “I'll remember” is not evidence that anything was stored.
+
+To check it from another conversation:
+
+> Look up my Ref memories about how I prefer explanations.
+
+Use the same account and space in both conversations. Personal memory is scoped to you within a Ref space; a different team space or environment can have a different index.
+
+## Enable automatic memory
+
+Automatic memory for external agents is **off by default**. Choose one installation path.
+
+### Local Claude Code or Codex
+
+Use the [Ref installer](/plans/install/index), or run `ref update` if Ref is already installed. Then:
+
+```sh
+ref memory enable
+```
+
+Start a new chat. In Codex, also review and trust the memory hook in `/hooks`.
+
+The tested minimum versions are Claude Code **2.1.321** and Codex **0.167.0**. The host must permit the hooks. The Code tab in Claude Desktop has its own runtime version; check `/status` there rather than relying on the terminal CLI's version.
+
+### Claude marketplace plugin
+
+Install the existing Ref plugin:
+
+```sh
+claude plugin marketplace add ref-tools/marketplace
+claude plugin install ref-plan@ref-tools
+```
+
+Connect Ref through OAuth in `/mcp`. Open `/plugin configure ref-plan@ref-tools`, enable **Automatic memory**, and start a new chat.
+
+For an account-installed plugin, add `ref-tools/marketplace` through Claude's **Customize → Plugins → Add marketplace**, install **ref-plan**, and connect its Ref connector. Enable **Automatic memory** in the plugin settings. [Claude explains account installation and connector setup here.](https://claude.com/docs/plugins/overview)
+
+This memory module targets Claude Code. Adding the plugin in regular Chat or Cowork does not make that Code module run there. See [host support](/plans/memory/how-it-works#host-support-and-lifecycle).
+
+If you already use the local installer, enable memory in that installation or the marketplace plugin, rather than both. Two enabled installations can supply duplicate context.
+
+## Your control over memory
+
+Ask an agent to list or correct your Ref memories, or inspect them in Ref's **Memory & Rules** settings. Personal memories stay separate from shared team memories. The automatic hook loads your personal index; agents are instructed to write to team memory only when you ask.
+
+For a local installation, turn automatic memory off with:
+
+```sh
+ref memory disable
+```
+
+For a marketplace installation, turn off **Automatic memory**. Start a new chat afterward. Disabling recall does not delete saved memories, erase content already present in a conversation, or remove copies from a host's native memory.
+
+Ref does not bulk-import native memory or keep native memory files synchronized. Saving and applying a memory remain agent actions, subject to tool access and the agent following the supplied guidance. Your current instructions take precedence over a remembered preference.
+
+[Read the technical guide →](/plans/memory/how-it-works)

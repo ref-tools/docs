@@ -18,12 +18,14 @@ claude plugin marketplace add ref-tools/marketplace
 claude plugin install ref-skills@ref-tools
 ```
 
-MCP plugins (pass your key from [ref.tools/keys](https://ref.tools/keys)):
+For Ref docs search, pass your key from [ref.tools/keys](https://ref.tools/keys). Ref planning uses OAuth:
 
 ```sh
 claude plugin install ref-context@ref-tools --config api_key=YOUR_REF_API_KEY
-claude plugin install ref-plan@ref-tools --config api_key=YOUR_REF_API_KEY
+claude plugin install ref-plan@ref-tools
 ```
+
+Open `/mcp` to authenticate RefPlan through OAuth. Existing API-key installations need to sign in again after updating. The `ref-plan` plugin also includes [opt-in memory](/plans/memory/overview), which runs alongside native memory in compatible Claude Code hosts.
 
 ## Codex
 
@@ -50,4 +52,4 @@ codex plugin marketplace add ref-tools/marketplace
 codex plugin add ref-context@ref-skills
 ```
 
-For the Ref MCP server on Codex, use the [install script](/plans/install/index) (Codex plugins cannot take an API key).
+For the Ref MCP server on Codex, use the [install script](/plans/install/index). For automatic recall, follow the [memory setup](/plans/memory/overview#enable-automatic-memory).

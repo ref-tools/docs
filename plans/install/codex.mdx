@@ -17,6 +17,10 @@ curl -fsSL https://api.plan.ref.tools/plugins/install/local-agent | bash
 
 Use this script for the local agent review loop. `AwaitReview` and `Share` are API-key only, and an OAuth connection does not include them.
 
+## Optional memory
+
+The installer includes opt-in memory hooks. Run `ref memory enable`, then start a new chat and review the hook in `/hooks`. See [Ref memory](/plans/memory/overview) for requirements, configuration, and how it works alongside native memory.
+
 ## Manual install
 
 Codex is configured in a `config.toml` file. This typically lives at `~/.codex/config.toml`
