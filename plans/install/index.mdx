@@ -61,13 +61,15 @@ You can find your API key at [ref.tools/keys](https://ref.tools/keys).
 
 ### Team-scoped access
 
-Add `?teamId=<TEAM_ID>` to the MCP URL to pick a team for an OAuth connection:
+Sign-in asks which space an OAuth connection uses: your individual space, or one of your teams. That applies when the URL has no `teamId`.
+
+Add `?teamId=<TEAM_ID>` to pin a team. It wins over the sign-in choice:
 
 ```
 https://api.plan.ref.tools/mcp?teamId=<TEAM_ID>
 ```
 
-Without `teamId`, an OAuth connection can read refs from every team you're on, but new refs are created in your individual space. Add `?teamId=<TEAM_ID>` if you want new refs in a team.
+An OAuth connection can still read refs from every team you're on. Without a sign-in choice or a URL team, new refs follow today's default.
 
 An API key already picks its team, so `teamId` isn't needed, and a `teamId` for a different team is refused.
 
