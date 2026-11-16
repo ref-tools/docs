@@ -23,6 +23,8 @@ You can find your API key at [ref.tools/keys](https://ref.tools/keys)
 
 If you use OAuth in combination with [Teams](/usage/teams), you may need to specify the team you want Ref to access. Ref will do it's best to intelligently pick the correct team but you may want to manually force a specific team.
 
+Sign-in asks which space an OAuth connection uses: your individual space, or one of your teams. That applies when the URL has no `scope`. Add `?scope=<TEAM_ID>` to pin a team. It wins over the sign-in choice. Without a sign-in choice or `?scope=`, scope still follows the rules below.
+
 Here is the algorithm Ref uses to pick the user or team scope:
 
 ```
