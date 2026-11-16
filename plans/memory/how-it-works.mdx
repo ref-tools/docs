@@ -11,9 +11,9 @@ For setup and examples, start with the [memory overview](/plans/memory/overview)
 
 Each memory is a ref containing a short title, an opening sentence stating the fact, and optional supporting detail. A separate index ref links to those records and includes their summaries.
 
-The automatic context response contains a bounded index, not every memory body. The current implementation returns up to 30 entries and marks partial results. The agent can read the full index when it is truncated, then read individual memories relevant to its task. This is an index-driven lookup, not a semantic search of every past conversation.
+The external-agent context response contains a bounded index, not every memory body. The current implementation returns up to 30 entries and marks partial results. The agent can read the full index when it is truncated, then read individual memories relevant to its task. This is an index-driven lookup, not a semantic search of every past conversation.
 
-A personal index belongs to a user within a Ref space. Team memory has a separate index. The server derives the authorized scope from the authenticated session; the automatic context request cannot name another user or request a team index.
+A personal index belongs to a user within a Ref space. Team memory has a separate index. The server derives the authorized scope from the authenticated session; the external-agent context request cannot name another user or request a team index.
 
 ## From a new chat to useful context
 
@@ -52,7 +52,7 @@ The guidance also tells the agent to read relevant records, update existing memo
 
 | Host or connection | How memory reaches the conversation |
 | --- | --- |
-| Ref threads | Ref supplies its own memory guidance and index context. If an index is absent, the agent is directed to list memories. External-agent plugins are not required for this built-in path. |
+| Ref threads | Ref supplies its own memory guidance and available personal and team index context. If an index is absent, the agent is directed to list memories. External-agent plugins are not required for this built-in path. |
 | Local Claude Code with memory enabled | A JavaScript module handles `prompt.context`, resolves the existing MCP connection, and appends a `refMemory` context block. Tested minimum: 2.1.321. |
 | Local Codex with memory enabled | A declarative `mcp_tool` hook calls Memory on `SessionStart` events matching `startup`, `clear`, or `compact`. Resume is deliberately excluded. Tested minimum: 0.167.0; hook trust is required. |
 | MCP connection without a memory hook | The model can use `Memory` and `Read` on request. The MCP connection alone does not install lifecycle hooks. |
