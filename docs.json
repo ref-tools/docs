@@ -50,7 +50,7 @@
             ]
           },
           {
-            "group": "Memory",
+            "group": "Ref memory",
             "pages": ["plans/memory/overview", "plans/memory/how-it-works"]
           },
           {

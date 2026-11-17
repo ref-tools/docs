@@ -1,51 +1,54 @@
 ---
-title: "How memory works"
-description: "How Ref stores memories and makes them available across agents."
+title: "Using Ref memory"
+description: "Help your agents learn your preferences, carry context between tools, and keep memories useful."
 ---
 
-Ref provides a shared memory store through MCP. Agents keep deciding what to remember and when it matters; Ref makes those records available across providers and harnesses.
+With Ref memory active, your agent can learn from ordinary conversation. You do not need to say “remember in Ref” each time. Use the examples below to make preferences clear and check what carries over.
 
-## Memories are refs
+## Say what should carry forward
 
-Each memory is a readable ref with a title, a summary, and optional detail. A separate index links to the memories and summarizes them. The server maintains the index when an agent creates or updates a memory.
+Be specific about how you want future work handled:
 
-Personal memory belongs to a user within a Ref space. Other agents connected to that same account and space can access it. Team memory has a separate index; the server enforces access from the authenticated session.
+> Keep your summaries short. Give me the recommendation first, then the reasons.
 
-Explore the [sample index](https://plan.ref.tools/mini-app/?demo=memory) and a [full memory](https://plan.ref.tools/mini-app/?demo=memory#review-style) in the interactive demo. The content is fictional.
+Include the scope when a preference belongs to one project:
 
-## How agents receive it
+> For Atlas, always consider what happens when someone loses their connection halfway through a task.
 
-Ref's host integration loads a personal index through the MCP `Memory` tool. The response contains titles, links, summaries, and read/save guidance. Agents use `Read` to open relevant memories and `Memory` to create or update them.
+Lasting preferences and project context make useful memories. Keep today's task list and progress in the task itself.
 
-```mermaid
-sequenceDiagram
-    participant Host as Agent harness
-    participant Ref as Ref MCP
-    participant Agent as Model
-    Host->>Ref: Memory context
-    Ref-->>Host: Personal index + guidance
-    Host->>Agent: Add to conversation context
-    Agent->>Ref: Read relevant memory
-    Ref-->>Agent: Full memory
-    Agent->>Ref: Save or correct a fact
-    Note over Ref: Update memory and index
-```
+## Pick up with another agent
 
-The context request needs no transcript, prompt, or session identifier. It returns up to 30 entries and marks truncated results so the agent can read the full index.
+Agents connected to the same Ref account and space can use the same saved memories. A different space can have different context.
 
-| Host | Ref integration |
-| --- | --- |
-| Ref threads | Built-in guidance and personal/team index context. |
-| Claude Code | A `prompt.context` module appends Ref context through the existing MCP connection. |
-| Codex | A `SessionStart` hook loads Ref context on startup, clear, or compaction; not resume. |
-| MCP alone | Memory tools are available, but automatic context injection requires host integration. |
+Continue your work normally, or ask the new agent to check a preference:
 
-Hook support depends on the host. A connector in Claude Chat or Cowork does not imply support for the Claude Code module.
+> Check my Ref memories for how I like plans structured, then draft a plan for this change.
 
-## How updates travel
+## Inspect and correct memories
 
-A saved correction updates the Ref record and its index entry. Another agent's next read can retrieve it. Ref does not push replacements into conversations that already hold an earlier snapshot; an agent can refresh through `Memory` and `Read`.
+Ask for the saved records when you want to see what is shaping an answer:
 
-The MCP context handler has no separate response cache or per-session delivery ledger. Conversation snapshots and provider prompt caching belong to the harness and provider; neither refreshes the saved index automatically.
+> Show me my Ref memories about writing and reviews.
 
-Ref currently works alongside native memory. Its guidance asks agents to save durable facts to Ref too. These are independent writes, not file synchronization or bulk import of a native memory store.
+If your preference changes, correct it naturally:
+
+> I've changed my mind: put risks right after the recommendation in future reviews.
+
+The agent can update the existing memory. You can also open the ref and correct its wording directly.
+
+Explore the [sample index](https://plan.ref.tools/mini-app/?demo=memory) and a [full memory](https://plan.ref.tools/mini-app/?demo=memory#review-style). These examples use fictional content.
+
+## If an agent misses a memory
+
+Ask it to check Ref directly:
+
+> Look up my latest Ref memories about this project before continuing.
+
+An open conversation may still hold an older snapshot. If a correction is missing, ask for a fresh read. If nothing is found, check that both agents are connected to the same Ref account and space and that the earlier save succeeded.
+
+## What Ref shares
+
+Ref stores each memory as a readable ref and maintains an index of links and summaries. Connected agents retrieve the index and open relevant records through MCP. Automatic recall depends on the host's Ref integration; an MCP connection alone does not inject memories into conversations.
+
+A saved update becomes available on the next read. It does not replace context already loaded into every open chat or synchronize a provider's native memory files.

@@ -1,38 +1,36 @@
 ---
-title: "Memory"
-description: "Memory that follows you across AI providers, agent harnesses, and conversations."
+title: "Ref memory"
+description: "Ref memory follows you across AI providers, agent harnesses, and conversations."
 ---
 
-## Stop teaching every agent the same things
+## Bring your context with you
 
-Your preferences, corrections, and project context should carry over when you switch agents.
+Your preferences, corrections, and project context should carry over when you switch agents. Built-in memory often stays within the provider or harness that saved it.
 
-Ref gives that knowledge a shared home. With Ref memory active, agents save useful things they learn as you work and recall them in later conversations. No special prompt required.
+Ref memory gives that knowledge a shared home. With Ref memory active, agents save useful things they learn as you work and recall them in later conversations. No special prompt required.
 
-- **Switch agents without starting over.** A preference learned in Anthropic’s Claude Code can inform your next review in OpenAI’s Codex.
+- **Switch agents without starting over.** A preference learned in Anthropic’s Claude Code can inform your next plan in OpenAI’s Codex.
 - **Make corrections last.** Feedback becomes context for future work, instead of disappearing with the chat.
 - **See what’s remembered.** Memories are readable refs you can inspect and correct.
 
-## Learn once, use across agents
+## How to use Ref memory
 
-During a review, you tell Claude Code:
+Tell your agent how you like to work:
 
-> Lead with the user-visible behavior, then explain the implementation and validation.
+> Start my plans with what users will see and the mockups. Put implementation details and test steps at the bottom.
 
-Claude Code can save that preference. Later, Codex can use it without you explaining your review style again. Both agents use the same Ref account and space.
+Claude Code can save that preference. Later, Codex can use it without you explaining your planning style again. Both agents use the same Ref account and space.
 
-Change your mind? Say so naturally:
+You can also ask what Ref has saved:
 
-> Going forward, put risks and limitations before implementation details.
+> What has Ref remembered about how I like plans written? Show me the memories.
 
-The agent can update the memory for future work.
+Open any memory to check its wording or correct it. Your current instructions take precedence over remembered preferences.
 
 [Explore an example memory index →](https://plan.ref.tools/mini-app/?demo=memory)
 
 ## What gets remembered?
 
-Lasting preferences, corrections, project context, and useful references. The agent decides what is worth keeping; memory is not a transcript of everything you say.
+Lasting preferences, corrections, project context, and useful references. The agent decides what is worth keeping; Ref memory is not a transcript of everything you say.
 
-Memories are yours to inspect and correct. Ask your agent what it remembers or open the records in Ref. Your current instructions take precedence over remembered preferences.
-
-[How memory works →](/plans/memory/how-it-works)
+[Using Ref memory: examples and tips →](/plans/memory/how-it-works)
