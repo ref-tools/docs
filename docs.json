@@ -7,6 +7,10 @@
     "light": "#e5e5e5",
     "dark": "#1a1a1a"
   },
+  "fonts": {
+    "heading": { "family": "Inter", "weight": 600 },
+    "body": { "family": "Inter" }
+  },
   "favicon": "/favicon.svg",
   "navigation": {
     "global": {

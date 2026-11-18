@@ -1,18 +1,30 @@
-.link, .navbar-link, #topbar-cta-button, .sidebar-group { 
-  font-family: 'Source Code Pro', monospace;
+/* Prose: one size for paragraphs and lists, and a measure of about 70
+   characters. Code blocks and tables keep the full column. */
+.prose :where(p, li) {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  letter-spacing: normal;
 }
 
-h1, h2, h3 {
-  font-family: 'Libre Baskerville', serif;
+.prose :where(p, ul, ol, blockquote) {
+  max-width: 37.5rem;
 }
 
-h4, h5 {
-  font-family: 'Source Code Pro', monospace;
+h1,
+.prose :where(h1, h2) {
+  letter-spacing: -0.018em;
 }
 
-div {
-  font-family: 'Source Code Pro', monospace;
-  letter-spacing: -0.02em;
+/* Monospace only for short uppercase labels; Paper Mono already loads for
+   code. Positive tracking keeps small capitals legible. */
+.eyebrow,
+.sidebar-title,
+.nav-tabs-item {
+  font-family: "Paper Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Do not add a global `.border-b { border-bottom: none }` here. Mintlify's <Tabs>
