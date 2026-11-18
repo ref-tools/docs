@@ -12,13 +12,6 @@
   line-height: inherit;
 }
 
-/* About 72 characters per line at any text size, including text inside
-   steps, callouts and accordions. em tracks each block's own size. Inline
-   spans ignore max-width; code and tables keep the full column. */
-.mdx-content :where(p, span, ul, ol, blockquote):not(pre *, table *) {
-  max-width: 35em;
-}
-
 /* Shorter phone lines read evenly with less leading. */
 @media (max-width: 640px) {
   .mdx-content {
