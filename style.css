@@ -56,3 +56,57 @@ div {
   opacity: 0.9;
   border-bottom: 1px solid #a1a1a1;
 }
+
+/* Copyable examples retain the document's blockquote treatment. */
+.prompt.memory-prompt {
+  position: relative;
+  display: block;
+  background: none;
+  border: 0;
+  border-left: 2px solid var(--tw-prose-quote-borders, currentColor);
+  border-radius: 0;
+  padding: 0 2rem 0 1rem;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+.memory-prompt [data-component-part="prompt-actions-wrapper"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.memory-prompt [data-component-part="prompt-action-copy-button"] {
+  background: none;
+  border: 0;
+  color: inherit;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  opacity: 0;
+}
+
+.memory-prompt [data-component-part="prompt-action-copy-button"] > [aria-hidden] {
+  display: none;
+}
+
+.memory-prompt [data-component-part="prompt-action-copy-button"]::before {
+  content: "⧉";
+  font: 1.25rem/1 sans-serif;
+}
+
+.memory-prompt [data-component-part="prompt-action-copy-button"]:has([role="status"]:not(:empty))::before {
+  content: "✓";
+}
+
+.memory-prompt:hover [data-component-part="prompt-action-copy-button"],
+.memory-prompt:focus-within [data-component-part="prompt-action-copy-button"] {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .memory-prompt [data-component-part="prompt-action-copy-button"] {
+    opacity: 1;
+  }
+}

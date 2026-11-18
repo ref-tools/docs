@@ -7,9 +7,9 @@ description: "Ref memory follows you across AI providers, agent harnesses, and c
 
 ## Bring your context with you
 
-Your preferences, corrections, and project context should carry over when you switch agents. Built-in memory often stays within the provider or harness that saved it.
+Your preferences, corrections, and project context should carry over when you switch agents. But built-in memory often stays within the provider or harness that saved it.
 
-Ref memory gives that knowledge a shared home. With Ref memory active, agents save useful things they learn as you work and recall them in later conversations. No special prompt required.
+Ref memory gives that knowledge a shared home. Agents save useful things they learn as you work and recall them in later conversations. No special prompt required.
 
 - **Switch agents without starting over.** A preference learned in Anthropic’s Claude Code can inform your next plan in OpenAI’s Codex.
 - **Make corrections last.** Feedback becomes context for future work, instead of disappearing with the chat.
@@ -17,15 +17,21 @@ Ref memory gives that knowledge a shared home. With Ref memory active, agents sa
 
 ## How to use Ref memory
 
+[Enable Ref memory and check it’s working →](/plans/memory/how-it-works#enable-and-check-ref-memory)
+
 Tell your agent how you like to work:
 
-> Start my plans with what users will see and the mockups. Put implementation details and test steps at the bottom.
+<Prompt className="memory-prompt" description="Start my plans with what users will see and the mockups. Put implementation details and test steps at the bottom.">
+Start my plans with what users will see and the mockups. Put implementation details and test steps at the bottom.
+</Prompt>
 
 Claude Code can save that preference. Later, Codex can use it without you explaining your planning style again. Both agents use the same Ref account and space.
 
 You can also ask what Ref has saved:
 
-> What has Ref remembered about how I like plans written? Show me the memories.
+<Prompt className="memory-prompt" description="What has Ref remembered about how I like plans written? Show me the memories.">
+What has Ref remembered about how I like plans written? Show me the memories.
+</Prompt>
 
 Open any memory to check its wording or correct it. Your current instructions take precedence over remembered preferences.
 

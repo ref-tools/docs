@@ -5,19 +5,35 @@ description: "Help your agents learn your preferences, carry context between too
 
 {/* Before publishing, replace the PR preview origin below with https://plan.ref.tools. */}
 
-With Ref memory active, your agent can learn from ordinary conversation. You do not need to say “remember in Ref” each time. Use the examples below to make preferences clear and check what carries over.
+Ref memory lets your agent learn from ordinary conversation. You do not need to say “remember in Ref” each time. Use the examples below to make preferences clear and check what carries over.
+
+## Enable and check Ref memory
+
+For local Claude Code or Codex, use the [Ref installer](/plans/install#install-with-one-command), then run `ref memory enable`. In Codex, approve the memory hook in `/hooks`. Start a new chat.
+
+To check automatic recall, ask:
+
+<Prompt className="memory-prompt" description="Before looking up any memories, check whether Ref memory guidance and a memory index were already loaded into this chat. Tell me if either is missing.">
+Before looking up any memories, check whether Ref memory guidance and a memory index were already loaded into this chat. Tell me if either is missing.
+</Prompt>
+
+The agent should find both in its starting context; a new account’s index may be empty. If either is missing, follow the [Claude Code](/plans/install/claude-code#optional-memory) or [Codex](/plans/install/codex#optional-memory) setup guide. Being able to look up memories through MCP alone does not confirm automatic recall is active.
 
 ## Say what should carry forward
 
 Be specific about how you want future work handled:
 
-> Keep your summaries short. Give me the recommendation first, then the reasons.
+<Prompt className="memory-prompt" description="Keep your summaries short. Give me the recommendation first, then the reasons.">
+Keep your summaries short. Give me the recommendation first, then the reasons.
+</Prompt>
 
 Include the scope when a preference belongs to one project:
 
-> For Atlas, always consider what happens when someone loses their connection halfway through a task.
+<Prompt className="memory-prompt" description="For Atlas, always consider what happens when someone loses their connection halfway through a task.">
+For Atlas, always consider what happens when someone loses their connection halfway through a task.
+</Prompt>
 
-Lasting preferences and project context make useful memories. Keep today's task list and progress in the task itself.
+Lasting preferences and project context make useful memories. Short-lived, task-specific details should stay in your task ref itself.
 
 ## Pick up with another agent
 
@@ -25,17 +41,23 @@ Agents connected to the same Ref account and space can use the same saved memori
 
 Continue your work normally, or ask the new agent to check a preference:
 
-> Check my Ref memories for how I like plans structured, then draft a plan for this change.
+<Prompt className="memory-prompt" description="Check my Ref memories for how I like plans structured, then draft a plan for this change.">
+Check my Ref memories for how I like plans structured, then draft a plan for this change.
+</Prompt>
 
 ## Inspect and correct memories
 
 Ask for the saved records when you want to see what is shaping an answer:
 
-> Show me my Ref memories about writing and reviews.
+<Prompt className="memory-prompt" description="Show me my Ref memories about writing and reviews.">
+Show me my Ref memories about writing and reviews.
+</Prompt>
 
 If your preference changes, correct it naturally:
 
-> I've changed my mind: put risks right after the recommendation in future reviews.
+<Prompt className="memory-prompt" description="I've changed my mind: put risks right after the recommendation in future reviews.">
+I've changed my mind: put risks right after the recommendation in future reviews.
+</Prompt>
 
 The agent can update the existing memory. You can also open the ref and correct its wording directly.
 
@@ -45,12 +67,14 @@ Explore the [sample index](https://plan-staging-ref--pr7337-mp0ss27p.web.app/min
 
 Ask it to check Ref directly:
 
-> Look up my latest Ref memories about this project before continuing.
+<Prompt className="memory-prompt" description="Look up my latest Ref memories about this project before continuing.">
+Look up my latest Ref memories about this project before continuing.
+</Prompt>
 
 An open conversation may still hold an older snapshot. If a correction is missing, ask for a fresh read. If nothing is found, check that both agents are connected to the same Ref account and space and that the earlier save succeeded.
 
 ## What Ref shares
 
-Ref stores each memory as a readable ref and maintains an index of links and summaries. Connected agents retrieve the index and open relevant records through MCP. Automatic recall depends on the host's Ref integration; an MCP connection alone does not inject memories into conversations.
+Ref stores each memory as a readable ref and maintains an index of links and summaries. Connected agents retrieve the index and open relevant records through MCP.
 
 A saved update becomes available on the next read. It does not replace context already loaded into every open chat or synchronize a provider's native memory files.
