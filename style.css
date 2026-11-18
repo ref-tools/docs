@@ -1,18 +1,29 @@
-.link, .navbar-link, #topbar-cta-button, .sidebar-group { 
-  font-family: 'Source Code Pro', monospace;
+/* Prose: one size for paragraphs and lists, and a measure of about 70
+   characters. Code blocks and tables keep the full column. */
+.prose :where(p, li) {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  letter-spacing: normal;
 }
 
-h1, h2, h3 {
-  font-family: 'Libre Baskerville', serif;
+.prose :where(p, ul, ol, blockquote) {
+  max-width: 37.5rem;
 }
 
-h4, h5 {
-  font-family: 'Source Code Pro', monospace;
+/* Libre Baskerville ships 400 and 700 only; any other weight is synthesized. */
+h1,
+.prose :where(h1, h2) {
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
-div {
-  font-family: 'Source Code Pro', monospace;
-  letter-spacing: -0.02em;
+/* Mintlify draws these with the heading face. Keep the serif to page titles
+   and H2 so small headings and navigation labels stay in Inter. */
+.prose :where(h3, h4, h5, h6),
+.sidebar-title,
+[data-layout-item="toc-title"] {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 600;
 }
 
 /* Do not add a global `.border-b { border-bottom: none }` here. Mintlify's <Tabs>
