@@ -260,7 +260,8 @@
     }
   },
   "contextual": {
-    "options": ["copy", "view"]
+    "options": ["copy", "view"],
+    "display": "toc"
   },
   "footer": {
     "socials": {
