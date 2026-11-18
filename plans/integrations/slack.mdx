@@ -20,16 +20,22 @@ Only team admins can connect the Slack integration.
 
 ## Create Plans from Slack
 
-@mention the Ref bot in any Slack thread to create a plan. The agent reads the full thread, researches your indexed repositories, and produces a structured implementation plan. It replies in the thread with a link to the finished plan.
+@mention the Ref bot in any Slack thread to create a plan. The agent reads the full thread, researches your indexed repositories, and produces a structured implementation plan. Within a few seconds the bot replies in the thread with "Starting" and a link to the new plan. When the work is done it replies again with the answer and the link.
 
 ## Follow Up in Threads
 
-@mention the bot again in the same thread to update the existing plan. Ask it to add a section, change the scope, or refine a task — the agent picks up where it left off. It only creates a new plan if you explicitly ask for one.
+@mention the bot again in the same thread to continue a plan. It reads the thread and works out which plan your message is about, then replies at once with the plan it picked.
+
+A follow-up mention continues the plan the bot created in that thread, when your message is about it. If your message links a plan, it continues that plan, unless you ask for a separate one. A plan link pasted earlier in the thread is continued only when the thread shows the mention is about it — for example, the thread has been discussing it and you ask "what do you think?" — or when the mention links it. The simplest way to point the bot at a specific plan is to put that plan's link in the same message as the @mention.
+
+Otherwise it starts a new plan. That includes a plan link pasted only as context for a different request, a request about something unrelated to the plan this thread created, asking for a separate or additional plan, and cases where it cannot tell which of several linked plans you mean. The bot only continues plans that belong to your Ref team and that you can open yourself.
+
+The reply says "Continuing" that plan, or "Queued behind a running turn" in it when that plan's agent is busy and your request will run next. If it starts a new plan, the reply says "Starting". When the work is done it replies again in the thread with the answer and the link.
 
 ## Key Features
 
 - **Thread → Plan in seconds** — @mention the bot in a thread and get a fully researched implementation plan
-- **Conversational updates** — Follow-up @mentions update the existing plan instead of creating duplicates
+- **Conversational updates** — A follow-up @mention continues the plan the bot created in that thread. A plan link pasted earlier in the thread is continued only when the thread shows the mention is about it, or the mention links it. The bot replies at once with the plan it picked.
 - **Codebase-aware** — The agent researches your indexed repositories to produce plans grounded in your actual code
 - **Team-connected** — Plans are created under your Ref team with team-level visibility
 
