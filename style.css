@@ -73,6 +73,22 @@ h1,
   letter-spacing: -0.01em;
 }
 
+/* "On this page" column: section links share the page actions' text edge and
+   36px rhythm, with icons hanging to the left of that edge. The 22px indent is
+   the actions' 14px icon plus their 8px gap. */
+[data-layout-item="toc-title"] svg {
+  width: 14px;
+  height: 14px;
+}
+
+[data-layout-item="toc-title"] ~ [data-layout-item="toc-list"] {
+  padding-left: 22px;
+}
+
+[data-layout-item="toc-item-link"] {
+  padding-block: 6px;
+}
+
 /* Do not add a global `.border-b { border-bottom: none }` here. Mintlify's <Tabs>
    (and other UI) use Tailwind's border-b for the active tab underline; stripping
    it site-wide makes tabs look like plain text with no selection state. */
