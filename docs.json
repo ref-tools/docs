@@ -50,6 +50,10 @@
             ]
           },
           {
+            "group": "Ref memory",
+            "pages": ["plans/memory/overview", "plans/memory/how-it-works"]
+          },
+          {
             "group": "Plans for Your Role",
             "pages": [
               "plans/workflows/roles",
