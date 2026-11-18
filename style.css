@@ -1,29 +1,83 @@
-/* Prose: one size for paragraphs and lists, and a measure of about 70
-   characters. Code blocks and tables keep the full column. */
-.prose :where(p, li) {
+/* Body size is set once on the content container and inherited, because
+   Mintlify renders most markdown paragraphs as block <span>s, not <p>.
+   Headings, code and components set their own sizes. */
+.mdx-content {
   font-size: 1.0625rem;
   line-height: 1.7;
   letter-spacing: normal;
 }
 
-.prose :where(p, ul, ol, blockquote) {
-  max-width: 37.5rem;
+.mdx-content :where(p, li) {
+  font-size: inherit;
+  line-height: inherit;
 }
 
-/* Libre Baskerville ships 400 and 700 only; any other weight is synthesized. */
+/* About 72 characters per line at any text size, including text inside
+   steps, callouts and accordions. em tracks each block's own size. Inline
+   spans ignore max-width; code and tables keep the full column. */
+.mdx-content :where(p, span, ul, ol, blockquote):not(pre *, table *) {
+  max-width: 35em;
+}
+
+/* Shorter phone lines read evenly with less leading. */
+@media (max-width: 640px) {
+  .mdx-content {
+    line-height: 1.6;
+  }
+}
+
+/* Text in steps, tabs and accordions continues the body copy, so it matches
+   the body size; callouts stay one step smaller. */
+.mdx-content :where([data-component-part="step-content"], [data-component-part="tab-content"], [data-component-part="accordion-content"]) {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.mdx-content [data-component-part="callout-content"],
+.mdx-content [data-component-part="callout-content"] * {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.mdx-content [data-component-part="callout-content"] code {
+  font-size: 0.875em;
+}
+
+/* Longhands only: the text-wrap shorthand would also reset wrapping in code. */
+.mdx-content {
+  text-wrap-style: pretty;
+}
+
 h1,
-.prose :where(h1, h2) {
+.mdx-content :where(h2, h3, h4) {
+  text-wrap-style: balance;
+}
+
+/* Inline code in headings would otherwise inherit the heading's tight tracking. */
+:where(h1, h2, h3, h4, h5, h6) code {
+  letter-spacing: normal;
+}
+
+/* Wrapped inline code keeps its padding and corners on every line. */
+.mdx-content :not(pre) > code {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Mintlify applies the heading face to every h1–h6 and to component titles
+   such as cards. Point it at the body face, then opt page titles and markdown
+   H2s back in, so new components default to Inter. Mintlify defines the
+   variable on :root after this file loads, hence the doubled selector. */
+:root:root {
+  --font-family-headings-custom: var(--font-family-body-custom);
+  --font-weight-headings-custom: 600;
+}
+
+h1,
+.prose h2:not([data-component-part]) {
+  font-family: "Libre Baskerville", Georgia, serif;
   font-weight: 400;
   letter-spacing: -0.01em;
-}
-
-/* Mintlify draws these with the heading face. Keep the serif to page titles
-   and H2 so small headings and navigation labels stay in Inter. */
-.prose :where(h3, h4, h5, h6),
-.sidebar-title,
-[data-layout-item="toc-title"] {
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-weight: 600;
 }
 
 /* Do not add a global `.border-b { border-bottom: none }` here. Mintlify's <Tabs>
