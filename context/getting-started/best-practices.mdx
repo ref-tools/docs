@@ -3,16 +3,16 @@ title: "Best Practices"
 description: "How to prompt coding agents to use Ref effectively."
 ---
 
-## TLDR
+### TLDR
 
 1. **Use the provided `search_docs` and `my_docs` prompts** - When you know your prompt will require working with a tricky library, use Ref's default prompts.
 2. **Guide the model with rules files** - Set up a project rules file so the model always knows when you want it to use Ref.
 
-# How coding agents use Ref
+## How coding agents use Ref
 
 Coding agents leverage Ref's MCP tools to access documentation at the right moment. Understanding when and how agents use Ref helps you guide them more effectively.
 
-### 1. When explicitly guided by the user
+#### 1. When explicitly guided by the user
 
 Agents use Ref when you explicitly instruct them to search documentation. This is the most reliable way to ensure agents access the latest docs.
 
@@ -28,7 +28,7 @@ Ref provides two autocomplete prompts in compatible clients:
 
 Typing `/Ref` and your IDE or CLI will autocomplete these prompts.
 
-### 2. When encountering lint errors
+#### 2. When encountering lint errors
 
 When a coding agent detects errors related to library or API usage, they will search Ref for documentation without user guidance.
 
@@ -40,11 +40,11 @@ When a coding agent detects errors related to library or API usage, they will se
 The best way to encourage this behavior is with a simple prompt in an `AGENTS.md` or similar file.
 
 
-# Guiding Agents with Rules Files
+## Guiding Agents with Rules Files
 
 Rules files let you provide consistent instructions to coding agents. They're especially powerful for directing agents to use Ref automatically.
 
-### Example Rules File Content
+#### Example Rules File Content
 
 Rules files typically include project-specific instructions that guide AI agents in how to work with your codebase. For Ref integration, they should specify when and how to search documentation. They should generally be simple and direct.
 
@@ -73,7 +73,7 @@ Always start by checking the docs with Ref.
 ```
 
 
-### Rules Files
+#### Rules Files
 
 Different AI coding tools support different rules file formats:
 
@@ -89,7 +89,7 @@ Different AI coding tools support different rules file formats:
 **Recommendation:** For maximum compatibility, use `AGENTS.md` as your primary rules file. It's supported by most modern AI coding tools that implement MCP or read standard project files.
 
 
-## Next Steps
+### Next Steps
 
 <Card icon="cubes" title="Add Private Resources" href="/context/resources/overview" >
 Build your own custom index of private documentation sources for you or your team.
