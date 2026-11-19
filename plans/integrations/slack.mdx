@@ -20,16 +20,26 @@ Only team admins can connect the Slack integration.
 
 ## Create Plans from Slack
 
-@mention the Ref bot in any Slack thread to create a plan. The agent reads the full thread, researches your indexed repositories, and produces a structured implementation plan. It replies in the thread with a link to the finished plan.
+@mention the Ref bot in any Slack thread to create a plan. The agent reads the full thread, researches your indexed repositories, and produces a structured implementation plan. Within a few seconds the bot replies in the thread with "Starting" and a link to the new plan. When the work is done, it replies again with the answer and the link.
 
 ## Follow Up in Threads
 
-@mention the bot again in the same thread to update the existing plan. Ask it to add a section, change the scope, or refine a task — the agent picks up where it left off. It only creates a new plan if you explicitly ask for one.
+@mention the bot again in the same thread and it works out which plan your message is about:
+
+- **The plan it created in this thread**, when your message is about that plan.
+- **A plan you link in your message.** This is the surest way to point the bot at a specific plan.
+- **A plan someone linked earlier in the thread**, when the conversation shows your message is about it. For example, the thread has been discussing that plan and you ask "what do you think?"
+
+Otherwise it starts a new plan: when your request is about something else, when you ask for a separate plan, or when it can't tell which linked plan you mean. A link that was only pasted as context doesn't pull your request into that plan.
+
+Within a few seconds the bot replies with what it picked: "Continuing" with a link to the plan, "Starting" for a new one, or "Queued behind a running turn" when that plan's agent is busy and your request will run next. When the work is done, it replies again with the answer.
+
+The bot only continues plans in your Ref team that you can open yourself.
 
 ## Key Features
 
 - **Thread → Plan in seconds** — @mention the bot in a thread and get a fully researched implementation plan
-- **Conversational updates** — Follow-up @mentions update the existing plan instead of creating duplicates
+- **Conversational updates** — Follow-up @mentions continue the plan the thread is about, or start a new one when you ask for something else
 - **Codebase-aware** — The agent researches your indexed repositories to produce plans grounded in your actual code
 - **Team-connected** — Plans are created under your Ref team with team-level visibility
 
