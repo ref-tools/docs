@@ -1,0 +1,63 @@
+---
+title: "Skills over MCP"
+description: "The Ref MCP server ships Ref's skills, and your team's, to any agent that connects."
+---
+
+The Ref MCP server serves skills alongside its tools. An agent connected to Ref gets the guidance for writing refs, running reviews and checking plans along with the tools that do it, with nothing extra to install. When we update a skill, every connected agent gets the new version on its next load.
+
+Ref supports the [Skills extension](https://modelcontextprotocol.io/extensions/skills/overview) to MCP, which Claude now supports in public beta ([Anthropic's announcement](https://claude.com/resources/articles/skills-over-mcp-tasks-and-more)). Clients without native support load the same skills through two Ref tools.
+
+## What Ref serves
+
+| Source | Examples | Who gets it |
+|---|---|---|
+| Ref's own skills | `writing-a-ref`, `drawing-mermaid`, `reviewing-a-pr`, and plan checks such as `pre-mortem` | Every connection |
+| Your team's skills | Any skill in a [plugin marketplace](#serve-your-teams-skills) in a repo your team indexes | Your team, per the reach you set |
+
+An agent reads a skill's name and description up front and loads the full text only when the work calls for it, so skills cost little context until they're used.
+
+## How agents load skills
+
+**Clients with the Skills extension.** Ref declares the `io.modelcontextprotocol/skills` extension and answers `skills/list` and `skills/get`. Each skill's `SKILL.md` and its supporting files are MCP resources under `skill://`, for example `skill://ref/writing-a-ref/SKILL.md`, each with a size and `sha256` digest.
+
+In Claude Code, connected skills appear in the `/` menu as `<server>:<skill>`. With the server added as `RefPlan`:
+
+```text
+/RefPlan:pre-mortem
+```
+
+See Claude Code's [Use skills from MCP servers](https://code.claude.com/docs/en/mcp#use-skills-from-mcp-servers) for version requirements, approvals and organization settings.
+
+<Note>
+The extension is declared on plan-specific connections (`https://api.plan.ref.tools/mcp?plan=<PLAN_ID>`). On the default connection, agents load the same skills through the tools below.
+</Note>
+
+**Every other client.** Every Ref connection also has two tools, so Codex, Cursor and other clients use skills today:
+
+- `ListSkills` lists the skills this session can load, each with its id and when it applies.
+- `Skill` loads one by full id, such as `ref/writing-a-ref`, and can fetch any supporting file listed in its manifest.
+
+The tool descriptions tell agents to list skills early and load the matching one before that kind of work, so you don't need to prompt for it.
+
+## Serve your team's skills
+
+Commit a `.claude-plugin/marketplace.json` to any repo Ref indexes. Ref scans it and lists every skill it finds under **Settings > Skills**, grouped by marketplace and plugin.
+
+Each skill has three switches for where it reaches:
+
+| Switch | Who gets the skill |
+|---|---|
+| **Your MCP clients** | Agents you connect yourself, such as Claude Code or Cursor |
+| **Ref agents** | Ref's own agent threads |
+| **Launched agents** | Agents Ref launches on a task |
+
+Ref checks each skill when it scans. A skill that runs code or edits files reaches only **Your MCP clients**, whatever the other switches say. Team skills are served under the team's namespace, so they never replace Ref's own.
+
+<Warning>
+Skills can tell an agent to run code, and they change when the repo changes. Serve skills only from repos you trust.
+</Warning>
+
+## Related
+
+- [Skills and plugins](/plans/skills): install Ref skills from the public marketplace as plugins.
+- [Install the MCP server](/plans/install/index)

@@ -121,7 +121,7 @@
           },
           {
             "group": "Skills and plugins",
-            "pages": ["plans/skills"]
+            "pages": ["plans/skills", "plans/skills-over-mcp"]
           },
           {
             "group": "Comparison",
